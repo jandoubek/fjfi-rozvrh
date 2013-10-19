@@ -1,0 +1,111 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[czech]{babel}
+\usepackage{latexsym}
+\usepackage[utf8]{inputenc}	%znaková sada utf8
+\usepackage{indentfirst}
+
+\renewcommand{\arraystretch}{1.5}
+\renewcommand{\familydefault}{\sfdefault}
+
+%\renewcommand{\thechapter}{\Alph{chapter}}
+
+
+\oddsidemargin=-10mm   % levý okraj větší (kvůli vazbě)
+\topmargin=-25mm      % horní okraj trochu menší
+\textwidth=180mm      % šířka textu na stránce
+\textheight=270mm     % výška textu na stránce
+
+\pagenumbering{arabic} % číslování stránek arabskými číslicemi
+\pagestyle{plain}      % stránky číslované dole uprostřed
+
+\parindent=0pt % odsazení 1. řádku odstavce
+\parskip=7pt   % mezera mezi odstavci
+\frenchspacing % aktivuje použití některých českých typografických pravidel
+
+% definice marka pro české uvozovky:
+\def\bq{\mbox{\kern.1ex\protect\raisebox{-1.3ex}[0pt][0pt]{''}\kern-.1ex}}
+\def\eq{\mbox{\kern-.1ex``\kern.1ex}}
+\def\ifundefined#1{\expandafter\ifx\csname#1\endcsname\relax }%
+\ifundefined{uv}%
+        \gdef\uv#1{\bq #1\eq}
+\fi
+% konec .... použití makra pro psaní českých uvozovek: \uv{text uvnitř uvozovek}
+\title{Schéma použití webové aplikace}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Definice pojmů}
+\begin{description}
+\item[Lekce] --- jednoznačně určená výuková hodina v čase, tj. předmět, katedra (barva), vyučující, místnost, čas (od + do případně od + doba trvání), (ne)pravidelnost výuky.
+\end{description}
+
+\part{Vyhledávání lekcí}
+Obecným požadavkem u vyhledávání lekcí je výstup: seznam lekcí vyhovujících zadanému filtru. Tento seznam nemusí být nutně setříděný.
+
+\section{Student}
+V této sekci definuji několik nejčastějších požadavků na službu z pohledu studenta.
+
+\subsection{Rozvrh podle kruhu}
+V tomto schématu je pro studenta důležité získat na co nejmenší počet kliknutí celý svůj rozvrh. Mezi studenty půjde asi o nejčastěji využívanou funkcionalitu, protože jsou buď tak dobří, že změny nepotřebují, nebo změny potřebují, ale je pro ně nejrychlejší z/do tohoto rozvrhu ubrat/přidat předmět.
+
+\subsubsection{Strategie}
+Student volí pouze ročník, zaměření a kruh, tato trojice jednoznačně určuje jeho požadovaný rozvrh.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na filtrování podle ročníku, zaměření a kruhu.
+
+\subsection{Konkrétní předmět}
+Student chce zjistit, kdy probíhá výuka (z různých důvodů) vybraného předmětu. Zde může nastat několik situací:
+\begin{itemize}
+\item Student zná kromě názvu předmětu i další informace,
+\item Student zná pouze název předmětu.
+\end{itemize}
+
+\subsubsection{Strategie: název + další informace o předmětu}
+Použitím filtru a zadáním známých údajů co nejblíže specifikuje hledaný předmět. Čím více parametrů bude znát, respektive čím více filtrů bude moct aplikovat, tím více zmenší výslednou množinu vyhovujících lekcí.
+
+\subsubsection{Požadavky}
+Filtrování podle vlastností definovaných pro lekci, není ale jasné, které všechny jsou nutné. Potřebujeme pouze získat seznam lekcí vyhovujících filtru.
+
+\subsubsection{Strategie: pouze název předmětu}
+Student hledá podle názvu (či zkratky) předmětu, případně je nucen dohledat si nějaké informace o předmětu, pokud nechce vybírat ze všech lekcí, tj. není aplikován žádný filtr.
+
+\subsubsection{Požadavky}
+Zde vzniká požadavek na filtrování podle názvu/zkratky předmětu. Není nutné nabízet studentovi seznam všech předmětů, ale třeba použít vyhledávací pole.
+
+\subsection{Konkrétní čas}
+Toto schéma nastává například v případě, že student už má k dispozici nějakou verzi rozvrhu a rád by zaplnil mezery mezi jednotlivými lekcemi.
+
+\subsubsection{Strategie}
+Tato strategie je velice jednoduchá. Student potřebuje pouze zadat čas od/do a vybrat si mezi nabídnutými lekcemi.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na filtrování podle času.
+
+\section{Vyučující}
+Nyní se podívejme na vytváření rozvrhů z role vyučujícího.
+
+\subsection{Vlastní rozvrh}
+Vyučujícího zajímá pouze jeho osobní rozvrh.
+
+\subsubsection{Strategie}
+Vyučující má k dispozici své jméno, což je nejjednodušší možnost, jak získat svůj rozvrh.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na filtrování podle jména vyučujícího.
+
+\subsection{Rozvrh vyučovaného předmětu}
+Tento případ kopíruje strategii již zmiňované studentovo vyhledávání konkrétního předmětu. U vyučujícího můžeme předpokládat, že kromě názvu předmětu zná i další informace.
+
+\subsubsection{Požadavky}
+Požadavek na filtrování podle jména předmětu není nutný, ale jde jistě o velmi pohodlnou možnost.
+
+\subsection{Zhodnocení požadavků}
+V předchozích schématech vznikly nutné požadavky na vyhledávání dle ročníku, zaměření, kruhu, předmětu, času. Pro pohodlnost doporučuji zahrnout i zbylé parametry lekcí. 
+
+\part{Editace rozvrhu}
+
+\part{Export rozvrhu}
+
+\end{document}
