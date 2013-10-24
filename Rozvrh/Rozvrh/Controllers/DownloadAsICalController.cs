@@ -21,20 +21,38 @@ namespace Rozrvh.Controllers
 
         public ActionResult Download() 
         {
-            List<ExportHodina> hodiny = TempData["hodiny"] as List<ExportHodina>;
+            var hodiny = new List<IExportHodina>();
+            prototypeData(hodiny);
             string text = generateICal(hodiny);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             return File(buffer, "text/plain", "FJFIrozvrh.ical");
         }
 
-        private string generateICal(List<ExportHodina> hodiny) 
+        private void prototypeData(List<IExportHodina> dataToFill)
+        {
+            var vsbp = new PrototypeExportHodina("VSBP", DayOfWeek.Monday, 
+                new DateTime(1,1,1,14,30,0), new TimeSpan(2,0,0), "Vopalka", "B-314");            
+            var tpc = new PrototypeExportHodina("TPC", DayOfWeek.Tuesday, 
+                new DateTime(1,1,1,8,30,0), new TimeSpan(2,0,0), "Stamberg", "---");
+            var rao = new PrototypeExportHodina("RAO", DayOfWeek.Tuesday,
+                new DateTime(1, 1, 1, 13, 30, 0), new TimeSpan(4, 0, 0), "Vrba", "B-115");
+            var chrp = new PrototypeExportHodina("CHRP", DayOfWeek.Wednesday,
+                new DateTime(1, 1, 1, 10, 30, 0), new TimeSpan(2, 0, 0), "John", "B-314");
+
+            dataToFill.Add(vsbp);
+            dataToFill.Add(tpc);
+            dataToFill.Add(rao);
+            dataToFill.Add(chrp);
+        }
+
+        private string generateICal(List<IExportHodina> hodiny) 
         {
             string header = "BEGIN:VCALENDAR" + System.Environment.NewLine + "VERSION:2.0" +
                 System.Environment.NewLine + "PRODID:-//hacksw/handcal//NONSGML v1.0//EN" +
                 System.Environment.NewLine;
             string body = "";
 
-            foreach (ExportHodina hodina in hodiny)
+            foreach (IExportHodina hodina in hodiny)
             {
                 body += generateEventFromExportHodina(hodina);
             }
@@ -45,38 +63,27 @@ namespace Rozrvh.Controllers
             return header + body + tail; 
         }
 
-        //string datum = "20131015";
-        //string timeStart = "T093000";
-        //string timeEnd = "T113000";
-        //string konecSemestru = "20131115";
-        //string body = @"BEGIN:VEVENT
-        //DTSTAMP:"+datum+timeStart+@"
-        //DTSTART:"+datum+timeStart+@"
-        //DTEND:"+datum+timeEnd+@"
-        //RRULE:FREQ=WEEKLY;UNTIL="+konecSemestru+@"T000000Z
-        //SUMMARY:Prednaska z MAB 01
-        //END:VEVENT";
 
-        private string generateEventFromExportHodina(ExportHodina hodina)
+        private string generateEventFromExportHodina(IExportHodina hodina)
         {
             string semStart = dateTimeDateToICalString(
-                closestDayFromDateTime(semesterStart(),hodina.getDay()));
+                closestDayFromDateTime(semesterStart(),hodina.Day));
             string semEnd = dateTimeDateToICalString(semesterEnd());
 
             string head = "BEGIN:VEVENT" + System.Environment.NewLine;
             string stamp = "DTSTAMP:" + dateTimeDateToICalString(DateTime.Today) +
                 hourToICalString(DateTime.Now.Hour,DateTime.Now.Minute)+System.Environment.NewLine;
             string start = "DTSTART:" + semStart + 
-                hourToICalString(hodina.getStartTime().Hour, hodina.getStartTime().Minute) +
+                hourToICalString(hodina.StartTime.Hour, hodina.StartTime.Minute) +
                 System.Environment.NewLine;
             string end = "DTEND:" + semStart +
-                hourToICalString((hodina.getStartTime()+hodina.getLength()).Hour, 
-                (hodina.getStartTime()+hodina.getLength()).Minute) +
+                hourToICalString((hodina.StartTime+hodina.Length).Hour, 
+                (hodina.StartTime+hodina.Length).Minute) +
                 System.Environment.NewLine;
             string repeat = "RRULE:FREQ=WEEKLY;UNTIL=" + semEnd + "T000000Z" +
                 System.Environment.NewLine;
-            string summarry = "SUMMARY:" + hodina.getName() + System.Environment.NewLine;
-            string loc = "LOCATION:" + hodina.getRoom() + System.Environment.NewLine;
+            string summarry = "SUMMARY:" + hodina.Name + System.Environment.NewLine;
+            string loc = "LOCATION:" + hodina.Room + System.Environment.NewLine;
             string tail = "END:VEVENT" + System.Environment.NewLine;
 
             return head + stamp + start + end + repeat + summarry + loc + tail;
