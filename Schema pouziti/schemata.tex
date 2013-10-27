@@ -96,16 +96,111 @@ Vyučující má k dispozici své jméno, což je nejjednodušší možnost, jak
 Vzniká požadavek na filtrování podle jména vyučujícího.
 
 \subsection{Rozvrh vyučovaného předmětu}
-Tento případ kopíruje strategii již zmiňované studentovo vyhledávání konkrétního předmětu. U vyučujícího můžeme předpokládat, že kromě názvu předmětu zná i další informace.
+Tento případ kopíruje strategii již zmiňovaného studentova vyhledávání konkrétního předmětu. U vyučujícího můžeme předpokládat, že kromě názvu předmětu zná i další informace.
 
 \subsubsection{Požadavky}
 Požadavek na filtrování podle jména předmětu není nutný, ale jde jistě o velmi pohodlnou možnost.
 
-\subsection{Zhodnocení požadavků}
+\section{Zhodnocení požadavků}
 V předchozích schématech vznikly nutné požadavky na vyhledávání dle ročníku, zaměření, kruhu, předmětu, času. Pro pohodlnost doporučuji zahrnout i zbylé parametry lekcí. 
 
 \part{Editace rozvrhu}
+V této části již nevidím rozdíl v přístupu studenta či vyučujícího, 
+oba budu tedy shodně nazývat uživateli. Ve strategiích zároveň předpokládám, že akce, které bude uživatel vykonávat po vyfiltrování, se budou týkat jen a pouze přidávání lekci, nikoli například dalších úprav filtru, či jiné.
 
-\part{Export rozvrhu}
+\section{Přidání lekcí}
+Uživatel má po vyhledávání lekcí k dispozici seznam lekcí vyhovujících filtru a chce přidat do stávajícího rozvrhu (i prázdného) jednu, více nebo všechny lekce.
+
+\subsection{Přidání všech lekcí}
+Uživatel použil takový filtr, který mu vrátil seznam lekcí, z nichž chce všechny přidat do svého rozvrhu.
+
+\subsubsection{Strategie}
+Uživatel nechce žádným způsobem vybírat (označovat) jednotlivé lekce:
+\begin{itemize}
+\item Obecně jich je mnoho,
+\item Chce prostě všechny.
+\end{itemize}
+
+\subsubsection{Požadavky}
+Vzniká požadavek na funkci \uv{přidat vše}, která, jak už název napovídá, přidá všechny vybrané lekce do stávajícího rozvrhu.
+
+\subsection{Přidání jedné lekce}
+Uživatel použil takový filtr, který mu vrátil seznam lekcí, z nichž pouze jednu chce přidat do svého rozvrhu.
+
+\subsubsection{Strategie}
+Uživatel ví, kterou lekci z vyfiltrovaného seznamu chce. Nepotřebuje ji nijak označovat, pouze jednoduchým úkonem přidat do rozvrhu.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na přidání jedné z více lekcí.
+
+\subsection{Přidání více lekcí}
+Uživatel použil takový filtr, který mu vrátil seznam lekcí, z nichž pouze některé, ale obecně více než jednu, chce přidat do svého rozvrhu.
+
+\subsubsection{Strategie}
+Uživatel musí ze seznamu vybrat ty, které chce přidat do rozvrhu.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na přidání více lekcí z mnoha.
+
+\section{Odebrání lekcí}
+Podobně jako v předchozí části může uživatel chtít odebrat z již hotového rozvrhu jednu, více či všechny lekce. Strategie i požadavky vesměs kopírují své protějšky v předchozí sekci.
+
+\subsection{Odebrání všech lekcí}
+Uživatel má k dispozici takový rozvrh, který mu nevyhovuje do té míry, že se rozhodl jej úplně vymazat.
+
+\subsubsection{Strategie}
+Uživatel nechce žádným způsobem vybírat (označovat) jednotlivé lekce:
+\begin{itemize}
+\item Obecně jich je mnoho,
+\item Chce prostě odstranit všechny.
+\end{itemize}
+
+\subsubsection{Požadavky}
+Vzniká požadavek na smazání všech lekcí v rozvrhu.
+
+\subsection{Odebrání jedné lekce}
+Uživateli v aktuálním rozvrhu nevyhovuje jedna z lekcí a chce ji odstranit
+
+\subsubsection{Strategie}
+Uživatel ví, kterou lekci z rozvrhu chce odstranit. Nepotřebuje ji nijak označovat, pouze jednoduchým úkonem odstranit.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na odebrání jedné z více lekcí.
+
+\subsection{Odebrání více lekcí}
+Uživateli rozvrh částečně nevyhovuje, nechce jej smazat celý a zároveň chce smazat více lekcí.
+
+\subsubsection{Strategie}
+Uživatel musí z rozvrhu vybrat ty, které chce z rozvrhu odebrat.
+
+\subsubsection{Požadavky}
+Vzniká požadavek na odebrání více lekcí z mnoha.
+
+\section{Zhodnocení požadavků}
+Vznikly požadavky na přidání/odebrání jednoho, více nebo všech předmětů.  Podaří-li se implementovat funkci přidání/odebrání jednoho předmětu tak, že bude velmi jednoduchá a rychlá, mohla by být využita i pro přidání/odebrání více předmětů. Otázkou k debatě je, jestli uživatel nebude chtít ze seznamu vybírat (označovat/odznačovat) jednotlivé lekce a až potom je přidat/odebrat.
+
+\part{Práce s hotovým rozvrhem}
+V této části má uživatel již rozvrh hotový a rád by si jej uložil, případně si jej již uložil, ale rozhodl se jej znovu editovat.
+
+\section{Export rozvrhu}
+Uživatel použil kombinaci vyhledávání lekcí a editace rozvrhu k získání vyhovujícího rozvrhu a chce si jej uložit a získat pro sebe.
+
+\subsection{Strategie}
+Uživatel si chce jednoduchých způsobem uložit stávající rozvrh.
+
+\subsection{Požadavky}
+Vzniká požadavek na výběr formátu. Vzniká požadavek na export rozvrhu ve vybraném formátu.
+
+\section{Import rozvrhu}
+Uživatel má rozvrh uložen na svém počítači. Buď si jej v minulosti sám vypracoval a uložil, případně jej získal od někoho. Nyní se rozhodl pro jeho změnu.
+
+\subsection{Strategie}
+Uživatel chce nahrát svůj rozvrh do aplikace a ten následně upravit dle svých představ.
+
+\subsection{Požadavky}
+Vzniká požadavek na import rozvrhu do aplikace a umožnění další práce s ním.
+
+\section{Zhodnocení požadavků}
+Vznikají požadavky na import a export rozvrhu. Vzniká požadavek na výběr formátu exportovaného rozvrhu.
 
 \end{document}
