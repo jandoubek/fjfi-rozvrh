@@ -43,7 +43,7 @@
 
 
 #rightSection div.box, #rightSection div.boxPosledni {
-    float: left;margin-right: 12px;
+    float: left;margin-right: 10px;
 }
 #rightSection div.box label, #rightSection div.boxPosledni label {
     background: #e2e2e2;display: block; padding: 5px; width: 128px;border: 1px solid #a8a8a8;border-bottom: none;
@@ -55,7 +55,7 @@
     width: 140px;border: 1px solid #a8a8a8;padding: 5px;
 }
 #Tabulka {
-    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 100%;padding: 0;border-spacing: 0;
+    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 439px;padding: 0;border-spacing: 0;
 }
 #Tabulka th, #Tabulka td {
     text-align: left;padding: 5px;border-bottom: 1px solid #a8a8a8;border-right: 1px solid #a8a8a8;
