@@ -1,0 +1,28 @@
+﻿@using Rozrvh
+@using Rozrvh.Controllers
+@{
+    var hodiny = new List<IExportHodina>();
+    DownloadAsICalController.prototypeData(hodiny);
+
+}
+<table id="Tabulka">
+    <tr>
+        <th>Předmět</th>
+        <th>Vyučující</th>
+        <th>Místnost</th>
+    </tr>
+
+@foreach (var item in hodiny) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lecturer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room)
+        </td>
+    </tr>
+}
+</table>

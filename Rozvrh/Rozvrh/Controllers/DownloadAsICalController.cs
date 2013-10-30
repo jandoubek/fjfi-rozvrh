@@ -28,7 +28,7 @@ namespace Rozrvh.Controllers
             return File(buffer, "text/plain", "FJFIrozvrh.ical");
         }
 
-        private void prototypeData(List<IExportHodina> dataToFill)
+        public static void prototypeData(List<IExportHodina> dataToFill)
         {
             var vsbp = new PrototypeExportHodina("VSBP", DayOfWeek.Monday, 
                 new DateTime(1,1,1,14,30,0), new TimeSpan(2,0,0), "Vopalka", "B-314");            

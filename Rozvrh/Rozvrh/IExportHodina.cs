@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rozrvh
 {
-    interface IExportHodina
+    public interface IExportHodina
     {
         string Name {get; set;}
         System.DayOfWeek Day { get; set;}
