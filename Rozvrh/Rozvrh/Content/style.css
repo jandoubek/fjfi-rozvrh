@@ -1,26 +1,38 @@
 ﻿body {
-    background: #fff0f5;
+    padding: 0;
+    margin: 0;
 }
 
 #leftSection {
-    position: absolute;
+    height: 700px;
+    -moz-min-width: 400px;
+    -ms-min-width: 400px;
+    -o-min-width: 400px;
+    -webkit-min-width: 400px;
+    min-width: 400px;
+    /*position: absolute;
     top: 2px;
-    left: 2px;
-    bottom: 62px;
+    left: 2px;*/
 }
+
 #rightSection {
     width: 500px;
-    position: absolute;
+    height: 680px;
+    float: right;
+    margin: 8px;
+    /*position: absolute;
     top: 2px;
     right: 2px;
-    bottom: 62px;
+    bottom: 62px;*/
 }
 #rightSection #tabs {
-    position: absolute;
+    width: 492px;
+    height: 100%;
+    /*position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0;*/
 }
 #rightSection .ui-tabs .ui-tabs-nav {
     padding-left: 0.8em;
@@ -61,10 +73,7 @@ footer {
     padding: 10px 0;
     font-size: 0.9em;
     height: 40px;
-    position: absolute;
-    left: 0;
-    right: 0px;
-    bottom: 0;
+    width: 100%;
     color: #787878;
 }
 
