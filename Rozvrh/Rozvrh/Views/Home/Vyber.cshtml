@@ -1,0 +1,64 @@
+﻿@using System.Web.UI.WebControls
+
+@{
+    var rocniky = new List<ListItem> {
+        new ListItem {Text = "První BS", Value = "1"},
+        new ListItem {Text = "Druhý BS", Value = "2"},
+        new ListItem {Text = "Třetí BS", Value = "3"},
+        new ListItem {Text = "První MS", Value = "4"},
+        new ListItem {Text = "Druhý MS", Value = "5"},
+        new ListItem {Text = "Třetí MS", Value = "6"}
+    };
+    var zamereniL = new List<ListItem> {
+        new ListItem {Text = "JCH", Value = "1"}
+    };
+    var kruhy = new List<ListItem> {
+        new ListItem {Text = "1", Value = "1"}
+    };
+    var katedry = new List<ListItem> {
+        new ListItem {Text = "KJCH", Value = "1"},
+        new ListItem {Text = "KJR", Value = "2"}
+    };
+    var vyucujiciL = new List<ListItem> {
+        new ListItem {Text = "John", Value = "1"},
+        new ListItem {Text = "Štamberg", Value = "2"},
+        new ListItem {Text = "Vopálka", Value = "3"},
+        new ListItem {Text = "Vrba", Value = "4"}
+    };
+    var mistnosti = new List<ListItem> {
+        new ListItem {Text = "B-314", Value = "1"},
+        new ListItem {Text = "B-115", Value = "2"}
+    };
+
+}
+@using (Ajax.BeginForm("Filter", "Home", new AjaxOptions { 
+    HttpMethod = "Get", UpdateTargetId = "Fltr", InsertionMode = System.Web.Mvc.Ajax.InsertionMode.InsertAfter }))
+{
+
+<div class="box">
+    @Html.Label("Ročník",new {For = "rocnik"})
+    @Html.DropDownList("rocnik",new SelectList(rocniky,"Value","Text"),new {size ="6", onchange = "$(this.form).submit()"})
+</div>
+<div class="box">
+    @Html.Label("Zaměření",new {For = "zamereni"})
+    @Html.DropDownList("zamereni",new SelectList(zamereniL,"Value","Text"),new {size ="6",onchange = "$(this.form).submit()"})
+</div>
+<div class="boxPosledni">
+    @Html.Label("Kruh",new {For = "kruh"})
+    @Html.DropDownList("kruh",new SelectList(kruhy,"Value","Text"),new {size ="6",onchange = "$(this.form).submit()"})
+</div><div class="clear"></div><br/>
+<div class="box">
+    @Html.Label("Katedra",new {For = "katedra"})
+    @Html.DropDownList("katedra",new SelectList(katedry,"Value","Text"),new {size ="6",onchange = "$(this.form).submit()"})
+</div>
+<div class="box">
+    @Html.Label("Vyučující",new {For = "vyucujici"})
+    @Html.DropDownList("vyucujici",new SelectList(vyucujiciL,"Value","Text"),new {size ="6",onchange = "$(this.form).submit()"})
+</div>
+<div class="boxPosledni">
+    @Html.Label("Místnost",new {For = "mistnost"})
+    @Html.DropDownList("mistnost",new SelectList(mistnosti,"Value","Text"),new {size ="6",onchange = "$(this.form).submit()"})
+</div><div class="clear"></div>
+}<br/>
+<div id="Fltr"></div><br/>
+@Ajax.ActionLink("Vybrat vše","Show",new AjaxOptions{ InsertionMode = InsertionMode.Replace,UpdateTargetId = "leftSection"})<br/>

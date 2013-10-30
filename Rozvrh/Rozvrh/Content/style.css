@@ -1,0 +1,70 @@
+﻿body {
+    background: #fff0f5;
+}
+
+#leftSection {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 62px;
+}
+#rightSection {
+    width: 500px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 62px;
+}
+#rightSection #tabs {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+#rightSection .ui-tabs .ui-tabs-nav {
+    padding-left: 0.8em;
+}
+.clear {
+    clear: both;
+}
+
+
+#rightSection div.box, #rightSection div.boxPosledni {
+    float: left;margin-right: 12px;
+}
+#rightSection div.box label, #rightSection div.boxPosledni label {
+    background: #e2e2e2;display: block; padding: 5px; width: 128px;border: 1px solid #a8a8a8;border-bottom: none;
+}
+#rightSection div.boxPosledni {
+    margin-right: 0;
+}
+#rightSection div.box select, #rightSection div.boxPosledni select {
+    width: 140px;border: 1px solid #a8a8a8;padding: 5px;
+}
+#Tabulka {
+    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 100%;padding: 0;border-spacing: 0;
+}
+#Tabulka th, #Tabulka td {
+    text-align: left;padding: 5px;border-bottom: 1px solid #a8a8a8;border-right: 1px solid #a8a8a8;
+}
+#Tabulka th {
+    border-bottom: 3px #a8a8a8 double;
+}
+
+
+
+footer {
+    background-color: #e2e2e2;
+    border-top: 1px solid #333333;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9em;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    right: 0px;
+    bottom: 0;
+    color: #787878;
+}
+
