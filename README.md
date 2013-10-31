@@ -3,8 +3,8 @@ fjfi-rozvrh
 
 Team
 --------------
-* David Blatsk�
-* V�clav Honz�k
-* Oldřich �tika
-* Tom�� Smola
+* David Blatský
+* Václav Honzík
+* Oldřich Štika
+* Tomáš Smola
 * Richard Salač
