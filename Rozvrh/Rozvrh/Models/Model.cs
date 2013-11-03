@@ -7,7 +7,7 @@ namespace MvcApplication1.Models
 {
     public class Model:IModel
     {
-
+        // Ted jste v Master vetvi, jsem prijde docasna implementace modelu s tvrdymi daty
         public List<string> departments
         {
             get { throw new NotImplementedException(); }
