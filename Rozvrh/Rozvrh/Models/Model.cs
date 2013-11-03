@@ -7,45 +7,44 @@ namespace MvcApplication1.Models
 {
     public class Model:IModel
     {
-
         public List<string> departments
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<string> courses
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<string> groups
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<string> years
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<string> lecturers
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<string> classrooms
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<DayOfWeek> days
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<TimeSpan> times
         {
-            get { throw new NotImplementedException(); }
+            get;
         }
 
         public List<string> getParts(string group)
