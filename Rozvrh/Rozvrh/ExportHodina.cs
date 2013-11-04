@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace Rozrvh
 {
-    public class PrototypeExportHodina : IExportHodina
+    public class ExportHodina : IExportHodina
     {
         private string name;
         private DayOfWeek day;
@@ -14,7 +15,7 @@ namespace Rozrvh
         private string lecturer;
         private string room;
 
-        public PrototypeExportHodina(string n,DayOfWeek dow,DateTime st, TimeSpan len, string lec,
+        public ExportHodina(string n,DayOfWeek dow,DateTime st, TimeSpan len, string lec,
             string r) {
             name = n;
             day = dow;
@@ -25,7 +26,7 @@ namespace Rozrvh
         }
 
 
-
+        [XmlElement("NazevPredmetu")]
         public string Name 
         {
             get 
@@ -39,6 +40,7 @@ namespace Rozrvh
             }
         }
 
+        [XmlElement("Den")]
         public System.DayOfWeek Day
         {
             get
@@ -52,6 +54,7 @@ namespace Rozrvh
             }
         }
 
+        [XmlElement("ZacatekHodiny")]
         public DateTime StartTime
         {
             get
@@ -65,6 +68,7 @@ namespace Rozrvh
             }
         }
 
+        [XmlIgnore]
         public TimeSpan Length
         {
             get
@@ -78,6 +82,14 @@ namespace Rozrvh
             }
         }
 
+        [XmlElement("Delka")]
+        public long LengthTicks
+        {
+            get { return length.Ticks; }
+            set { length = new TimeSpan(value); }
+        }
+
+        [XmlElement("Prednasejici")]
         public string Lecturer
         {
             get
@@ -91,6 +103,7 @@ namespace Rozrvh
             }
         }
 
+        [XmlElement("Mistonost")]
         public string Room
         {
             get
