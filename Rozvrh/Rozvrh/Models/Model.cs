@@ -1,58 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MvcApplication1.Models
 {
-    public class Model:IModel
+    /// <summary>
+    /// Dummy data
+    /// </summary>
+    public class Model : IModel
     {
-        public List<string> departments
+        /// <summary>
+        /// Returns all departmens
+        /// </summary>
+        public List<string> Departments
         {
-            get;
+            get { return new List<string> { "KJCH", "KJR" }; }
         }
 
-        public List<string> courses
+        /// <summary>
+        /// Returns all courses
+        /// </summary>
+        public List<string> Courses
         {
-            get;
+            get { return new List<string> { "JCH" }; }
         }
 
-        public List<string> groups
+        /// <summary>
+        /// Returns all groups
+        /// </summary>
+        public List<string> Groups
         {
-            get;
+            get { return new List<string> { "1" }; }
         }
 
-        public List<string> years
+        /// <summary>
+        /// Returns all yeas of studies
+        /// </summary>
+        public List<string> Years
         {
-            get;
+            get { return new List<string> { "První BS", "Druhý BS", "Třetí BS", "První MS", "Druhý MS", "Třetí MS" }; }
         }
 
-        public List<string> lecturers
+        /// <summary>
+        /// Returns all lecturers
+        /// </summary>
+        public List<string> Lecturers
         {
-            get;
+            get { return new List<string> { "John", "Štamberg", "Vopálka", "Vrba" }; }
         }
 
-        public List<string> classrooms
+        /// <summary>
+        /// Returns all classrooms
+        /// </summary>
+        public List<string> Classrooms
         {
-            get;
+            get { return new List<string> { "B-314", "B-115" }; }
         }
 
-        public List<DayOfWeek> days
+        /// <summary>
+        /// Returns all days of the workweek
+        /// </summary>
+        public List<DayOfWeek> Days
         {
-            get;
+            get
+            {
+                return new List<DayOfWeek>
+                {
+                    DayOfWeek.Monday,
+                    DayOfWeek.Tuesday,
+                    DayOfWeek.Wednesday,
+                    DayOfWeek.Thursday,
+                    DayOfWeek.Friday
+                };
+            }
         }
 
-        public List<TimeSpan> times
+        /// <summary>
+        /// Returns all start times of lectures
+        /// </summary>
+        public List<TimeSpan> Times
         {
-            get;
+            get
+            {
+                return new List<TimeSpan>
+                {
+                    new TimeSpan(0, 8, 30, 0),
+                    new TimeSpan(0, 10, 30, 0),
+                    new TimeSpan(0, 13, 30, 0),
+                    new TimeSpan(0, 14, 30, 0)
+                };
+            }
         }
 
-        public List<string> getParts(string group)
+        //TODO Autor doplní komentář!
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="group"></param>
+        /// <returns></returns>
+        public List<string> GetParts(string group)
         {
             throw new NotImplementedException();
         }
 
-        public List<TimetableField> getTimeTable(List<string> filterValues)
+        //TODO Autor doplní komentář!
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filterValues"></param>
+        /// <returns></returns>
+        public List<TimetableField> GetTimeTable(List<string> filterValues)
         {
             throw new NotImplementedException();
         }
