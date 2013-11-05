@@ -102,15 +102,8 @@ namespace MvcApplication1.Models
             throw new NotImplementedException();
         }
 
-        //TODO Autor doplní komentář!
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filterValues"></param>
-        /// <returns></returns>
-        public List<TimetableField> GetTimeTable(List<string> filterValues)
-        {
-            throw new NotImplementedException();
-        }
+        //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
+        //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
+        //      Jedná se totiž o aplikační logiku, nikoliv datovou.
     }
 }

@@ -15,9 +15,5 @@ namespace MvcApplication1.Models
         List<TimeSpan> Times { get; }
 
         List<String> GetParts(String group);
-
-        // most important core function to get the timetable to render
-        List<TimetableField> GetTimeTable(List<String> filterValues);
-
     }   
 }
