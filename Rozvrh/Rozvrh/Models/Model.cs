@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Rozrvh;
 
 namespace MvcApplication1.Models
 {
@@ -8,6 +9,14 @@ namespace MvcApplication1.Models
     /// </summary>
     public class Model : IModel
     {
+        /// <summary>
+        /// Konstruktor třídy
+        /// </summary>
+        public Model()
+        {
+            FiltredLectures = new List<IExportHodina>();
+        }
+
         /// <summary>
         /// Returns all departmens
         /// </summary>
@@ -105,5 +114,10 @@ namespace MvcApplication1.Models
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
         //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
         //      Jedná se totiž o aplikační logiku, nikoliv datovou.
+
+        /// <summary>
+        /// Seznam vyfiltrovaných hodin, určení pro zobrazení v tabulce pod filtry
+        /// </summary>
+        public List<IExportHodina> FiltredLectures { get; set; }
     }
 }
