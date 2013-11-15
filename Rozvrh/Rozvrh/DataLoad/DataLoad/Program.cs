@@ -14,6 +14,7 @@ using System.IO;
 using System.Threading;
 using System.Reflection;
 using System.IO.Packaging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
     //bude sloužit pro přenos do .ical, .pdf exportu a na grafický výstup rozvrhu na obrazovku
@@ -62,6 +63,7 @@ using System.IO.Packaging;
             classroom = cr.name;
             if (predmet == "Jazyky")
             {
+                predmet_acr = "JAZ";
                 classroom = "-";
                 building = "-";
             }
@@ -487,6 +489,17 @@ using System.IO.Packaging;
         public ViewData(ModelData md)
         {
             this.md = md;
+            
+            //visible
+            v_degreeyears = md.m_degreeyears;
+            v_zamerenis = new List<Zamereni>();
+            v_kruhy = new List<Kruh>();
+            v_departments = md.m_departments;
+            v_lecturers = new List<Lecturer>();
+            v_buildings = md.m_buildings;
+            v_classrooms = new List<Classroom>();
+            v_days = md.m_days;
+            v_times = md.m_times;
         }
 
         ModelData md { get; set; }
@@ -502,46 +515,9 @@ using System.IO.Packaging;
         public List<Classroom> v_classrooms { get; set; }
         public List<Day> v_days { get; set; }
         public List<Time> v_times { get; set; }
-
-        //označené kolonky v příslučných objektech view - selected      
-        public DegreeYear s_degreeyear { get; set; }
-        public Zamereni s_zamereni { get; set; }
-        public List<Kruh> s_kruhy { get; set; }
-        public List<Department> s_departments { get; set; }
-        public List<Lecturer> s_lecturers { get; set; }
-        public List<Building> s_buildings { get; set; }
-        public List<Classroom> s_classrooms { get; set; }
-        public List<Day> s_days { get; set; }
-        public List<Time> s_times { get; set; }
-
-        public void InitViewData()
-        {    
-            //visible
-            v_degreeyears = md.m_degreeyears;
-            v_zamerenis = new List<Zamereni>();
-            v_kruhy = new List<Kruh>();
-            v_departments = md.m_departments;
-            v_lecturers = new List<Lecturer>();
-            v_buildings = md.m_buildings;
-            v_classrooms = new List<Classroom>();
-            v_days = md.m_days;
-            v_times = md.m_times;
-
-            //selected
-              //s_degreeyear; nejsou Listy proto není třeba inicializovat. vždy se jen přiřadí ke stávající instanci
-              //s_zamereni;
-            s_kruhy = new List<Kruh>();         
-            s_departments = new List<Department>();
-            s_lecturers = new List<Lecturer>();
-            s_buildings = new List<Building>();
-            s_classrooms = new List<Classroom>();
-            s_days = new List<Day>();
-            s_times = new List<Time>();
-        }
-        
-
+     
         //filter 1 - z vybraných položek ročníku zobrazí příšlušná zaměření
-        public void FilterDegreeYear2Zamereni()
+        public void FilterDegreeYear2Zamereni(DegreeYear s_degreeyear)
         {
             //ze zobrazených (visible) zaměření vybere ta, které přísluší vybranému ročníku
             var zamerenis =
@@ -554,7 +530,7 @@ using System.IO.Packaging;
         }
 
         //filter 2 -  z vybrané položky zaměření vybere příslušné kruhy
-        public void FilterZamereni2Kruhy()
+        public void FilterZamereni2Kruhy(Zamereni s_zamereni)
         {
             //ze všech kruhů vybere ty, které přísluší vybranému zaměření
             var kruhy =
@@ -567,7 +543,7 @@ using System.IO.Packaging;
         }
 
         //filter 3 -  z vybraných položek kateder vybere příslušné učitele
-        public void FilterDepartments2Lecturers()
+        public void FilterDepartments2Lecturers(List<Department> s_departments)
         {
             //ze všech učitelů vybere ty, kteří jsou z vybraných kateder
             var ucitele =
@@ -581,7 +557,7 @@ using System.IO.Packaging;
         }
 
         //filter 4 - z vybraných budov zobraz patřičné místnosti
-        public void FilterBuildings2Classrooms()
+        public void FilterBuildings2Classrooms(List<Building> s_buildings)
         {
             //ze všech místností vybere ty, které jsou z vybraných budov
             var mistnosti =
@@ -595,8 +571,21 @@ using System.IO.Packaging;
         }
 
         //filter 5 - hlavní filter
-        public void FilterAll2TimetableFields()
+        public void FilterAll2TimetableFields(List<Kruh> s_kruhy, List<Department> s_departments, List<Lecturer> s_lecturers, List<Classroom> s_classrooms, List<Day> s_days, List<Time> s_times)
         {
+            if(s_kruhy == null)
+                s_kruhy = new List<Kruh>();
+            if (s_departments == null)
+                s_departments = new List<Department>();
+            if (s_lecturers == null)
+                s_lecturers = new List<Lecturer>();
+            if (s_classrooms == null)
+                s_classrooms = new List<Classroom>();
+            if (s_days == null)
+                s_days = new List<Day>();
+            if (s_times == null)
+                s_times = new List<Time>();
+
             List<IEnumerable<Hodina>> HodinyDilci = new List<IEnumerable<Hodina>>();
 
         //1.podle kruhu - získá id hodin, které májí v rozvrhu označené kruhy    
@@ -690,6 +679,105 @@ using System.IO.Packaging;
 
     class Program
     {
+
+        [TestMethod]
+        public static void TestFilter1(ModelData MD, bool vypis)
+        {
+            ViewData VD = new ViewData(MD);
+            VD.FilterDegreeYear2Zamereni(VD.v_degreeyears[1]);         //zobraz zaměření příslušné vybranému kruhu index 1 - BS 2.ročník
+            List<string> expected = new List<string> { "APIN", "ASI", "FYT", "JCHI", "JIB", "JIC", "LPT", "RT", "ZS" };
+
+            if (vypis)
+            {
+                //vypiš co je v VD.v_zamerenis
+                Console.Write("\n\n zaměření v {0}: \n", VD.v_degreeyears[1].acronym);
+                foreach (Zamereni z in VD.v_zamerenis)
+                    Console.Write("     {0} \n", z.acronym);
+            }
+
+            CollectionAssert.AreEqual(expected, VD.v_zamerenis.Select(z => z.acronym).ToList(), "Neprošel test Filteru 1 - FilterDegreeyear2Zamereni");
+        }
+
+        [TestMethod]
+        public static void TestFilter2(ModelData MD, bool vypis)
+        {
+            ViewData VD = new ViewData(MD);
+            VD.FilterZamereni2Kruhy(MD.m_zamerenis[8]);              //zobraz kruhy příslušné vybranému zaměření index 8 - BS 2.ročník
+            List<int> expected = new List<int> { 1, 2, 3, 4, 5, 6, 7};
+
+            if (vypis)
+            {
+                //vypiš co je v VD.v_kruhy
+                Console.Write("\n\n zaměření v {0} 2.ročník Bc: \n", MD.m_zamerenis[8].acronym);
+                foreach (Kruh k in VD.v_kruhy)
+                    Console.Write("     {0} \n", k.cisloKruhu);
+            }
+
+            CollectionAssert.AreEqual(expected, VD.v_kruhy.Select(k => k.cisloKruhu).ToList(), "Neprošel test Filteru 2 - FilterZamereni2Kruhy");
+        }
+
+        [TestMethod]
+        public static void TestFilter3(ModelData MD, bool vypis)
+        {
+            ViewData VD = new ViewData(MD);
+            List<Department> s_depts = new List<Department> { MD.m_departments[0], MD.m_departments[2], MD.m_departments[9] }; //KM, KJ, KSE
+            VD.FilterDepartments2Lecturers(s_depts);            
+            int expectedCount = 150;
+
+            if (vypis)
+            {
+                //vypiš co je v VD.v_lecturers
+                Console.Write("\n\n  katedra {0}, {1} a {2} mají učitele: \n", MD.m_departments[0].acronym, MD.m_departments[2].acronym, MD.m_departments[9].acronym);
+                foreach (Lecturer l in VD.v_lecturers)
+                    Console.Write("     {0} {1} \n", l.forname, l.name);
+            }
+
+            Assert.AreEqual(expectedCount, VD.v_lecturers.Count(), "Neprošel test Filteru 3 - FilterDepartments2Lecturers");
+        }
+
+        [TestMethod]
+        public static void TestFilter4(ModelData MD, bool vypis)
+        {
+            ViewData VD = new ViewData(MD);
+            List<Building> s_builds = new List<Building> { MD.m_buildings[8], MD.m_buildings[5], MD.m_buildings[1] }; //UTIA, Troja, Trojanova
+            VD.FilterBuildings2Classrooms(s_builds);
+            int expectedCount = 38;
+
+            if (vypis)
+            {
+                //vypiš co je v VD.v_classrooms
+                Console.Write("\n\n  budovy {0}, {1} a {2} mají místnosti: \n", MD.m_buildings[8].name, MD.m_buildings[5].name, MD.m_buildings[1].name);
+                foreach (Classroom c in VD.v_classrooms)
+                    Console.Write("     {0}\n", c.name);
+            }
+
+            Assert.AreEqual(expectedCount, VD.v_classrooms.Count(), "Neprošel test Filteru 4 - FilterBuildings2Classrooms");
+        }
+
+        [TestMethod]
+        public static void TestFilter5(ModelData MD, bool vypis)
+        {
+            ViewData VD = new ViewData(MD);
+
+            List<Kruh> s_kruhy = new List<Kruh> { MD.m_kruhy[0], MD.m_kruhy[2]}; //Bc.2 JIB kruh1   Bc.3 FYT kruh1
+            //List<Department> s_depts = new List<Department> { MD.m_departments[1]}; //KF
+            //List<Classroom> s_clasrms = new List<Classroom>(){ MD.m_classrooms[0], MD.m_classrooms[2] };//??
+            List<Time> s_times = new List<Time> { MD.m_times[0], MD.m_times[1] }; //7:30 9:30           
+            List<Day> s_days = new List<Day> { MD.m_days[4], MD.m_days[3] }; //Ct Pa      
+            
+            VD.FilterAll2TimetableFields(s_kruhy, null, null, null, s_days, s_times);
+            List<string> expected = new List<string> { "KFcv", "JAZ", "SUPR", "ZAF1"};
+
+            if (vypis)
+            {
+                Console.WriteLine("\n\n výsledná pole jsou následující: ");
+                foreach (TimetableField t in VD.v_timetablefields)
+                    Console.WriteLine("    {6}  {0}  {1}  {2}  {3}:{4} {5}", t.predmet_acr, t.lecturer, t.day, t.time_hours, t.time_minutes, t.classroom, t.department_acr);
+            }
+
+            CollectionAssert.AreEqual(expected, VD.v_timetablefields.Select(t => t.predmet_acr).ToList(), "Neprošel test Filteru 5 - FilterAll2TimetableFields");
+        }
+
         static void Main(string[] args)
         {
             XElement config = XElement.Load("..\\..\\rozvrh_config.xml");
@@ -703,62 +791,16 @@ using System.IO.Packaging;
             if (!MD.InitModelData())
                 goto Finish;
 
-            //připrav data do kontejnerů ve View
-            ViewData VD = new ViewData(MD);
-            VD.InitViewData();
 
-            //TEST filter 1 - ručně vybrat ročník
-            VD.s_degreeyear = VD.v_degreeyears[1]; //index 1 - BS 2.ročník
-            //zobraz zaměření příslušné vybranému kruhu
-            VD.FilterDegreeYear2Zamereni();
-            //teď je v VD.v_zamerenis to co má být
-            Console.Write("\n\n zaměření v {0}: \n", VD.s_degreeyear.acronym);
-            foreach (Zamereni z in VD.v_zamerenis)
-                Console.Write("     {0} \n", z.acronym);
+            TestFilter1(MD, true); //test FilterDegreeyear2Zamereni
 
-            //TEST filter 2 - ručně vybrat zaměření
-            VD.s_zamereni = VD.v_zamerenis[8]; //index 8 ZS
-            //zobraz kruhy příslušné vybranému zaměření            
-            VD.FilterZamereni2Kruhy();
-            //teď je v VD.v_kruhy to co má být
-            Console.Write("\n\n kruhy v {0}: \n", VD.v_zamerenis[8].acronym); //ZS
-            foreach (Kruh k in VD.v_kruhy)
-                Console.Write("     {0} \n", k.cisloKruhu);
+            TestFilter2(MD, true); //test FilterZamereni2Kruhy
 
-            //TEST filter 3 - ručně vybrat katedry
-            VD.s_departments.Add(VD.v_departments[0]);//index 0 - KM
-            VD.s_departments.Add(VD.v_departments[2]);//index 2 - KJ
-            VD.s_departments.Add(VD.v_departments[9]);//index 9 - KSE
-            //zobraz učitele vybraných kateder
-            VD.FilterDepartments2Lecturers();
-            //teď je v VD.v_lecturers to co má být
-            Console.Write("\n\n  katedra {0} a {1} mají učitele: \n", VD.v_departments[2].acronym, VD.v_departments[4].acronym); 
-            foreach (Lecturer l in VD.v_lecturers)
-                Console.Write("     {0} {1} \n", l.forname, l.name);
+            TestFilter3(MD, true); //test FilterDepartments2Lecturers
+    
+            TestFilter4(MD, true); //test FilterBuildings2Classrooms
 
-            //TEST filter 4 - ručně vybrat budovy
-            VD.s_buildings.Add(VD.v_buildings[8]);//index 8 - UTIA
-            VD.s_buildings.Add(VD.v_buildings[5]);//index 5 - Troja
-            VD.s_buildings.Add(VD.v_buildings[1]);//index 1 - Trojanova
-            //zobraz místnosti vybraných budov
-            VD.FilterBuildings2Classrooms();
-            //teď je v VD.v_classrooms to co má být
-            Console.Write("\n\n  budovy {0} a {1} mají místnosti: \n", VD.v_buildings[0].name, VD.v_buildings[1].name);
-            foreach (Classroom c in VD.v_classrooms)
-                Console.Write("     {0}\n", c.name);
-            
-            //TEST filter 5 - celkový filter, který vrátí TimetableFields
-            VD.s_kruhy.Add(VD.v_kruhy[0]); //vyber 1. kruh Bc. 2. ročník ZS
-            VD.s_kruhy.Add(VD.v_kruhy[2]); //vyber 3. kruh Bc. 2. ročník ZS
-            //VD.s_classrooms.Add(VD.v_classrooms[19]); //T-101
-            //VD.s_classrooms.Add(VD.v_classrooms[29]); //T-105
-            //VD.s_classrooms.Add(VD.v_classrooms[31]); //T-014
-            VD.FilterAll2TimetableFields();
-
-            
-            Console.WriteLine("výsledná pole jsou následující: ");
-            foreach (TimetableField t in VD.v_timetablefields)
-                Console.WriteLine(" {6}  {0}  {1}  {2}  {3}:{4} {5}", t.predmet_acr, t.lecturer, t.day, t.time_hours, t.time_minutes, t.classroom, t.department_acr);
+            TestFilter5(MD, true); //test FilterAll2TimetableFields
 
             Finish:
                 Console.WriteLine("Stiskněte libovolnou klávesu...");
