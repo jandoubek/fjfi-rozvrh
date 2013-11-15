@@ -9,10 +9,15 @@ namespace MvcApplication1.Models
     /// </summary>
     public class Model : IModel
     {
+<<<<<<< HEAD
+        // Ted jste v Master vetvi, jsem prijde docasna implementace modelu s tvrdymi daty
+        public List<string> departments
+=======
         /// <summary>
         /// Konstruktor třídy
         /// </summary>
         public Model()
+>>>>>>> Model
         {
             FiltredLectures = new List<IExportHodina>();
         }

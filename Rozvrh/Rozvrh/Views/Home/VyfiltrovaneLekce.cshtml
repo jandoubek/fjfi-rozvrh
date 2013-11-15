@@ -1,10 +1,4 @@
-﻿@using Rozrvh
-@using Rozrvh.Controllers
-@{
-    var hodiny = new List<IExportHodina>();
-    DownloadAsICalController.prototypeData(hodiny);
-
-}
+﻿@model MvcApplication1.Models.Model
 <table id="Tabulka">
     <tr>
         <th>Předmět</th>
@@ -12,7 +6,7 @@
         <th>Místnost</th>
     </tr>
 
-@foreach (var item in hodiny) {
+@foreach (var item in Model.FiltredLectures) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)

@@ -188,6 +188,9 @@
     </Compile>
     <Compile Include="IExportHodina.cs" />
     <Compile Include="Models\Empty.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\TimetableField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PrototypeExportHodina.cs" />
   </ItemGroup>

@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcApplication1.Models;
 
 namespace Rozrvh.Controllers
 {
@@ -11,9 +12,8 @@ namespace Rozrvh.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
-            return View();
+            var m = new Model();
+            return View(m);
         }
 
         public string Show()
@@ -25,9 +25,12 @@ namespace Rozrvh.Controllers
 
         public PartialViewResult Filter(string rocnik, string zamereni, string kruh)
         {
-            if (!String.IsNullOrEmpty(rocnik) && !String.IsNullOrEmpty(zamereni) && !String.IsNullOrEmpty(kruh) && rocnik == "5" && zamereni == "1" && kruh == "1")
-                return PartialView("VyfiltrovaneLekce");
-            return null;
+            var m = new Model();
+            
+            if (!String.IsNullOrEmpty(rocnik) && !String.IsNullOrEmpty(zamereni) && !String.IsNullOrEmpty(kruh) && rocnik == m.Years[4] && zamereni == m.Courses[0] && kruh == m.Groups[0])
+                DownloadAsICalController.prototypeData(m.FiltredLectures);
+
+            return PartialView("VyfiltrovaneLekce", m);
         }
     }
 }

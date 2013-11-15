@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MvcApplication1.Models
 {
-    class TimetableField
+    public class TimetableField
     {
-        public String department;
-        public String color;
-        public String course;
-        public String practise;
-        public Boolean period;
-        public String lecturer;
-        public DayOfWeek day;
-        public DateTime time;
-        public String classroom;
-        public String degree;
-        public String group;
-        public String year;
-        public String part;
+        public String Department;
+        public String Color;
+        public String Course;
+        public String Practise;
+        public Boolean Period;
+        public String Lecturer;
+        public DayOfWeek Day;
+        public DateTime Time;
+        public String Classroom;
+        public String Degree;
+        public String Group;
+        public String Year;
+        public String Part;
     }
 }
