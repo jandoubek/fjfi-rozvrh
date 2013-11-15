@@ -4,7 +4,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MvcApplication1.Models;
+using Rozrvh.Exporters.ICal;
+using Rozvrh.Models;
 
 namespace Rozrvh.Controllers
 {

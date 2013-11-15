@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvcApplication1.Models
+namespace Rozvrh.Models
 {
     public class TimetableField
     {

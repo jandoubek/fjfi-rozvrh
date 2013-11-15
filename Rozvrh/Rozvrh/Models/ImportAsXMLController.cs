@@ -7,7 +7,15 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
 
-namespace MvcApplication1.Controllers
+// Docasny import, nez se doresi komentare
+using Rozrvh.Exporters.ICal;
+
+
+// FIX ME !!! autor: Richard
+// Podobny pripad, jako v Model.cs. Jestli jsem to z nazvu pochopil, tahle funkce ma slouzit k importu uzvatelskych xml s rozvrhy.
+// Tedy vstup informaci, se kterymi se bude dale pracovat - tato trida by tedy mela byt soucasti modelu. Dale viz komentar v Model.cs
+
+namespace Rozvrh.Models
 {
     public class ImportAsXMLController : Controller
     {

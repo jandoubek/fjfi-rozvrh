@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcApplication1.Controllers
+namespace Rozrvh.Exporters.ICal
 {
     public class ICalGenerator
     {

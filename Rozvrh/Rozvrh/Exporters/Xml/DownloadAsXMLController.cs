@@ -7,7 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Serialization;
 
-namespace MvcApplication1.Controllers
+// Docasny import, nez se vyresi co s ExportHodina
+using Rozrvh.Exporters.ICal; 
+
+namespace Rozvrh.Exporters.Xml
 {
     public class DownloadAsXMLController : Controller
     {

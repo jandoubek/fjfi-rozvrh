@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Xml.Serialization;
 
-namespace Rozrvh
+namespace Rozrvh.Exporters.ICal
 {
     public class ExportHodina : IExportHodina
     {

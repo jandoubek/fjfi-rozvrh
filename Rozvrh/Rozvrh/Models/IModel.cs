@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MvcApplication1.Models
+namespace Rozvrh.Models
 {
     interface IModel
     {
