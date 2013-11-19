@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Rozrvh.Exporters.Common;
 using Rozvrh.Models;
+using Rozvrh.Exporters;
 
 namespace Rozrvh.Controllers
 {
@@ -33,9 +34,6 @@ namespace Rozrvh.Controllers
         {
             var m = new Model();
             
-            if (!String.IsNullOrEmpty(rocnik) && !String.IsNullOrEmpty(zamereni) && !String.IsNullOrEmpty(kruh) && rocnik == m.Years[4] && zamereni == m.Courses[0] && kruh == m.Groups[0])
-                DownloadAsICalController.prototypeData(m.FiltredLectures);
-
             return PartialView("VyfiltrovaneLekce", m);
         }
     }
