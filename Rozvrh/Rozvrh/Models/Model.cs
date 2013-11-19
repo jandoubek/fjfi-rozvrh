@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using Rozrvh;
+using System.Linq;
 // Docasny import kvuli kompilaci, dokud se nerozhodne, co s tim
 using Rozrvh.Exporters.ICal;
+using System.Xml.Linq;
 
 namespace Rozvrh.Models
 {
     /// <summary>
     /// Dummy data
     /// </summary>
-    public class Model : IModel
+    public class Model:IModel
     {
+      
         /// <summary>
         /// Konstruktor třídy
         /// </summary>
@@ -25,14 +28,63 @@ namespace Rozvrh.Models
 // Navic mi prijde, ze ExportHodina se funkcne kryje s TimeTableField a slo by je sjednotit a zbavit se tak jedne datove tridy.
 // Navrhuji refaktoring ve smyslu vyse uvedeneho, pokud ma nekdo jiny nazor - sem (resp. na FB nebo na SCRUM) s nim.
             FiltredLectures = new List<IExportHodina>();
+
+            System.Diagnostics.Debug.WriteLine("Model constructor");
+            // Richard: This is only a temporary solution. In next phase the XmlLoader is gonna be modofied to be a singleton and these linq queries placed there.
+            // Model constructor will be designed to only set references for all lists.
+            try
+            {
+                XMLTimetableLoader XmlLoader = new XMLTimetableLoader("C:\\Aktualni_databaze.xml");
+                
+                var DepartmentsAsString =
+                    from d in XmlLoader.m_departments
+                    orderby d.acronym
+                select d.acronym;
+                Departments = DepartmentsAsString.ToList();
+                
+                
+                var YearsAsString =
+                    from y in XmlLoader.m_degreeyears
+                    orderby y.acronym
+                    select y.acronym;
+                Years = YearsAsString.ToList();
+
+                var BuildingsAsString =
+                    from b in XmlLoader.m_buildings
+                    orderby b.name
+                    select b.name;
+                Buildings = BuildingsAsString.ToList();
+                
+                var DaysAsString = 
+                    from d in XmlLoader.m_days
+                    orderby d.name
+                    select d.name;
+                Days = DaysAsString.ToList();
+
+                Courses = new List<string>();
+
+                Groups = new List<string>();
+                Lecturers = new List<string>();
+                Classrooms = new List<string>();
+                 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error when parsing timetable XML.");
+                Console.WriteLine(e.StackTrace);
+            }
+            
+            //Departments = new List<string> { "KJCH", "KJR" };
         }
+
 
         /// <summary>
         /// Returns all departmens
         /// </summary>
         public List<string> Departments
         {
-            get { return new List<string> { "KJCH", "KJR" }; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -40,7 +92,8 @@ namespace Rozvrh.Models
         /// </summary>
         public List<string> Courses
         {
-            get { return new List<string> { "JCH" }; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -48,7 +101,8 @@ namespace Rozvrh.Models
         /// </summary>
         public List<string> Groups
         {
-            get { return new List<string> { "1" }; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -56,7 +110,8 @@ namespace Rozvrh.Models
         /// </summary>
         public List<string> Years
         {
-            get { return new List<string> { "První BS", "Druhý BS", "Třetí BS", "První MS", "Druhý MS", "Třetí MS" }; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -64,7 +119,8 @@ namespace Rozvrh.Models
         /// </summary>
         public List<string> Lecturers
         {
-            get { return new List<string> { "John", "Štamberg", "Vopálka", "Vrba" }; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -72,42 +128,35 @@ namespace Rozvrh.Models
         /// </summary>
         public List<string> Classrooms
         {
-            get { return new List<string> { "B-314", "B-115" }; }
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Returns all classrooms
+        /// </summary>
+        public List<string> Buildings
+        {
+            get;
+            set;
         }
 
         /// <summary>
         /// Returns all days of the workweek
         /// </summary>
-        public List<DayOfWeek> Days
+        public List<String> Days
         {
-            get
-            {
-                return new List<DayOfWeek>
-                {
-                    DayOfWeek.Monday,
-                    DayOfWeek.Tuesday,
-                    DayOfWeek.Wednesday,
-                    DayOfWeek.Thursday,
-                    DayOfWeek.Friday
-                };
-            }
+            get;
+            set;
         }
 
         /// <summary>
         /// Returns all start times of lectures
         /// </summary>
-        public List<TimeSpan> Times
+        public List<String> Times
         {
-            get
-            {
-                return new List<TimeSpan>
-                {
-                    new TimeSpan(0, 8, 30, 0),
-                    new TimeSpan(0, 10, 30, 0),
-                    new TimeSpan(0, 13, 30, 0),
-                    new TimeSpan(0, 14, 30, 0)
-                };
-            }
+            get;
+            set;
         }
 
         //TODO Autor doplní komentář!

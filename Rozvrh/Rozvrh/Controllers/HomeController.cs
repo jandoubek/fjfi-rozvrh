@@ -11,10 +11,15 @@ namespace Rozrvh.Controllers
 {
     public class HomeController : Controller
     {
+        private Model M;
+        public HomeController(){
+            System.Diagnostics.Debug.WriteLine("Controller constructor");
+            M = new Model();
+        }
+
         public ActionResult Index()
         {
-            var m = new Model();
-            return View(m);
+           return View(M);
         }
 
         public string Show()

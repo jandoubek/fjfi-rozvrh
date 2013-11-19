@@ -11,8 +11,8 @@ namespace Rozvrh.Models
         List<String> Years { get; }
         List<String> Lecturers { get; }
         List<String> Classrooms { get; }
-        List<DayOfWeek> Days { get; }
-        List<TimeSpan> Times { get; }
+        List<String> Days { get; }
+        List<String> Times { get; }
 
         List<String> GetParts(String group);
     }   
