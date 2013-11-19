@@ -24,7 +24,7 @@ namespace Rozvrh.Exporters
         public ActionResult DownloadAsSVG(List<IExportHodina> hodiny)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(hodiny);
+            string text = gen.generateSVG(hodiny,"Rozvrh");
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             return File(buffer, "text/plain", "FJFIrozvrh.svg");
         }
