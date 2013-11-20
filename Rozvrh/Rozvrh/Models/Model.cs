@@ -191,7 +191,7 @@ namespace Rozvrh.Models
             //udělej množinový průnik dílčích filterů
             var HodinyPrunik = HodinyDilci.Aggregate((previousList, nextList) => previousList.Intersect(nextList).ToList());
 
-            var TimetableFields =
+            var filteredTimetableFields =
                 from h in HodinyPrunik
                 join lec in XmlLoader.m_lectures on h.lectureId equals lec.id
                 join c in XmlLoader.m_courses on lec.courseId equals c.id
@@ -204,7 +204,7 @@ namespace Rozvrh.Models
                 orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
-            TimetableFields = TimetableFields.ToList();
+            TimetableFields = filteredTimetableFields.ToList();
         }
 
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
