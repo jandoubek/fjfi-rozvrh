@@ -48,11 +48,6 @@ namespace Rozvrh.Models
                 Groups = new List<Kruh>();
                 Lecturers = new List<Lecturer>();
                 Classrooms = new List<Classroom>();
-
-                FilterDegreeYear2Specialization(DegreeYears[1].id.ToString());
-                FilterDepartments2Lecturers(Departments[1].id.ToString());
-                FilterSpecialization2Groups(Specializations[1].id.ToString());
-                FilterBuildings2Classrooms(Buildings[1].id.ToString());
             
             }
             catch (Exception e)
