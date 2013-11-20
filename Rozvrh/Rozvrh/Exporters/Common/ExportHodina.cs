@@ -5,6 +5,9 @@ using System.Xml.Serialization;
 
 namespace Rozrvh.Exporters.Common
 {
+    /// <summary>
+    /// Implementation of IExportHodina which is also XML serializable.
+    /// </summary>
     public class ExportHodina : IExportHodina
     {
         private string name;

@@ -6,6 +6,9 @@ using System.Web;
 
 namespace Rozvrh.Exporters.Generators
 {
+    /// <summary>
+    ///  Class generating string in SVG format from list of lectures.
+    /// </summary>
     public class SvgGenerator
     {
         private Dictionary<DayOfWeek, int> doWMapping;
@@ -39,6 +42,13 @@ namespace Rozvrh.Exporters.Generators
             };                    
   
         }
+
+        /// <summary> 
+        /// Generates string in SVG format.
+        /// </summary> 
+        /// <returns> String following SVG XML format. </returns>
+        /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
+        /// <param name="title">Title rendered at the top of the SVG.</param>
         public string generateSVG(List<IExportHodina> lectures, string title)
         {
 
@@ -56,10 +66,14 @@ namespace Rozvrh.Exporters.Generators
         private string RenderLectures (List<IExportHodina> lectures)
         {
             string res = "";
-            foreach(IExportHodina l in lectures)
+            if (lectures != null)
             {
-                res += RenderLecture(l);
+                foreach (IExportHodina l in lectures)
+                {
+                    res += RenderLecture(l);
+                }
             }
+            
             return res;
         }
 
