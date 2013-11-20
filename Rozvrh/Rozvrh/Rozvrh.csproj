@@ -129,8 +129,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Exporters\Xml\DownloadAsXMLController.cs" />
-    <Compile Include="Exporters\ICal\ICalGenerator.cs" />
+    <Compile Include="Exporters\ExportController.cs" />
+    <Compile Include="Exporters\Generators\ICalGenerator.cs" />
+    <Compile Include="Exporters\Generators\SvgGenerator.cs" />
     <Compile Include="Models\Timetable\Building.cs" />
     <Compile Include="Models\Timetable\Classroom.cs" />
     <Compile Include="Models\Timetable\Course.cs" />
@@ -145,14 +146,12 @@
     <Compile Include="Models\Timetable\Time.cs" />
     <Compile Include="Models\Timetable\Zamereni.cs" />
     <Compile Include="Models\XMLTimetableLoader.cs" />
-    <Compile Include="Models\ImportAsXMLController.cs" />
-    <Compile Include="Exporters\ICal\DownloadAsICalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Exporters\ICal\ExportHodina.cs" />
+    <Compile Include="Exporters\Common\ExportHodina.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Exporters\ICal\IExportHodina.cs" />
+    <Compile Include="Exporters\Common\IExportHodina.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\TimetableField.cs" />
@@ -253,7 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Exporters\Pdf\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>

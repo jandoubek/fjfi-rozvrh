@@ -1,10 +1,11 @@
 ﻿using Rozrvh;
+using Rozrvh.Exporters.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Rozrvh.Exporters.ICal
+namespace Rozrvh.Exporters.Generators
 {
     public class ICalGenerator
     {

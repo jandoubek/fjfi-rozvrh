@@ -2,7 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rozrvh;
 using System.Collections.Generic;
-using MvcApplication1.Controllers;
+using Rozrvh.Exporters.Common;
+using Rozrvh.Exporters.Generators;
+
 
 namespace Rozvrh.Tests
 {

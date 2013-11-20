@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Rozrvh;
 using System.Linq;
 // Docasny import kvuli kompilaci, dokud se nerozhodne, co s tim
-using Rozrvh.Exporters.ICal;
+using Rozrvh.Exporters.Common;
 using System.Xml.Linq;
 
 namespace Rozvrh.Models
