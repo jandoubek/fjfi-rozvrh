@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Models
 {
     interface IModel
     {
-        List<String> Departments { get; } 
-        List<String> Specializations { get; }  // Scope of study program
-        List<String> Groups { get; } // Group of students
-        List<String> DegreeYears { get; } 
-        List<String> Lecturers { get; } 
-        List<String> Buildings { get; } 
-        List<String> Classrooms { get; }
-        List<String> Days { get; }
-        List<String> Times { get; }
+        List<Department> Departments { get; } 
+        List<Zamereni> Specializations { get; }  // Scope of study program
+        List<Kruh> Groups { get; } // Group of students
+        List<DegreeYear> DegreeYears { get; } 
+        List<Lecturer> Lecturers { get; } 
+        List<Building> Buildings { get; } 
+        List<Classroom> Classrooms { get; }
+        List<Day> Days { get; }
+        List<Time> Times { get; }
 
     }   
 }
