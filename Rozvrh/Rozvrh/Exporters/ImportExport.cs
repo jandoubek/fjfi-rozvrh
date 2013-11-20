@@ -26,7 +26,9 @@ namespace Rozvrh.Exporters
             SvgGenerator gen = new SvgGenerator();
             string text = gen.generateSVG(lectures,"Rozvrh");
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
-            return Controller.File(buffer, "text/plain", "FJFIrozvrh.svg");
+            var res = new FileContentResult(buffer, "text/plain");
+            res.FileDownloadName = "FJFIrozvrh.svg";
+            return res;
         }
 
         /// <summary>
@@ -41,7 +43,9 @@ namespace Rozvrh.Exporters
             {
                 ser.Serialize(ms, lectures);
                 var bytes = ms.ToArray();
-                return Controller.File(bytes, "text/xml", "FJFIrozvrh.xml");
+                var res = new FileContentResult(bytes, "text/xml");
+                res.FileDownloadName = "FJFIRozvrh.XML" ;
+                return res;
             }
         }
 
@@ -57,7 +61,9 @@ namespace Rozvrh.Exporters
             ICalGenerator gen = new ICalGenerator();
             string text = gen.generateICal(lectures, semStart, semEnd);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
-            return Controller.File(buffer, "text/plain", "FJFIrozvrh.ical");
+            var res = new FileContentResult(buffer, "text/plain");
+            res.FileDownloadName = "FJFIRozvrh.ical";
+            return res;
         }
 
         /// <summary>
