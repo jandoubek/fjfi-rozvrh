@@ -105,7 +105,19 @@ namespace Rozvrh.Models
             Groups = partsAsInt.Distinct().ToList().ConvertAll<string>(p => p.ToString());
         }
 
-       
+        public void FilterDepartments2Lecturers(String departmentFilterValue)
+        {
+
+            //ze všech učitelů vybere ty, kteří jsou z vybraných kateder
+            var lecturersAsString =
+                from d in XmlLoader.m_departments
+                from l in XmlLoader.m_lecturers
+                where d.acronym.Equals(departmentFilterValue) && d.id.Equals(l.departmentId)
+                orderby l.name
+                select l.name;
+
+            Lecturers = lecturersAsString.Distinct().ToList();
+        }
 
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
         //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
