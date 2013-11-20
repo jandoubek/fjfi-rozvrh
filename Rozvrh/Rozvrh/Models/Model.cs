@@ -113,6 +113,100 @@ namespace Rozvrh.Models
             Classrooms = filteredClassrooms.ToList();
         }
 
+        //filter 5 - hlavní filter
+        public void FilterAll2TimetableFields(String groupId, String departmentId, 
+            String lecturerId, String classroomId, String dayId, String timeId)
+        {
+
+            int groupIdAsInt = Convert.ToInt32(groupId);
+            int departmentAsInt = Convert.ToInt32(departmentId);
+            int lecturerIdAsInt = Convert.ToInt32(lecturerId);
+            int classroomIdAsInt = Convert.ToInt32(classroomId);
+            int dayIdAsInt = Convert.ToInt32(dayId);
+            int timeIdAsInt = Convert.ToInt32(timeId);
+
+            List<IEnumerable<Hodina>> HodinyDilci = new List<IEnumerable<Hodina>>();
+
+            //1.podle kruhu - získá id hodin, které májí v rozvrhu označené kruhy    
+            //získej id hodin vybraných kruhů
+            var Hodiny1 =
+                from hk in XmlLoader.m_hodinyKruhu
+                where hk.kruhId.Equals(groupId)
+                from h in XmlLoader.m_hodiny
+                where hk.hodinaId == h.id
+                select h;
+            if (Hodiny1.Count() != 0)
+                HodinyDilci.Add(Hodiny1);
+
+            //2.podle katedry, která vypisuje kurz (katedra -> kurz -> lekce -> hodina)
+            //získej kurzy, které jsou vypisovány těmito katedrami             
+            var Hodiny2 =
+                from c in XmlLoader.m_courses
+                where c.departmentId.Equals(departmentAsInt)
+                from l in XmlLoader.m_lectures
+                where c.id == l.courseId
+                from h in XmlLoader.m_hodiny
+                where l.id == h.lectureId
+                select h;
+            if (Hodiny2.Count() != 0)
+                HodinyDilci.Add(Hodiny2);
+
+            //3. podle vyučujícího
+            //získej hodiny, které vedou vybraní vyučující
+            var Hodiny3 =
+                from h in XmlLoader.m_hodiny
+                where h.lecturerId.Equals(lecturerIdAsInt)
+                select h;
+            if (Hodiny3.Count() != 0)
+                HodinyDilci.Add(Hodiny3);
+
+            //4. podle vybrané místnosti
+            //získej hodiny, které jsou vedeny ve vybraných místnostech
+
+            var Hodiny4 =
+                from h in XmlLoader.m_hodiny
+                where h.classroomId.Equals(classroomId)
+                select h;
+            if (Hodiny4.Count() != 0)
+                HodinyDilci.Add(Hodiny4);
+
+            //5.podle dne v týdnu
+            //získej hodiny vedené ve vybraných dnech v týdnu
+            var Hodiny5 =
+                from h in XmlLoader.m_hodiny
+                where h.dayId.Equals(dayId)
+                select h;
+            if (Hodiny5.Count() != 0)
+                HodinyDilci.Add(Hodiny5);
+
+            //6.podle času
+            //získej hodiny vedené ve vybraných časech
+            var Hodiny6 =
+                from h in XmlLoader.m_hodiny
+                where h.timeId.Equals(timeId)
+                select h;
+            if (Hodiny6.Count() != 0)
+                HodinyDilci.Add(Hodiny6);
+
+            //udělej množinový průnik dílčích filterů
+            var HodinyPrunik = HodinyDilci.Aggregate((previousList, nextList) => previousList.Intersect(nextList).ToList());
+
+            var TimetableFields =
+                from h in HodinyPrunik
+                join lec in XmlLoader.m_lectures on h.lectureId equals lec.id
+                join c in XmlLoader.m_courses on lec.courseId equals c.id
+                join dep in XmlLoader.m_departments on c.departmentId equals dep.id
+                join ler in XmlLoader.m_lecturers on h.lecturerId equals ler.id
+                join d in XmlLoader.m_days on h.dayId equals d.id
+                join t in XmlLoader.m_times on h.timeId equals t.id
+                join cr in XmlLoader.m_classrooms on h.classroomId equals cr.id
+                join b in XmlLoader.m_buildings on cr.buildingId equals b.id
+                orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
+                select new TimetableField(dep, c, lec, ler, d, t, b, cr);
+
+            TimetableFields = TimetableFields.ToList();
+        }
+
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
         //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
         //      Jedná se totiž o aplikační logiku, nikoliv datovou.
@@ -131,5 +225,7 @@ namespace Rozvrh.Models
         public List<Classroom> Classrooms { get; private set; }
         public List<Day> Days { get; private set; }
         public List<Time> Times { get; private set; }
+
+        public List<TimetableField> TimetableFields { get; private set; }
     }
 }
