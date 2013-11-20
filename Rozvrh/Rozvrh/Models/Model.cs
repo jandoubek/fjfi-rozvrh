@@ -131,7 +131,7 @@ namespace Rozvrh.Models
             //získej id hodin vybraných kruhů
             var Hodiny1 =
                 from hk in XmlLoader.m_hodinyKruhu
-                where hk.kruhId.Equals(groupId)
+                where hk.kruhId.Equals(groupIdAsInt)
                 from h in XmlLoader.m_hodiny
                 where hk.hodinaId == h.id
                 select h;
@@ -165,7 +165,7 @@ namespace Rozvrh.Models
 
             var Hodiny4 =
                 from h in XmlLoader.m_hodiny
-                where h.classroomId.Equals(classroomId)
+                where h.classroomId.Equals(classroomIdAsInt)
                 select h;
             if (Hodiny4.Count() != 0)
                 HodinyDilci.Add(Hodiny4);
@@ -174,7 +174,7 @@ namespace Rozvrh.Models
             //získej hodiny vedené ve vybraných dnech v týdnu
             var Hodiny5 =
                 from h in XmlLoader.m_hodiny
-                where h.dayId.Equals(dayId)
+                where h.dayId.Equals(dayIdAsInt)
                 select h;
             if (Hodiny5.Count() != 0)
                 HodinyDilci.Add(Hodiny5);
@@ -183,7 +183,7 @@ namespace Rozvrh.Models
             //získej hodiny vedené ve vybraných časech
             var Hodiny6 =
                 from h in XmlLoader.m_hodiny
-                where h.timeId.Equals(timeId)
+                where h.timeId.Equals(timeIdAsInt)
                 select h;
             if (Hodiny6.Count() != 0)
                 HodinyDilci.Add(Hodiny6);

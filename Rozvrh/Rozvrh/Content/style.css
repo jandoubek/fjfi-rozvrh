@@ -8,6 +8,7 @@
     min-width: 1000px;
     min-height: 600px;
     font-size: 14px;
+    font-family: Verdana;
 }
 .clear {
     clear: both;
@@ -55,13 +56,13 @@ padding: 1em 0 0 0;
 }
 
 #Tabulka {
-    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 100%;padding: 0;border-spacing: 0;
+    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 100%;padding: 0;border-spacing: 0;clear: both;
 }
 #Tabulka th, #Tabulka td {
     text-align: left;padding: 5px;border-bottom: 1px solid #a8a8a8;border-right: 1px solid #a8a8a8;
 }
 #Tabulka th {
-    border-bottom: 3px #a8a8a8 double;
+    border-bottom: 3px #a8a8a8 double;font-weight: 400;
 }
 
 
