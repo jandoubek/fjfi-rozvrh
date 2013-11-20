@@ -1,18 +1,19 @@
 ﻿body {
     padding: 0;
     margin: 0;
+    -moz-min-width: 1000px;
+    -ms-min-width: 1000px;
+    -o-min-width: 1000px;
+    -webkit-min-width: 1000px;
+    min-width: 1000px;
+    font-size: 14px;
+}
+.clear {
+    clear: both;
 }
 
 #leftSection {
     height: 700px;
-    -moz-min-width: 400px;
-    -ms-min-width: 400px;
-    -o-min-width: 400px;
-    -webkit-min-width: 400px;
-    min-width: 400px;
-    /*position: absolute;
-    top: 2px;
-    left: 2px;*/
 }
 
 #rightSection {
@@ -20,39 +21,33 @@
     height: 680px;
     float: right;
     margin: 8px;
-    /*position: absolute;
-    top: 2px;
-    right: 2px;
-    bottom: 62px;*/
 }
+
+
 #rightSection #tabs {
     width: 492px;
     height: 100%;
-    /*position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;*/
 }
 #rightSection .ui-tabs .ui-tabs-nav {
     padding-left: 0.8em;
 }
-.clear {
-    clear: both;
+#rightSection .ui-tabs .ui-tabs-panel { 
+padding: 1em 0;
 }
-
-
-#rightSection div.box, #rightSection div.boxPosledni {
-    float: left;margin-right: 10px;
+#rightSection div.boxContainer {
+    float: left;margin-right: 21px;
 }
-#rightSection div.box label, #rightSection div.boxPosledni label {
-    background: #e2e2e2;display: block; padding: 5px; width: 128px;border: 1px solid #a8a8a8;border-bottom: none;
+#rightSection div.nomargin {
+    margin: 0;
 }
-#rightSection div.boxPosledni {
-    margin-right: 0;
+#rightSection div.box{
+    float: left;margin-right: -1px;
 }
-#rightSection div.box select, #rightSection div.boxPosledni select {
-    width: 140px;border: 1px solid #a8a8a8;padding: 5px;
+#rightSection div.box label {
+    background: #e2e2e2;display: block; padding: 5px; width: 83px;border: 1px solid #a8a8a8;border-bottom: none;
+}
+#rightSection div.box select {
+    width: 95px;border: 1px solid #a8a8a8;padding: 5px; font-size: 0.85em;
 }
 #Tabulka {
     border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 439px;padding: 0;border-spacing: 0;

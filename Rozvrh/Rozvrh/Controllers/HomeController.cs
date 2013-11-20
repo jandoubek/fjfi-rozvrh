@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,11 +31,25 @@ namespace Rozrvh.Controllers
 
         }
 
-        public PartialViewResult Filter(string rocnik, string zamereni, string kruh)
+        public PartialViewResult Filter(string degreeYear, string specialization, string groups, string department, string lecturer, string building, string classroom, string day, string time)
         {
-            var m = new Model();
-            
-            return PartialView("VyfiltrovaneLekce", m);
+            if (!String.IsNullOrEmpty(degreeYear))
+                M.FilterDegreeYear2Specialization(degreeYear);
+
+            if (!String.IsNullOrEmpty(specialization))
+                M.FilterSpecialization2Groups(specialization);
+
+            if (!String.IsNullOrEmpty(department))
+                M.FilterDepartments2Lecturers(department);
+
+            if (!String.IsNullOrEmpty(building))
+                M.FilterBuildings2Classrooms(building);
+
+            if (!String.IsNullOrEmpty(groups) || !String.IsNullOrEmpty(department) || !String.IsNullOrEmpty(lecturer) || !String.IsNullOrEmpty(classroom) || !String.IsNullOrEmpty(day) || !String.IsNullOrEmpty(time))
+                M.FilterAll2TimetableFields(groups, department, lecturer, classroom, day, time);
+
+            return PartialView("Vyber", M);
         }
+
     }
 }

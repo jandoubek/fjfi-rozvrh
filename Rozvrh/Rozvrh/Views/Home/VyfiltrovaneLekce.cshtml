@@ -5,18 +5,21 @@
         <th>Vyučující</th>
         <th>Místnost</th>
     </tr>
-
-@foreach (var item in Model.FiltredLectures) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lecturer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Room)
-        </td>
-    </tr>
-}
+    @if (Model.TimetableFields != null)
+    {
+        foreach (var item in Model.TimetableFields)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.predmet_acr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lecturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.classroom)
+            </td>
+        </tr>
+        }
+    }
 </table>
