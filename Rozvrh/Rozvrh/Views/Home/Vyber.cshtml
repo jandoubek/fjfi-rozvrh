@@ -1,5 +1,17 @@
 ﻿@model Rozvrh.Models.Model
 
+<script>
+    function filterAll() {
+       $("#Fltr").load('@Url.Action("FilterAll", "Home")?groups=' + $("#groups").val() + '&department=' + $("#department").val() +
+            '&lecturer=' + $("#lecturer").val() + '&classroom=' + $("#classroom").val() + '&day=' + $("#day").val() + '&time=' + $("#time").val());
+    }
+
+    $("select").change(function () { window.filterAll(); });
+
+    $("#clearAll").click(function() { $("select option").prop("selected", false); });
+
+</script>
+
 @using (Ajax.BeginForm("Filter", "Home", new AjaxOptions
 {
     HttpMethod = "Get",
@@ -11,7 +23,7 @@
     <div class="boxContainer">
         <div class="box">
             @Html.Label("degreeYear", "Ročník")
-            @Html.DropDownList("degreeYear", new SelectList(Model.DegreeYears,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("degreeYear", new SelectList(Model.DegreeYears,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()", onclick="" })
         </div>
         <div class="box">
             @Html.Label("specialization", "Zaměření")
@@ -31,7 +43,7 @@
             @Html.Label("lecturer", "Vyučující")
             @Html.DropDownList("lecturer", new SelectList(Model.Lecturers,"id","name"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
-    </div><div class="clear"></div><br/><br/>
+    </div><div class="clear"></div><br/>
     <div class="boxContainer">
         <div class="box">
             @Html.Label("building", "Budova")
@@ -51,11 +63,8 @@
     <div class="boxContainer">
         <div class="box">
             @Html.Label("time", "Začátek")
-            @Html.DropDownList("time", new SelectList(Model.Times,"id","hours"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("time", new SelectList(Model.Times,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
     </div><div class="clear"></div>
-    <br />
-}<br />
-<div id="Fltr">@Html.Partial("VyfiltrovaneLekce")</div>
-<br />
-@Ajax.ActionLink("Vybrat vše", "Show", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "leftSection" })
+    <a id="clearAll" href="#">Odznačit vše</a>
+}

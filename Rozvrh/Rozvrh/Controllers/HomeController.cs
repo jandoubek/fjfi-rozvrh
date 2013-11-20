@@ -45,10 +45,22 @@ namespace Rozrvh.Controllers
             if (!String.IsNullOrEmpty(building))
                 M.FilterBuildings2Classrooms(building);
 
+            return PartialView("Vyber", M);
+        }
+
+        public PartialViewResult FilterAll(string groups, string department, string lecturer, string classroom, string day, string time)
+        {
+            groups = groups == "null" ? "-1" : groups;
+            department = department == "null" ? "-1" : department;
+            lecturer = lecturer == "null" ? "-1" : lecturer;
+            classroom = classroom == "null" ? "-1" : classroom;
+            day = day == "null" ? "-1" : day;
+            time = time == "null" ? "-1" : time;
+
             if (!String.IsNullOrEmpty(groups) || !String.IsNullOrEmpty(department) || !String.IsNullOrEmpty(lecturer) || !String.IsNullOrEmpty(classroom) || !String.IsNullOrEmpty(day) || !String.IsNullOrEmpty(time))
                 M.FilterAll2TimetableFields(groups, department, lecturer, classroom, day, time);
 
-            return PartialView("Vyber", M);
+            return PartialView("VyfiltrovaneLekce", M);
         }
 
     }

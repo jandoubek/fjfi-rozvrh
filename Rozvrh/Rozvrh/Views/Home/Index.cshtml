@@ -3,16 +3,25 @@
 }
 @section right{
     <div id="tabs">
-    <ul><li><a href="#tabs-1">Výběr</a></li><li><a href="#tabs-2">Export</a></li></ul>
-    <div id="tabs-1">@{Html.RenderPartial("Vyber");}</div>
-    <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
+        <ul>
+            <li><a href="#tabs-1">Výběr</a></li>
+            <li><a href="#tabs-2">Export</a></li>
+        </ul>
+        <div id="tabs-1">@{Html.RenderPartial("Vyber");}</div>
+        <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
     </div>
 }
 
 @section scripts{
     <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
-  </script>
+        $(function () {
+            $("#tabs").tabs();
+        });
+    </script>
 }
+
+<div id="Fltr">@Html.Partial("VyfiltrovaneLekce")</div>
+<br />
+<br />
+@*@Ajax.ActionLink("Vybrat vše", "Show", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "leftSection" })*@
+

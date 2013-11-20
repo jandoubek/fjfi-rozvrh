@@ -6,6 +6,7 @@
     -o-min-width: 1000px;
     -webkit-min-width: 1000px;
     min-width: 1000px;
+    min-height: 600px;
     font-size: 14px;
 }
 .clear {
@@ -13,14 +14,14 @@
 }
 
 #leftSection {
-    height: 700px;
+    padding: 0 10px 0 10px;
 }
 
 #rightSection {
     width: 500px;
-    height: 680px;
     float: right;
     margin: 8px;
+    padding-bottom: 0.8em;
 }
 
 
@@ -32,7 +33,7 @@
     padding-left: 0.8em;
 }
 #rightSection .ui-tabs .ui-tabs-panel { 
-padding: 1em 0;
+padding: 1em 0 0 0;
 }
 #rightSection div.boxContainer {
     float: left;margin-right: 21px;
@@ -49,8 +50,12 @@ padding: 1em 0;
 #rightSection div.box select {
     width: 95px;border: 1px solid #a8a8a8;padding: 5px; font-size: 0.85em;
 }
+#rightSection #clearAll {
+    padding: 2px;line-height: 1.8em;
+}
+
 #Tabulka {
-    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 439px;padding: 0;border-spacing: 0;
+    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 100%;padding: 0;border-spacing: 0;
 }
 #Tabulka th, #Tabulka td {
     text-align: left;padding: 5px;border-bottom: 1px solid #a8a8a8;border-right: 1px solid #a8a8a8;
