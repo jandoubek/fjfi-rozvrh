@@ -6,11 +6,11 @@
 
 <div class="box">
     @Html.Label("rocnik","Ročník")
-    @Html.DropDownList("rocnik",new SelectList(Model.Years),new {size ="6", onchange = "$(this.form).submit()"})
+    @Html.DropDownList("rocnik",new SelectList(Model.DegreeYears),new {size ="6", onchange = "$(this.form).submit()"})
 </div>
 <div class="box">
     @Html.Label("zamereni","Zaměření")
-    @Html.DropDownList("zamereni",new SelectList(Model.Courses),new {size ="6",onchange = "$(this.form).submit()"})
+    @Html.DropDownList("zamereni",new SelectList(Model.Specializations),new {size ="6",onchange = "$(this.form).submit()"})
 </div>
 <div class="boxPosledni">
     @Html.Label("kruh","Kruh")

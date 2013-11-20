@@ -13,6 +13,9 @@ namespace Rozvrh.Models
     /// </summary>
     public class Model:IModel
     {
+        // Temporary, see comment in constructor
+        XMLTimetableLoader XmlLoader = new XMLTimetableLoader("C:\\Aktualni_databaze.xml");
+                
       
         /// <summary>
         /// Konstruktor třídy
@@ -34,7 +37,6 @@ namespace Rozvrh.Models
             // Model constructor will be designed to only set references for all lists.
             try
             {
-                XMLTimetableLoader XmlLoader = new XMLTimetableLoader("C:\\Aktualni_databaze.xml");
                 
                 var DepartmentsAsString =
                     from d in XmlLoader.m_departments
@@ -47,7 +49,7 @@ namespace Rozvrh.Models
                     from y in XmlLoader.m_degreeyears
                     orderby y.acronym
                     select y.acronym;
-                Years = YearsAsString.ToList();
+               DegreeYears = YearsAsString.ToList();
 
                 var BuildingsAsString =
                     from b in XmlLoader.m_buildings
@@ -61,12 +63,12 @@ namespace Rozvrh.Models
                     select d.name;
                 Days = DaysAsString.ToList();
 
-                Courses = new List<string>();
+                Specializations = new List<string>();
 
                 Groups = new List<string>();
                 Lecturers = new List<string>();
                 Classrooms = new List<string>();
-                 
+            
             }
             catch (Exception e)
             {
@@ -77,98 +79,42 @@ namespace Rozvrh.Models
             //Departments = new List<string> { "KJCH", "KJR" };
         }
 
-
-        /// <summary>
-        /// Returns all departmens
-        /// </summary>
-        public List<string> Departments
+        public void FilterDegreeYear2Specialization(String degreeYearFilterValue)
         {
-            get;
-            set;
+            var degreeYearIds =
+                from dy in XmlLoader.m_degreeyears
+                where dy.acronym.Equals(degreeYearFilterValue)
+                select dy.id;
+            
+            //ze zobrazených (visible) zaměření vybere ta, které přísluší vybranému ročníku
+            var scopesAsString =
+                from s in XmlLoader.m_zamerenis
+                where degreeYearIds.ToList().Contains(s.degreeYearId)
+                orderby s.acronym
+                select s.acronym;
+
+            Specializations = scopesAsString.ToList();
         }
 
-        /// <summary>
-        /// Returns all courses
-        /// </summary>
-        public List<string> Courses
+        //filter 2 -  z vybrané položky zaměření vybere příslušné kruhy
+        public void FilterSpecialization2Groups(String scopeFilterValue)
         {
-            get;
-            set;
+
+            var scopeIds =
+                from s in XmlLoader.m_zamerenis
+                where s.acronym.Equals(scopeFilterValue)
+                select s.id;
+
+            //ze všech kruhů vybere ty, které přísluší vybranému zaměření
+            var partsAsInt =
+                from p in XmlLoader.m_kruhy
+                where scopeIds.ToList().Contains(p.id)
+                orderby p.cisloKruhu
+                select p.cisloKruhu;
+            Groups = partsAsInt.ToList().ConvertAll<string>(p => p.ToString());
         }
 
-        /// <summary>
-        /// Returns all groups
-        /// </summary>
-        public List<string> Groups
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Returns all yeas of studies
-        /// </summary>
-        public List<string> Years
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Returns all lecturers
-        /// </summary>
-        public List<string> Lecturers
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Returns all classrooms
-        /// </summary>
-        public List<string> Classrooms
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Returns all classrooms
-        /// </summary>
-        public List<string> Buildings
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Returns all days of the workweek
-        /// </summary>
-        public List<String> Days
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Returns all start times of lectures
-        /// </summary>
-        public List<String> Times
-        {
-            get;
-            set;
-        }
-
-        //TODO Autor doplní komentář!
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="group"></param>
-        /// <returns></returns>
-        public List<string> GetParts(string group)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
         //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
@@ -177,6 +123,24 @@ namespace Rozvrh.Models
         /// <summary>
         /// Seznam vyfiltrovaných hodin, určení pro zobrazení v tabulce pod filtry
         /// </summary>
-        public List<IExportHodina> FiltredLectures { get; set; }
+        public List<IExportHodina> FiltredLectures { get; private set; }
+
+        public List<string> Departments { get; private set; }
+
+        public List<string> Specializations { get; private set; }
+
+        public List<string> Groups { get; private set; }
+
+        public List<string> DegreeYears { get; private set; }
+
+        public List<string> Lecturers { get; private set; }
+
+        public List<string> Buildings { get; private set; }
+
+        public List<string> Classrooms { get; private set; }
+
+        public List<string> Days { get; private set; }
+
+        public List<string> Times { get; private set; }
     }
 }
