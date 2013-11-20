@@ -81,37 +81,28 @@ namespace Rozvrh.Models
 
         public void FilterDegreeYear2Specialization(String degreeYearFilterValue)
         {
-            var degreeYearIds =
-                from dy in XmlLoader.m_degreeyears
-                where dy.acronym.Equals(degreeYearFilterValue)
-                select dy.id;
-            
+   
             //ze zobrazených (visible) zaměření vybere ta, které přísluší vybranému ročníku
             var scopesAsString =
+                from dy in XmlLoader.m_degreeyears
                 from s in XmlLoader.m_zamerenis
-                where degreeYearIds.ToList().Contains(s.degreeYearId)
+                where dy.acronym.Equals(degreeYearFilterValue) && dy.id.Equals(s.degreeYearId)
                 orderby s.acronym
                 select s.acronym;
 
-            Specializations = scopesAsString.ToList();
+            Specializations = scopesAsString.Distinct().ToList();
         }
 
-        //filter 2 -  z vybrané položky zaměření vybere příslušné kruhy
-        public void FilterSpecialization2Groups(String scopeFilterValue)
+        public void FilterSpecialization2Groups(String specializationFilterValue)
         {
-
-            var scopeIds =
-                from s in XmlLoader.m_zamerenis
-                where s.acronym.Equals(scopeFilterValue)
-                select s.id;
-
             //ze všech kruhů vybere ty, které přísluší vybranému zaměření
             var partsAsInt =
+                from s in XmlLoader.m_zamerenis
                 from p in XmlLoader.m_kruhy
-                where scopeIds.ToList().Contains(p.id)
+                where s.acronym.Equals(specializationFilterValue) && s.id.Equals(p.zamereniId)
                 orderby p.cisloKruhu
                 select p.cisloKruhu;
-            Groups = partsAsInt.ToList().ConvertAll<string>(p => p.ToString());
+            Groups = partsAsInt.Distinct().ToList().ConvertAll<string>(p => p.ToString());
         }
 
        
