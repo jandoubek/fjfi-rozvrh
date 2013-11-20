@@ -43,13 +43,13 @@ namespace Rozrvh.Controllers
 
         public PartialViewResult FilterAll(string groups, string department, string lecturer, string classroom, string day, string time)
         {
-            if (!IsNull(groups) || !IsNull(department) || !IsNull(lecturer) || !IsNull(classroom) || !IsNull(day) || !IsNull(time))
+            if (!isNull(groups) || !isNull(department) || !isNull(lecturer) || !isNull(classroom) || !isNull(day) || !isNull(time))
                 M.FilterAll2TimetableFields(groups, department, lecturer, classroom, day, time);
 
             return PartialView("VyfiltrovaneLekce", M);
         }
 
-        private bool IsNull(string text)
+        private bool isNull(string text)
         {
             return text == "null";
         }

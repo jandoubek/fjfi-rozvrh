@@ -2,13 +2,13 @@
 
 <script>
     function filterAll() {
-       $("#Fltr").load('@Url.Action("FilterAll", "Home")?groups=' + $("#groups").val() + '&department=' + $("#department").val() +
-            '&lecturer=' + $("#lecturer").val() + '&classroom=' + $("#classroom").val() + '&day=' + $("#day").val() + '&time=' + $("#time").val());
+        $("#Fltr").load('@Url.Action("FilterAll", "Home")?groups=' + $("#groups").val() + '&department=' + $("#department").val() +
+             '&lecturer=' + $("#lecturer").val() + '&classroom=' + $("#classroom").val() + '&day=' + $("#day").val() + '&time=' + $("#time").val());
     }
 
-    $("select").change(function () { window.filterAll(); });
+    $("select").on('change', function () { window.filterAll(); });
 
-    $("#clearAll").click(function() { $("select option").prop("selected", false); });
+    $("#clearAll").click(function () { $("select option").prop("selected", false); });
 
 </script>
 
@@ -23,48 +23,51 @@
     <div class="boxContainer">
         <div class="box">
             @Html.Label("degreeYear", "Ročník")
-            @Html.DropDownList("degreeYear", new SelectList(Model.DegreeYears,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()", onclick="" })
+            @Html.DropDownList("degreeYear", new SelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()", onclick = "" })
         </div>
         <div class="box">
             @Html.Label("specialization", "Zaměření")
-            @Html.DropDownList("specialization", new SelectList(Model.Specializations,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("specialization", new SelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
         <div class="box">
             @Html.Label("groups", "Kruh")
-            @Html.DropDownList("groups", new SelectList(Model.Groups,"id","cisloKruhu"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("groups", new SelectList(Model.Groups, "id", "cisloKruhu"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
     </div>
     <div class="boxContainer nomargin">
         <div class="box">
             @Html.Label("department", "Katedra")
-            @Html.DropDownList("department", new SelectList(Model.Departments,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("department", new SelectList(Model.Departments, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
         <div class="box">
             @Html.Label("lecturer", "Vyučující")
-            @Html.DropDownList("lecturer", new SelectList(Model.Lecturers,"id","name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("lecturer", new SelectList(Model.Lecturers, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
-    </div><div class="clear"></div><br/>
+    </div>
+    <div class="clear"></div>
+    <br />
     <div class="boxContainer">
         <div class="box">
             @Html.Label("building", "Budova")
-            @Html.DropDownList("building", new SelectList(Model.Buildings,"id","name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("building", new SelectList(Model.Buildings, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
         <div class="box">
             @Html.Label("classroom", "Místnost")
-            @Html.DropDownList("classroom", new SelectList(Model.Classrooms,"id","name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("classroom", new SelectList(Model.Classrooms, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
     </div>
     <div class="boxContainer">
         <div class="box">
             @Html.Label("day", "Den")
-            @Html.DropDownList("day", new SelectList(Model.Days,"id","name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("day", new SelectList(Model.Days, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
     </div>
     <div class="boxContainer">
         <div class="box">
             @Html.Label("time", "Začátek")
-            @Html.DropDownList("time", new SelectList(Model.Times,"id","acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("time", new SelectList(Model.Times, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
-    </div><div class="clear"></div>
+    </div>
+    <div class="clear"></div>
     <a id="clearAll" href="#">Odznačit vše</a>
 }
