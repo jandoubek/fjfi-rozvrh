@@ -24,13 +24,6 @@ namespace Rozrvh.Controllers
            return View(M);
         }
 
-        public string Show()
-        {
-
-            return "<img src=\"Images/ing2jch1.png\" />";
-
-        }
-
         public PartialViewResult Filter(string degreeYear, string specialization, string groups, string department, string lecturer, string building, string classroom, string day, string time)
         {
             if (!String.IsNullOrEmpty(degreeYear))
@@ -50,17 +43,15 @@ namespace Rozrvh.Controllers
 
         public PartialViewResult FilterAll(string groups, string department, string lecturer, string classroom, string day, string time)
         {
-            groups = groups == "null" ? "-1" : groups;
-            department = department == "null" ? "-1" : department;
-            lecturer = lecturer == "null" ? "-1" : lecturer;
-            classroom = classroom == "null" ? "-1" : classroom;
-            day = day == "null" ? "-1" : day;
-            time = time == "null" ? "-1" : time;
-
-            if (!String.IsNullOrEmpty(groups) || !String.IsNullOrEmpty(department) || !String.IsNullOrEmpty(lecturer) || !String.IsNullOrEmpty(classroom) || !String.IsNullOrEmpty(day) || !String.IsNullOrEmpty(time))
+            if (!IsNull(groups) || !IsNull(department) || !IsNull(lecturer) || !IsNull(classroom) || !IsNull(day) || !IsNull(time))
                 M.FilterAll2TimetableFields(groups, department, lecturer, classroom, day, time);
 
             return PartialView("VyfiltrovaneLekce", M);
+        }
+
+        private bool IsNull(string text)
+        {
+            return text == "null";
         }
 
     }
