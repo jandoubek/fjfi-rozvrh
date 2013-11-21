@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rozrvh;
-using Rozvrh.Models.Timetable;
 using System.Linq;
-// Docasny import kvuli kompilaci, dokud se nerozhodne, co s tim
-using Rozrvh.Exporters.Common;
-using System.Xml.Linq;
+using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Models
 {
@@ -18,7 +14,7 @@ namespace Rozvrh.Models
         XMLTimetableLoader XmlLoader = new XMLTimetableLoader("C:\\Aktualni_databaze.xml");
 
         /// <summary>
-        /// Konstruktor třídy
+        /// Konstruktor třídy.
         /// </summary>
         public Model()
         {
@@ -45,13 +41,14 @@ namespace Rozvrh.Models
                 Console.WriteLine("Error when parsing timetable XML.");
                 Console.WriteLine(e.StackTrace);
             }
-
-            //Departments = new List<string> { "KJCH", "KJR" };
         }
 
+        /// <summary>
+        /// Metoda filtrující zaměření podle zadaného ročníku (DegreeYear). Výsledek ukládá do 'Specializations' vlastnosti Modelu.
+        /// </summary>
+        /// <param name="buildingIds">Id ročníku (DegreeYear)</param>
         public void FilterDegreeYear2Specialization(String degreeYearId)
         {
-            //ze zaměření vybere ta, které přísluší vybranému ročníku
             var filteredSpecializations =
                 from s in XmlLoader.m_specializations
                 where s.degreeYearId.Equals(degreeYearId)
@@ -61,9 +58,12 @@ namespace Rozvrh.Models
             Specializations = filteredSpecializations.ToList();
         }
 
+        /// <summary>
+        /// Metoda filtrující kruhy podle zadaného (jednoho) zaměření. Výsledek ukládá do 'Groups' vlastnosti Modelu.
+        /// </summary>
+        /// <param name="specializationId">Id zaměření</param>
         public void FilterSpecialization2Groups(String specializationId)
         {
-            //z kruhů vybere ty, které přísluší vybranému zaměření
             var filteredGroups =
                from g in XmlLoader.m_groups
                where g.specializationId.Equals(specializationId)
@@ -72,9 +72,12 @@ namespace Rozvrh.Models
             Groups = filteredGroups.ToList();
         }
 
+        /// <summary>
+        /// Metoda filtrující vyučující podle zadaných kateder (katedra, která ho zaměstnává). Výsledek ukládá do 'Lecturers' vlastnosti Modelu.
+        /// </summary>
+        /// <param name="departmentIds">Id kateder</param>
         public void FilterDepartments2Lecturers(String departmentId)
         {
-            //z učitelů vybere ty, kteří jsou z vybraných kateder
             var filteredLecturers =
                 from l in XmlLoader.m_lecturers
                 where l.departmentId.Equals(departmentId)
@@ -84,9 +87,12 @@ namespace Rozvrh.Models
             Lecturers = filteredLecturers.ToList();
         }
 
+        /// <summary>
+        /// Metoda filtrující místnosti podle zadaných budov. Výsledek ukládá do 'Classrooms' vlastnosti Modelu.
+        /// </summary>
+        /// <param name="buildingIds">Id budov</param>
         public void FilterBuildings2Classrooms(String buildingId)
         {
-            //z místností vybere ty, které jsou z vybraných budov
             var filteredClassrooms =
                 from c in XmlLoader.m_classrooms
                 where c.buildingId.Equals(buildingId)
@@ -97,40 +103,39 @@ namespace Rozvrh.Models
         }
 
         /// <summary>
-        /// Metoda filtrující nad všemi daty podle zadaných parametrů.
+        /// Metoda filtrující všechny hodiny (Teachings) podle zadaných parametrů. Výsledek ukládá do 'TimetableFields' vlastnosti Modelu.
         /// </summary>
-        /// <param name="groupId">Id kruhu</param>
-        /// <param name="departmentId">Id katedry</param>
-        /// <param name="lecturerId">Id vyučujícího</param>
-        /// <param name="classroomId">Id třídy</param>
-        /// <param name="dayId">Id dne</param>
-        /// <param name="timeId">Id času</param>
-        public void FilterAll2TimetableFields(String groupId, String departmentId,
-            String lecturerId, String classroomId, String dayId, String timeId)
+        /// <param name="groupIds">Id kruhů</param>
+        /// <param name="departmentIds">Id kateder</param>
+        /// <param name="lecturerIds">Id vyučujících</param>
+        /// <param name="classroomIds">Id místnosti</param>
+        /// <param name="dayIds">Id dnů</param>
+        /// <param name="timeIds">Id časů</param>
+        public void FilterAll2TimetableFields(string groupId, string departmentId, string lecturerId, string classroomId, string dayId, string timeId)
         {
             const string NULL = "null";
             var teachingsFromAllFilters = new List<IEnumerable<Teaching>>();
 
-            filterByGroup(groupId, NULL, teachingsFromAllFilters);
-            filterByDepartment(departmentId, NULL, teachingsFromAllFilters);
-            filterByLecturer(lecturerId, NULL, teachingsFromAllFilters);
-            filterByClassroom(classroomId, NULL, teachingsFromAllFilters);
-            filterByDay(dayId, NULL, teachingsFromAllFilters);
-            filterByTime(timeId, NULL, teachingsFromAllFilters);
+            filterByGroup(groupId, NULL, teachingsFromAllFilters);          //získej Teachings zadaných kruhů
+            filterByDepartment(departmentId, NULL, teachingsFromAllFilters);//získej Teachings zadaných kateder
+            filterByLecturer(lecturerId, NULL, teachingsFromAllFilters);    //získej Teachings zadaných vyučujících
+            filterByClassroom(classroomId, NULL, teachingsFromAllFilters);  //získej Teachings zadaných místností
+            filterByDay(dayId, NULL, teachingsFromAllFilters);              //získej Teachings zadaných dnů
+            filterByTime(timeId, NULL, teachingsFromAllFilters);            //získej Teachings zadaných časů
 
             //udělej množinový průnik dílčích filterů
             var resultTeachings = intersect(teachingsFromAllFilters);
 
             var filteredTimetableFields =
-                from h in resultTeachings
-                join lec in XmlLoader.m_lectures on h.lectureId equals lec.id
-                join c in XmlLoader.m_courses on lec.courseId equals c.id
-                join dep in XmlLoader.m_departments on c.departmentId equals dep.id
-                join ler in XmlLoader.m_lecturers on h.lecturerId equals ler.id
-                join d in XmlLoader.m_days on h.dayId equals d.id
-                join t in XmlLoader.m_times on h.timeId equals t.id
-                join cr in XmlLoader.m_classrooms on h.classroomId equals cr.id
-                join b in XmlLoader.m_buildings on cr.buildingId equals b.id
+                from h      in resultTeachings
+                join lec    in XmlLoader.m_lectures     on h.lectureId      equals lec.id
+                join c      in XmlLoader.m_courses      on lec.courseId     equals c.id
+                join dep    in XmlLoader.m_departments  on c.departmentId   equals dep.id
+                join ler    in XmlLoader.m_lecturers    on h.lecturerId     equals ler.id
+                join d      in XmlLoader.m_days         on h.dayId          equals d.id
+                join t      in XmlLoader.m_times        on h.timeId         equals t.id
+                join cr     in XmlLoader.m_classrooms   on h.classroomId    equals cr.id
+                join b      in XmlLoader.m_buildings    on cr.buildingId    equals b.id
                 orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
