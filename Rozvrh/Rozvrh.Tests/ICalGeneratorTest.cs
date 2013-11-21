@@ -15,8 +15,8 @@ namespace Rozvrh.Tests
         public void TestGenerate()
         {
 
-            var mockA = new Moq.Mock<IExportHodina>();
-            var mockB = new Moq.Mock<IExportHodina>();
+            var mockA = new Moq.Mock<ExportLecture>();
+            var mockB = new Moq.Mock<ExportLecture>();
 
             mockA.Setup(m => m.Day).Returns(DayOfWeek.Monday);
             mockA.Setup(m => m.Lecturer).Returns("OsobaA");
@@ -32,7 +32,7 @@ namespace Rozvrh.Tests
             mockB.Setup(m => m.Room).Returns("MistnostB");
             mockB.Setup(m => m.StartTime).Returns(new DateTime(1, 1, 1, 17, 0, 0));
 
-            var hodiny = new List<IExportHodina>();
+            var hodiny = new List<ExportLecture>();
             hodiny.Add(mockA.Object);
             hodiny.Add(mockB.Object);
 
@@ -75,7 +75,7 @@ END:VCALENDAR";
         [TestMethod]
         public void TestEmpty()
         {
-            var hodiny = new List<IExportHodina>();
+            var hodiny = new List<ExportLecture>();
             DateTime semesterStart = new DateTime();
             DateTime semesterEnd = new DateTime();
             ICalGenerator gen = new ICalGenerator();
