@@ -36,26 +36,26 @@ namespace Rozvrh.Tests
             string semStartB = gen.dateTimeDateToICalString(gen.closestDayFromDateTime(semesterStart,b.Day));
             string semEnd = gen.dateTimeDateToICalString(semesterEnd);
 
-            string goodOutput = @"BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//hacksw/handcal//NONSGML v1.0//EN
-BEGIN:VEVENT
-DTSTAMP:" + stamp + @"
-DTSTART:" + semStartA + @"T073000
-DTEND:" + semStartA + @"T093000
-RRULE:FREQ=WEEKLY;UNTIL=" + semEnd + @"T000000Z
-SUMMARY:PredmetA
-LOCATION:MistnostA
-END:VEVENT
-BEGIN:VEVENT
-DTSTAMP:" + stamp + @"
-DTSTART:" + semStartB + @"T170000
-DTEND:" + semStartB + @"T180000
-RRULE:FREQ=WEEKLY;UNTIL=" + semEnd + @"T000000Z
-SUMMARY:PredmetB
-LOCATION:MistnostB
-END:VEVENT
-END:VCALENDAR";
+            string goodOutput = "BEGIN:VCALENDAR"+System.Environment.NewLine+
+                    "VERSION:2.0"+System.Environment.NewLine+
+                    "PRODID:-//hacksw/handcal//NONSGML v1.0//EN"+System.Environment.NewLine+
+                    "BEGIN:VEVENT"+System.Environment.NewLine+
+                    "DTSTAMP:" + stamp + System.Environment.NewLine +
+                    "DTSTART:" + semStartA + "T073000"+System.Environment.NewLine+
+                    "DTEND:" + semStartA + "T093000"+System.Environment.NewLine+
+                    "RRULE:FREQ=WEEKLY;UNTIL=" + semEnd + "T000000Z"+System.Environment.NewLine+
+                    "SUMMARY:PredmetA"+System.Environment.NewLine+
+                    "LOCATION:MistnostA"+System.Environment.NewLine+
+                    "END:VEVENT"+System.Environment.NewLine+
+                    "BEGIN:VEVENT"+System.Environment.NewLine+
+                    "DTSTAMP:" + stamp + System.Environment.NewLine +
+                    "DTSTART:" + semStartB + "T170000"+ System.Environment.NewLine+
+                    "DTEND:" + semStartB + "T180000" + System.Environment.NewLine +
+                    "RRULE:FREQ=WEEKLY;UNTIL=" + semEnd + "T000000Z"+System.Environment.NewLine+
+                    "SUMMARY:PredmetB"+System.Environment.NewLine+
+                    "LOCATION:MistnostB"+System.Environment.NewLine+
+                    "END:VEVENT"+System.Environment.NewLine+
+                    "END:VCALENDAR";
             Assert.AreEqual<string>(goodOutput, actualOutput);
 
         }
@@ -69,10 +69,10 @@ END:VCALENDAR";
             ICalGenerator gen = new ICalGenerator();
             string actualOutput = gen.generateICal(hodiny, semesterStart, semesterEnd);
 
-            string goodOutput = @"BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//hacksw/handcal//NONSGML v1.0//EN
-END:VCALENDAR";
+            string goodOutput = @"BEGIN:VCALENDAR"+System.Environment.NewLine+
+                                "VERSION:2.0"+System.Environment.NewLine+
+                                "PRODID:-//hacksw/handcal//NONSGML v1.0//EN"+System.Environment.NewLine+
+                                "END:VCALENDAR";
             Assert.AreEqual<string>(goodOutput, actualOutput);
         }
     }
