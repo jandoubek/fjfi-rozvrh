@@ -15,26 +15,14 @@ namespace Rozvrh.Tests
         public void TestGenerate()
         {
 
-            var mockA = new Moq.Mock<ExportLecture>();
-            var mockB = new Moq.Mock<ExportLecture>();
-
-            mockA.Setup(m => m.Day).Returns(DayOfWeek.Monday);
-            mockA.Setup(m => m.Lecturer).Returns("OsobaA");
-            mockA.Setup(m => m.Length).Returns(new TimeSpan(2, 0, 0));
-            mockA.Setup(m => m.Name).Returns("PredmetA");
-            mockA.Setup(m => m.Room).Returns("MistnostA");
-            mockA.Setup(m => m.StartTime).Returns(new DateTime(1, 1, 1, 7, 30, 0));
-
-            mockB.Setup(m => m.Day).Returns(DayOfWeek.Tuesday);
-            mockB.Setup(m => m.Lecturer).Returns("OsobaB");
-            mockB.Setup(m => m.Length).Returns(new TimeSpan(1, 0, 0));
-            mockB.Setup(m => m.Name).Returns("PredmetB");
-            mockB.Setup(m => m.Room).Returns("MistnostB");
-            mockB.Setup(m => m.StartTime).Returns(new DateTime(1, 1, 1, 17, 0, 0));
+            ExportLecture a = new ExportLecture("PredmetA", DayOfWeek.Monday, new DateTime(1, 1, 1, 7, 30, 0), new TimeSpan(2, 0, 0),
+                "OsobaA", "MistnostA","#99999");
+            ExportLecture b = new ExportLecture("PredmetB", DayOfWeek.Tuesday, new DateTime(1, 1, 1, 17, 0, 0), new TimeSpan(1, 0, 0),
+                "OsobaB", "MistnostB", "#99999");
 
             var hodiny = new List<ExportLecture>();
-            hodiny.Add(mockA.Object);
-            hodiny.Add(mockB.Object);
+            hodiny.Add(a);
+            hodiny.Add(b);
 
             DateTime semesterStart = new DateTime(2013, 9, 19);
             DateTime semesterEnd = new DateTime(2014, 2, 19);
@@ -44,8 +32,8 @@ namespace Rozvrh.Tests
             string actualOutput = gen.generateICal(hodiny,semesterStart,semesterEnd);
             string stamp = gen.dateTimeDateToICalString(DateTime.Today) +
                 gen.hourToICalString(DateTime.Now.Hour, DateTime.Now.Minute);
-            string semStartA = gen.dateTimeDateToICalString(gen.closestDayFromDateTime(semesterStart,mockA.Object.Day));
-            string semStartB = gen.dateTimeDateToICalString(gen.closestDayFromDateTime(semesterStart,mockB.Object.Day));
+            string semStartA = gen.dateTimeDateToICalString(gen.closestDayFromDateTime(semesterStart,a.Day));
+            string semStartB = gen.dateTimeDateToICalString(gen.closestDayFromDateTime(semesterStart,b.Day));
             string semEnd = gen.dateTimeDateToICalString(semesterEnd);
 
             string goodOutput = @"BEGIN:VCALENDAR
