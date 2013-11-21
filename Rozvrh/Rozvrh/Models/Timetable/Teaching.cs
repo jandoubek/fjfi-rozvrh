@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Rozvrh.Models.Timetable
 {
-    public class Hodina
+    public class Teaching
     {
         public string id            { get; private set; }
         public string lectureId     { get; private set; }
@@ -14,8 +14,8 @@ namespace Rozvrh.Models.Timetable
         public string timeId        { get; private set; }
         public string classroomId   { get; private set; }
         public string tag           { get; private set; }
-       
-        public Hodina(string id, string lectureId, string lecturerId, string dayId, string timeId, string classroomId, string tag)
+
+        public Teaching(string id, string lectureId, string lecturerId, string dayId, string timeId, string classroomId, string tag)
         {
             this.id = id;
             this.lectureId = lectureId;
@@ -25,5 +25,5 @@ namespace Rozvrh.Models.Timetable
             this.classroomId = classroomId;
             this.tag = tag;
         }
-    }//= hodina v xml
+    }//= card v xml
 }

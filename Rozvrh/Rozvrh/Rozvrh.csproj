@@ -139,13 +139,13 @@
     <Compile Include="Models\Timetable\Day.cs" />
     <Compile Include="Models\Timetable\DegreeYear.cs" />
     <Compile Include="Models\Timetable\Department.cs" />
-    <Compile Include="Models\Timetable\Hodina.cs" />
-    <Compile Include="Models\Timetable\HodinyKruhu.cs" />
-    <Compile Include="Models\Timetable\Kruh.cs" />
+    <Compile Include="Models\Timetable\Teaching.cs" />
+    <Compile Include="Models\Timetable\GroupTeachingBinder.cs" />
+    <Compile Include="Models\Timetable\Group.cs" />
     <Compile Include="Models\Timetable\Lecture.cs" />
     <Compile Include="Models\Timetable\Lecturer.cs" />
     <Compile Include="Models\Timetable\Time.cs" />
-    <Compile Include="Models\Timetable\Zamereni.cs" />
+    <Compile Include="Models\Timetable\Specialization.cs" />
     <Compile Include="Models\XMLTimetableLoader.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exporters\Common\ExportHodina.cs" />

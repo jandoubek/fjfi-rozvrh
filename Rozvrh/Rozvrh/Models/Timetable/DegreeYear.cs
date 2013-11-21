@@ -10,6 +10,7 @@ namespace Rozvrh.Models.Timetable
         public string id            { get; private set; }
         public string name          { get; private set; }
         public string acronym       { get; private set; }
+
         public DegreeYear(string id, string name, string acronym)
         {
             this.id = id;

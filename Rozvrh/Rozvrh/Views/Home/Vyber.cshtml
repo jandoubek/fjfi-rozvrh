@@ -31,7 +31,7 @@
         </div>
         <div class="box">
             @Html.Label("groups", "Kruh")
-            @Html.DropDownList("groups", new SelectList(Model.Groups, "id", "cisloKruhu"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.DropDownList("groups", new SelectList(Model.Groups, "id", "groupNo"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
     </div>
     <div class="boxContainer nomargin">
