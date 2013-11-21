@@ -16,18 +16,18 @@ namespace Rozvrh.Models
             m_rozvhXmlFilePath = xmlPath;
 
             //model data - všechny courses, lectures, ...
-            m_courses = new List<Course>();
-            m_lectures = new List<Lecture>();
-            m_lecturers = new List<Lecturer>();
-            m_days = new List<Day>();
-            m_times = new List<Time>();
-            m_buildings = new List<Building>();
-            m_classrooms = new List<Classroom>();
-            m_degreeyears = new List<DegreeYear>();
-            m_zamerenis = new List<Zamereni>();
-            m_hodiny = new List<Hodina>();
-            m_kruhy = new List<Kruh>();
-            m_hodinyKruhu = new List<HodinyKruhu>();
+            m_courses       = new List<Course>();
+            m_lectures      = new List<Lecture>();
+            m_lecturers     = new List<Lecturer>();
+            m_days          = new List<Day>();
+            m_times         = new List<Time>();
+            m_buildings     = new List<Building>();
+            m_classrooms    = new List<Classroom>();
+            m_degreeyears   = new List<DegreeYear>();
+            m_zamerenis     = new List<Zamereni>();
+            m_hodiny        = new List<Hodina>();
+            m_kruhy         = new List<Kruh>();
+            m_hodinyKruhu   = new List<HodinyKruhu>();
 
             // FIX ME !!! - proper exception handling in LoadXML and InitModelData()
             if (!this.LoadXml() || !this.InitModelData()) {
@@ -83,41 +83,41 @@ namespace Rozvrh.Models
                     orderby dep.Element("code").Value
                     select dep;
                 foreach (XElement dep in enumDepartment)
-                    m_departments.Add(new Department(Convert.ToInt32(dep.Attribute("id").Value), Convert.ToInt32(dep.Element("code").Value), dep.Element("name").Value, dep.Element("acronym").Value, Convert.ToUInt64(dep.Element("color").Value)));
+                    m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
 
                 //init Courses
                 //!!! vyhodí předměty, které jsou jen z relevantních (těch co už jsou načtené) kateder               
                 var enumCourse =
                     from dep in m_departments
                     from c in m_xelDefinitions.Element("courses").Descendants("course")
-                    where  dep.id == (int)c.Element("department").Attribute("ref")
+                    where  dep.id.Equals(c.Element("department").Attribute("ref").Value)
                     select c;
                 foreach (XElement c in enumCourse)
-                    m_courses.Add(new Course(Convert.ToInt32(c.Attribute("id").Value), Convert.ToInt32(c.Element("department").Attribute("ref").Value), c.Element("name").Value, c.Element("acronym").Value));
+                    m_courses.Add(new Course(c.Attribute("id").Value, c.Element("department").Attribute("ref").Value, c.Element("name").Value, c.Element("acronym").Value));
 
                 //init Lectures
                 //!!! načte lekce, které jsou jen z relevantních (těch co už jsou načtené) kurzů                
                 var enumLecture =
                     from c in m_courses
                     from lec in m_xelDefinitions.Element("lectures").Descendants("lecture")
-                    where c.id == (int)lec.Element("course").Attribute("ref")
+                    where c.id.Equals(lec.Element("course").Attribute("ref").Value)
                     select lec;
                 foreach (XElement lec in enumLecture)
-                    m_lectures.Add(new Lecture(Convert.ToInt32(lec.Attribute("id").Value), Convert.ToInt32(lec.Element("course").Attribute("ref").Value),
-                                               Convert.ToInt32(lec.Element("practice").Value), lec.Element("tag").Value, Convert.ToInt32(lec.Element("duration").Value),
-                                               Convert.ToInt32(lec.Element("period").Value)));
+                    m_lectures.Add(new Lecture (lec.Attribute("id").Value,lec.Element("course").Attribute("ref").Value,
+                                               lec.Element("practice").Value, lec.Element("tag").Value, lec.Element("duration").Value,
+                                               lec.Element("period").Value));
 
                 //init Lecturers
                 //!!!vybere vyučující jen z relevantních kateder 
                 var enumLecturer =
                     from c in m_courses
                     from ler in m_xelDefinitions.Element("lecturers").Descendants("lecturer")
-                    where c.id == (int)ler.Element("department").Attribute("ref")  //vybere vyučující ze skutečných kateder
+                    where c.id.Equals(ler.Element("department").Attribute("ref").Value)  //vybere vyučující ze skutečných kateder
                     select ler;
                 foreach (XElement ler in enumLecturer)
-                    m_lecturers.Add(new Lecturer(Convert.ToInt32(ler.Attribute("id").Value), ler.Element("name").Value,
-                                                 ler.Element("forename").Value, Convert.ToInt32(ler.Element("department").Attribute("ref").Value)));
-                m_lecturers.Add(new Lecturer(0, "", "", 0));
+                    m_lecturers.Add(new Lecturer(ler.Attribute("id").Value, ler.Element("name").Value,
+                                                 ler.Element("forename").Value, ler.Element("department").Attribute("ref").Value));
+                m_lecturers.Add(new Lecturer("0", "", "", "0"));
 
                 //init Days
                 IEnumerable<XElement> enumEl =
@@ -125,16 +125,16 @@ namespace Rozvrh.Models
                   orderby d.Element("daysorder").Value
                   select d;
                 foreach (XElement d in enumEl)
-                    m_days.Add(new Day(Convert.ToInt32(d.Attribute("id").Value), d.Element("czech").Value, Convert.ToInt32(d.Element("daysorder").Value)));
+                    m_days.Add(new Day(d.Attribute("id").Value, d.Element("czech").Value, d.Element("daysorder").Value));
 
                 //init Times                
                 enumEl =
                   from el in m_xelDefinitions.Element("times").Descendants("time")
-                  orderby Convert.ToInt32(el.Element("timesorder").Value)
+                  orderby el.Element("timesorder").Value
                   select el;
                 foreach (XElement el in enumEl)
-                    m_times.Add(new Time(Convert.ToInt32(el.Attribute("id").Value), Convert.ToInt32(el.Element("hours").Value),
-                                         Convert.ToInt32(el.Element("minutes").Value), Convert.ToInt32(el.Element("timesorder").Value)));
+                    m_times.Add(new Time(el.Attribute("id").Value, el.Element("hours").Value,
+                                         el.Element("minutes").Value, el.Element("timesorder").Value));
 
                 //init Buildings              
                 enumEl =
@@ -142,14 +142,14 @@ namespace Rozvrh.Models
                   orderby el.Attribute("id").Value
                   select el;
                 foreach (XElement el in enumEl)
-                    m_buildings.Add(new Building(Convert.ToInt32(el.Attribute("id").Value), el.Element("name").Value));
+                    m_buildings.Add(new Building(el.Attribute("id").Value, el.Element("name").Value));
 
                 //init Classrooms
                 enumEl =
                     from el in m_xelDefinitions.Element("classrooms").Descendants("classroom")
                     select el;
                 foreach (XElement el in enumEl)
-                    m_classrooms.Add(new Classroom(Convert.ToInt32(el.Attribute("id").Value), el.Element("name").Value, Convert.ToInt32(el.Element("building").Attribute("ref").Value)));
+                    m_classrooms.Add(new Classroom(el.Attribute("id").Value, el.Element("name").Value, el.Element("building").Attribute("ref").Value));
 
                 //init DegreeYear               
                 enumEl =
@@ -168,13 +168,13 @@ namespace Rozvrh.Models
                 int i = 1;
                 foreach (var p in pairs)
                 {
-                    m_degreeyears.Add(new DegreeYear(i,
-                        enumEl.Single(x => (int?)x.Attribute("id") == Convert.ToInt32(p.degree)).Element("name").Value + " " + p.year + ". ročník",
-                        enumEl.Single(x => (int?)x.Attribute("id") == Convert.ToInt32(p.degree)).Element("acronym").Value + ". " + p.year + "."));
+                    m_degreeyears.Add(new DegreeYear(i.ToString(),
+                        enumEl.Single(x => x.Attribute("id").Value.Equals(p.degree)).Element("name").Value + " " + p.year + ". ročník",
+                        enumEl.Single(x => x.Attribute("id").Value.Equals(p.degree)).Element("acronym").Value + ". " + p.year + "."));
                     var zamereni =
                         from ak in groups
                         where ak.Element("degree").Attribute("ref").Value == p.degree && ak.Element("schoolyear").Value == p.year
-                        select new Zamereni(Convert.ToInt32(ak.Attribute("id").Value), ak.Element("name").Value, ak.Element("acronym").Value, i);
+                        select new Zamereni(ak.Attribute("id").Value, ak.Element("name").Value, ak.Element("acronym").Value, i.ToString());
                     foreach (var z in zamereni)
                         m_zamerenis.Add(z);
                     i++;
@@ -189,25 +189,26 @@ namespace Rozvrh.Models
 
                 enumEl =
                     from el in m_xelDefinitions.Element("cards").Descendants("card")
-                    where lecIds.Contains((int)el.Element("lecture").Attribute("ref")) &&  //vybere vyučující lekci ze skutečných kateder
+                    where lecIds.Contains(el.Element("lecture").Attribute("ref").Value) &&  //vybere vyučující lekci ze skutečných kateder
                           !el.Element("time").IsEmpty && !el.Element("day").IsEmpty
                     select el;
-                int lerId, crId;
+
+                string lerId, crId;
                 foreach (XElement el in enumEl)
                 {
                     if (el.Element("lecturer").HasAttributes)
-                        lerId = Convert.ToInt32(el.Element("lecturer").Attribute("ref").Value);
+                        lerId = el.Element("lecturer").Attribute("ref").Value;
                     else
-                        lerId = 0;
+                        lerId = "0";
 
                     if (el.Elements("classroom").Count() > 0 && el.Element("classroom").HasAttributes)
-                        crId = Convert.ToInt32(el.Element("classroom").Attribute("ref").Value);
+                        crId = el.Element("classroom").Attribute("ref").Value;
                     else
-                        crId = 0;
+                        crId = "0";
 
-                    m_hodiny.Add(new Hodina(Convert.ToInt32(el.Attribute("id").Value), Convert.ToInt32(el.Element("lecture").Attribute("ref").Value),
-                                            lerId, Convert.ToInt32(el.Element("day").Attribute("ref").Value),
-                                            Convert.ToInt32(el.Element("time").Attribute("ref").Value), crId,
+                    m_hodiny.Add(new Hodina(el.Attribute("id").Value, el.Element("lecture").Attribute("ref").Value,
+                                            lerId, el.Element("day").Attribute("ref").Value,
+                                            el.Element("time").Attribute("ref").Value, crId,
                                             el.Element("tag").Value));
                 }
 
@@ -219,16 +220,17 @@ namespace Rozvrh.Models
                 enumEl =
                     from el in m_xelDefinitions.Element("parts").Descendants("part")
                     select el;
-                int j, idHodiny;
+                int j;
+                string idHodiny;
                 foreach (XElement el in enumEl)
                 {
-                    m_kruhy.Add(new Kruh(Convert.ToInt32(el.Attribute("id").Value), Convert.ToInt32(el.Element("number").Value), Convert.ToInt32(el.Element("group").Attribute("ref").Value)));
+                    m_kruhy.Add(new Kruh(el.Attribute("id").Value, el.Element("number").Value, el.Element("group").Attribute("ref").Value));
                     j = 1;
                     foreach (XElement cardEl in el.Descendants("card"))
                     {
-                        idHodiny = Convert.ToInt32(cardEl.Attribute("ref").Value);
+                        idHodiny = cardEl.Attribute("ref").Value;
                         if (idsHodin.Contains(idHodiny))
-                            m_hodinyKruhu.Add(new HodinyKruhu(j++, Convert.ToInt32(el.Attribute("id").Value), idHodiny));
+                            m_hodinyKruhu.Add(new HodinyKruhu((j++).ToString(), el.Attribute("id").Value, idHodiny));
                     }
                 }
                 m_kruhy = m_kruhy.OrderBy(k => k.cisloKruhu).ToList();  //seřadit, aby s tim pak nebyla práce;

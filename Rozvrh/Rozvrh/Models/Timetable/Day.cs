@@ -7,10 +7,11 @@ namespace Rozvrh.Models.Timetable
 {
     public class Day
     {
-        public int id { get; private set; }
-        public string name { get; private set; }
-        public int daysOrder { get; private set; }
-        public Day(int id, string name, int daysOrder)
+        public string id            { get; private set; }
+        public string name          { get; private set; }
+        public string daysOrder     { get; private set; }
+       
+        public Day(string id, string name, string daysOrder)
         {
             this.id = id;
             this.name = name;

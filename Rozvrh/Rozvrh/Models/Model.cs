@@ -61,12 +61,10 @@ namespace Rozvrh.Models
 
         public void FilterDegreeYear2Specialization(String degreeYearId)
         {
-            int degreeYearIdAsInt = Convert.ToInt32(degreeYearId);
-
             //ze zobrazených (visible) zaměření vybere ta, které přísluší vybranému ročníku
             var filteredSpecializations =
                 from s in XmlLoader.m_zamerenis
-                where s.degreeYearId.Equals(degreeYearIdAsInt)
+                where s.degreeYearId.Equals(degreeYearId)
                 orderby s.acronym
                 select s;
 
@@ -75,12 +73,10 @@ namespace Rozvrh.Models
 
         public void FilterSpecialization2Groups(String specializationId)
         {
-            int specializationIdAsInt = Convert.ToInt32(specializationId);
-
             //ze všech kruhů vybere ty, které přísluší vybranému zaměření
             var filteredGroups =
                from g in XmlLoader.m_kruhy
-               where g.zamereniId.Equals(specializationIdAsInt)
+               where g.zamereniId.Equals(specializationId)
                select g;
 
             Groups = filteredGroups.ToList();
@@ -88,12 +84,10 @@ namespace Rozvrh.Models
 
         public void FilterDepartments2Lecturers(String departmentId)
         {
-            int departmentIdAsInt = Convert.ToInt32(departmentId);
-
             //ze všech učitelů vybere ty, kteří jsou z vybraných kateder
             var filteredLecturers =
                 from l in XmlLoader.m_lecturers
-                where l.departmentId.Equals(departmentIdAsInt)
+                where l.departmentId.Equals(departmentId)
                 orderby l.name
                 select l;
 
@@ -102,11 +96,10 @@ namespace Rozvrh.Models
 
         public void FilterBuildings2Classrooms(String buildingId)
         {
-            int buildingIdAsInt = Convert.ToInt32(buildingId);
             //ze všech místností vybere ty, které jsou z vybraných budov
             var filteredClassrooms =
                 from c in XmlLoader.m_classrooms
-                where c.buildingId.Equals(buildingIdAsInt)
+                where c.buildingId.Equals(buildingId)
                 orderby c.name
                 select c;
 
@@ -156,17 +149,11 @@ namespace Rozvrh.Models
 
         private void filterByGroup(string groupId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
-            int groupIdAsInt;
-            if (groupId.Contains(NULL))
-                groupIdAsInt = -1;
-            else
-                groupIdAsInt = Convert.ToInt32(groupId);
-
-            if (groupIdAsInt > -1)
+            if (!groupId.Contains(NULL))
             {
                 var timeTableFieldsFromGroupFilter =
                     (from hk in XmlLoader.m_hodinyKruhu
-                     where hk.kruhId.Equals(groupIdAsInt)
+                     where hk.kruhId.Equals(groupId)
                      from h in XmlLoader.m_hodiny
                      where hk.hodinaId == h.id
                      select h).ToList();
@@ -176,17 +163,11 @@ namespace Rozvrh.Models
 
         private void filterByDepartment(string departmentId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
-            int departmentAsInt;
-            if (departmentId.Contains(NULL))
-                departmentAsInt = -1;
-            else
-                departmentAsInt = Convert.ToInt32(departmentId);
-
-            if (departmentAsInt > -1)
+            if (!departmentId.Contains(NULL))
             {
                 var hodiny2 =
                     (from c in XmlLoader.m_courses
-                     where c.departmentId.Equals(departmentAsInt)
+                     where c.departmentId.Equals(departmentId)
                      from l in XmlLoader.m_lectures
                      where c.id == l.courseId
                      from h in XmlLoader.m_hodiny
@@ -198,17 +179,11 @@ namespace Rozvrh.Models
 
         private void filterByLecturer(string lecturerId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
-            int lecturerIdAsInt;
-            if (lecturerId.Contains(NULL))
-                lecturerIdAsInt = -1;
-            else
-                lecturerIdAsInt = Convert.ToInt32(lecturerId);
-
-            if (lecturerIdAsInt > -1)
+            if (!lecturerId.Contains(NULL))
             {
                 var hodiny3 =
                     (from h in XmlLoader.m_hodiny
-                     where h.lecturerId.Equals(lecturerIdAsInt)
+                     where h.lecturerId.Equals(lecturerId)
                      select h).ToList();
                 timetableFieldsFromEachFilter.Add(hodiny3);
             }
@@ -216,17 +191,11 @@ namespace Rozvrh.Models
 
         private void filterByClassroom(string classroomId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
-            int classroomIdAsInt;
-            if (classroomId.Contains(NULL))
-                classroomIdAsInt = -1;
-            else
-                classroomIdAsInt = Convert.ToInt32(classroomId);
-
-            if (classroomIdAsInt > -1)
+            if (!classroomId.Contains(NULL))
             {
                 var hodiny4 =
                     (from h in XmlLoader.m_hodiny
-                     where h.classroomId.Equals(classroomIdAsInt)
+                     where h.classroomId.Equals(classroomId)
                      select h).ToList();
                 timetableFieldsFromEachFilter.Add(hodiny4);
             }
@@ -234,17 +203,11 @@ namespace Rozvrh.Models
 
         private void filterByDay(string dayId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
-            int dayIdAsInt;
-            if (dayId.Contains(NULL))
-                dayIdAsInt = -1;
-            else
-                dayIdAsInt = Convert.ToInt32(dayId);
-
-            if (dayIdAsInt > -1)
+            if (!dayId.Contains(NULL))
             {
                 var hodiny5 =
                     (from h in XmlLoader.m_hodiny
-                     where h.dayId.Equals(dayIdAsInt)
+                     where h.dayId.Equals(dayId)
                      select h).ToList();
                 timetableFieldsFromEachFilter.Add(hodiny5);
             }
@@ -252,17 +215,11 @@ namespace Rozvrh.Models
 
         private void filterByTime(string timeId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
-            int timeIdAsInt;
-            if (timeId.Contains(NULL))
-                timeIdAsInt = -1;
-            else
-                timeIdAsInt = Convert.ToInt32(timeId);
-
-            if (timeIdAsInt > -1)
+            if (!timeId.Contains(NULL))
             {
                 var hodiny6 =
                     (from h in XmlLoader.m_hodiny
-                     where h.timeId.Equals(timeIdAsInt)
+                     where h.timeId.Equals(timeId)
                      select h).ToList();
                 timetableFieldsFromEachFilter.Add(hodiny6);
             }
@@ -280,18 +237,17 @@ namespace Rozvrh.Models
         /// <summary>
         /// Seznam vyfiltrovaných hodin, určení pro zobrazení v tabulce pod filtry
         /// </summary>
-        public List<IExportHodina> FiltredLectures { get; private set; }
+        public List<IExportHodina>  FiltredLectures     { get; private set; }
 
-        public List<Department> Departments { get; private set; }
-        public List<Zamereni> Specializations { get; private set; }
-        public List<Kruh> Groups { get; private set; }
-        public List<DegreeYear> DegreeYears { get; private set; }
-        public List<Lecturer> Lecturers { get; private set; }
-        public List<Building> Buildings { get; private set; }
-        public List<Classroom> Classrooms { get; private set; }
-        public List<Day> Days { get; private set; }
-        public List<Time> Times { get; private set; }
-
-        public List<TimetableField> TimetableFields { get; private set; }
+        public List<Department>     Departments         { get; private set; }
+        public List<Zamereni>       Specializations     { get; private set; }
+        public List<Kruh>           Groups              { get; private set; }
+        public List<DegreeYear>     DegreeYears         { get; private set; }
+        public List<Lecturer>       Lecturers           { get; private set; }
+        public List<Building>       Buildings           { get; private set; }
+        public List<Classroom>      Classrooms          { get; private set; }
+        public List<Day>            Days                { get; private set; }
+        public List<Time>           Times               { get; private set; }
+        public List<TimetableField> TimetableFields     { get; private set; }
     }
 }

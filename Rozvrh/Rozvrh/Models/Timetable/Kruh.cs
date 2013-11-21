@@ -7,10 +7,11 @@ namespace Rozvrh.Models.Timetable
 {
     public class Kruh
     {
-        public int id { get; private set; }
-        public int cisloKruhu { get; private set; }
-        public int zamereniId { get; private set; }
-        public Kruh(int id, int cisloKruhu, int zamereniId)
+        public string id            { get; private set; }
+        public string cisloKruhu    { get; private set; }
+        public string zamereniId    { get; private set; }
+        
+        public Kruh(string id, string cisloKruhu, string zamereniId)
         {
             this.id = id;
             this.cisloKruhu = cisloKruhu;

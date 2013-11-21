@@ -5,23 +5,23 @@ namespace Rozvrh.Models
 {
     public class TimetableField
     {
-        public string department { get; private set; }//název katedry
-        public string department_acr { get; private set; }//zkratka katedry
-        public string predmet { get; private set; }  //název předmětu
-        public string predmet_acr { get; private set; } //zkratka predmetu
-        public ulong color { get; private set; }     //barva políčka
-        public int period { get; private set; }      //perioda opakování hodiny
-        public int duration { get; private set; }    //délka lekce v hodinách
-        public string tag { get; private set; }      //tag
-        public bool practice { get; private set; }   //cvičení?
-        public string lecturer { get; private set; } //složené jméno učitele
-        public string day { get; private set; }      //název dne v týdnu   
-        public int day_order { get; private set; }   //pořadí dne v týdnu
-        public int time_hours { get; private set; }  //čas hodin
-        public int time_minutes { get; private set; }//čas minut
-        public int time_order { get; private set; }  //čas pořadí časového slotu
-        public string building { get; private set; } //budova název
-        public string classroom { get; private set; }//místnost název
+        public string department        { get; private set; }//název katedry
+        public string department_acr    { get; private set; }//zkratka katedry
+        public string predmet           { get; private set; }  //název předmětu
+        public string predmet_acr       { get; private set; } //zkratka predmetu
+        public string color             { get; private set; }     //barva políčka
+        public string period            { get; private set; }      //perioda opakování hodiny
+        public string duration          { get; private set; }    //délka lekce v hodinách
+        public string tag               { get; private set; }      //tag
+        public string practice          { get; private set; }   //cvičení?
+        public string lecturer          { get; private set; } //složené jméno učitele
+        public string day               { get; private set; }      //název dne v týdnu   
+        public string day_order         { get; private set; }   //pořadí dne v týdnu
+        public string time_hours        { get; private set; }  //čas hodin
+        public string time_minutes      { get; private set; }//čas minut
+        public string time_order        { get; private set; }  //čas pořadí časového slotu
+        public string building          { get; private set; } //budova název
+        public string classroom         { get; private set; }//místnost název
 
         public TimetableField(Department dep, Course c, Lecture lec, Lecturer ler, Day d, Time t, Building b, Classroom cr)
         {
@@ -29,13 +29,13 @@ namespace Rozvrh.Models
             department_acr = dep.acronym;
             predmet = c.name;
             predmet_acr = c.acronym;
-            if (lec.practice == 1)
+            if (lec.practice.Equals("1"))
                 predmet_acr += "cv";
             color = dep.color;
             period = lec.period;
             duration = lec.duration;
             tag = lec.tag;
-            practice = lec.practice > 0;
+            practice = lec.practice;
             lecturer = ler.name;
             if (ler.forname.Length != 0)
                 lecturer = ler.forname[0] + ". " + lecturer;

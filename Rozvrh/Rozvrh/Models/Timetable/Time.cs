@@ -7,12 +7,13 @@ namespace Rozvrh.Models.Timetable
 {
     public class Time
     {
-        public int id { get; private set; }
-        public int hours { get; private set; }
-        public int minutes { get; private set; }
-        public int timesOrder { get; private set; }
-        public String acronym { get; private set; }
-        public Time(int id, int hours, int minutes, int timesOrder)
+        public string id            { get; private set; }
+        public string hours         { get; private set; }
+        public string minutes       { get; private set; }
+        public string timesOrder    { get; private set; }
+        public string acronym       { get; private set; }
+        
+        public Time(string id, string hours, string minutes, string timesOrder)
         {
             this.id = id;
             this.hours = hours;

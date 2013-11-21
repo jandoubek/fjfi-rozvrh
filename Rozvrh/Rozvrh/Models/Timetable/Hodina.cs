@@ -7,14 +7,15 @@ namespace Rozvrh.Models.Timetable
 {
     public class Hodina
     {
-        public int id { get; private set; }
-        public int lectureId { get; private set; }
-        public int lecturerId { get; private set; }
-        public int dayId { get; private set; }
-        public int timeId { get; private set; }
-        public int classroomId { get; private set; }
-        public string tag { get; private set; }
-        public Hodina(int id, int lectureId, int lecturerId, int dayId, int timeId, int classroomId, string tag)
+        public string id            { get; private set; }
+        public string lectureId     { get; private set; }
+        public string lecturerId    { get; private set; }
+        public string dayId         { get; private set; }
+        public string timeId        { get; private set; }
+        public string classroomId   { get; private set; }
+        public string tag           { get; private set; }
+       
+        public Hodina(string id, string lectureId, string lecturerId, string dayId, string timeId, string classroomId, string tag)
         {
             this.id = id;
             this.lectureId = lectureId;

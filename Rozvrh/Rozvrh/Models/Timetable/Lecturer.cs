@@ -7,11 +7,12 @@ namespace Rozvrh.Models.Timetable
 {
     public class Lecturer
     {
-        public int id { get; private set; }
-        public string name { get; private set; }
-        public string forname { get; private set; }
-        public int departmentId { get; private set; }
-        public Lecturer(int id, string name, string forname, int departmentId)
+        public string id            { get; private set; }
+        public string name          { get; private set; }
+        public string forname       { get; private set; }
+        public string departmentId  { get; private set; }
+        
+        public Lecturer(string id, string name, string forname, string departmentId)
         {
             this.id = id;
             this.name = name;
