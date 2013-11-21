@@ -154,7 +154,7 @@ namespace Rozvrh.Models
             TimetableFields = filteredTimetableFields.ToList();
         }
 
-        private void filterByGroup(string groupId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        private void filterByGroup(string groupId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
             int groupIdAsInt;
             if (groupId.Contains(NULL))
@@ -170,12 +170,11 @@ namespace Rozvrh.Models
                      from h in XmlLoader.m_hodiny
                      where hk.hodinaId == h.id
                      select h).ToList();
-                if (timeTableFieldsFromGroupFilter.Count != 0)
-                    timetableFieldsFromEachFilter.Add(timeTableFieldsFromGroupFilter);
+                timetableFieldsFromEachFilter.Add(timeTableFieldsFromGroupFilter);
             }
         }
 
-        private void filterByDepartment(string departmentId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        private void filterByDepartment(string departmentId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
             int departmentAsInt;
             if (departmentId.Contains(NULL))
@@ -193,12 +192,11 @@ namespace Rozvrh.Models
                      from h in XmlLoader.m_hodiny
                      where l.id == h.lectureId
                      select h).ToList();
-                if (hodiny2.Count != 0)
-                    timetableFieldsFromEachFilter.Add(hodiny2);
+                timetableFieldsFromEachFilter.Add(hodiny2);
             }
         }
 
-        private void filterByLecturer(string lecturerId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        private void filterByLecturer(string lecturerId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
             int lecturerIdAsInt;
             if (lecturerId.Contains(NULL))
@@ -212,12 +210,11 @@ namespace Rozvrh.Models
                     (from h in XmlLoader.m_hodiny
                      where h.lecturerId.Equals(lecturerIdAsInt)
                      select h).ToList();
-                //if (hodiny3.Count != 0)
                 timetableFieldsFromEachFilter.Add(hodiny3);
             }
         }
 
-        private void filterByClassroom(string classroomId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        private void filterByClassroom(string classroomId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
             int classroomIdAsInt;
             if (classroomId.Contains(NULL))
@@ -231,12 +228,11 @@ namespace Rozvrh.Models
                     (from h in XmlLoader.m_hodiny
                      where h.classroomId.Equals(classroomIdAsInt)
                      select h).ToList();
-                if (hodiny4.Count != 0)
-                    timetableFieldsFromEachFilter.Add(hodiny4);
+                timetableFieldsFromEachFilter.Add(hodiny4);
             }
         }
 
-        private void filterByDay(string dayId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        private void filterByDay(string dayId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
         {
             int dayIdAsInt;
             if (dayId.Contains(NULL))
@@ -250,8 +246,7 @@ namespace Rozvrh.Models
                     (from h in XmlLoader.m_hodiny
                      where h.dayId.Equals(dayIdAsInt)
                      select h).ToList();
-                if (hodiny5.Count != 0)
-                    timetableFieldsFromEachFilter.Add(hodiny5);
+                timetableFieldsFromEachFilter.Add(hodiny5);
             }
         }
 
@@ -269,8 +264,7 @@ namespace Rozvrh.Models
                     (from h in XmlLoader.m_hodiny
                      where h.timeId.Equals(timeIdAsInt)
                      select h).ToList();
-                if (hodiny6.Count != 0)
-                    timetableFieldsFromEachFilter.Add(hodiny6);
+                timetableFieldsFromEachFilter.Add(hodiny6);
             }
         }
 
