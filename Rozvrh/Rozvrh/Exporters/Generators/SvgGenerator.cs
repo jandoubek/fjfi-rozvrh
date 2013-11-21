@@ -12,7 +12,6 @@ namespace Rozvrh.Exporters.Generators
     public class SvgGenerator
     {
         private Dictionary<DayOfWeek, int> doWMapping;
-        private Dictionary<int, string> deptColorMappping;
 
         public SvgGenerator()
         {
@@ -23,23 +22,7 @@ namespace Rozvrh.Exporters.Generators
                 {DayOfWeek.Wednesday,157},
                 {DayOfWeek.Thursday,207},
                 {DayOfWeek.Friday,257}
-            };
-
-            deptColorMappping = new Dictionary<int, string>()
-            {
-                {0,"#999999"},
-                {1,"#73d216"},
-                {2,"#f67c7c"},
-                {4,"#aaaaaa"},
-                {11,"#cc0000"},
-                {12,"#f57900"},
-                {14,"#00ccbb"},
-                {15,"#75507b"},
-                {16,"#3465a4"},
-                {17,"#edd400"},
-                {18,"#c17d11"},
-                {99,"#666666"}
-            };                    
+            };             
   
         }
 
@@ -49,7 +32,7 @@ namespace Rozvrh.Exporters.Generators
         /// <returns> String following SVG XML format. </returns>
         /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
         /// <param name="title">Title rendered at the top of the SVG.</param>
-        public string generateSVG(List<IExportHodina> lectures, string title)
+        public string generateSVG(List<ExportLecture> lectures, string title)
         {
 
             string header = @"<?xml version=""1.0"" encoding=""UTF-8""?>
@@ -63,12 +46,12 @@ namespace Rozvrh.Exporters.Generators
                 + headerHours() + headerDays() + RenderLectures(lectures) + tail;
         }
 
-        private string RenderLectures (List<IExportHodina> lectures)
+        private string RenderLectures(List<ExportLecture> lectures)
         {
             string res = "";
             if (lectures != null)
             {
-                foreach (IExportHodina l in lectures)
+                foreach (ExportLecture l in lectures)
                 {
                     res += RenderLecture(l);
                 }
@@ -77,7 +60,7 @@ namespace Rozvrh.Exporters.Generators
             return res;
         }
 
-        private string RenderLecture(IExportHodina lecture)
+        private string RenderLecture(ExportLecture lecture)
         {
             string res = "";
 
@@ -87,12 +70,12 @@ namespace Rozvrh.Exporters.Generators
                 xSpan(lecture.Length),yStartDay(lecture.Day),xStartHour(lecture.StartTime)) + System.Environment.NewLine;
             //x="{$x + 1}" y="{$y + $dy + 1}" width="{$width - 2}" height="{$height - 2}"
             res += String.Format("<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"48\" width=\"{0}\" stroke=\"{3}\" y=\"{1}\" x=\"{2}\" stroke-width=\"2\" class=\"cardFrame\"/>",
-                xSpan(lecture.Length) - 2, yStartDay(lecture.Day) + 1, xStartHour(lecture.StartTime) + 1, deptColorMappping[0]) + System.Environment.NewLine;
+                xSpan(lecture.Length) - 2, yStartDay(lecture.Day) + 1, xStartHour(lecture.StartTime) + 1, lecture.DepartementColor) + System.Environment.NewLine;
 
             //Fills
             //x="{$x}" y="{$y + $dy}" width="{$width}" height="{$height - $height div (4 - $split)}"
             res += String.Format("<rect height=\"33.3333333333\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardTop\" fill=\"{3}\"/>",
-                xSpan(lecture.Length),yStartDay(lecture.Day),xStartHour(lecture.StartTime),deptColorMappping[0]) + System.Environment.NewLine;
+                xSpan(lecture.Length), yStartDay(lecture.Day), xStartHour(lecture.StartTime), lecture.DepartementColor) + System.Environment.NewLine;
             //x="{$x}" y="{$y + $dy + $height - $height * 1 div (4 - $split)}" width="{$width}" height="{$height div (4 - $split)}"
             res += String.Format("<rect height=\"16.6666666667\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardBottom\" fill=\"#fff\"/>",
                 xSpan(lecture.Length), yStartDay(lecture.Day) + 33.3333333333, xStartHour(lecture.StartTime)) + System.Environment.NewLine;

@@ -1,6 +1,7 @@
 ﻿using Rozrvh.Exporters.Common;
 using Rozrvh.Exporters.Generators;
 using Rozvrh.Exporters.Generators;
+using Rozvrh.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,11 +21,11 @@ namespace Rozvrh.Exporters
         /// Exports lectures to SVG file. 
         /// </summary> 
         /// <returns> SVG file in XML syntax. </returns>
-        /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
-        public ActionResult DownloadAsSVG(List<IExportHodina> lectures)
+        /// <param name="lectures">List of lectures.</param>
+        public ActionResult DownloadAsSVG(List<TimetableField> lectures)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(lectures,"Rozvrh");
+            string text = gen.generateSVG(convertToExportFormat(lectures), "Rozvrh");
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIrozvrh.svg";
@@ -35,10 +36,10 @@ namespace Rozvrh.Exporters
         /// Serializes lectures to XML file.
         /// </summary>
         /// <returns> XML serialization as text file. </returns>
-        /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
-        public ActionResult DownloadAsXML(List<IExportHodina> lectures)
+        /// <param name="lectures">List of lectures.</param>
+        public ActionResult DownloadAsXML(List<TimetableField> lectures)
         {
-            var ser = new XmlSerializer(typeof(List<ExportHodina>));
+            var ser = new XmlSerializer(typeof(List<TimetableField>));
             using (var ms = new MemoryStream())
             {
                 ser.Serialize(ms, lectures);
@@ -53,13 +54,13 @@ namespace Rozvrh.Exporters
         /// Exports lectures to ICal format.
         /// </summary>
         /// <returns> Text file in ICal format. </returns>
-        /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
+        /// <param name="lectures">List of lectures.</param>
         /// <param name="semStart">Beginning of the semester. Only Year, Month and Day are used. </param>
         /// <param name="semEnd">End of the semester. Only Year, Month and Day are used. </param>
-        public ActionResult DownloadAsICAL(List<IExportHodina> lectures,DateTime semStart, DateTime semEnd)
+        public ActionResult DownloadAsICAL(List<TimetableField> lectures,DateTime semStart, DateTime semEnd)
         {
             ICalGenerator gen = new ICalGenerator();
-            string text = gen.generateICal(lectures, semStart, semEnd);
+            string text = gen.generateICal(convertToExportFormat(lectures), semStart, semEnd);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIRozvrh.ical";
@@ -69,16 +70,17 @@ namespace Rozvrh.Exporters
         /// <summary>
         /// Deserialize XML of lectures.
         /// </summary>
-        /// <returns> List of lectures of ExportHodina class. </returns>
+        /// <returns> List of lectures of TimetableField class. </returns>
         /// <param name="file">File posted by HTTP POST.</param>
-        public List<ExportHodina> ImportXML(HttpPostedFileBase file)
+        /// <exception cref="InvalidDataException">The XML cannot be deserialized.</exception>
+        public List<TimetableField> ImportXML(HttpPostedFileBase file)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(List<ExportHodina>));
-            List<ExportHodina> hodiny = new List<ExportHodina>();
+            XmlSerializer ser = new XmlSerializer(typeof(List<TimetableField>));
+            List<TimetableField> hodiny = new List<TimetableField>();
             try
             {
                 StreamReader f = new StreamReader(file.InputStream);
-                hodiny = (List<ExportHodina>)ser.Deserialize(f);
+                hodiny = (List<TimetableField>)ser.Deserialize(f);
             }
             catch (InvalidOperationException ioe)
             {
@@ -86,6 +88,16 @@ namespace Rozvrh.Exporters
             }
 
             return hodiny;
+        }
+
+        private List<ExportLecture> convertToExportFormat(List<TimetableField> lectures)
+        {
+            var res = new List<ExportLecture>();
+            foreach (var lecture in lectures)
+            {
+                res.Add(new ExportLecture(lecture));
+            }
+            return res;
         }
 
     }
