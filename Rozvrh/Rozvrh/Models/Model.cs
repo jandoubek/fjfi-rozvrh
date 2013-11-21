@@ -12,25 +12,25 @@ namespace Rozvrh.Models
     /// <summary>
     /// Dummy data
     /// </summary>
-    public class Model:IModel
+    public class Model : IModel
     {
         // Temporary, see comment in constructor
         XMLTimetableLoader XmlLoader = new XMLTimetableLoader("C:\\Aktualni_databaze.xml");
-                
-      
+
+
         /// <summary>
         /// Konstruktor třídy
         /// </summary>
         public Model()
         {
-// FIX ME !!! - autor: Richard
-// Micha se export a model, pokud od sbe neco potrebuji, musi pres controller. 
-// Pokud exporter potrebuje cokoli od modelu, controller si vse vytahne z modelu pred(!) zavooanim exporteru a rovnou mu posle vse potrebne.
-// Proc je vubec v modelu IExportHodina? Pokud vidim dobre, pouziva tato trida jako nas datovy "typ" pro vypis vfiltrovanych hodin ve view.
-// V tom pripade, je to nas zakladni datovy typ a mel by byt soucasti modelu a jmenovat se jinak, napr. FilteredLecture
-// Nejsem si jisty, jestli je v tomto pripade nutny interface - pro zakladni datovy typ, ktery nema zadne funkce (vyjma get a set) - nebyla by vhodnejsi struktura?
-// Navic mi prijde, ze ExportHodina se funkcne kryje s TimeTableField a slo by je sjednotit a zbavit se tak jedne datove tridy.
-// Navrhuji refaktoring ve smyslu vyse uvedeneho, pokud ma nekdo jiny nazor - sem (resp. na FB nebo na SCRUM) s nim.
+            // FIX ME !!! - autor: Richard
+            // Micha se export a model, pokud od sbe neco potrebuji, musi pres controller. 
+            // Pokud exporter potrebuje cokoli od modelu, controller si vse vytahne z modelu pred(!) zavooanim exporteru a rovnou mu posle vse potrebne.
+            // Proc je vubec v modelu IExportHodina? Pokud vidim dobre, pouziva tato trida jako nas datovy "typ" pro vypis vfiltrovanych hodin ve view.
+            // V tom pripade, je to nas zakladni datovy typ a mel by byt soucasti modelu a jmenovat se jinak, napr. FilteredLecture
+            // Nejsem si jisty, jestli je v tomto pripade nutny interface - pro zakladni datovy typ, ktery nema zadne funkce (vyjma get a set) - nebyla by vhodnejsi struktura?
+            // Navic mi prijde, ze ExportHodina se funkcne kryje s TimeTableField a slo by je sjednotit a zbavit se tak jedne datove tridy.
+            // Navrhuji refaktoring ve smyslu vyse uvedeneho, pokud ma nekdo jiny nazor - sem (resp. na FB nebo na SCRUM) s nim.
             FiltredLectures = new List<IExportHodina>();
 
             System.Diagnostics.Debug.WriteLine("Model constructor");
@@ -48,21 +48,21 @@ namespace Rozvrh.Models
                 Groups = new List<Kruh>();
                 Lecturers = new List<Lecturer>();
                 Classrooms = new List<Classroom>();
-            
+
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error when parsing timetable XML.");
                 Console.WriteLine(e.StackTrace);
             }
-            
+
             //Departments = new List<string> { "KJCH", "KJR" };
         }
 
         public void FilterDegreeYear2Specialization(String degreeYearId)
         {
-            int degreeYearIdAsInt = Convert.ToInt32(degreeYearId);  
-  
+            int degreeYearIdAsInt = Convert.ToInt32(degreeYearId);
+
             //ze zobrazených (visible) zaměření vybere ta, které přísluší vybranému ročníku
             var filteredSpecializations =
                 from s in XmlLoader.m_zamerenis
@@ -75,7 +75,7 @@ namespace Rozvrh.Models
 
         public void FilterSpecialization2Groups(String specializationId)
         {
-            int specializationIdAsInt = Convert.ToInt32(specializationId); 
+            int specializationIdAsInt = Convert.ToInt32(specializationId);
 
             //ze všech kruhů vybere ty, které přísluší vybranému zaměření
             var filteredGroups =
@@ -113,86 +113,33 @@ namespace Rozvrh.Models
             Classrooms = filteredClassrooms.ToList();
         }
 
-        //filter 5 - hlavní filter
-        public void FilterAll2TimetableFields(String groupId, String departmentId, 
+        /// <summary>
+        /// Metoda filtrující nad všemi daty podle zadaných parametrů.
+        /// </summary>
+        /// <param name="groupId">Id kruhu</param>
+        /// <param name="departmentId">Id katedry</param>
+        /// <param name="lecturerId">Id vyučujícího</param>
+        /// <param name="classroomId">Id třídy</param>
+        /// <param name="dayId">Id dne</param>
+        /// <param name="timeId">Id času</param>
+        public void FilterAll2TimetableFields(String groupId, String departmentId,
             String lecturerId, String classroomId, String dayId, String timeId)
         {
+            const string NULL = "null";
+            var timetableFieldsFromEachFilter = new List<IEnumerable<Hodina>>();
 
-            int groupIdAsInt = Convert.ToInt32(groupId);
-            int departmentAsInt = Convert.ToInt32(departmentId);
-            int lecturerIdAsInt = Convert.ToInt32(lecturerId);
-            int classroomIdAsInt = Convert.ToInt32(classroomId);
-            int dayIdAsInt = Convert.ToInt32(dayId);
-            int timeIdAsInt = Convert.ToInt32(timeId);
-
-            List<IEnumerable<Hodina>> HodinyDilci = new List<IEnumerable<Hodina>>();
-
-            //1.podle kruhu - získá id hodin, které májí v rozvrhu označené kruhy    
-            //získej id hodin vybraných kruhů
-            var Hodiny1 =
-                from hk in XmlLoader.m_hodinyKruhu
-                where hk.kruhId.Equals(groupIdAsInt)
-                from h in XmlLoader.m_hodiny
-                where hk.hodinaId == h.id
-                select h;
-            if (Hodiny1.Count() != 0)
-                HodinyDilci.Add(Hodiny1);
-
-            //2.podle katedry, která vypisuje kurz (katedra -> kurz -> lekce -> hodina)
-            //získej kurzy, které jsou vypisovány těmito katedrami             
-            var Hodiny2 =
-                from c in XmlLoader.m_courses
-                where c.departmentId.Equals(departmentAsInt)
-                from l in XmlLoader.m_lectures
-                where c.id == l.courseId
-                from h in XmlLoader.m_hodiny
-                where l.id == h.lectureId
-                select h;
-            if (Hodiny2.Count() != 0)
-                HodinyDilci.Add(Hodiny2);
-
-            //3. podle vyučujícího
-            //získej hodiny, které vedou vybraní vyučující
-            var Hodiny3 =
-                from h in XmlLoader.m_hodiny
-                where h.lecturerId.Equals(lecturerIdAsInt)
-                select h;
-            if (Hodiny3.Count() != 0)
-                HodinyDilci.Add(Hodiny3);
-
-            //4. podle vybrané místnosti
-            //získej hodiny, které jsou vedeny ve vybraných místnostech
-
-            var Hodiny4 =
-                from h in XmlLoader.m_hodiny
-                where h.classroomId.Equals(classroomIdAsInt)
-                select h;
-            if (Hodiny4.Count() != 0)
-                HodinyDilci.Add(Hodiny4);
-
-            //5.podle dne v týdnu
-            //získej hodiny vedené ve vybraných dnech v týdnu
-            var Hodiny5 =
-                from h in XmlLoader.m_hodiny
-                where h.dayId.Equals(dayIdAsInt)
-                select h;
-            if (Hodiny5.Count() != 0)
-                HodinyDilci.Add(Hodiny5);
-
-            //6.podle času
-            //získej hodiny vedené ve vybraných časech
-            var Hodiny6 =
-                from h in XmlLoader.m_hodiny
-                where h.timeId.Equals(timeIdAsInt)
-                select h;
-            if (Hodiny6.Count() != 0)
-                HodinyDilci.Add(Hodiny6);
+            filterByGroup(groupId, NULL, timetableFieldsFromEachFilter);
+            filterByDepartment(departmentId, NULL, timetableFieldsFromEachFilter);
+            filterByLecturer(lecturerId, NULL, timetableFieldsFromEachFilter);
+            filterByClassroom(classroomId, NULL, timetableFieldsFromEachFilter);
+            filterByDay(dayId, NULL, timetableFieldsFromEachFilter);
+            filterByTime(timeId, NULL, timetableFieldsFromEachFilter);
 
             //udělej množinový průnik dílčích filterů
-            var HodinyPrunik = HodinyDilci.Aggregate((previousList, nextList) => previousList.Intersect(nextList).ToList());
+            var timetableFields = intersect(timetableFieldsFromEachFilter);
 
             var filteredTimetableFields =
-                from h in HodinyPrunik
+                from h in timetableFields
                 join lec in XmlLoader.m_lectures on h.lectureId equals lec.id
                 join c in XmlLoader.m_courses on lec.courseId equals c.id
                 join dep in XmlLoader.m_departments on c.departmentId equals dep.id
@@ -205,6 +152,131 @@ namespace Rozvrh.Models
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
             TimetableFields = filteredTimetableFields.ToList();
+        }
+
+        private void filterByGroup(string groupId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            int groupIdAsInt;
+            if (groupId.Contains(NULL))
+                groupIdAsInt = -1;
+            else
+                groupIdAsInt = Convert.ToInt32(groupId);
+
+            if (groupIdAsInt > -1)
+            {
+                var timeTableFieldsFromGroupFilter =
+                    (from hk in XmlLoader.m_hodinyKruhu
+                     where hk.kruhId.Equals(groupIdAsInt)
+                     from h in XmlLoader.m_hodiny
+                     where hk.hodinaId == h.id
+                     select h).ToList();
+                if (timeTableFieldsFromGroupFilter.Count != 0)
+                    timetableFieldsFromEachFilter.Add(timeTableFieldsFromGroupFilter);
+            }
+        }
+
+        private void filterByDepartment(string departmentId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            int departmentAsInt;
+            if (departmentId.Contains(NULL))
+                departmentAsInt = -1;
+            else
+                departmentAsInt = Convert.ToInt32(departmentId);
+
+            if (departmentAsInt > -1)
+            {
+                var hodiny2 =
+                    (from c in XmlLoader.m_courses
+                     where c.departmentId.Equals(departmentAsInt)
+                     from l in XmlLoader.m_lectures
+                     where c.id == l.courseId
+                     from h in XmlLoader.m_hodiny
+                     where l.id == h.lectureId
+                     select h).ToList();
+                if (hodiny2.Count != 0)
+                    timetableFieldsFromEachFilter.Add(hodiny2);
+            }
+        }
+
+        private void filterByLecturer(string lecturerId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            int lecturerIdAsInt;
+            if (lecturerId.Contains(NULL))
+                lecturerIdAsInt = -1;
+            else
+                lecturerIdAsInt = Convert.ToInt32(lecturerId);
+
+            if (lecturerIdAsInt > -1)
+            {
+                var hodiny3 =
+                    (from h in XmlLoader.m_hodiny
+                     where h.lecturerId.Equals(lecturerIdAsInt)
+                     select h).ToList();
+                //if (hodiny3.Count != 0)
+                timetableFieldsFromEachFilter.Add(hodiny3);
+            }
+        }
+
+        private void filterByClassroom(string classroomId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            int classroomIdAsInt;
+            if (classroomId.Contains(NULL))
+                classroomIdAsInt = -1;
+            else
+                classroomIdAsInt = Convert.ToInt32(classroomId);
+
+            if (classroomIdAsInt > -1)
+            {
+                var hodiny4 =
+                    (from h in XmlLoader.m_hodiny
+                     where h.classroomId.Equals(classroomIdAsInt)
+                     select h).ToList();
+                if (hodiny4.Count != 0)
+                    timetableFieldsFromEachFilter.Add(hodiny4);
+            }
+        }
+
+        private void filterByDay(string dayId, string NULL, List<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            int dayIdAsInt;
+            if (dayId.Contains(NULL))
+                dayIdAsInt = -1;
+            else
+                dayIdAsInt = Convert.ToInt32(dayId);
+
+            if (dayIdAsInt > -1)
+            {
+                var hodiny5 =
+                    (from h in XmlLoader.m_hodiny
+                     where h.dayId.Equals(dayIdAsInt)
+                     select h).ToList();
+                if (hodiny5.Count != 0)
+                    timetableFieldsFromEachFilter.Add(hodiny5);
+            }
+        }
+
+        private void filterByTime(string timeId, string NULL, ICollection<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            int timeIdAsInt;
+            if (timeId.Contains(NULL))
+                timeIdAsInt = -1;
+            else
+                timeIdAsInt = Convert.ToInt32(timeId);
+
+            if (timeIdAsInt > -1)
+            {
+                var hodiny6 =
+                    (from h in XmlLoader.m_hodiny
+                     where h.timeId.Equals(timeIdAsInt)
+                     select h).ToList();
+                if (hodiny6.Count != 0)
+                    timetableFieldsFromEachFilter.Add(hodiny6);
+            }
+        }
+
+        private static IEnumerable<Hodina> intersect(IEnumerable<IEnumerable<Hodina>> timetableFieldsFromEachFilter)
+        {
+            return timetableFieldsFromEachFilter.Aggregate((previousList, nextList) => previousList.Intersect(nextList).ToList());
         }
 
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
