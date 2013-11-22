@@ -1,18 +1,18 @@
 ﻿
 namespace Rozvrh.Models.Timetable
 {
-    public class GroupTeachingBinder
+    public class GroupLessonBinder
     {
         public string id             { get; private set; }
         public string groupId        { get; private set; }
-        public string teachingId     { get; private set; }
+        public string lessonId     { get; private set; }
 
-        public GroupTeachingBinder(string id, string groupId, string teachingId)
+        public GroupLessonBinder(string id, string groupId, string lessonId)
         {
             this.id = id;
             this.groupId = groupId;
-            this.teachingId = teachingId;
+            this.lessonId = lessonId;
         }
-    }//- je vybráno z part elementů
+    }//- je vybráno z part elementů xml
 
 }

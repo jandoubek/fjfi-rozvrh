@@ -139,7 +139,7 @@
     <Compile Include="Models\Timetable\Day.cs" />
     <Compile Include="Models\Timetable\DegreeYear.cs" />
     <Compile Include="Models\Timetable\Department.cs" />
-    <Compile Include="Models\Timetable\Teaching.cs" />
+    <Compile Include="Models\Timetable\Lesson.cs" />
     <Compile Include="Models\Timetable\GroupTeachingBinder.cs" />
     <Compile Include="Models\Timetable\Group.cs" />
     <Compile Include="Models\Timetable\Lecture.cs" />
