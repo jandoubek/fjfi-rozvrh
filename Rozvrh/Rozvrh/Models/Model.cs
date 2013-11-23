@@ -4,31 +4,43 @@ using System.Linq;
 using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Models
-{
+{    
     /// <summary>
     /// Richard: Dummy data
     /// </summary>
     public class Model : IModel
     {
-        // Richard: Temporary, see comment in constructor
-        XMLTimetableLoader XmlLoader = new XMLTimetableLoader("C:\\Aktualni_databaze.xml");
-
+        
         /// <summary>
         /// Class constructor. Inits the properties which are used in View components.
         /// </summary>
         public Model()
         {
+            xmlTimetable = XMLTimetable.Instance;
+            LoadData();           
+        }
 
-            System.Diagnostics.Debug.WriteLine("Model constructor");
-            // Richard: This is only a temporary solution. In next phase the XmlLoader is gonna be modofied to be a singleton and these linq queries placed there.
-            // Model constructor will be designed to only set references for all lists.
+        /// <summary>
+        /// Class constructor. Inits the properties which are used in View components from given instance XMLTimetable - should be used only for unit testing.
+        /// </summary>
+        /// <param name="TimetableData"></param>
+        public Model(XMLTimetable TimetableData)
+        {
+            xmlTimetable = TimetableData;
+            LoadData();
+        }
+
+        /// <summary>
+        /// Loads data from XMLTimetable class and initializes all property fields.
+        /// </summary>
+        private void LoadData(){
             try
             {
-                Departments = XmlLoader.m_departments;
-                DegreeYears = XmlLoader.m_degreeyears;
-                Buildings = XmlLoader.m_buildings;
-                Days = XmlLoader.m_days;
-                Times = XmlLoader.m_times;
+                Departments = xmlTimetable.m_departments;
+                DegreeYears = xmlTimetable.m_degreeyears;
+                Buildings = xmlTimetable.m_buildings;
+                Days = xmlTimetable.m_days;
+                Times = xmlTimetable.m_times;
 
                 Specializations = new List<Specialization>();
                 Groups = new List<Group>();
@@ -38,10 +50,13 @@ namespace Rozvrh.Models
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error when parsing timetable XML.");
-                Console.WriteLine(e.StackTrace);
+                // FIX ME !!! - implement proper logging
+                System.Diagnostics.Debug.WriteLine("Error when parsing timetable XML.");
+                System.Diagnostics.Debug.WriteLine(e.StackTrace);
             }
         }
+
+        private XMLTimetable xmlTimetable { get; set; }
 
         /// <summary>
         /// Method filtering specializations (zaměření) by given DegreeYear. Result held in 'Specializations' property of Model.
@@ -52,7 +67,7 @@ namespace Rozvrh.Models
             if (degreeYearId != null)
             {
                 var filteredSpecializations =
-                    from s in XmlLoader.m_specializations
+                    from s in xmlTimetable.m_specializations
                     where s.degreeYearId.Equals(degreeYearId)
                     orderby s.acronym
                     select s;
@@ -70,7 +85,7 @@ namespace Rozvrh.Models
             if (specializationId != null)
             {
                 var filteredGroups =
-                   from g in XmlLoader.m_groups
+                   from g in xmlTimetable.m_groups
                    where g.specializationId.Equals(specializationId)
                    select g;
 
@@ -87,7 +102,7 @@ namespace Rozvrh.Models
             if (departmentIds != null && departmentIds.Count > 0)
             {
                 var filteredLecturers =
-                    from l in XmlLoader.m_lecturers
+                    from l in xmlTimetable.m_lecturers
                     where departmentIds.Contains(l.departmentId)
                     orderby l.name
                     select l;
@@ -105,7 +120,7 @@ namespace Rozvrh.Models
             if (buildingIds != null && buildingIds.Count > 0)
             {
                 var filteredClassrooms =
-                    from c in XmlLoader.m_classrooms
+                    from c in xmlTimetable.m_classrooms
                     where buildingIds.Contains(c.buildingId)
                     orderby c.name
                     select c;
@@ -118,7 +133,7 @@ namespace Rozvrh.Models
         public void FilterDepartments2Lecturers(String departmentId)
         {
                 var filteredLecturers =
-                    from l in XmlLoader.m_lecturers
+                    from l in xmlTimetable.m_lecturers
                     where l.departmentId.Equals(departmentId)
                     orderby l.name
                     select l;
@@ -130,7 +145,7 @@ namespace Rozvrh.Models
         public void FilterBuildings2Classrooms(String buildingId)
         {
             var filteredClassrooms =
-                from c in XmlLoader.m_classrooms
+                from c in xmlTimetable.m_classrooms
                 where c.buildingId.Equals(buildingId)
                 orderby c.name
                 select c;
@@ -172,14 +187,14 @@ namespace Rozvrh.Models
 
             var filteredTimetableFields =
                 from h in resultLessons
-                join lec in XmlLoader.m_lectures on h.lectureId equals lec.id
-                join c in XmlLoader.m_courses on lec.courseId equals c.id
-                join dep in XmlLoader.m_departments on c.departmentId equals dep.id
-                join ler in XmlLoader.m_lecturers on h.lecturerId equals ler.id
-                join d in XmlLoader.m_days on h.dayId equals d.id
-                join t in XmlLoader.m_times on h.timeId equals t.id
-                join cr in XmlLoader.m_classrooms on h.classroomId equals cr.id
-                join b in XmlLoader.m_buildings on cr.buildingId equals b.id
+                join lec in xmlTimetable.m_lectures on h.lectureId equals lec.id
+                join c in xmlTimetable.m_courses on lec.courseId equals c.id
+                join dep in xmlTimetable.m_departments on c.departmentId equals dep.id
+                join ler in xmlTimetable.m_lecturers on h.lecturerId equals ler.id
+                join d in xmlTimetable.m_days on h.dayId equals d.id
+                join t in xmlTimetable.m_times on h.timeId equals t.id
+                join cr in xmlTimetable.m_classrooms on h.classroomId equals cr.id
+                join b in xmlTimetable.m_buildings on cr.buildingId equals b.id
                 orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
@@ -213,14 +228,14 @@ namespace Rozvrh.Models
 
             var filteredTimetableFields =
                 from h      in resultLessons
-                join lec    in XmlLoader.m_lectures     on h.lectureId      equals lec.id
-                join c      in XmlLoader.m_courses      on lec.courseId     equals c.id
-                join dep    in XmlLoader.m_departments  on c.departmentId   equals dep.id
-                join ler    in XmlLoader.m_lecturers    on h.lecturerId     equals ler.id
-                join d      in XmlLoader.m_days         on h.dayId          equals d.id
-                join t      in XmlLoader.m_times        on h.timeId         equals t.id
-                join cr     in XmlLoader.m_classrooms   on h.classroomId    equals cr.id
-                join b      in XmlLoader.m_buildings    on cr.buildingId    equals b.id
+                join lec    in xmlTimetable.m_lectures     on h.lectureId      equals lec.id
+                join c      in xmlTimetable.m_courses      on lec.courseId     equals c.id
+                join dep    in xmlTimetable.m_departments  on c.departmentId   equals dep.id
+                join ler    in xmlTimetable.m_lecturers    on h.lecturerId     equals ler.id
+                join d      in xmlTimetable.m_days         on h.dayId          equals d.id
+                join t      in xmlTimetable.m_times        on h.timeId         equals t.id
+                join cr     in xmlTimetable.m_classrooms   on h.classroomId    equals cr.id
+                join b      in xmlTimetable.m_buildings    on cr.buildingId    equals b.id
                 orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
@@ -237,9 +252,9 @@ namespace Rozvrh.Models
             if (groupIds != null && groupIds.Count > 0)
             {
                 var timeTableFieldsFromGroupFilter =
-                    (from hk in XmlLoader.m_groupLessonBinder
+                    (from hk in xmlTimetable.m_groupLessonBinder
                      where  groupIds.Contains(hk.groupId)
-                     from h in XmlLoader.m_lessons
+                     from h in xmlTimetable.m_lessons
                      where hk.lessonId == h.id
                      select h).ToList();
                 lessonsFromAllFilters.Add(timeTableFieldsFromGroupFilter);
@@ -256,11 +271,11 @@ namespace Rozvrh.Models
             if (departmentIds != null && departmentIds.Count > 0)
             {
                 var lessons2 =
-                    (from c in XmlLoader.m_courses
+                    (from c in xmlTimetable.m_courses
                      where departmentIds.Contains(c.departmentId)
-                     from l in XmlLoader.m_lectures
+                     from l in xmlTimetable.m_lectures
                      where c.id == l.courseId
-                     from h in XmlLoader.m_lessons
+                     from h in xmlTimetable.m_lessons
                      where l.id == h.lectureId
                      select h).ToList();
                 lessonsFromAllFilters.Add(lessons2);
@@ -277,7 +292,7 @@ namespace Rozvrh.Models
             if (lecturerIds != null && lecturerIds.Count > 0)
             {
                 var lessons3 =
-                    (from h in XmlLoader.m_lessons
+                    (from h in xmlTimetable.m_lessons
                      where lecturerIds.Contains(h.lecturerId)
                      select h).ToList();
                 lessonsFromAllFilters.Add(lessons3);
@@ -294,7 +309,7 @@ namespace Rozvrh.Models
             if (classroomIds != null && classroomIds.Count > 0)
             {
                 var lessons4 =
-                    (from h in XmlLoader.m_lessons
+                    (from h in xmlTimetable.m_lessons
                      where classroomIds.Contains(h.classroomId)
                      select h).ToList();
                 lessonsFromAllFilters.Add(lessons4);
@@ -311,7 +326,7 @@ namespace Rozvrh.Models
             if (dayIds != null && dayIds.Count > 0)
             {
                 var lessons5 =
-                    (from h in XmlLoader.m_lessons
+                    (from h in xmlTimetable.m_lessons
                      where dayIds.Contains(h.dayId)
                      select h).ToList();
                 lessonsFromAllFilters.Add(lessons5);
@@ -328,7 +343,7 @@ namespace Rozvrh.Models
             if (timeIds != null && timeIds.Count > 0)
             {
                 var lessons6 =
-                    (from h in XmlLoader.m_lessons
+                    (from h in xmlTimetable.m_lessons
                      where timeIds.Contains(h.timeId)
                      select h).ToList();
                 lessonsFromAllFilters.Add(lessons6);
