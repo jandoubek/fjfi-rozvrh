@@ -133,6 +133,7 @@
     <Compile Include="Exporters\Generators\ICalGenerator.cs" />
     <Compile Include="Exporters\Generators\SvgGenerator.cs" />
     <Compile Include="Exporters\ImportExport.cs" />
+    <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Timetable\Building.cs" />
     <Compile Include="Models\Timetable\Classroom.cs" />
     <Compile Include="Models\Timetable\Course.cs" />
@@ -146,7 +147,7 @@
     <Compile Include="Models\Timetable\Lecturer.cs" />
     <Compile Include="Models\Timetable\Time.cs" />
     <Compile Include="Models\Timetable\Specialization.cs" />
-    <Compile Include="Models\XMLTimetableLoader.cs" />
+    <Compile Include="Models\XMLTimetable.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exporters\Common\ExportLecture.cs" />
     <Compile Include="Global.asax.cs">

@@ -5,34 +5,55 @@ using Rozvrh.Models.Timetable;
 using System.Xml.Linq;
 using System.IO;
 
+
+//FIX ME !!! Richard: Needs to be abstracted to an interface becouse of unit testing.
+
 namespace Rozvrh.Models
 {
     /// <summary>
-    /// Class providing data load from xml file and storing of the base data after aplication start. This method should be singleton.
+    /// Class providing data load from xml file and storing of the base data after aplication start. This method is implemented as singleton.
     /// </summary>
-    public class XMLTimetableLoader
+    public class XMLTimetable
     {
+
+        // static holder for instance, need to use lambda to construct since constructor private
+        private static readonly Lazy<XMLTimetable> _instance = new Lazy<XMLTimetable>(() => new XMLTimetable());
+
+        // accessor for instance
+        public static XMLTimetable Instance
+        {
+            get
+            {
+                return _instance.Value;
+            }
+        }
+
+        private XMLTimetable() {
+            Refresh(Config.Instance.XMLTimetableFilePath);
+        }
+
+
         /// <summary>
-        /// Class constructor. Loads xml file, parses and initializes properties which holds base data of the application.
+        /// Reloads xml file, parses and initializes properties which holds base data of the application. This method should be used for refreshing the model after updating thxml with timetable.
         /// </summary>
         /// <param name="xmlPath">Path to the source xml file.</param>
-        public XMLTimetableLoader(string xmlPath)
+        public void Refresh(string xmlPath)
         {
             m_dataXmlFilePath = xmlPath;
 
-            m_departments           = new List<Department>();
-            m_courses               = new List<Course>();
-            m_lectures              = new List<Lecture>();
-            m_lecturers             = new List<Lecturer>();
-            m_days                  = new List<Day>();
-            m_times                 = new List<Time>();
-            m_buildings             = new List<Building>();
-            m_classrooms            = new List<Classroom>();
-            m_degreeyears           = new List<DegreeYear>();
-            m_specializations       = new List<Specialization>();
-            m_lessons                = new List<Lesson>();
-            m_groups                = new List<Group>();
-            m_groupLessonBinder     = new List<GroupLessonBinder>();
+            m_departments = new List<Department>();
+            m_courses = new List<Course>();
+            m_lectures = new List<Lecture>();
+            m_lecturers = new List<Lecturer>();
+            m_days = new List<Day>();
+            m_times = new List<Time>();
+            m_buildings = new List<Building>();
+            m_classrooms = new List<Classroom>();
+            m_degreeyears = new List<DegreeYear>();
+            m_specializations = new List<Specialization>();
+            m_lessons = new List<Lesson>();
+            m_groups = new List<Group>();
+            m_groupLessonBinder = new List<GroupLessonBinder>();
 
             this.LoadXml();
             this.InitData();
@@ -51,67 +72,67 @@ namespace Rozvrh.Models
         /// <summary>
         /// Holds relevant departments from the xml. Only depertments with specified name.
         /// </summary>
-        public List<Department>          m_departments          { get; private set; }
-        
+        public List<Department> m_departments { get; private set; }
+
         /// <summary>
         /// Holds relevant courses from the xml. Only courses of departments specified in m_departments.
         /// </summary>
-        public List<Course>              m_courses              { get; private set; }
-       
+        public List<Course> m_courses { get; private set; }
+
         /// <summary>
         /// Holds relevant lectures from the xml. Only lectures of courses specified in m_courses.
         /// </summary>
-        public List<Lecture>             m_lectures             { get; private set; }
-        
+        public List<Lecture> m_lectures { get; private set; }
+
         /// <summary>
         /// Holds relevant lecturers from the xml. Only lecturers of departments specified in m_departments.
         /// </summary>
-        public List<Lecturer>            m_lecturers            { get; private set; }
-        
+        public List<Lecturer> m_lecturers { get; private set; }
+
         /// <summary>
         /// Holds days from the xml.
         /// </summary>
-        public List<Day>                 m_days                 { get; private set; }
-        
+        public List<Day> m_days { get; private set; }
+
         /// <summary>
         /// Holds times from the xml.
         /// </summary>
-        public List<Time>                m_times                { get; private set; }
-        
+        public List<Time> m_times { get; private set; }
+
         /// <summary>
         /// Holds buildings from the xml.
         /// </summary>
-        public List<Building>            m_buildings            { get; private set; }
-        
+        public List<Building> m_buildings { get; private set; }
+
         /// <summary>
         /// Holds classrooms from the xml.
         /// </summary>
-        public List<Classroom>           m_classrooms           { get; private set; }
-        
+        public List<Classroom> m_classrooms { get; private set; }
+
         /// <summary>
         /// Holds relevant lessons from the xml. Only lessons with specified time, day and lecture specified in m_lectures.
         /// </summary>
-        public List<Lesson>              m_lessons               { get; private set; }
-        
+        public List<Lesson> m_lessons { get; private set; }
+
         /// <summary>
         /// Holds relevant degree and year info. Extracted from 'degrees' and 'groups' elements.
         /// </summary>
-        public List<DegreeYear>          m_degreeyears          { get; private set; }
-        
+        public List<DegreeYear> m_degreeyears { get; private set; }
+
         /// <summary>
         /// Holds specializations from the xml. Extracted from the 'groups' element.
         /// </summary>
-        public List<Specialization>      m_specializations      { get; private set; }
-        
+        public List<Specialization> m_specializations { get; private set; }
+
         /// <summary>
         /// Holds relevant groups (kruhy) from the xml. Extracted from the 'parts' element.
         /// </summary>
-        public List<Group>               m_groups               { get; private set; }
-        
+        public List<Group> m_groups { get; private set; }
+
         /// <summary>
         /// Holds relevant pairs of group and lesson from the xml. Extracted from cards element.
         /// </summary>
-        public List<GroupLessonBinder>   m_groupLessonBinder    { get; private set; }
+        public List<GroupLessonBinder> m_groupLessonBinder { get; private set; }
 
         /// <summary>
         /// Method which open and parse the xml file.
@@ -168,7 +189,7 @@ namespace Rozvrh.Models
         {
             var enumDepartment =
                 from dep in m_xelDefinitions.Element("departments").Descendants("department")
-                where !dep.Element("name").IsEmpty 
+                where !dep.Element("name").IsEmpty
                 orderby dep.Element("code").Value
                 select dep;
             foreach (XElement dep in enumDepartment)
@@ -245,7 +266,7 @@ namespace Rozvrh.Models
         private void initLecturers()
         {
             var enumLecturerDep =      //all from departments in m_departments          
-               ( 
+               (
                 from d in m_departments
                 from ler in m_xelDefinitions.Element("lecturers").Descendants("lecturer")
                 where d.id == ler.Element("department").Attribute("ref").Value
@@ -322,7 +343,7 @@ namespace Rozvrh.Models
         /// Init m_degreeYears and m_specializations.
         /// </summary>
         private void initDegreeYearAndSpecialization()
-        {            
+        {
             //get all degrees
             var enumEl =
                 from el in m_xelDefinitions.Element("degrees").Descendants("degree")
@@ -337,10 +358,10 @@ namespace Rozvrh.Models
             var pairs =
                 from g in groups
                 select new { degree = g.Element("degree").Attribute("ref").Value, year = g.Element("schoolyear").Value };
-            
+
             //get pairs that every pair is only once mentioned. probably 6 (or 5) pairs
             pairs = pairs.Distinct();
-            
+
             int i = 1;
             foreach (var p in pairs)
             {
@@ -385,6 +406,6 @@ namespace Rozvrh.Models
             }
             m_groups = m_groups.OrderBy(k => k.groupNo).ToList();
         }
-   
+
     }
 }
