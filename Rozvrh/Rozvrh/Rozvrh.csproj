@@ -134,6 +134,7 @@
     <Compile Include="Exporters\Generators\SvgGenerator.cs" />
     <Compile Include="Exporters\ImportExport.cs" />
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\IXMLTimetable.cs" />
     <Compile Include="Models\Timetable\Building.cs" />
     <Compile Include="Models\Timetable\Classroom.cs" />
     <Compile Include="Models\Timetable\Course.cs" />

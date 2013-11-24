@@ -24,7 +24,7 @@ namespace Rozvrh.Models
         /// Class constructor. Inits the properties which are used in View components from given instance XMLTimetable - should be used only for unit testing.
         /// </summary>
         /// <param name="timetableData"></param>
-        public Model(XMLTimetable timetableData)
+        public Model(IXMLTimetable timetableData)
         {
             xmlTimetable = timetableData;
             loadData();
@@ -57,7 +57,7 @@ namespace Rozvrh.Models
             }
         }
 
-        private XMLTimetable xmlTimetable { get; set; }
+        private IXMLTimetable xmlTimetable { get; set; }
 
         /// <summary>
         /// Method filtering specializations (zaměření) by given DegreeYear. Result held in 'Specializations' property of Model.

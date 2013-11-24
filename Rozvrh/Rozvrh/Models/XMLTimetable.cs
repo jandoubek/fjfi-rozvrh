@@ -13,7 +13,7 @@ namespace Rozvrh.Models
     /// <summary>
     /// Class providing data load from xml file and storing of the base data after aplication start. This method is implemented as singleton.
     /// </summary>
-    public class XMLTimetable
+    public class XMLTimetable : IXMLTimetable
     {
 
         // static holder for instance, need to use lambda to construct since constructor private
@@ -48,7 +48,7 @@ namespace Rozvrh.Models
             m_days = new List<Day>();
             m_times = new List<Time>();
             m_buildings = new List<Building>();
-            m_classrooms = new List<Classroom>();
+            m_classrooms = new List<Classroom>();   
             m_degreeyears = new List<DegreeYear>();
             m_specializations = new List<Specialization>();
             m_lessons = new List<Lesson>();
