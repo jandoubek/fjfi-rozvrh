@@ -4,36 +4,37 @@ using System.Linq;
 using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Models
-{    
+{
     /// <summary>
     /// Richard: Dummy data
     /// </summary>
     public class Model : IModel
     {
-        
+
         /// <summary>
         /// Class constructor. Inits the properties which are used in View components.
         /// </summary>
         public Model()
         {
             xmlTimetable = XMLTimetable.Instance;
-            LoadData();           
+            loadData();
         }
 
         /// <summary>
         /// Class constructor. Inits the properties which are used in View components from given instance XMLTimetable - should be used only for unit testing.
         /// </summary>
-        /// <param name="TimetableData"></param>
-        public Model(XMLTimetable TimetableData)
+        /// <param name="timetableData"></param>
+        public Model(XMLTimetable timetableData)
         {
-            xmlTimetable = TimetableData;
-            LoadData();
+            xmlTimetable = timetableData;
+            loadData();
         }
 
         /// <summary>
         /// Loads data from XMLTimetable class and initializes all property fields.
         /// </summary>
-        private void LoadData(){
+        private void loadData()
+        {
             try
             {
                 Departments = xmlTimetable.m_departments;
@@ -108,7 +109,7 @@ namespace Rozvrh.Models
                     select l;
 
                 Lecturers = filteredLecturers.ToList();
-            }  
+            }
         }
 
         /// <summary>
@@ -132,40 +133,34 @@ namespace Rozvrh.Models
         //David: preserved for back compatibility
         public void FilterDepartments2Lecturers(String departmentId)
         {
-                var filteredLecturers =
-                    from l in xmlTimetable.m_lecturers
-                    where l.departmentId.Equals(departmentId)
-                    orderby l.name
-                    select l;
-
-                Lecturers = filteredLecturers.ToList();
+            if (departmentId != "null")
+            {
+                var departmentIds = new List<string> { departmentId };
+                FilterDepartments2Lecturers(departmentIds); 
+            }
         }
 
         //David: preserved for back compatibility
         public void FilterBuildings2Classrooms(String buildingId)
         {
-            var filteredClassrooms =
-                from c in xmlTimetable.m_classrooms
-                where c.buildingId.Equals(buildingId)
-                orderby c.name
-                select c;
-
-            Classrooms = filteredClassrooms.ToList();
+            if (buildingId != "null")
+            {
+                var buildingsIds = new List<string> { buildingId };
+                FilterBuildings2Classrooms(buildingsIds); 
+            }
         }
 
         //David: preserved for back compatibility
         public void FilterAll2TimetableFields(string groupId, string departmentId, string lecturerId, string classroomId, string dayId, string timeId)
         {
             const string NULL = "null";
-            var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
 
-            //pro kompatibilitu
-            List<string> groupIds = new List<string>();
-            List<string> departmentIds = new List<string>();
-            List<string> lecturerIds = new List<string>();
-            List<string> classroomIds = new List<string>();
-            List<string> dayIds = new List<string>();
-            List<string> timeIds = new List<string>();
+            var groupIds = new List<string>();
+            var departmentIds = new List<string>();
+            var lecturerIds = new List<string>();
+            var classroomIds = new List<string>();
+            var dayIds = new List<string>();
+            var timeIds = new List<string>();
 
             if (groupId != NULL) groupIds.Add(groupId);
             if (departmentId != NULL) departmentIds.Add(departmentId);
@@ -173,10 +168,27 @@ namespace Rozvrh.Models
             if (classroomId != NULL) classroomIds.Add(classroomId);
             if (dayId != NULL) dayIds.Add(dayId);
             if (timeId != NULL) timeIds.Add(timeId);
-            //pro kompatibilitu
+
+            FilterAll2TimetableFields(groupIds, departmentIds, lecturerIds, classroomIds, dayIds, timeIds);
+        }
+
+        /// <summary>
+        /// Method filtering lessons (vyučovací hodiny) by given groups (kruhy), departments (dep. of the course), lecturers, classrooms, days and times.
+        /// Result held in 'TimetableFields' property of Model.
+        /// </summary>
+        /// <param name="groupIds">Ids of the given groups.</param>
+        /// <param name="departmentIds">Ids of the given departments.</param>
+        /// <param name="lecturerIds">Ids of the given lecturers.</param>
+        /// <param name="classroomIds">Ids of the given classrooms.</param>
+        /// <param name="dayIds">Ids of the given days.</param>
+        /// <param name="timeIds">Ids of the given times.</param>
+        public void FilterAll2TimetableFields(List<string> groupIds, List<string> departmentIds, List<string> lecturerIds,
+                                              List<string> classroomIds, List<string> dayIds, List<string> timeIds)
+        {
+            var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
 
             filterLessonsByGroups(groupIds, lessonsFromAllFilters);
-            if (lecturerIds == null || lecturerIds.Count == 0) //the condition allows lessons of other depertments then the lecturer is member of, but given by the lecturer
+            if (lecturerIds == null || lecturerIds.Count == 0) //allows lessons of other depertments then the lecturer is member of, but given by the lecturer
                 filterLessonsByDepartments(departmentIds, lessonsFromAllFilters);
             filterLessonsByLecturers(lecturerIds, lessonsFromAllFilters);
             filterLessonsByClassrooms(classroomIds, lessonsFromAllFilters);
@@ -202,47 +214,6 @@ namespace Rozvrh.Models
         }
 
         /// <summary>
-        /// Method filtering lessons (vyučovací hodiny) by given groups (kruhy), departments (dep. of the course), lecturers, classrooms, days and times.
-        /// Result held in 'TimetableFields' property of Model.
-        /// </summary>
-        /// <param name="groupIds">Ids of the given groups.</param>
-        /// <param name="departmentIds">Ids of the given departments.</param>
-        /// <param name="lecturerIds">Ids of the given lecturers.</param>
-        /// <param name="classroomIds">Ids of the given classrooms.</param>
-        /// <param name="dayIds">Ids of the given days.</param>
-        /// <param name="timeIds">Ids of the given times.</param>
-        public void FilterAll2TimetableFields(List<string> groupIds, List<string> departmentIds, List<string> lecturerIds, 
-                                              List<string> classroomIds, List<string> dayIds, List<string> timeIds)
-        {
-            var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
-
-            filterLessonsByGroups(groupIds,lessonsFromAllFilters);          
-            if(lecturerIds == null || lecturerIds.Count == 0) //allows lessons of other depertments then the lecturer is member of, but given by the lecturer
-                filterLessonsByDepartments(departmentIds, lessonsFromAllFilters);
-            filterLessonsByLecturers(lecturerIds, lessonsFromAllFilters);    
-            filterLessonsByClassrooms(classroomIds, lessonsFromAllFilters);  
-            filterLessonsByDays(dayIds, lessonsFromAllFilters);             
-            filterLessonsByTimes(timeIds, lessonsFromAllFilters);
-
-            var resultLessons = intersect(lessonsFromAllFilters);
-
-            var filteredTimetableFields =
-                from h      in resultLessons
-                join lec    in xmlTimetable.m_lectures     on h.lectureId      equals lec.id
-                join c      in xmlTimetable.m_courses      on lec.courseId     equals c.id
-                join dep    in xmlTimetable.m_departments  on c.departmentId   equals dep.id
-                join ler    in xmlTimetable.m_lecturers    on h.lecturerId     equals ler.id
-                join d      in xmlTimetable.m_days         on h.dayId          equals d.id
-                join t      in xmlTimetable.m_times        on h.timeId         equals t.id
-                join cr     in xmlTimetable.m_classrooms   on h.classroomId    equals cr.id
-                join b      in xmlTimetable.m_buildings    on cr.buildingId    equals b.id
-                orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
-                select new TimetableField(dep, c, lec, ler, d, t, b, cr);
-
-            TimetableFields = filteredTimetableFields.ToList();
-        }
-
-        /// <summary>
         /// Method filtering lessons by given groups.
         /// </summary>
         /// <param name="groupIds">Ids of the given groups.</param>
@@ -251,16 +222,16 @@ namespace Rozvrh.Models
         {
             if (groupIds != null && groupIds.Count > 0)
             {
-                var timeTableFieldsFromGroupFilter =
+                var lessonsFilteredByGroups =
                     (from hk in xmlTimetable.m_groupLessonBinder
-                     where  groupIds.Contains(hk.groupId)
+                     where groupIds.Contains(hk.groupId)
                      from h in xmlTimetable.m_lessons
                      where hk.lessonId == h.id
                      select h).ToList();
-                lessonsFromAllFilters.Add(timeTableFieldsFromGroupFilter);
+                lessonsFromAllFilters.Add(lessonsFilteredByGroups);
             }
         }
-       
+
         /// <summary>
         /// Method filtering lessons by given departments.
         /// </summary>
@@ -270,7 +241,7 @@ namespace Rozvrh.Models
         {
             if (departmentIds != null && departmentIds.Count > 0)
             {
-                var lessons2 =
+                var lessonsFilteredByDepartments =
                     (from c in xmlTimetable.m_courses
                      where departmentIds.Contains(c.departmentId)
                      from l in xmlTimetable.m_lectures
@@ -278,75 +249,75 @@ namespace Rozvrh.Models
                      from h in xmlTimetable.m_lessons
                      where l.id == h.lectureId
                      select h).ToList();
-                lessonsFromAllFilters.Add(lessons2);
+                lessonsFromAllFilters.Add(lessonsFilteredByDepartments);
             }
         }
 
         /// <summary>
         /// Method filtering lessons by given lecturers.
         /// </summary>
-        /// <param name="lecturerId">Ids of the given lecturers.</param>
+        /// <param name="lecturerIds">Ids of the given lecturers.</param>
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByLecturers(List<string> lecturerIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
             if (lecturerIds != null && lecturerIds.Count > 0)
             {
-                var lessons3 =
+                var lessonsFilteredByLecturers =
                     (from h in xmlTimetable.m_lessons
                      where lecturerIds.Contains(h.lecturerId)
                      select h).ToList();
-                lessonsFromAllFilters.Add(lessons3);
+                lessonsFromAllFilters.Add(lessonsFilteredByLecturers);
             }
         }
 
         /// <summary>
         /// Method filtering lessons by given classrooms.
         /// </summary>
-        /// <param name="classroomId">Ids of the given classrooms.</param>
+        /// <param name="classroomIds">Ids of the given classrooms.</param>
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByClassrooms(List<string> classroomIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
             if (classroomIds != null && classroomIds.Count > 0)
             {
-                var lessons4 =
+                var lessonsFilteredByClassrooms =
                     (from h in xmlTimetable.m_lessons
                      where classroomIds.Contains(h.classroomId)
                      select h).ToList();
-                lessonsFromAllFilters.Add(lessons4);
+                lessonsFromAllFilters.Add(lessonsFilteredByClassrooms);
             }
         }
 
         /// <summary>
         /// Method filtering lessons by given days.
         /// </summary>
-        /// <param name="dayId">Ids of the given days.</param>
+        /// <param name="dayIds">Ids of the given days.</param>
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByDays(List<string> dayIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
             if (dayIds != null && dayIds.Count > 0)
             {
-                var lessons5 =
+                var lessonsFilteredByDays =
                     (from h in xmlTimetable.m_lessons
                      where dayIds.Contains(h.dayId)
                      select h).ToList();
-                lessonsFromAllFilters.Add(lessons5);
+                lessonsFromAllFilters.Add(lessonsFilteredByDays);
             }
         }
 
         /// <summary>
         /// Method filtering lessons by given times.
         /// </summary>
-        /// <param name="timeId">Ids of the given times.</param>
+        /// <param name="timeIds">Ids of the given times.</param>
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByTimes(List<string> timeIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
             if (timeIds != null && timeIds.Count > 0)
             {
-                var lessons6 =
+                var lessonsFilteredByTime =
                     (from h in xmlTimetable.m_lessons
                      where timeIds.Contains(h.timeId)
                      select h).ToList();
-                lessonsFromAllFilters.Add(lessons6);
+                lessonsFromAllFilters.Add(lessonsFilteredByTime);
             }
         }
 
@@ -364,15 +335,15 @@ namespace Rozvrh.Models
         //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
         //      Jedná se totiž o aplikační logiku, nikoliv datovou.
 
-        public List<Department>     Departments         { get; private set; }
-        public List<Specialization> Specializations     { get; private set; }
-        public List<Group>          Groups              { get; private set; }
-        public List<DegreeYear>     DegreeYears         { get; private set; }
-        public List<Lecturer>       Lecturers           { get; private set; }
-        public List<Building>       Buildings           { get; private set; }
-        public List<Classroom>      Classrooms          { get; private set; }
-        public List<Day>            Days                { get; private set; }
-        public List<Time>           Times               { get; private set; }
-        public List<TimetableField> TimetableFields     { get; private set; }
+        public List<Department> Departments { get; private set; }
+        public List<Specialization> Specializations { get; private set; }
+        public List<Group> Groups { get; private set; }
+        public List<DegreeYear> DegreeYears { get; private set; }
+        public List<Lecturer> Lecturers { get; private set; }
+        public List<Building> Buildings { get; private set; }
+        public List<Classroom> Classrooms { get; private set; }
+        public List<Day> Days { get; private set; }
+        public List<Time> Times { get; private set; }
+        public List<TimetableField> TimetableFields { get; private set; }
     }
 }
