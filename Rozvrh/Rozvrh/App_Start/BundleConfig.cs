@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Rozrvh
+namespace Rozvrh
 {
     public class BundleConfig
     {

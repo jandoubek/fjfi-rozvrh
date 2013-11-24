@@ -1,11 +1,11 @@
-﻿using Rozrvh;
-using Rozrvh.Exporters.Common;
+﻿using Rozvrh;
+using Rozvrh.Exporters.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Rozrvh.Exporters.Generators
+namespace Rozvrh.Exporters.Generators
 {
     /// <summary>
     ///  Class generating string in ICal format from list of lectures.

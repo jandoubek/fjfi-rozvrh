@@ -1,4 +1,4 @@
-﻿using Rozrvh.Exporters.Common;
+using Rozvrh.Exporters.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +22,8 @@ namespace Rozvrh.Exporters.Generators
                 {DayOfWeek.Wednesday,157},
                 {DayOfWeek.Thursday,207},
                 {DayOfWeek.Friday,257}
-            };             
-  
+            };
+
         }
 
         /// <summary> 
@@ -57,7 +57,7 @@ namespace Rozvrh.Exporters.Generators
                     res += RenderLecture(l);
                 }
             }
-            
+
             return res;
         }
 
@@ -68,7 +68,7 @@ namespace Rozvrh.Exporters.Generators
             //Borders
             //x="{$x}" y="{$y + $dy}" width="{$width}" height="{$height}"
             res += String.Format("<rect height=\"50\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardBack\" fill=\"#fff\"/>",
-                xSpan(lecture.Length),yStartDay(lecture.Day),xStartHour(lecture.StartTime)) + System.Environment.NewLine;
+                xSpan(lecture.Length), yStartDay(lecture.Day), xStartHour(lecture.StartTime)) + System.Environment.NewLine;
             //x="{$x + 1}" y="{$y + $dy + 1}" width="{$width - 2}" height="{$height - 2}"
             res += String.Format("<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"48\" width=\"{0}\" stroke=\"{3}\" y=\"{1}\" x=\"{2}\" stroke-width=\"2\" class=\"cardFrame\"/>",
                 xSpan(lecture.Length) - 2, yStartDay(lecture.Day) + 1, xStartHour(lecture.StartTime) + 1, lecture.DepartementColor) + System.Environment.NewLine;
@@ -80,27 +80,27 @@ namespace Rozvrh.Exporters.Generators
             //x="{$x}" y="{$y + $dy + $height - $height * 1 div (4 - $split)}" width="{$width}" height="{$height div (4 - $split)}"
             res += String.Format("<rect height=\"16.6666666667\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardBottom\" fill=\"#fff\"/>",
                 xSpan(lecture.Length), yStartDay(lecture.Day) + 33.3333333333, xStartHour(lecture.StartTime)) + System.Environment.NewLine;
-            
+
             //Texts
             //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
-                yStartDay(lecture.Day)+22,xStartHour(lecture.StartTime)+xSpan(lecture.Length)/2,lecture.Name) + System.Environment.NewLine;
+                yStartDay(lecture.Day) + 22, xStartHour(lecture.StartTime) + xSpan(lecture.Length) / 2, lecture.Name) + System.Environment.NewLine;
             //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
             //if red in krbalek then it have class=\"label&#10; periodic\"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
-                yStartDay(lecture.Day)+22,xStartHour(lecture.StartTime)+xSpan(lecture.Length)/2,lecture.Name) + System.Environment.NewLine;
+                yStartDay(lecture.Day) + 22, xStartHour(lecture.StartTime) + xSpan(lecture.Length) / 2, lecture.Name) + System.Environment.NewLine;
 
             //Room
             //x="{$x + $width - 5}" y="{$y + $dy + $height - 6 + $split}"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
-                yStartDay(lecture.Day)+45,xStartHour(lecture.StartTime)+xSpan(lecture.Length)-5,lecture.Room) + System.Environment.NewLine;
-            
+                yStartDay(lecture.Day) + 45, xStartHour(lecture.StartTime) + xSpan(lecture.Length) - 5, lecture.Room) + System.Environment.NewLine;
+
             //Lecturer
             //x="{$x + 5}" y="{$y + $dy + $height - 6 + $split}"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
-                yStartDay(lecture.Day)+45,xStartHour(lecture.StartTime)+5,lecture.Lecturer) + System.Environment.NewLine;
-            
-            
+                yStartDay(lecture.Day) + 45, xStartHour(lecture.StartTime) + 5, lecture.Lecturer) + System.Environment.NewLine;
+
+
             return res;
         }
 
@@ -172,7 +172,7 @@ namespace Rozvrh.Exporters.Generators
 
         private string headerTitle(string title)
         {
-            return "<text y=\"32\" x=\"7\" style=\"fill: #000; font-size: 12px; font-weight: bold; text-anchor: start; font-family: sans-serif;\">"+title+"</text>";
+            return "<text y=\"32\" x=\"7\" style=\"fill: #000; font-size: 12px; font-weight: bold; text-anchor: start; font-family: sans-serif;\">" + title + "</text>";
         }
 
         private string headerHours()

@@ -5,11 +5,11 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Rozrvh.Exporters.Common;
+using Rozvrh.Exporters.Common;
 using Rozvrh.Models;
 using Rozvrh.Exporters;
 
-namespace Rozrvh.Controllers
+namespace Rozvrh.Controllers
 {
     public class HomeController : Controller
     {

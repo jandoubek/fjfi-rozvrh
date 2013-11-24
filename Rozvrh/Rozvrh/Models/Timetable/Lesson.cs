@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace Rozvrh.Models.Timetable
 {
-    public class Teaching
+    /// <summary>
+    /// Class representing teaching lesson. (Former Teaching, Hodina, Card in xml file)
+    /// </summary>
+    public class Lesson
     {
         public string id            { get; private set; }
         public string lectureId     { get; private set; }
@@ -15,7 +14,7 @@ namespace Rozvrh.Models.Timetable
         public string classroomId   { get; private set; }
         public string tag           { get; private set; }
 
-        public Teaching(string id, string lectureId, string lecturerId, string dayId, string timeId, string classroomId, string tag)
+        public Lesson(string id, string lectureId, string lecturerId, string dayId, string timeId, string classroomId, string tag)
         {
             this.id = id;
             this.lectureId = lectureId;
