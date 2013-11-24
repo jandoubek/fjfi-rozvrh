@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace Rozrvh.Exporters.Common
+namespace Rozvrh.Exporters.Common
 {
     /// <summary>
     /// Class used for export to SVG and ICal.
