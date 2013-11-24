@@ -49,6 +49,7 @@ namespace Rozvrh.Exporters.Generators
         private string RenderLectures(List<ExportLecture> lectures)
         {
             string res = "";
+            lectures.Sort((x, y) => DateTime.Compare(x.StartTime, y.StartTime));
             if (lectures != null)
             {
                 foreach (ExportLecture l in lectures)
