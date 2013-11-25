@@ -48,6 +48,13 @@ namespace Rozvrh.Models
                 Lecturers = new List<Lecturer>();
                 Classrooms = new List<Classroom>();
 
+                SelectedGroups = new List<int>();
+                SelectedDepartments = new List<int>();
+                SelectedLecturers = new List<int>();
+                SelectedBuildings = new List<int>();
+                SelectedClassrooms = new List<int>();
+                SelectedDays = new List<int>();
+                SelectedTimes = new List<int>();
             }
             catch (Exception e)
             {
@@ -345,5 +352,13 @@ namespace Rozvrh.Models
         public List<Day> Days { get; private set; }
         public List<Time> Times { get; private set; }
         public List<TimetableField> TimetableFields { get; private set; }
+
+        public List<int> SelectedDepartments { get; set; }
+        public List<int> SelectedGroups { get; set; }
+        public List<int> SelectedLecturers { get; set; }
+        public List<int> SelectedBuildings { get; set; }
+        public List<int> SelectedClassrooms { get; set; }
+        public List<int> SelectedDays { get; set; }
+        public List<int> SelectedTimes { get; set; }
     }
 }

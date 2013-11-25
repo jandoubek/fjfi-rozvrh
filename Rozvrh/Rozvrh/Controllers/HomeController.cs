@@ -43,34 +43,53 @@ namespace Rozvrh.Controllers
             return ie.DownloadAsXML(M.TimetableFields);
         }
 
-        public PartialViewResult Filter(string degreeYear, string specialization, string groups, string department, string lecturer, string building, string classroom, string day, string time)
+        public PartialViewResult Filter(Model returnedModel, string degreeYear, string specialization)
         {
-            if (!String.IsNullOrEmpty(degreeYear))
+
+            if (!isNull(degreeYear))
                 M.FilterDegreeYear2Specialization(degreeYear);
 
-            if (!String.IsNullOrEmpty(specialization))
+            if (!isNull(specialization))
                 M.FilterSpecialization2Groups(specialization);
 
-            if (!String.IsNullOrEmpty(department))
-                M.FilterDepartments2Lecturers(department);
+            if (returnedModel.SelectedDepartments.Any())
+                M.FilterDepartments2Lecturers(returnedModel.SelectedDepartments.ConvertAll(d => d.ToString()));
 
-            if (!String.IsNullOrEmpty(building))
-                M.FilterBuildings2Classrooms(building);
+            if (returnedModel.SelectedBuildings.Any())
+                M.FilterBuildings2Classrooms(returnedModel.SelectedBuildings.ConvertAll(b => b.ToString()));
 
             return PartialView("Vyber", M);
         }
 
-        public PartialViewResult FilterAll(string groups, string department, string lecturer, string classroom, string day, string time)
+        public PartialViewResult FilterAll(List<string> groups, List<string> departments, List<string> lecturers, List<string> classrooms, List<string> days, List<string> times)
         {
-            if (!isNull(groups) || !isNull(department) || !isNull(lecturer) || !isNull(classroom) || !isNull(day) || !isNull(time))
-                M.FilterAll2TimetableFields(groups, department, lecturer, classroom, day, time);
+            removeEmptyElement(groups);
+            removeEmptyElement(departments);
+            removeEmptyElement(lecturers);
+            removeEmptyElement(classrooms);
+            removeEmptyElement(days);
+            removeEmptyElement(times);
+
+            if (groups.Any() || departments.Any() || lecturers.Any() || classrooms.Any() || days.Any() || times.Any())
+                M.FilterAll2TimetableFields(groups, departments, lecturers, classrooms, days, times);
 
             return PartialView("VyfiltrovaneLekce", M);
         }
 
         private bool isNull(string text)
         {
-            return text == "null";
+            return text == null || text == "null";
+        }
+
+        /// <summary>
+        /// Checks if the list contains only one element which is empty string. If so, the empty element is removed.
+        /// </summary>
+        /// <param name="list">List to be checked and modified</param>
+        /// <returns></returns>
+        private void removeEmptyElement(List<string> list)
+        {
+            if (list.Count() == 1 && list[0] == "")
+                list.RemoveAt(0);
         }
 
     }
