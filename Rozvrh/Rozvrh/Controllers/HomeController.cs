@@ -24,6 +24,25 @@ namespace Rozvrh.Controllers
            return View(M);
         }
 
+        public ActionResult ExportToSVG()
+        {
+            var ie = new ImportExport();
+            //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
+            return ie.DownloadAsSVG(M.TimetableFields,"Rozvrh");            
+        }
+
+        public ActionResult ExportToICal()
+        {
+            var ie = new ImportExport();
+            return ie.DownloadAsICAL(M.TimetableFields,Config.Instance.SemesterStart,Config.Instance.SemesterEnd);
+        }
+
+        public ActionResult ExportToXML()
+        {
+            var ie = new ImportExport();
+            return ie.DownloadAsXML(M.TimetableFields);
+        }
+
         public PartialViewResult Filter(string degreeYear, string specialization, string groups, string department, string lecturer, string building, string classroom, string day, string time)
         {
             if (!String.IsNullOrEmpty(degreeYear))
