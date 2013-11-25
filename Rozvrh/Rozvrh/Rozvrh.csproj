@@ -129,7 +129,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Exporters\Generators\ICalGenerator.cs" />
     <Compile Include="Exporters\Generators\SvgGenerator.cs" />
     <Compile Include="Exporters\ImportExport.cs" />
