@@ -227,7 +227,7 @@ namespace Rozvrh.Models
                      where groupIds.Contains(hk.groupId)
                      from h in xmlTimetable.m_lessons
                      where hk.lessonId == h.id
-                     select h).ToList();
+                     select h).Distinct();
                 lessonsFromAllFilters.Add(lessonsFilteredByGroups);
             }
         }
@@ -242,13 +242,13 @@ namespace Rozvrh.Models
             if (departmentIds != null && departmentIds.Count > 0)
             {
                 var lessonsFilteredByDepartments =
-                    (from c in xmlTimetable.m_courses
+                     from c in xmlTimetable.m_courses
                      where departmentIds.Contains(c.departmentId)
                      from l in xmlTimetable.m_lectures
                      where c.id == l.courseId
                      from h in xmlTimetable.m_lessons
                      where l.id == h.lectureId
-                     select h).ToList();
+                     select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByDepartments);
             }
         }
@@ -263,9 +263,9 @@ namespace Rozvrh.Models
             if (lecturerIds != null && lecturerIds.Count > 0)
             {
                 var lessonsFilteredByLecturers =
-                    (from h in xmlTimetable.m_lessons
+                     from h in xmlTimetable.m_lessons
                      where lecturerIds.Contains(h.lecturerId)
-                     select h).ToList();
+                     select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByLecturers);
             }
         }
@@ -280,9 +280,9 @@ namespace Rozvrh.Models
             if (classroomIds != null && classroomIds.Count > 0)
             {
                 var lessonsFilteredByClassrooms =
-                    (from h in xmlTimetable.m_lessons
+                     from h in xmlTimetable.m_lessons
                      where classroomIds.Contains(h.classroomId)
-                     select h).ToList();
+                     select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByClassrooms);
             }
         }
@@ -297,9 +297,9 @@ namespace Rozvrh.Models
             if (dayIds != null && dayIds.Count > 0)
             {
                 var lessonsFilteredByDays =
-                    (from h in xmlTimetable.m_lessons
+                     from h in xmlTimetable.m_lessons
                      where dayIds.Contains(h.dayId)
-                     select h).ToList();
+                     select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByDays);
             }
         }
@@ -314,9 +314,9 @@ namespace Rozvrh.Models
             if (timeIds != null && timeIds.Count > 0)
             {
                 var lessonsFilteredByTime =
-                    (from h in xmlTimetable.m_lessons
+                     from h in xmlTimetable.m_lessons
                      where timeIds.Contains(h.timeId)
-                     select h).ToList();
+                     select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByTime);
             }
         }

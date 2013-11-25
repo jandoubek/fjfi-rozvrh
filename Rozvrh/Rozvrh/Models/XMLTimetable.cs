@@ -28,7 +28,8 @@ namespace Rozvrh.Models
             }
         }
 
-        private XMLTimetable() {
+        private XMLTimetable()
+        {
             Refresh(Config.Instance.XMLTimetableFilePath);
         }
 
@@ -48,7 +49,7 @@ namespace Rozvrh.Models
             m_days = new List<Day>();
             m_times = new List<Time>();
             m_buildings = new List<Building>();
-            m_classrooms = new List<Classroom>();   
+            m_classrooms = new List<Classroom>();
             m_degreeyears = new List<DegreeYear>();
             m_specializations = new List<Specialization>();
             m_lessons = new List<Lesson>();
@@ -152,6 +153,7 @@ namespace Rozvrh.Models
             //LOG Console.WriteLine("RozvrhDataProvider::LoadXML: XML soubor '{0}' načten", m_rozvhXmlFilePath);
         }
 
+
         /// <summary>
         /// Init class properties by xml data.
         /// </summary>
@@ -159,252 +161,215 @@ namespace Rozvrh.Models
         {
             try
             {
-                //LOG Console.WriteLine("RozvrhDataProvider::InitData: pokouším se načíst data...");
+                // Init m_departments. Only depertments with name filled in the xml. e.g. departments with acronym "REZERVA", a "PROPAGACE" are ommited.
+                var enumDepartment =
+                    from dep in m_xelDefinitions.Element("departments").Descendants("department")
+                    where !dep.Element("name").IsEmpty
+                    orderby dep.Element("code").Value
+                    select dep;
+                foreach (XElement dep in enumDepartment)
+                    m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
+                //--------------------------------------------------------------------------
 
-                //must be called in this order
-                initDepartments();
-                initCourses();
-                initLectures();
-                initLessons();
-                initLecturers();
-                initDays();
-                initTimes();
-                initBuildings();
-                initClassrooms();
-                initDegreeYearAndSpecialization();
-                initGroupsAndGroupLessonBinders();
+                // Init m_courses. Only courses of the departments specified in m_departments.
+                var enumCourse =
+                    from dep in m_departments
+                    from c in m_xelDefinitions.Element("courses").Descendants("course")
+                    where dep.id.Equals(c.Element("department").Attribute("ref").Value)
+                    select c;
+                foreach (XElement c in enumCourse)
+                    m_courses.Add(new Course(c.Attribute("id").Value, c.Element("department").Attribute("ref").Value, c.Element("name").Value, c.Element("acronym").Value));
+                //--------------------------------------------------------------------------
+
+                // Init m_lectures. Only lectures of the courses specified in m_courses.
+                var enumLecture =
+                    from c in m_courses
+                    from lec in m_xelDefinitions.Element("lectures").Descendants("lecture")
+                    where c.id.Equals(lec.Element("course").Attribute("ref").Value)
+                    select lec;
+                foreach (XElement lec in enumLecture)
+                    m_lectures.Add(new Lecture(lec.Attribute("id").Value, lec.Element("course").Attribute("ref").Value,
+                                               lec.Element("practice").Value, lec.Element("tag").Value, lec.Element("duration").Value,
+                                               lec.Element("period").Value));
+                //--------------------------------------------------------------------------
+
+                // Init m_lessons. Only lessons with specified time, day and lecture specified in m_lectures. If the lecturer and classroom not given in xml, '0' ids are filed
+                var lecIds = 
+                    from lec in m_lectures
+                    select lec.id;
+
+                var enumCard =
+                    from card in m_xelDefinitions.Element("cards").Descendants("card")
+                    where lecIds.Contains(card.Element("lecture").Attribute("ref").Value) &&
+                          !card.Element("time").IsEmpty && !card.Element("day").IsEmpty
+                    select card;
+
+                string lerId, crId;
+                foreach (XElement card in enumCard)
+                {
+                    if (card.Element("lecturer").HasAttributes)
+                        lerId = card.Element("lecturer").Attribute("ref").Value;
+                    else
+                        lerId = "0";
+
+                    if (card.Elements("classroom").Count() > 0 && card.Element("classroom").HasAttributes)
+                        crId = card.Element("classroom").Attribute("ref").Value;
+                    else
+                        crId = "0";
+
+                    m_lessons.Add(new Lesson(card.Attribute("id").Value, card.Element("lecture").Attribute("ref").Value,
+                                            lerId, card.Element("day").Attribute("ref").Value,
+                                            card.Element("time").Attribute("ref").Value, crId,
+                                            card.Element("tag").Value));
+                }
+                //--------------------------------------------------------------------------
+
+                //lets get ids of lessons, times, lecturers and classrooms from all lessons
+                List<string> lessonIds = new List<string>();
+                List<string> timeIds = new List<string>();
+                List<string> lecturerIds = new List<string>();
+                List<string> classroomIds = new List<string>();
+
+                var lessonPartsIds = //extract ids of lessons, times, lecturers and classrooms
+                    from les in m_lessons
+                    select new { les.id, les.timeId, les.lecturerId, les.classroomId };
+
+                foreach (var e in lessonPartsIds)
+                {
+                    lessonIds.Add(e.id);
+                    timeIds.Add(e.timeId);
+                    lecturerIds.Add(e.lecturerId);
+                    classroomIds.Add(e.classroomId);
+                }
+                lessonIds.Distinct();
+                timeIds.Distinct();
+                lecturerIds.Distinct();
+                classroomIds.Distinct();
+                //--------------------------------------------------------------------------
+
+                // Init m_lecturers. Only lecturers with at least one lesson
+                var enumLecturer =    //only lecturers who give one or more lessons  
+                    (
+                    from ler in m_xelDefinitions.Element("lecturers").Descendants("lecturer")
+                    where lecturerIds.Contains(ler.Attribute("id").Value)
+                    select ler
+                    ).Distinct();
+
+                foreach (XElement ler in enumLecturer)
+                    m_lecturers.Add(new Lecturer(ler.Attribute("id").Value, ler.Element("name").Value,
+                                                 ler.Element("forename").Value, ler.Element("department").Attribute("ref").Value));
+                m_lecturers.Add(new Lecturer("0", "", "", "0")); //adds an general null lecturer - need in the JAZ course
+                //--------------------------------------------------------------------------
+
+                // Init m_times.
+                var enumTimes =
+                    from el in m_xelDefinitions.Element("times").Descendants("time")
+                    where timeIds.Contains(el.Attribute("id").Value)  //get all times when at least on lesson take place
+                    orderby Convert.ToInt32(el.Element("timesorder").Value)
+                    select el;
+                foreach (XElement el in enumTimes)
+                    m_times.Add(new Time(el.Attribute("id").Value, el.Element("hours").Value,
+                                         el.Element("minutes").Value, el.Element("timesorder").Value));
+                //--------------------------------------------------------------------------
+
+                // Init m_days.
+                var enumDays =
+                    from d in m_xelDefinitions.Element("days").Descendants("day")
+                    orderby d.Element("daysorder").Value
+                    select d;
+                foreach (XElement d in enumDays)
+                    m_days.Add(new Day(d.Attribute("id").Value, d.Element("czech").Value, d.Element("daysorder").Value));
+                //--------------------------------------------------------------------------
+
+                // Init m_classrooms.
+                var enumClassrooms =
+                    from cl in m_xelDefinitions.Element("classrooms").Descendants("classroom")
+                    where classroomIds.Contains(cl.Attribute("id").Value)
+                    select cl;
+                foreach (XElement cl in enumClassrooms)
+                    m_classrooms.Add(new Classroom(cl.Attribute("id").Value, cl.Element("name").Value, cl.Element("building").Attribute("ref").Value));
+                //--------------------------------------------------------------------------
+
+                // Init m_buildings.
+                var buildingsUsed =
+                    (
+                    from cl in m_classrooms
+                    select cl.buildingId
+                    ).Distinct();
+
+                var enumBuildings =
+                    from b in m_xelDefinitions.Element("buildings").Descendants("building")
+                    where buildingsUsed.Contains(b.Attribute("id").Value)
+                    orderby b.Attribute("id").Value
+                    select b;
+                foreach (XElement b in enumBuildings)
+                    m_buildings.Add(new Building(b.Attribute("id").Value, b.Element("name").Value));
+
+                //--------------------------------------------------------------------------
+
+                // Init m_degreeYears and m_specializations.
+                //get all degrees
+                var enumDegrees =
+                    from el in m_xelDefinitions.Element("degrees").Descendants("degree")
+                    select el;
+
+                //get all groups (=zaměření, specialization)
+                var groups =
+                    from g in m_xelDefinitions.Element("groups").Descendants("group")
+                    select g;
+
+                //get all possible pairs of {degree, year} from groups(=zaměření, specialization)
+                var pairs =
+                    from g in groups
+                    select new { degree = g.Element("degree").Attribute("ref").Value, year = g.Element("schoolyear").Value };
+
+                //get pairs that every pair is only once mentioned. probably 6 (or 5) pairs
+                pairs = pairs.Distinct();
+
+                int i = 1;
+                foreach (var p in pairs)
+                {
+                    m_degreeyears.Add(new DegreeYear(i.ToString(),
+                        enumDegrees.Single(x => x.Attribute("id").Value.Equals(p.degree)).Element("name").Value + " " + p.year + ". ročník",
+                        enumDegrees.Single(x => x.Attribute("id").Value.Equals(p.degree)).Element("acronym").Value + ". " + p.year + "."));
+                    var specials =
+                        from ak in groups
+                        where ak.Element("degree").Attribute("ref").Value == p.degree && ak.Element("schoolyear").Value == p.year
+                        select new Specialization(ak.Attribute("id").Value, ak.Element("name").Value, ak.Element("acronym").Value, i.ToString());
+                    foreach (var z in specials)
+                        m_specializations.Add(z);
+                    i++;
+                }
+                m_degreeyears = m_degreeyears.OrderBy(d => d.acronym).ToList();
+                //--------------------------------------------------------------------------
+
+                // Init m_groups and m_groupLessonBinder.
+                var enumParts =
+                    from el in m_xelDefinitions.Element("parts").Descendants("part")
+                    select el;
+                int j;
+                string idLesson;
+                foreach (XElement el in enumParts)
+                {
+                    m_groups.Add(new Group(el.Attribute("id").Value, el.Element("number").Value, el.Element("group").Attribute("ref").Value));
+                    j = 1;
+                    foreach (XElement cardEl in el.Descendants("card"))
+                    {
+                        idLesson = cardEl.Attribute("ref").Value;
+                        if (lessonIds.Contains(idLesson))
+                            m_groupLessonBinder.Add(new GroupLessonBinder((j++).ToString(), el.Attribute("id").Value, idLesson));
+                    }
+                }
+                m_groups = m_groups.OrderBy(k => k.groupNo).ToList();
+
             }
+
             catch (IOException e)
             {
                 //LOG Console.WriteLine("RozvrhDataProvider::InitData: CHYBA - nepovedlo se načíst data do modelu");
                 throw new Exception("XML data file parsing error.");
             }
             //LOG Console.WriteLine("RozvrhDataProvider::InitData: data načtena");
-        }
-
-        /// <summary>
-        /// Init m_departments. Only depertments with name filled in the xml. e.g. departments with acronym "REZERVA", a "PROPAGACE" are ommited.
-        /// </summary>
-        private void initDepartments()
-        {
-            var enumDepartment =
-                from dep in m_xelDefinitions.Element("departments").Descendants("department")
-                where !dep.Element("name").IsEmpty
-                orderby dep.Element("code").Value
-                select dep;
-            foreach (XElement dep in enumDepartment)
-                m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
-        }
-
-        /// <summary>
-        /// Init m_courses. Only courses of the departments specified in m_departments.
-        /// </summary>
-        private void initCourses()
-        {
-            var enumCourse =
-                    from dep in m_departments
-                    from c in m_xelDefinitions.Element("courses").Descendants("course")
-                    where dep.id.Equals(c.Element("department").Attribute("ref").Value)
-                    select c;
-            foreach (XElement c in enumCourse)
-                m_courses.Add(new Course(c.Attribute("id").Value, c.Element("department").Attribute("ref").Value, c.Element("name").Value, c.Element("acronym").Value));
-        }
-
-        /// <summary>
-        /// Init m_lectures. Only lectures of the courses specified in m_courses.
-        /// </summary>
-        private void initLectures()
-        {
-            var enumLecture =
-                from c in m_courses
-                from lec in m_xelDefinitions.Element("lectures").Descendants("lecture")
-                where c.id.Equals(lec.Element("course").Attribute("ref").Value)
-                select lec;
-            foreach (XElement lec in enumLecture)
-                m_lectures.Add(new Lecture(lec.Attribute("id").Value, lec.Element("course").Attribute("ref").Value,
-                                           lec.Element("practice").Value, lec.Element("tag").Value, lec.Element("duration").Value,
-                                           lec.Element("period").Value));
-        }
-
-        /// <summary>
-        /// Init m_lessons. Only lessons with specified time, day and lecture specified in m_lectures. If the lecturer and classroom not given in xml, '0' ids are filed
-        /// </summary>
-        private void initLessons()
-        {
-            var lecIds = from lec in m_lectures
-                         select lec.id;
-
-            var enumEl =
-                from el in m_xelDefinitions.Element("cards").Descendants("card")
-                where lecIds.Contains(el.Element("lecture").Attribute("ref").Value) &&
-                      !el.Element("time").IsEmpty && !el.Element("day").IsEmpty
-                select el;
-
-            string lerId, crId;
-            foreach (XElement el in enumEl)
-            {
-                if (el.Element("lecturer").HasAttributes)
-                    lerId = el.Element("lecturer").Attribute("ref").Value;
-                else
-                    lerId = "0";
-
-                if (el.Elements("classroom").Count() > 0 && el.Element("classroom").HasAttributes)
-                    crId = el.Element("classroom").Attribute("ref").Value;
-                else
-                    crId = "0";
-
-                m_lessons.Add(new Lesson(el.Attribute("id").Value, el.Element("lecture").Attribute("ref").Value,
-                                        lerId, el.Element("day").Attribute("ref").Value,
-                                        el.Element("time").Attribute("ref").Value, crId,
-                                        el.Element("tag").Value));
-            }
-        }
-
-        /// <summary>
-        /// Init m_lecturers. Only lecturers of the departments specified in m_departments.
-        /// </summary>
-        private void initLecturers()
-        {
-            var enumLecturerDep =      //all from departments in m_departments          
-               (
-                from d in m_departments
-                from ler in m_xelDefinitions.Element("lecturers").Descendants("lecturer")
-                where d.id == ler.Element("department").Attribute("ref").Value
-                select ler
-               ).Distinct();
-
-            var enumLecturerTeaching =    //only lecturers who give one or more lessons  
-                (
-                from ler in enumLecturerDep
-                from les in m_lessons
-                where ler.Attribute("id").Value == les.lecturerId
-                select ler
-                ).Distinct();
-
-            foreach (XElement ler in enumLecturerTeaching)
-                m_lecturers.Add(new Lecturer(ler.Attribute("id").Value, ler.Element("name").Value,
-                                             ler.Element("forename").Value, ler.Element("department").Attribute("ref").Value));
-            m_lecturers.Add(new Lecturer("0", "", "", "0")); //adds an general null lecturer - need in the JAZ course
-        }
-
-        /// <summary>
-        /// Init m_days.
-        /// </summary>
-        private void initDays()
-        {
-            var enumEl =
-              from d in m_xelDefinitions.Element("days").Descendants("day")
-              orderby d.Element("daysorder").Value
-              select d;
-            foreach (XElement d in enumEl)
-                m_days.Add(new Day(d.Attribute("id").Value, d.Element("czech").Value, d.Element("daysorder").Value));
-        }
-
-        /// <summary>
-        /// Init m_times.
-        /// </summary>
-        private void initTimes()
-        {
-            var enumEl =
-                  from el in m_xelDefinitions.Element("times").Descendants("time")
-                  orderby Convert.ToInt32(el.Element("timesorder").Value)
-                  select el;
-            foreach (XElement el in enumEl)
-                m_times.Add(new Time(el.Attribute("id").Value, el.Element("hours").Value,
-                                     el.Element("minutes").Value, el.Element("timesorder").Value));
-        }
-
-        /// <summary>
-        /// Init m_buildings.
-        /// </summary>
-        private void initBuildings()
-        {
-            var enumEl =
-                  from el in m_xelDefinitions.Element("buildings").Descendants("building")
-                  orderby el.Attribute("id").Value
-                  select el;
-            foreach (XElement el in enumEl)
-                m_buildings.Add(new Building(el.Attribute("id").Value, el.Element("name").Value));
-        }
-
-        /// <summary>
-        /// Init m_classrooms.
-        /// </summary>
-        private void initClassrooms()
-        {
-            var enumEl =
-                    from el in m_xelDefinitions.Element("classrooms").Descendants("classroom")
-                    select el;
-            foreach (XElement el in enumEl)
-                m_classrooms.Add(new Classroom(el.Attribute("id").Value, el.Element("name").Value, el.Element("building").Attribute("ref").Value));
-        }
-
-        /// <summary>
-        /// Init m_degreeYears and m_specializations.
-        /// </summary>
-        private void initDegreeYearAndSpecialization()
-        {
-            //get all degrees
-            var enumEl =
-                from el in m_xelDefinitions.Element("degrees").Descendants("degree")
-                select el;
-
-            //get all groups (=zaměření, specialization)
-            var groups =
-                from g in m_xelDefinitions.Element("groups").Descendants("group")
-                select g;
-
-            //get all possible pairs of {degree, year} from groups(=zaměření, specialization)
-            var pairs =
-                from g in groups
-                select new { degree = g.Element("degree").Attribute("ref").Value, year = g.Element("schoolyear").Value };
-
-            //get pairs that every pair is only once mentioned. probably 6 (or 5) pairs
-            pairs = pairs.Distinct();
-
-            int i = 1;
-            foreach (var p in pairs)
-            {
-                m_degreeyears.Add(new DegreeYear(i.ToString(),
-                    enumEl.Single(x => x.Attribute("id").Value.Equals(p.degree)).Element("name").Value + " " + p.year + ". ročník",
-                    enumEl.Single(x => x.Attribute("id").Value.Equals(p.degree)).Element("acronym").Value + ". " + p.year + "."));
-                var specials =
-                    from ak in groups
-                    where ak.Element("degree").Attribute("ref").Value == p.degree && ak.Element("schoolyear").Value == p.year
-                    select new Specialization(ak.Attribute("id").Value, ak.Element("name").Value, ak.Element("acronym").Value, i.ToString());
-                foreach (var z in specials)
-                    m_specializations.Add(z);
-                i++;
-            }
-            m_degreeyears = m_degreeyears.OrderBy(d => d.acronym).ToList();
-        }
-
-        /// <summary>
-        /// Init m_groups and m_groupLessonBinder.
-        /// </summary>
-        private void initGroupsAndGroupLessonBinders()
-        {
-            var idsLessons =
-                from h in m_lessons
-                select h.id;
-
-            var enumEl =
-                from el in m_xelDefinitions.Element("parts").Descendants("part")
-                select el;
-            int j;
-            string idLesson;
-            foreach (XElement el in enumEl)
-            {
-                m_groups.Add(new Group(el.Attribute("id").Value, el.Element("number").Value, el.Element("group").Attribute("ref").Value));
-                j = 1;
-                foreach (XElement cardEl in el.Descendants("card"))
-                {
-                    idLesson = cardEl.Attribute("ref").Value;
-                    if (idsLessons.Contains(idLesson))
-                        m_groupLessonBinder.Add(new GroupLessonBinder((j++).ToString(), el.Attribute("id").Value, idLesson));
-                }
-            }
-            m_groups = m_groups.OrderBy(k => k.groupNo).ToList();
         }
 
     }
