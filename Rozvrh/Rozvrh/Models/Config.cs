@@ -18,6 +18,8 @@ namespace Rozvrh.Models
 		private Config()
 		{
             XMLTimetableFilePath = "C:\\Aktualni_databaze.xml";
+            SemesterStart = new DateTime(2013, 9, 23);
+            SemesterEnd = new DateTime(2014, 2, 14);
 	    }
 	
 	   // accessor for instance
@@ -28,6 +30,19 @@ namespace Rozvrh.Models
 			   return _instance.Value;
 		   }
 	   }
+
+       [XmlElement("SemesterStart")]
+       public DateTime SemesterStart
+       {
+           get; private set;
+       }
+
+       [XmlElement("SemesterEnd")]
+       public DateTime SemesterEnd
+       {
+           get;
+           private set;
+       }
 
         [XmlElement("XMLTimeTablePath")]
         public String XMLTimetableFilePath{
