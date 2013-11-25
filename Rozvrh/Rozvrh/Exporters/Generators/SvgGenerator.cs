@@ -30,7 +30,7 @@ namespace Rozvrh.Exporters.Generators
         /// Generates string in SVG format.
         /// </summary> 
         /// <returns> String following SVG XML format. </returns>
-        /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
+        /// <param name="lectures">List of lectures with ExportLecture interface to export.</param>
         /// <param name="title">Title rendered at the top of the SVG.</param>
         public string generateSVG(List<ExportLecture> lectures, string title)
         {
@@ -46,60 +46,94 @@ namespace Rozvrh.Exporters.Generators
                 + headerHours() + headerDays() + RenderLectures(lectures) + tail;
         }
 
+
         private string RenderLectures(List<ExportLecture> lectures)
         {
-            string res = "";
-            lectures.Sort((x, y) => DateTime.Compare(x.StartTime, y.StartTime));
+            string res = "";            
             if (lectures != null)
             {
-                foreach (ExportLecture l in lectures)
+                lectures.Sort((x, y) => DateTime.Compare(x.StartTime, y.StartTime));
+                List<List<ExportLecture>> groups = divideToGroups(lectures);
+
+                foreach (var group in groups)
                 {
-                    res += RenderLecture(l);
+                    foreach (var lecture in group)
+                    {
+                        res += RenderLecture(lecture,group.Count,group.IndexOf(lecture));
+                    }
                 }
             }
 
             return res;
         }
 
-        private string RenderLecture(ExportLecture lecture)
+        private static List<List<ExportLecture>> divideToGroups(List<ExportLecture> lectures)
+        {
+            List<List<ExportLecture>> groups = new List<List<ExportLecture>>();
+            groups.Add(new List<ExportLecture>());
+            foreach (ExportLecture l in lectures)
+            {
+                var lastgroup = groups[groups.Count - 1];
+                if (lastgroup.Count < 1)
+                {
+                    groups[groups.Count - 1].Add(l);
+                }
+                else if (DateTime.Compare(l.StartTime, lastgroup[lastgroup.Count - 1].StartTime + lastgroup[lastgroup.Count - 1].Length) <= 0)
+                {
+                    lastgroup.Add(l);
+                }
+                else
+                {
+                    groups.Add(new List<ExportLecture>());
+                    lastgroup.Add(l);
+                }
+            }
+            return groups;
+        }
+
+        private string RenderLecture(ExportLecture lecture,int split,int pos)
         {
             string res = "";
 
+            double height = 50.0 / split;
+            double width = xSpan(lecture.Length);
+            double x = xStartHour(lecture.StartTime);
+            double y = yStartDay(lecture.Day);
+            double dy = height * pos;
+
             //Borders
-            //x="{$x}" y="{$y + $dy}" width="{$width}" height="{$height}"
-            res += String.Format("<rect height=\"50\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardBack\" fill=\"#fff\"/>",
-                xSpan(lecture.Length), yStartDay(lecture.Day), xStartHour(lecture.StartTime)) + System.Environment.NewLine;
+             res += String.Format("<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBack\" fill=\"#fff\"/>",
+                height, width, y + dy, x) + System.Environment.NewLine;
             //x="{$x + 1}" y="{$y + $dy + 1}" width="{$width - 2}" height="{$height - 2}"
-            res += String.Format("<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"48\" width=\"{0}\" stroke=\"{3}\" y=\"{1}\" x=\"{2}\" stroke-width=\"2\" class=\"cardFrame\"/>",
-                xSpan(lecture.Length) - 2, yStartDay(lecture.Day) + 1, xStartHour(lecture.StartTime) + 1, lecture.DepartementColor) + System.Environment.NewLine;
+            res += String.Format("<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"{0}\" width=\"{1}\" stroke=\"{4}\" y=\"{2}\" x=\"{3}\" stroke-width=\"2\" class=\"cardFrame\"/>",
+                height - 2,width - 2, y + dy + 1, x + 1, lecture.DepartementColor) + System.Environment.NewLine;
 
             //Fills
             //x="{$x}" y="{$y + $dy}" width="{$width}" height="{$height - $height div (4 - $split)}"
-            res += String.Format("<rect height=\"33.3333333333\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardTop\" fill=\"{3}\"/>",
-                xSpan(lecture.Length), yStartDay(lecture.Day), xStartHour(lecture.StartTime), lecture.DepartementColor) + System.Environment.NewLine;
+            res += String.Format("<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardTop\" fill=\"{4}\"/>",
+                height - (height / (4 - split)), width, y + dy, x, lecture.DepartementColor) + System.Environment.NewLine;
             //x="{$x}" y="{$y + $dy + $height - $height * 1 div (4 - $split)}" width="{$width}" height="{$height div (4 - $split)}"
-            res += String.Format("<rect height=\"16.6666666667\" width=\"{0}\" y=\"{1}\" x=\"{2}\" class=\"cardBottom\" fill=\"#fff\"/>",
-                xSpan(lecture.Length), yStartDay(lecture.Day) + 33.3333333333, xStartHour(lecture.StartTime)) + System.Environment.NewLine;
+            res += String.Format("<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBottom\" fill=\"#fff\"/>",
+                height / (4 - split), width, y + dy + (height - (height / (4 - split))), x) + System.Environment.NewLine;
 
             //Texts
             //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
-                yStartDay(lecture.Day) + 22, xStartHour(lecture.StartTime) + xSpan(lecture.Length) / 2, lecture.Name) + System.Environment.NewLine;
+                y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
             //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
             //if red in krbalek then it have class=\"label&#10; periodic\"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
-                yStartDay(lecture.Day) + 22, xStartHour(lecture.StartTime) + xSpan(lecture.Length) / 2, lecture.Name) + System.Environment.NewLine;
+                y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
 
             //Room
             //x="{$x + $width - 5}" y="{$y + $dy + $height - 6 + $split}"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
-                yStartDay(lecture.Day) + 45, xStartHour(lecture.StartTime) + xSpan(lecture.Length) - 5, lecture.Room) + System.Environment.NewLine;
+                y + dy + height - 6 + split, x + width - 5, lecture.Room) + System.Environment.NewLine;
 
             //Lecturer
             //x="{$x + 5}" y="{$y + $dy + $height - 6 + $split}"
             res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
-                yStartDay(lecture.Day) + 45, xStartHour(lecture.StartTime) + 5, lecture.Lecturer) + System.Environment.NewLine;
-
+                y + dy + height - 6 + split, x + 5, lecture.Lecturer) + System.Environment.NewLine;
 
             return res;
         }
