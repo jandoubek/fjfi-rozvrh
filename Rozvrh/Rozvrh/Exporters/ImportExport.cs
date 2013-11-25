@@ -22,10 +22,11 @@ namespace Rozvrh.Exporters
         /// </summary> 
         /// <returns> SVG file in XML syntax. </returns>
         /// <param name="lectures">List of lectures.</param>
-        public ActionResult DownloadAsSVG(List<TimetableField> lectures)
+        /// <param name="title">Title displayed at top-left corner of the SVG.</param>
+        public ActionResult DownloadAsSVG(List<TimetableField> lectures,string title)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(convertToExportFormat(lectures), "Rozvrh");
+            string text = gen.generateSVG(convertToExportFormat(lectures), title);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIrozvrh.svg";
