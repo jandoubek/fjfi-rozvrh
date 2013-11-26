@@ -1,80 +1,41 @@
-﻿body {
-    padding: 0;
-    margin: 0;
-    -moz-min-width: 1000px;
-    -ms-min-width: 1000px;
-    -o-min-width: 1000px;
-    -webkit-min-width: 1000px;
-    min-width: 1000px;
-    min-height: 600px;
-    font-size: 14px;
-    font-family: Verdana;
-}
-.clear {
-    clear: both;
-}
+﻿body { padding: 0; margin: 0; -moz-min-width: 1000px; -ms-min-width: 1000px; -o-min-width: 1000px; -webkit-min-width: 1000px; min-width: 1000px; min-height: 600px; font-size: 14px; font-family: Verdana; }
 
-#leftSection {
-    padding: 0 10px 0 10px;
-}
+.clear { clear: both; }
 
-#rightSection {
-    width: 500px;
-    float: right;
-    margin: 8px;
-    padding-bottom: 0.8em;
-}
+#leftSection { padding: 0 10px 0 10px; }
+
+#rightSection { width: 500px; float: right; margin: 8px; padding-bottom: 0.8em; }
 
 
-#rightSection #tabs {
-    width: 492px;
-    height: 100%;
-}
-#rightSection .ui-tabs .ui-tabs-nav {
-    padding-left: 0.8em;
-}
-#rightSection .ui-tabs .ui-tabs-panel { 
-padding: 1em 0 0 0;
-}
-#rightSection div.boxContainer {
-    float: left;margin-right: 21px;
-}
-#rightSection div.nomargin {
-    margin: 0;
-}
-#rightSection div.box{
-    float: left;margin-right: -1px;
-}
-#rightSection div.box label {
-    background: #e2e2e2;display: block; padding: 5px; width: 83px;border: 1px solid #a8a8a8;border-bottom: none;
-}
-#rightSection div.box select {
-    width: 95px;border: 1px solid #a8a8a8;padding: 5px; font-size: 0.85em;
-}
-#rightSection #clearAll {
-    padding: 2px;line-height: 1.8em;
-}
+    #rightSection #tabs { width: 492px; height: 100%; }
 
-#Tabulka {
-    border-left: 1px solid #a8a8a8;border-top: 1px solid #a8a8a8;width: 100%;padding: 0;border-spacing: 0;clear: both;
-}
-#Tabulka th, #Tabulka td {
-    text-align: left;padding: 5px;border-bottom: 1px solid #a8a8a8;border-right: 1px solid #a8a8a8;
-}
-#Tabulka th {
-    border-bottom: 3px #a8a8a8 double;font-weight: 400;
-}
+    #rightSection .ui-tabs .ui-tabs-nav { padding-left: 0.8em; }
+
+    #rightSection .ui-tabs .ui-tabs-panel { padding: 1em 0 0 0; }
+
+    #rightSection div.boxContainer { float: left; margin-right: 21px; }
+
+    #rightSection div.nomargin { margin: 0; }
+
+    #rightSection div.box { float: left; margin-right: -1px; }
+
+        #rightSection div.box label { background: #e2e2e2; display: block; padding: 5px; width: 83px; border: 1px solid #a8a8a8; border-bottom: none; }
+
+        #rightSection div.box select { width: 95px; border: 1px solid #a8a8a8; padding: 5px; font-size: 0.85em; }
+
+    #rightSection #clearAll { padding: 2px; line-height: 1.8em; }
+
+#Tabulka { border-left: 1px solid #a8a8a8; border-top: 1px solid #a8a8a8; width: 100%; padding: 0; border-spacing: 0; clear: both; }
+
+    #Tabulka th, #Tabulka td { text-align: left; padding: 5px; border-bottom: 1px solid #a8a8a8; border-right: 1px solid #a8a8a8; }
+
+    #Tabulka th { border-bottom: 3px #a8a8a8 double; font-weight: 400; }
+
+#Loading { position: absolute; width: 490px; display: none; height: 394px; border: 1px solid #929292; background: #c2c2c2 no-repeat; -ms-opacity: 0.6; opacity: 0.6; filter: alpha(opacity=60); text-align: center; vertical-align: middle; }
+
+    #Loading span { display: inline-block; height: 100%; vertical-align: middle; }
+
+    #Loading img { display: inline-block; vertical-align: middle; width: 80px; height: 80px; }
 
 
-
-footer {
-    background-color: #e2e2e2;
-    border-top: 1px solid #333333;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 0.9em;
-    height: 40px;
-    width: 100%;
-    color: #787878;
-}
-
+footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: center; padding: 10px 0; font-size: 0.9em; height: 40px; width: 100%; color: #787878; }

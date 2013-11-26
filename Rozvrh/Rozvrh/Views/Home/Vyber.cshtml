@@ -8,73 +8,106 @@
             degreeYears: $('#SelectedDegreeYears').val(), specializations: $('#SelectedSpecializations').val(),
             groups: $('#SelectedGroups').val(), departments: $('#SelectedDepartments').val(),
             lecturers: $('#SelectedLecturers').val(), buildings: $('#SelectedBuildings').val(),
-            classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val()},function(data) {
-                $('#Fltr').html(data);
-            });
+            classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val()
+        }, function (data) {
+            $('#Fltr').html(data);
+        });
     }
 
-    $("select").on('change', function () { window.filterAll(); });
+    function onListBoxChange(listBox) {
+        $(listBox.form).submit();
+        filterAll();
+    }
 
     $("#clearAll").click(function () { $("select option").prop("selected", false); });
+
+    function unselectSpecializationsGroups () {
+        $('#SelectedSpecializations').val([]);
+        $('#SelectedGroups').val([]);
+    }
+    
+    $(document).ready(function () {
+        BindSpinner();
+    });
+
+    function BindSpinner() {
+        $("#Loading").bind("ajaxSend", function () {
+            $(this).show();
+        }).bind("ajaxStop", function () {
+            $(this).hide();
+        }).bind("ajaxError", function () {
+            $(this).hide();
+        });
+    };
 
 </script>
 
 @using (Ajax.BeginForm("Filter", "Home", new AjaxOptions
 {
-    HttpMethod = "Get",
+    HttpMethod = "Post",
     UpdateTargetId = "tabs-1",
     InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
 }))
 {
 
+    <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
+
     <div class="boxContainer">
         <div class="box">
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
-            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()"})
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
         <div class="box">
             @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
-            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
         <div class="box">
             @Html.LabelFor(m => m.SelectedGroups, "Kruh")
-            @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>
     </div>
+
     <div class="boxContainer nomargin">
         <div class="box">
             @Html.LabelFor(m => m.SelectedDepartments, "Katedra")
-            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "8", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
         </div>
         <div class="box">
             @Html.LabelFor(m => m.SelectedLecturers, "Vyučující")
-            @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>
     </div>
+
     <div class="clear"></div>
+
     <br />
+
     <div class="boxContainer">
         <div class="box">
             @Html.LabelFor(m => m.SelectedBuildings, "Budova")
-            @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "8", onchange = "$('#SelectedClassrooms').val([]);onListBoxChange(this);" })
         </div>
         <div class="box">
             @Html.LabelFor(m => m.SelectedClassrooms, "Místnost")
-            @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>
     </div>
+
     <div class="boxContainer">
         <div class="box">
             @Html.LabelFor(m => m.SelectedDays, "Den")
-            @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>
     </div>
+
     <div class="boxContainer">
         <div class="box">
             @Html.LabelFor(m => m.SelectedTimes, "Začátek")
-            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>
     </div>
+
     <div class="clear"></div>
+
     <a id="clearAll" href="#">Odznačit vše</a>
 }
