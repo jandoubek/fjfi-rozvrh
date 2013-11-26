@@ -137,48 +137,6 @@ namespace Rozvrh.Models
             }
         }
 
-        //David: preserved for back compatibility
-        public void FilterDepartments2Lecturers(String departmentId)
-        {
-            if (departmentId != "null")
-            {
-                var departmentIds = new List<string> { departmentId };
-                FilterDepartments2Lecturers(departmentIds); 
-            }
-        }
-
-        //David: preserved for back compatibility
-        public void FilterBuildings2Classrooms(String buildingId)
-        {
-            if (buildingId != "null")
-            {
-                var buildingsIds = new List<string> { buildingId };
-                FilterBuildings2Classrooms(buildingsIds); 
-            }
-        }
-
-        //David: preserved for back compatibility
-        public void FilterAll2TimetableFields(string groupId, string departmentId, string lecturerId, string classroomId, string dayId, string timeId)
-        {
-            const string NULL = "null";
-
-            var groupIds = new List<string>();
-            var departmentIds = new List<string>();
-            var lecturerIds = new List<string>();
-            var classroomIds = new List<string>();
-            var dayIds = new List<string>();
-            var timeIds = new List<string>();
-
-            if (groupId != NULL) groupIds.Add(groupId);
-            if (departmentId != NULL) departmentIds.Add(departmentId);
-            if (lecturerId != NULL) lecturerIds.Add(lecturerId);
-            if (classroomId != NULL) classroomIds.Add(classroomId);
-            if (dayId != NULL) dayIds.Add(dayId);
-            if (timeId != NULL) timeIds.Add(timeId);
-
-            FilterAll2TimetableFields(groupIds, departmentIds, lecturerIds, classroomIds, dayIds, timeIds);
-        }
-
         /// <summary>
         /// Method filtering lessons (vyučovací hodiny) by given groups (kruhy), departments (dep. of the course), lecturers, classrooms, days and times.
         /// Result held in 'TimetableFields' property of Model.
