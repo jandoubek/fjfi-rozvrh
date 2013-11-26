@@ -69,40 +69,6 @@ namespace Rozvrh.Models
 
         private IXMLTimetable xmlTimetable { get; set; }
 
-        //David: perserved for back compatibility
-        public void FilterAll2TimetableFields(List<string> groupIds, List<string> departmentIds, List<string> lecturerIds,
-                                              List<string> classroomIds, List<string> dayIds, List<string> timeIds)
-        {
-            var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
-
-            filterLessonsByGroups(groupIds, lessonsFromAllFilters);
-            if (lecturerIds == null || lecturerIds.Count == 0) //allows lessons of other depertments then the lecturer is member of, but given by the lecturer
-                filterLessonsByDepartments(departmentIds, lessonsFromAllFilters);
-            filterLessonsByLecturers(lecturerIds, lessonsFromAllFilters);
-            filterLessonsByClassrooms(classroomIds, lessonsFromAllFilters);
-            filterLessonsByDays(dayIds, lessonsFromAllFilters);
-            filterLessonsByTimes(timeIds, lessonsFromAllFilters);
-
-            var resultLessons = intersect(lessonsFromAllFilters);
-
-            var filteredTimetableFields =
-                from h in resultLessons
-                join lec in xmlTimetable.m_lectures on h.lectureId equals lec.id
-                join c in xmlTimetable.m_courses on lec.courseId equals c.id
-                join dep in xmlTimetable.m_departments on c.departmentId equals dep.id
-                join ler in xmlTimetable.m_lecturers on h.lecturerId equals ler.id
-                join d in xmlTimetable.m_days on h.dayId equals d.id
-                join t in xmlTimetable.m_times on h.timeId equals t.id
-                join cr in xmlTimetable.m_classrooms on h.classroomId equals cr.id
-                join b in xmlTimetable.m_buildings on cr.buildingId equals b.id
-                orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
-                select new TimetableField(dep, c, lec, ler, d, t, b, cr);
-
-            TimetableFields = filteredTimetableFields.ToList();
-        }
-
-        
-
         /// <summary>
         /// Method filtering specializations (zaměření) by given degreeYears. Specializations are visible just only one degreeYear is selected.
         /// Result held in 'Specializations' property of Model.
