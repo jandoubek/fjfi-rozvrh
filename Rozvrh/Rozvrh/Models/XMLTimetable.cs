@@ -169,6 +169,7 @@ namespace Rozvrh.Models
                     select dep;
                 foreach (XElement dep in enumDepartment)
                     m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
+    
                 //--------------------------------------------------------------------------
 
                 // Init m_courses. Only courses of the departments specified in m_departments.
@@ -241,10 +242,6 @@ namespace Rozvrh.Models
                     lecturerIds.Add(e.lecturerId);
                     classroomIds.Add(e.classroomId);
                 }
-                lessonIds.Distinct();
-                timeIds.Distinct();
-                lecturerIds.Distinct();
-                classroomIds.Distinct();
                 //--------------------------------------------------------------------------
 
                 // Init m_lecturers. Only lecturers with at least one lesson
