@@ -95,10 +95,16 @@ namespace Rozvrh.Models
             }
         }
 
-        //David: perserved for back compatibility, renamed to FilterLecturersByDepartments
+        //David: perserved for back compatibility, renamed to FilterClassroomsByBuildings
         public void FilterBuildings2Classrooms(List<string> buildingIds)
         {
             FilterClassroomsByBuildings(buildingIds);
+        }
+
+        //David: perserved for back compatibility, renamed to FilterLecturersByDepartments
+        public void FilterDepartments2Lecturers(List<string> departmentIds)
+        {
+            FilterLecturersByDepartments(departmentIds);
         }
 
         //David: perserved for back compatibility
@@ -133,7 +139,7 @@ namespace Rozvrh.Models
             TimetableFields = filteredTimetableFields.ToList();
         }
 
-
+        
 
         /// <summary>
         /// Method filtering specializations (zaměření) by given degreeYears. Specializations are visible just only one degreeYear is selected.
