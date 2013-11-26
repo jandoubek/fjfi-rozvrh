@@ -69,7 +69,8 @@ namespace Rozvrh.Exporters.Common
         public ExportLecture(TimetableField ttf)
         {
             name = ttf.lecture_acr;
-            day = DayOfWeek.Monday;
+            //day order ranges from 0 to 4, DayOfWeek from 1 to 5
+            day = (DayOfWeek)Enum.ToObject(typeof(DayOfWeek),ttf.day_order+1);
             startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 
                 Int32.Parse(ttf.time_hours), Int32.Parse(ttf.time_minutes), 0);
             length = new TimeSpan(Int32.Parse(ttf.duration),0,0);
