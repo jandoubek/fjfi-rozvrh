@@ -333,8 +333,8 @@ namespace Rozvrh.Tests.Model
         public void Amsm2NdYearHasOnlySmb1Lesson()
         {
             const string amsm2NdYearGroupId = "9";
-            model.FilterAll2TimetableFields(new List<string> { amsm2NdYearGroupId }, new List<string>(), new List<string>(),
-                new List<string>(), new List<string>(), new List<string>());
+            model.FilterTimetableFieldsByAll(new List<string>(), new List<string>(), new List<string> { amsm2NdYearGroupId }, new List<string>(), new List<string>(),
+                new List<string>(), new List<string>(), new List<string>(), new List<string>());
 
             const int expectedCount = 1;
             const string expectedLessonAcronym = "SMB1";
@@ -347,8 +347,8 @@ namespace Rozvrh.Tests.Model
         public void Mi2NdYear2NdGroupHasOnlySos1Lesson()
         {
             const string mi2NdYear2NdGroupGroupId = "2";
-            model.FilterAll2TimetableFields(new List<string> { mi2NdYear2NdGroupGroupId }, new List<string>(), new List<string>(),
-                new List<string>(), new List<string>(), new List<string>());
+            model.FilterTimetableFieldsByAll(new List<string>(), new List<string>(), new List<string> { mi2NdYear2NdGroupGroupId }, new List<string>(), new List<string>(),
+                new List<string>(), new List<string>(), new List<string>(), new List<string>());
 
             const int expectedCount = 1;
             const string expectedLessonAcronym = "SOS1";
@@ -363,8 +363,8 @@ namespace Rozvrh.Tests.Model
             const string kmDepartmentId = "1";
             const string kjchDepartmentId = "7";
             const string kseDepartmentId = "10";
-            model.FilterAll2TimetableFields(new List<string>(), new List<string> { kmDepartmentId, kjchDepartmentId, kseDepartmentId }, new List<string>(),
-                new List<string>(), new List<string>(), new List<string>());
+            model.FilterTimetableFieldsByAll(new List<string>(), new List<string>(), new List<string>(), new List<string> { kmDepartmentId, kjchDepartmentId, kseDepartmentId }, new List<string>(),
+                new List<string>(), new List<string>(), new List<string>(), new List<string>());
 
             const int expectedCount = 17; //19 Lessons but 2 of them have't specified Day and Time property
 
@@ -374,8 +374,14 @@ namespace Rozvrh.Tests.Model
         [TestMethod]
         public void TimetableFieldsOfAmsm1StYear()
         {
-            model.FilterAll2TimetableFields(new List<string> { "3", "4", "5" }, new List<string>(), new List<string>(),
-                new List<string>(), new List<string>(), new List<string>());
+            const string bc1StYearDegreeYearId = "1";
+            const string amsm1StYearSpecializationId = "108";
+            const string group1StOfAmsmSpecialization1StYearGroupId = "3";
+            const string group2StOfAmsmSpecialization1StYearGroupId = "4";
+            const string group3StOfAmsmSpecialization1StYearGroupId = "5";
+            model.FilterTimetableFieldsByAll(new List<string> { bc1StYearDegreeYearId }, new List<string> { amsm1StYearSpecializationId },
+                new List<string> { group1StOfAmsmSpecialization1StYearGroupId, group2StOfAmsmSpecialization1StYearGroupId, group3StOfAmsmSpecialization1StYearGroupId},
+                new List<string>(), new List<string>(), new List<string>(), new List<string>(), new List<string>(), new List<string> ());
 
             const int expectedCount = 4;
 
