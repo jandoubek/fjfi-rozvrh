@@ -95,18 +95,6 @@ namespace Rozvrh.Models
             }
         }
 
-        //David: perserved for back compatibility, renamed to FilterClassroomsByBuildings
-        public void FilterBuildings2Classrooms(List<string> buildingIds)
-        {
-            FilterClassroomsByBuildings(buildingIds);
-        }
-
-        //David: perserved for back compatibility, renamed to FilterLecturersByDepartments
-        public void FilterDepartments2Lecturers(List<string> departmentIds)
-        {
-            FilterLecturersByDepartments(departmentIds);
-        }
-
         //David: perserved for back compatibility
         public void FilterAll2TimetableFields(List<string> groupIds, List<string> departmentIds, List<string> lecturerIds,
                                               List<string> classroomIds, List<string> dayIds, List<string> timeIds)

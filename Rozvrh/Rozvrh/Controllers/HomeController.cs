@@ -53,10 +53,10 @@ namespace Rozvrh.Controllers
                 M.FilterSpecialization2Groups(specialization);
 
             if (returnedModel.SelectedDepartments.Any())
-                M.FilterDepartments2Lecturers(returnedModel.SelectedDepartments.ConvertAll(d => d.ToString()));
+                M.FilterLecturersByDepartments(returnedModel.SelectedDepartments.ConvertAll(d => d.ToString()));
 
             if (returnedModel.SelectedBuildings.Any())
-                M.FilterBuildings2Classrooms(returnedModel.SelectedBuildings.ConvertAll(b => b.ToString()));
+                M.FilterClassroomsByBuildings(returnedModel.SelectedBuildings.ConvertAll(b => b.ToString()));
 
             return PartialView("Vyber", M);
         }
