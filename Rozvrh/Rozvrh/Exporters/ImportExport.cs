@@ -126,10 +126,14 @@ namespace Rozvrh.Exporters
         private List<ExportLecture> convertToExportFormat(List<TimetableField> lectures)
         {
             var res = new List<ExportLecture>();
-            foreach (var lecture in lectures)
+            if (lectures != null)
             {
-                res.Add(new ExportLecture(lecture));
+                foreach (var lecture in lectures)
+                {
+                    res.Add(new ExportLecture(lecture));
+                }
             }
+            
             return res;
         }
 
