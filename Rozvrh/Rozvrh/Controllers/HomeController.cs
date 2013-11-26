@@ -60,17 +60,24 @@ namespace Rozvrh.Controllers
             return PartialView("Vyber", M);
         }
 
-        public PartialViewResult FilterAll(List<string> groups, List<string> departments, List<string> lecturers, List<string> classrooms, List<string> days, List<string> times)
+        public PartialViewResult FilterAll(List<string> degreeYears, List<string> specializations, List<string> groups,
+                                           List<string> departments, List<string> lecturers,       List<string> buildings,
+                                           List<string> classrooms,  List<string> days,            List<string> times)
         {
+            removeEmptyElement(degreeYears);
+            removeEmptyElement(specializations);
             removeEmptyElement(groups);
             removeEmptyElement(departments);
+            removeEmptyElement(buildings);
             removeEmptyElement(lecturers);
             removeEmptyElement(classrooms);
             removeEmptyElement(days);
             removeEmptyElement(times);
 
-            if (groups.Any() || departments.Any() || lecturers.Any() || classrooms.Any() || days.Any() || times.Any())
-                M.FilterAll2TimetableFields(groups, departments, lecturers, classrooms, days, times);
+            if (degreeYears.Any() || specializations.Any() || groups.Any() || departments.Any() || 
+                lecturers.Any() || buildings.Any() || classrooms.Any() || days.Any() || times.Any())
+                
+                M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times);
 
             return PartialView("VyfiltrovaneLekce", M);
         }

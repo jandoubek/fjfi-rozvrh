@@ -5,7 +5,9 @@
 
     function filterAll() {
         $.post('@Url.Action("FilterAll", "Home")', {
-            groups: $('#SelectedGroups').val(), departments: $('#SelectedDepartments').val(), lecturers: $('#SelectedLecturers').val(),
+            degreeYears: $('#SelectedDegreeYears').val(), specializations: $('#SelectedSpecializations').val(),
+            groups: $('#SelectedGroups').val(), departments: $('#SelectedDepartments').val(),
+            lecturers: $('#SelectedLecturers').val(), buildings: $('#SelectedBuildings').val(),
             classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val()},function(data) {
                 $('#Fltr').html(data);
             });
@@ -28,7 +30,7 @@
     <div class="boxContainer">
         <div class="box">
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
-            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()", onclick = "" })
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()"})
         </div>
         <div class="box">
             @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")

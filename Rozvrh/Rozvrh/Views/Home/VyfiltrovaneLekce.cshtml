@@ -8,7 +8,7 @@
         <th>Čas</th>
         <th>Délka (hod)</th>
         <th>Místnost</th>
-        <th>Perioda</th>
+        <th>Pravidelně</th>
     </tr>
     @if (Model.TimetableFields != null)
     {
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.day)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.time_hours):@Html.DisplayFor(modelItem => item.time_minutes)
+                @Html.DisplayFor(modelItem => item.time)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.duration)

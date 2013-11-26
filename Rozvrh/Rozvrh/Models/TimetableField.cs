@@ -80,7 +80,7 @@ namespace Rozvrh.Models
         /// <summary>
         /// Compound time. Format '[h]h:mm'.
         /// </summary>
-        public string time_acronym      { get; private set; }
+        public string time              { get; private set; }
         
         /// <summary>
         /// Order of a time in timetable. From 0 to 12 (7:30 - 19:30)
@@ -114,10 +114,13 @@ namespace Rozvrh.Models
             department_acr = dep.acronym;
             lecture_name = c.name;
             lecture_acr = c.acronym;
-            if (lec.practice.Equals("1"))
+            if (lec.practice.Equals("1") && lecture_acr != "JAZ")
                 lecture_acr += "cv";
             color = dep.color;
-            period = lec.period;
+            if (lec.period == "0")
+                period = "Ano";
+            else
+                period = "Ne";
             duration = lec.duration;
             tag = lec.tag;
             practice = lec.practice;
@@ -126,16 +129,10 @@ namespace Rozvrh.Models
             day_order = d.daysOrder;
             time_hours = t.hours;
             time_minutes = t.minutes;
-            time_acronym = t.acronym;
+            time = t.acronym;
             time_order = t.timesOrder;
             building = b.name;
             classroom = cr.name;
-            if (lecture_name == "Jazyky")
-            {
-                lecture_acr = "JAZ";
-                classroom = "-";
-                building = "-";
-            }
         }
     }
 

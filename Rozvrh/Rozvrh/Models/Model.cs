@@ -256,7 +256,7 @@ namespace Rozvrh.Models
             {
                 var specializationIdsByDegreeYear =
                     from s in xmlTimetable.m_specializations
-                    where degreeYearIds.Contains(s.id)
+                    where degreeYearIds.Contains(s.degreeYearId)
                     select s.id;
 
                 filterLessonsBySpecializations(specializationIdsByDegreeYear.ToList(), lessonsFromAllFilters);

@@ -169,7 +169,7 @@ namespace Rozvrh.Models
                     select dep;
                 foreach (XElement dep in enumDepartment)
                     m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
-    
+                m_departments.Add(new Department("0", "0", "---", "---", "0"));
                 //--------------------------------------------------------------------------
 
                 // Init m_courses. Only courses of the departments specified in m_departments.
@@ -255,7 +255,7 @@ namespace Rozvrh.Models
                 foreach (XElement ler in enumLecturer)
                     m_lecturers.Add(new Lecturer(ler.Attribute("id").Value, ler.Element("name").Value,
                                                  ler.Element("forename").Value, ler.Element("department").Attribute("ref").Value));
-                m_lecturers.Add(new Lecturer("0", "", "", "0")); //adds an general null lecturer - need in the JAZ course
+                m_lecturers.Add(new Lecturer("0", "---", "", "0")); //adds an general null lecturer - need in the JAZ course
                 //--------------------------------------------------------------------------
 
                 // Init m_times.
@@ -285,6 +285,7 @@ namespace Rozvrh.Models
                     select cl;
                 foreach (XElement cl in enumClassrooms)
                     m_classrooms.Add(new Classroom(cl.Attribute("id").Value, cl.Element("name").Value, cl.Element("building").Attribute("ref").Value));
+                m_classrooms.Add(new Classroom("0", "---", "0")); //adds an general null classroom
                 //--------------------------------------------------------------------------
 
                 // Init m_buildings.
@@ -301,7 +302,7 @@ namespace Rozvrh.Models
                     select b;
                 foreach (XElement b in enumBuildings)
                     m_buildings.Add(new Building(b.Attribute("id").Value, b.Element("name").Value));
-
+                m_buildings.Add(new Building("0", "---")); //adds an general null building
                 //--------------------------------------------------------------------------
 
                 // Init m_degreeYears and m_specializations.
