@@ -53,11 +53,11 @@
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
     <div class="boxContainer">
-        <div class="box">
+        <div class="box" id="noscroll">
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
             @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
-        <div class="box">
+        <div class="box" >
             @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
             @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
@@ -94,7 +94,7 @@
     </div>
 
     <div class="boxContainer">
-        <div class="box">
+        <div class="box" id="noscroll">
             @Html.LabelFor(m => m.SelectedDays, "Den")
             @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>

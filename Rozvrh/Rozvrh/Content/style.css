@@ -23,6 +23,8 @@
 
         #rightSection div.box select { width: 95px; border: 1px solid #a8a8a8; padding: 5px; font-size: 0.85em; }
 
+        #rightSection div.box#noscroll ::-webkit-scrollbar { display: none;}
+
     #rightSection #clearAll { padding: 2px; line-height: 1.8em; }
 
 #Tabulka { border-left: 1px solid #a8a8a8; border-top: 1px solid #a8a8a8; width: 100%; padding: 0; border-spacing: 0; clear: both; }
