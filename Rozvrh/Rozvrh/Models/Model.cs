@@ -48,6 +48,9 @@ namespace Rozvrh.Models
                 Lecturers = new List<Lecturer>();
                 Classrooms = new List<Classroom>();
 
+
+                SelectedDegreeYears = new List<int>();
+                SelectedSpecializations = new List<int>();
                 SelectedGroups = new List<int>();
                 SelectedDepartments = new List<int>();
                 SelectedLecturers = new List<int>();
@@ -65,35 +68,6 @@ namespace Rozvrh.Models
         }
 
         private IXMLTimetable xmlTimetable { get; set; }
-
-        //David: perserved for back compatibility, renamed to FilterSpecializationsByDegreeYears
-        public void FilterDegreeYear2Specialization(String degreeYearId)
-        {
-            if (degreeYearId != null)
-            {
-                var filteredSpecializations =
-                    from s in xmlTimetable.m_specializations
-                    where s.degreeYearId.Equals(degreeYearId)
-                    orderby s.acronym
-                    select s;
-
-                Specializations = filteredSpecializations.ToList();
-            }
-        }
-
-        //David: perserved for back compatibility, renamed to FilterGroupsBySpecializations
-        public void FilterSpecialization2Groups(String specializationId)
-        {
-            if (specializationId != null)
-            {
-                var filteredGroups =
-                   from g in xmlTimetable.m_groups
-                   where g.specializationId.Equals(specializationId)
-                   select g;
-
-                Groups = filteredGroups.ToList();
-            }
-        }
 
         //David: perserved for back compatibility
         public void FilterAll2TimetableFields(List<string> groupIds, List<string> departmentIds, List<string> lecturerIds,

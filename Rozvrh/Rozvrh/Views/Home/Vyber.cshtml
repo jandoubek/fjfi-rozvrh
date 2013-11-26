@@ -27,12 +27,12 @@
 
     <div class="boxContainer">
         <div class="box">
-            @Html.Label("degreeYear", "Ročník")
-            @Html.DropDownList("degreeYear", new SelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()", onclick = "" })
+            @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()", onclick = "" })
         </div>
         <div class="box">
-            @Html.Label("specialization", "Zaměření")
-            @Html.DropDownList("specialization", new SelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
+            @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
+            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$(this.form).submit()" })
         </div>
         <div class="box">
             @Html.LabelFor(m => m.SelectedGroups, "Kruh")

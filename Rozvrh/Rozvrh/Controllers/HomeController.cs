@@ -43,14 +43,13 @@ namespace Rozvrh.Controllers
             return ie.DownloadAsXML(M.TimetableFields);
         }
 
-        public PartialViewResult Filter(Model returnedModel, string degreeYear, string specialization)
+        public PartialViewResult Filter(Model returnedModel)
         {
+            if (returnedModel.SelectedDegreeYears.Any())
+                M.FilterSpecializationsByDegreeYears(returnedModel.SelectedDegreeYears.ConvertAll(d => d.ToString()));
 
-            if (!isNull(degreeYear))
-                M.FilterDegreeYear2Specialization(degreeYear);
-
-            if (!isNull(specialization))
-                M.FilterSpecialization2Groups(specialization);
+            if (returnedModel.SelectedSpecializations.Any())
+                M.FilterGroupsBySpecializations(returnedModel.SelectedSpecializations.ConvertAll(d => d.ToString()));
 
             if (returnedModel.SelectedDepartments.Any())
                 M.FilterLecturersByDepartments(returnedModel.SelectedDepartments.ConvertAll(d => d.ToString()));
