@@ -352,7 +352,7 @@ namespace Rozvrh.Tests.Model
             model.FilterAll2TimetableFields(new List<string> { "3", "4", "5" }, new List<string>(), new List<string>(),
                 new List<string>(), new List<string>(), new List<string>());
 
-            const int expectedCount = 6;
+            const int expectedCount = 4;
 
             Assert.AreEqual(expectedCount, model.TimetableFields.Count);
         }
