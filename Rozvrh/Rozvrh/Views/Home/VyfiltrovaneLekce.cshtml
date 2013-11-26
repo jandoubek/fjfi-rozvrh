@@ -16,28 +16,28 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.lecture_acr)
+                <a href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.department_acr)
+                @Html.DisplayTextFor(modelItem => item.department_acr)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lecturer)
+                @Html.DisplayTextFor(modelItem => item.lecturer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.day)
+                @Html.DisplayTextFor(modelItem => item.day)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.time)
+                @Html.DisplayTextFor(modelItem => item.time)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.duration)
+                @Html.DisplayTextFor(modelItem => item.duration)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.classroom)
+                @Html.DisplayTextFor(modelItem => item.classroom)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.period)
+                @Html.DisplayTextFor(modelItem => item.period)
             </td>
         </tr>
         }

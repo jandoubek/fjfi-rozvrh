@@ -41,7 +41,12 @@ namespace Rozvrh.Models
         /// Lecture duration in hours. Always an integer.
         /// </summary>
         public string duration          { get; private set; }
-        
+
+        /// <summary>
+        /// address to the www pages of the previous year school pool 
+        /// </summary>
+        public string course_href              { get; private set; }
+
         /// <summary>
         /// Miscellaneous info about lecture.
         /// </summary>
@@ -114,14 +119,15 @@ namespace Rozvrh.Models
             department_acr = dep.acronym;
             lecture_name = c.name;
             lecture_acr = c.acronym;
-            if (lec.practice.Equals("1") && lecture_acr != "JAZ")
-                lecture_acr += "cv";
+            //if (lec.practice.Equals("1") && lecture_acr != "JAZ")
+            lecture_acr += lec.tag;
             color = dep.color;
             if (lec.period == "0")
                 period = "Ano";
             else
                 period = "Ne";
-            duration = lec.duration;
+            duration = lec.duration;   //will be replaced to the config setting
+            course_href = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/"+dep.code+c.acronym+"/";
             tag = lec.tag;
             practice = lec.practice;
             lecturer = ler.name;
