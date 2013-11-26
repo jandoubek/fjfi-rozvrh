@@ -26,21 +26,18 @@ namespace Rozvrh.Controllers
 
         public ActionResult ExportToSVG()
         {
-            var ie = new ImportExport();
             //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
-            return ie.DownloadAsSVG(M.TimetableFields,"Rozvrh");            
+            return ImportExport.Instance.DownloadAsSVG("Rozvrh");            
         }
 
         public ActionResult ExportToICal()
         {
-            var ie = new ImportExport();
-            return ie.DownloadAsICAL(M.TimetableFields,Config.Instance.SemesterStart,Config.Instance.SemesterEnd);
+            return ImportExport.Instance.DownloadAsICAL(Config.Instance.SemesterStart,Config.Instance.SemesterEnd);
         }
 
         public ActionResult ExportToXML()
         {
-            var ie = new ImportExport();
-            return ie.DownloadAsXML(M.TimetableFields);
+            return ImportExport.Instance.DownloadAsXML();
         }
 
         public PartialViewResult Filter(Model returnedModel)
@@ -57,6 +54,7 @@ namespace Rozvrh.Controllers
             if (returnedModel.SelectedBuildings.Any())
                 M.FilterClassroomsByBuildings(returnedModel.SelectedBuildings.ConvertAll(b => b.ToString()));
 
+            ImportExport.Instance.setLectures(M.TimetableFields);
             return PartialView("Vyber", M);
         }
 
@@ -78,7 +76,8 @@ namespace Rozvrh.Controllers
                 lecturers.Any() || buildings.Any() || classrooms.Any() || days.Any() || times.Any())
                 
                 M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times);
-
+            
+            ImportExport.Instance.setLectures(M.TimetableFields);
             return PartialView("VyfiltrovaneLekce", M);
         }
 

@@ -17,13 +17,47 @@ namespace Rozvrh.Exporters
     /// </summary>
     public class ImportExport
     {
+
+        private static ImportExport instance;
+        private List<TimetableField> lectures;
+
+        private ImportExport() 
+        {
+            lectures = new List<TimetableField>();
+        }
+
+        /// <summary>
+        ///  Singleton instance.
+        /// </summary>
+        public static ImportExport Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ImportExport();
+                }
+                return instance;
+            }
+        }
+
+        /// <summary> 
+        /// Sets current lectures ready export.
+        /// </summary> 
+        /// <param name="l">List of lectures.</param>
+        public void setLectures(List<TimetableField> l)
+        {
+            lectures = l;
+        }
+        
+
         /// <summary> 
         /// Exports lectures to SVG file. 
         /// </summary> 
         /// <returns> SVG file in XML syntax. </returns>
         /// <param name="lectures">List of lectures.</param>
         /// <param name="title">Title displayed at top-left corner of the SVG.</param>
-        public ActionResult DownloadAsSVG(List<TimetableField> lectures,string title)
+        public ActionResult DownloadAsSVG(string title)
         {
             SvgGenerator gen = new SvgGenerator();
             string text = gen.generateSVG(convertToExportFormat(lectures), title);
@@ -37,8 +71,7 @@ namespace Rozvrh.Exporters
         /// Serializes lectures to XML file.
         /// </summary>
         /// <returns> XML serialization as text file. </returns>
-        /// <param name="lectures">List of lectures.</param>
-        public ActionResult DownloadAsXML(List<TimetableField> lectures)
+        public ActionResult DownloadAsXML()
         {
             var ser = new XmlSerializer(typeof(List<TimetableField>));
             using (var ms = new MemoryStream())
@@ -55,10 +88,9 @@ namespace Rozvrh.Exporters
         /// Exports lectures to ICal format.
         /// </summary>
         /// <returns> Text file in ICal format. </returns>
-        /// <param name="lectures">List of lectures.</param>
         /// <param name="semStart">Beginning of the semester. Only Year, Month and Day are used. </param>
         /// <param name="semEnd">End of the semester. Only Year, Month and Day are used. </param>
-        public ActionResult DownloadAsICAL(List<TimetableField> lectures,DateTime semStart, DateTime semEnd)
+        public ActionResult DownloadAsICAL(DateTime semStart, DateTime semEnd)
         {
             ICalGenerator gen = new ICalGenerator();
             string text = gen.generateICal(convertToExportFormat(lectures), semStart, semEnd);

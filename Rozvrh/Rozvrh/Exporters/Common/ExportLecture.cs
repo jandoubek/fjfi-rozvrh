@@ -70,13 +70,13 @@ namespace Rozvrh.Exporters.Common
         {
             name = ttf.lecture_acr;
             //day order ranges from 0 to 4, DayOfWeek from 1 to 5
-            day = (DayOfWeek)Enum.ToObject(typeof(DayOfWeek),ttf.day_order+1);
+            day = (DayOfWeek)Enum.ToObject(typeof(DayOfWeek), Int32.Parse(ttf.day_order) + 1);
             startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 
                 Int32.Parse(ttf.time_hours), Int32.Parse(ttf.time_minutes), 0);
             length = new TimeSpan(Int32.Parse(ttf.duration),0,0);
             lecturer = ttf.lecturer;
             room = ttf.classroom;
-            departementColor = ttf.color;
+            departementColor = "#"+Int32.Parse(ttf.color).ToString("X");
         }
 
 

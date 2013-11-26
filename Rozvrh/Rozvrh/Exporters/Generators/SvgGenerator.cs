@@ -1,6 +1,7 @@
 using Rozvrh.Exporters.Common;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -78,13 +79,17 @@ namespace Rozvrh.Exporters.Generators
                 {
                     groups[groups.Count - 1].Add(l);
                 }
-                else if (DateTime.Compare(l.StartTime, lastgroup[lastgroup.Count - 1].StartTime + lastgroup[lastgroup.Count - 1].Length) <= 0)
+                    //Is lecture l starting sooner than end of the last lecture (with 10 minutes toleration)?
+                else if (DateTime.Compare(l.StartTime, lastgroup[lastgroup.Count - 1].StartTime + 
+                    lastgroup[lastgroup.Count - 1].Length - new TimeSpan(0,10,0)) < 0
+                    && l.Day == lastgroup[lastgroup.Count - 1].Day)
                 {
                     lastgroup.Add(l);
                 }
                 else
                 {
                     groups.Add(new List<ExportLecture>());
+                    lastgroup = groups[groups.Count - 1];
                     lastgroup.Add(l);
                 }
             }
@@ -102,37 +107,37 @@ namespace Rozvrh.Exporters.Generators
             double dy = height * pos;
 
             //Borders
-             res += String.Format("<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBack\" fill=\"#fff\"/>",
+             res += String.Format(new NumberFormatInfo(),"<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBack\" fill=\"#fff\"/>",
                 height, width, y + dy, x) + System.Environment.NewLine;
             //x="{$x + 1}" y="{$y + $dy + 1}" width="{$width - 2}" height="{$height - 2}"
-            res += String.Format("<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"{0}\" width=\"{1}\" stroke=\"{4}\" y=\"{2}\" x=\"{3}\" stroke-width=\"2\" class=\"cardFrame\"/>",
+            res += String.Format(new NumberFormatInfo(),"<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"{0}\" width=\"{1}\" stroke=\"{4}\" y=\"{2}\" x=\"{3}\" stroke-width=\"2\" class=\"cardFrame\"/>",
                 height - 2,width - 2, y + dy + 1, x + 1, lecture.DepartementColor) + System.Environment.NewLine;
 
             //Fills
             //x="{$x}" y="{$y + $dy}" width="{$width}" height="{$height - $height div (4 - $split)}"
-            res += String.Format("<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardTop\" fill=\"{4}\"/>",
+            res += String.Format(new NumberFormatInfo(),"<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardTop\" fill=\"{4}\"/>",
                 height - (height / (4 - split)), width, y + dy, x, lecture.DepartementColor) + System.Environment.NewLine;
             //x="{$x}" y="{$y + $dy + $height - $height * 1 div (4 - $split)}" width="{$width}" height="{$height div (4 - $split)}"
-            res += String.Format("<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBottom\" fill=\"#fff\"/>",
+            res += String.Format(new NumberFormatInfo(),"<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBottom\" fill=\"#fff\"/>",
                 height / (4 - split), width, y + dy + (height - (height / (4 - split))), x) + System.Environment.NewLine;
 
             //Texts
             //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
-            res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
+            res += String.Format(new NumberFormatInfo(),"<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
                 y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
             //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
             //if red in krbalek then it have class=\"label&#10; periodic\"
-            res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
+            res += String.Format(new NumberFormatInfo(),"<text y=\"{0}\" x=\"{1}\" style=\"dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
                 y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
 
             //Room
             //x="{$x + $width - 5}" y="{$y + $dy + $height - 6 + $split}"
-            res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
+            res += String.Format(new NumberFormatInfo(),"<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
                 y + dy + height - 6 + split, x + width - 5, lecture.Room) + System.Environment.NewLine;
 
             //Lecturer
             //x="{$x + 5}" y="{$y + $dy + $height - 6 + $split}"
-            res += String.Format("<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
+            res += String.Format(new NumberFormatInfo(),"<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
                 y + dy + height - 6 + split, x + 5, lecture.Lecturer) + System.Environment.NewLine;
 
             return res;
