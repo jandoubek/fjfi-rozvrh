@@ -127,8 +127,8 @@ namespace Rozvrh.Models
             else
                 period = "Ne";
             duration = lec.duration;   //will be replaced to the config setting
-            course_href = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/"+dep.code+c.acronym+"/";
-            tag = lec.tag;
+            course_href = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/" + dep.code + c.acronym.Replace(@"/", "");
+            tag = lec.tag; 
             practice = lec.practice;
             lecturer = ler.name;
             day = d.name;
