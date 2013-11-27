@@ -53,7 +53,9 @@ namespace Rozvrh.Exporters.Generators
             string res = "";            
             if (lectures != null)
             {
-                lectures.Sort((x, y) => DateTime.Compare(x.StartTime, y.StartTime));
+                lectures.Sort((x, y) => x.Day == y.Day ?
+                    DateTime.Compare(x.StartTime, y.StartTime) :
+                    x.Day.CompareTo(y.Day));
                 List<List<ExportLecture>> groups = divideToGroups(lectures);
 
                 foreach (var group in groups)
