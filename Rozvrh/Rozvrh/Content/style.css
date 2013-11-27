@@ -6,6 +6,11 @@
 
 #rightSection { width: 500px; float: right; margin: 8px; padding-bottom: 0.8em; }
 
+    #rightSection .exportLink { margin-left:5px;}
+
+    #rightSection .exportToolip { margin:5px 10px 5px 10px; font-size:0.9em; width:90%;  padding:5px 10px; }
+
+    #rightSection .tooltipSelected { background-color:#f1f1f1; }
 
     #rightSection #tabs { width: 492px; height: 100%; }
 
@@ -41,3 +46,4 @@
 
 
 footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: center; padding: 10px 0; font-size: 0.9em; height: 40px; width: 100%; color: #787878; }
+
