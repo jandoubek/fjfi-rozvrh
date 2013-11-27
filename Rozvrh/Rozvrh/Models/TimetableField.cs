@@ -10,97 +10,97 @@ namespace Rozvrh.Models
         /// <summary>
         /// Department name.
         /// </summary>
-        public string department        { get; private set; }
+        public string department        { get; set; }
         
         /// <summary>
         /// Department acronym. Just letters, no numbers.
         /// </summary>
-        public string department_acr    { get; private set; }
+        public string department_acr    { get; set; }
         
         /// <summary>
         /// Lecture name.
         /// </summary>
-        public string lecture_name      { get; private set; }
+        public string lecture_name      { get; set; }
         
         /// <summary>
         /// Lecture acronym. 'cv' at the end of string when practise.
         /// </summary>
-        public string lecture_acr       { get; private set; }
+        public string lecture_acr       { get; set; }
         
         /// <summary>
         /// Color of the department. Integer number in decimal base representing hex color. e.g. 15724527 is EFEFEF grey
         /// </summary>
-        public string color             { get; private set; }
+        public string color             { get; set; }
         
         /// <summary>
         /// Week regularity of lessons. Number 0 for regular every week lesson and 1 for irregular lesson.
         /// </summary>
-        public string period            { get; private set; }
+        public string period            { get; set; }
         
         /// <summary>
         /// Lecture duration in hours. Always an integer.
         /// </summary>
-        public string duration          { get; private set; }
+        public string duration          { get; set; }
 
         /// <summary>
         /// address to the www pages of the previous year school pool 
         /// </summary>
-        public string course_href              { get; private set; }
+        public string course_href              { get; set; }
 
         /// <summary>
         /// Miscellaneous info about lecture.
         /// </summary>
-        public string tag               { get; private set; }
+        public string tag               { get; set; }
         
         /// <summary>
         /// Is the lecture practice? '1' for practice lecture, '0' for lecture/reading
         /// </summary>
-        public string practice          { get; private set; }
+        public string practice          { get; set; }
         
         /// <summary>
         /// Conposed name of a lecturer. Format 'Name S.' (surname).
         /// </summary>
-        public string lecturer          { get; private set; }
+        public string lecturer          { get; set; }
         
         /// <summary>
         /// Day name. 
         /// </summary>
-        public string day               { get; private set; } 
+        public string day               { get; set; } 
         
         /// <summary>
         /// Day order. From 0 to 4 (pondělí - pátek)
         /// </summary>
-        public string day_order         { get; private set; }
+        public string day_order         { get; set; }
         
         /// <summary>
         /// Only hours of lesson time.
         /// </summary>
-        public string time_hours        { get; private set; }
+        public string time_hours        { get; set; }
         
         /// <summary>
         /// Only minutes of lesson time.
         /// </summary>
-        public string time_minutes      { get; private set; }
+        public string time_minutes      { get; set; }
         
         /// <summary>
         /// Compound time. Format '[h]h:mm'.
         /// </summary>
-        public string time              { get; private set; }
+        public string time              { get; set; }
         
         /// <summary>
         /// Order of a time in timetable. From 0 to 12 (7:30 - 19:30)
         /// </summary>
-        public string time_order        { get; private set; }
+        public string time_order        { get; set; }
         
         /// <summary>
         /// Building name.
         /// </summary>
-        public string building          { get; private set; }
+        public string building          { get; set; }
         
         /// <summary>
         /// Classroom name.
         /// </summary>
-        public string classroom         { get; private set; }
+        public string classroom         { get; set; }
 
         /// <summary>
         /// Class constructor. Fills '-' in the classroom and building properties for 'Jazyky' lessons. 
@@ -139,6 +139,14 @@ namespace Rozvrh.Models
             time_order = t.timesOrder;
             building = b.name;
             classroom = cr.name;
+        }
+
+        /// <summary>
+        /// Parameterless contructor for XML serialization.
+        /// </summary>
+        public TimetableField()
+        {
+ 
         }
     }
 
