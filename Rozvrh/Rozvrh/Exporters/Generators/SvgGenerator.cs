@@ -82,8 +82,7 @@ namespace Rozvrh.Exporters.Generators
                     groups[groups.Count - 1].Add(l);
                 }
                     //Is lecture l starting sooner than end of the last lecture (with 10 minutes toleration)?
-                else if (DateTime.Compare(l.StartTime, lastgroup[lastgroup.Count - 1].StartTime + 
-                    lastgroup[lastgroup.Count - 1].Length - new TimeSpan(0,10,0)) < 0
+                else if (DateTime.Compare(l.StartTime, lastgroup.Max(lec => lec.StartTime + lec.Length - new TimeSpan(0, 10, 0))) < 0
                     && l.Day == lastgroup[lastgroup.Count - 1].Day)
                 {
                     lastgroup.Add(l);
