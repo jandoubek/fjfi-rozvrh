@@ -388,14 +388,13 @@ namespace Rozvrh.Models
         /// <summary>
         /// Return true when there is any id, false for empty list.
         /// </summary>
-        /// <param name="Ids">list of ids</param>
+        /// <param name="ids">List of ids</param>
         /// <returns>true when nonempty, false otherwise</returns>
         private static bool anyId(List<string> ids)
         {
             if (ids != null && ids.Count > 0)
                 return true;
-            else
-                return false;
+            return false;
         }
 
         //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
