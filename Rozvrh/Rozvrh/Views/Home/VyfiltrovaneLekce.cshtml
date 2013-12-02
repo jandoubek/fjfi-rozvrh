@@ -1,51 +1,26 @@
 ﻿@model Rozvrh.Models.Model
 
-<canvas id="canvas" width="900px" height="600px">
+<canvas id="canvas" width="900px" height="600px"></canvas>
 
+<div>
+    @{
+        var grid = new WebGrid(Model.TimetableFields, canSort: false, canPage: false);
 
-</canvas> 
-
-<table id="Tabulka">
-    <tr>
-        <th>Předmět</th>
-        <th>Katedra</th>
-        <th>Vyučující</th>
-        <th>Den</th>
-        <th>Čas</th>
-        <th>Délka (hod)</th>
-        <th>Místnost</th>
-        <th>Pravidelně</th>
-    </tr>
-    @if (Model.TimetableFields != null)
-    {
-        foreach (var item in Model.TimetableFields)
+        if (Model.TimetableFields != null)
         {
-        <tr>
-            <td>
-                <a href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.department_acr)
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.lecturer)
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.day)
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.time)
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.duration)
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.classroom)
-            </td>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.period)
-            </td>
-        </tr>
+            @grid.GetHtml(
+                columns: grid.Columns(
+                         grid.Column("lecture_acr", "Předmět"),
+                         grid.Column("department", "Katedra"),
+                         grid.Column("lecturer", "Vyučující"),
+                         grid.Column("day", "Den"),
+                         grid.Column("time", "Čas"),
+                         grid.Column("duration", "Délka"),
+                         grid.Column("classroom", "Místnost"),
+                         grid.Column("period", "Pravidelnost"),
+                    grid.Column(header: "Vybrat", format: @<text><input name="Selector" type="checkbox" checked="checked" /></text>)
+                     )
+                 )
         }
     }
-</table>
+</div>
