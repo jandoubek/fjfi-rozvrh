@@ -16,6 +16,7 @@ namespace Rozvrh.Models
         /// </summary>
         public Model()
         {
+            initialize();
             xmlTimetable = XMLTimetable.Instance;
             loadData();
         }
@@ -26,8 +27,33 @@ namespace Rozvrh.Models
         /// <param name="timetableData"></param>
         public Model(IXMLTimetable timetableData)
         {
+            initialize();
             xmlTimetable = timetableData;
             loadData();
+        }
+
+        /// <summary>
+        /// Initializes fields to empty lists.
+        /// </summary>
+        private void initialize(){
+
+            Specializations = new List<Specialization>();
+            Groups = new List<Group>();
+            Lecturers = new List<Lecturer>();
+            Classrooms = new List<Classroom>();
+
+
+            SelectedDegreeYears = new List<int>();
+            SelectedSpecializations = new List<int>();
+            SelectedGroups = new List<int>();
+            SelectedDepartments = new List<int>();
+            SelectedLecturers = new List<int>();
+            SelectedBuildings = new List<int>();
+            SelectedClassrooms = new List<int>();
+            SelectedDays = new List<int>();
+            SelectedTimes = new List<int>();
+
+            TimetableFields = new List<TimetableField>();
         }
 
         /// <summary>
@@ -43,21 +69,6 @@ namespace Rozvrh.Models
                 Days = xmlTimetable.m_days;
                 Times = xmlTimetable.m_times;
 
-                Specializations = new List<Specialization>();
-                Groups = new List<Group>();
-                Lecturers = new List<Lecturer>();
-                Classrooms = new List<Classroom>();
-
-
-                SelectedDegreeYears = new List<int>();
-                SelectedSpecializations = new List<int>();
-                SelectedGroups = new List<int>();
-                SelectedDepartments = new List<int>();
-                SelectedLecturers = new List<int>();
-                SelectedBuildings = new List<int>();
-                SelectedClassrooms = new List<int>();
-                SelectedDays = new List<int>();
-                SelectedTimes = new List<int>();
             }
             catch (Exception e)
             {
