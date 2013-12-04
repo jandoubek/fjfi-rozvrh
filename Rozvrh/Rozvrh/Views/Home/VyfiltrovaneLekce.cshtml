@@ -2,13 +2,16 @@
 
 <canvas id="canvas" width="900px" height="600px"></canvas>
 
-<div>
+<div id="FiltredTimetableFieds">
     @{
-        var grid = new WebGrid(Model.TimetableFields, canSort: false, canPage: false);
-
-        if (Model.TimetableFields != null)
+        using (Html.BeginForm("Sort", "Home", System.Web.Mvc.FormMethod.Get))
         {
-            @grid.GetHtml(
+            var grid = new WebGrid(canSort: true, canPage: false, ajaxUpdateContainerId: "FiltredTimetableFieds");
+            grid.Bind(Model.FiltredTimetableFields, rowCount: Model.FiltredTimetableFields.Count, autoSortAndPage: false);
+
+            if (Model.FiltredTimetableFields != null)
+            {
+        @grid.GetHtml(
                 columns: grid.Columns(
                          grid.Column("lecture_acr", "Předmět"),
                          grid.Column("department", "Katedra"),
@@ -21,6 +24,7 @@
                     grid.Column(header: "Vybrat", format: @<text><input name="Selector" type="checkbox" checked="checked" /></text>)
                      )
                  )
+            }
         }
     }
 </div>

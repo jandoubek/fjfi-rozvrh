@@ -53,7 +53,8 @@ namespace Rozvrh.Models
             SelectedDays = new List<int>();
             SelectedTimes = new List<int>();
 
-            TimetableFields = new List<TimetableField>();
+            FiltredTimetableFields = new List<TimetableField>();
+            CustomTimetableFields = new List<TimetableField>();
         }
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace Rozvrh.Models
                 orderby dep.code, c.acronym, lec.practice, ler.name, d.daysOrder, t.timesOrder, b.name, cr.name
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
-            TimetableFields = filteredTimetableFields.ToList();
+            FiltredTimetableFields = filteredTimetableFields.ToList();
         }
 
         /// <summary>
@@ -408,10 +409,6 @@ namespace Rozvrh.Models
             return false;
         }
 
-        //Olda: Metoda, která podle nastavení filtrů vrátí seznam TimetableFieldů, by měla být v Controlleru.
-        //      V tuhle chvíli tedy v souboru HomeController, v metodě Filter.
-        //      Jedná se totiž o aplikační logiku, nikoliv datovou.
-
         public List<Department> Departments { get; private set; }
         public List<Specialization> Specializations { get; private set; }
         public List<Group> Groups { get; private set; }
@@ -421,7 +418,14 @@ namespace Rozvrh.Models
         public List<Classroom> Classrooms { get; private set; }
         public List<Day> Days { get; private set; }
         public List<Time> Times { get; private set; }
-        public List<TimetableField> TimetableFields { get; private set; }
+        /// <summary>
+        /// List of TimetableFields fitred using settings in filtrs on Vyber.cshtml
+        /// </summary>
+        public List<TimetableField> FiltredTimetableFields { get; private set; }
+        /// <summary>
+        /// List of TimetableFields selected by user to be part of his personal timetable
+        /// </summary>
+        public List<TimetableField> CustomTimetableFields { get; set; }
 
         public List<int> SelectedDegreeYears { get; set; }
         public List<int> SelectedSpecializations { get; set; }

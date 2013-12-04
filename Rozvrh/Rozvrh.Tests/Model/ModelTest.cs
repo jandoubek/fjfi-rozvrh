@@ -339,8 +339,8 @@ namespace Rozvrh.Tests.Model
             const int expectedCount = 1;
             const string expectedLessonAcronym = "SMB1";
 
-            Assert.AreEqual(expectedCount, model.TimetableFields.Count);
-            Assert.AreEqual(expectedLessonAcronym, model.TimetableFields[0].lecture_acr);
+            Assert.AreEqual(expectedCount, model.FiltredTimetableFields.Count);
+            Assert.AreEqual(expectedLessonAcronym, model.FiltredTimetableFields[0].lecture_acr);
         }
 
         [TestMethod]
@@ -353,8 +353,8 @@ namespace Rozvrh.Tests.Model
             const int expectedCount = 1;
             const string expectedLessonAcronym = "SOS1";
 
-            Assert.AreEqual(expectedCount, model.TimetableFields.Count);
-            Assert.AreEqual(expectedLessonAcronym, model.TimetableFields[0].lecture_acr);
+            Assert.AreEqual(expectedCount, model.FiltredTimetableFields.Count);
+            Assert.AreEqual(expectedLessonAcronym, model.FiltredTimetableFields[0].lecture_acr);
         }
 
         [TestMethod]
@@ -368,7 +368,7 @@ namespace Rozvrh.Tests.Model
 
             const int expectedCount = 17; //19 Lessons but 2 of them have't specified Day and Time property
 
-            Assert.AreEqual(expectedCount, model.TimetableFields.Count);
+            Assert.AreEqual(expectedCount, model.FiltredTimetableFields.Count);
         }
 
         [TestMethod]
@@ -385,7 +385,7 @@ namespace Rozvrh.Tests.Model
 
             const int expectedCount = 4;
 
-            Assert.AreEqual(expectedCount, model.TimetableFields.Count);
+            Assert.AreEqual(expectedCount, model.FiltredTimetableFields.Count);
         }
     }
 }

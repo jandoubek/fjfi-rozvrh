@@ -252,6 +252,7 @@
     <Content Include="Views\Home\Export.cshtml" />
     <Content Include="Views\Home\Editace.cshtml" />
     <Content Include="Views\Home\VyfiltrovaneLekce.cshtml" />
+    <Content Include="Views\Home\Rozvrh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

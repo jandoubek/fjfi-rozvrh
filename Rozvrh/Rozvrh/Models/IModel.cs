@@ -16,6 +16,17 @@ namespace Rozvrh.Models
         List<Day>           Days               { get; }
         List<Time>          Times              { get; }
 
-        List<TimetableField> TimetableFields { get; }
+        List<TimetableField> FiltredTimetableFields { get; }
+        List<TimetableField> CustomTimetableFields { get; }
+
+        List<int> SelectedDegreeYears { get; }
+        List<int> SelectedSpecializations { get; }
+        List<int> SelectedGroups { get; }
+        List<int> SelectedDepartments { get; }
+        List<int> SelectedLecturers { get; }
+        List<int> SelectedBuildings { get; }
+        List<int> SelectedClassrooms { get; }
+        List<int> SelectedDays { get; }
+        List<int> SelectedTimes { get; }
     }   
 }

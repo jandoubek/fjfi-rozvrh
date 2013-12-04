@@ -14,25 +14,27 @@ namespace Rozvrh.Controllers
     public class HomeController : Controller
     {
         private Model M;
-        public HomeController(){
+
+        public HomeController()
+        {
             System.Diagnostics.Debug.WriteLine("Controller constructor");
             M = new Model();
         }
 
         public ActionResult Index()
         {
-           return View(M);
+            return View(M);
         }
 
         public ActionResult ExportToSVG()
         {
             //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
-            return ImportExport.Instance.DownloadAsSVG("Rozvrh");            
+            return ImportExport.Instance.DownloadAsSVG("Rozvrh");
         }
 
         public ActionResult ExportToICal()
         {
-            return ImportExport.Instance.DownloadAsICAL(Config.Instance.SemesterStart,Config.Instance.SemesterEnd);
+            return ImportExport.Instance.DownloadAsICAL(Config.Instance.SemesterStart, Config.Instance.SemesterEnd);
         }
 
         public ActionResult ExportToXML()
@@ -54,13 +56,13 @@ namespace Rozvrh.Controllers
             if (returnedModel.SelectedBuildings.Any())
                 M.FilterClassroomsByBuildings(returnedModel.SelectedBuildings.ConvertAll(b => b.ToString()));
 
-            ImportExport.Instance.setLectures(M.TimetableFields);
+            ImportExport.Instance.setLectures(M.FiltredTimetableFields);
             return PartialView("Vyber", M);
         }
 
         public PartialViewResult FilterAll(List<string> degreeYears, List<string> specializations, List<string> groups,
-                                           List<string> departments, List<string> lecturers,       List<string> buildings,
-                                           List<string> classrooms,  List<string> days,            List<string> times)
+            List<string> departments, List<string> lecturers, List<string> buildings,
+            List<string> classrooms, List<string> days, List<string> times)
         {
             removeEmptyElement(degreeYears);
             removeEmptyElement(specializations);
@@ -72,12 +74,13 @@ namespace Rozvrh.Controllers
             removeEmptyElement(days);
             removeEmptyElement(times);
 
-            if (degreeYears.Any() || specializations.Any() || groups.Any() || departments.Any() || 
+            if (degreeYears.Any() || specializations.Any() || groups.Any() || departments.Any() ||
                 lecturers.Any() || buildings.Any() || classrooms.Any() || days.Any() || times.Any())
-                
+
                 M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times);
-            
-            ImportExport.Instance.setLectures(M.TimetableFields);
+
+            ImportExport.Instance.setLectures(M.FiltredTimetableFields);
+
             return PartialView("VyfiltrovaneLekce", M);
         }
 
@@ -97,5 +100,23 @@ namespace Rozvrh.Controllers
                 list.RemoveAt(0);
         }
 
+        public ActionResult SelectAll()
+        {
+            var opacity = new double[] {0.3114, 0.4583, 0.6338};
+            M.FilterTimetableFieldsByAll(new List<string> {"6"}, new List<string> {"9"}, new List<string> {"25"}, new List<string>(), new List<string>(), new List<string>(), new List<string>(), new List<string>(), new List<string>());
+            M.CustomTimetableFields = M.FiltredTimetableFields;
+            foreach (var tf in M.CustomTimetableFields)
+            {
+                var hexColor = int.Parse(tf.color).ToString("X6");
+                tf.color = "";
+                for (int i = 0; i < 3; i++)
+                {
+                    double x = Convert.ToDouble(Int32.Parse(hexColor.Substring(i*2, 2), NumberStyles.HexNumber));
+                    x = (1 - opacity[i])*255 + opacity[i]*x;
+                    tf.color += Convert.ToInt32(Math.Floor(x)).ToString("X2");
+                }
+            }
+            return PartialView("Rozvrh", M);
+        }
     }
 }

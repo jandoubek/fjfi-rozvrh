@@ -1,0 +1,13 @@
+﻿@using System.EnterpriseServices
+@using Rozvrh.Models
+@using Rozvrh.Models.Timetable
+@model Rozvrh.Models.Model
+@foreach (var day in Model.Days)
+{
+    var dayTimetable = Model.CustomTimetableFields.Where(m => m.day == day.name).ToList();
+    foreach (var field in dayTimetable)
+    {
+        <div style="width:@(Convert.ToInt32(field.duration)*50 - 2)px; height:40px; background:#@field.color; float:left; border:1px solid black; font-size:10px;">@field.lecture_acr</div>
+    }
+    <br/>
+}
