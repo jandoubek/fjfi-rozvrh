@@ -11,67 +11,67 @@
 <code>99</code>
 <name />
 <acronym>REZERVACE</acronym>
-<color>8421504</color>
+<color>6710886</color>
 </department>
 <department id="1">
 <code>01</code>
 <name>K. matematiky</name>
 <acronym>KM</acronym>
-<color>1822536</color>
+<color>7590422</color>
 </department>
 <department id="2">
 <code>02</code>
 <name>K. fyziky</name>
 <acronym>KF</acronym>
-<color>16711935</color>
+<color>16153724</color>
 </department>
 <department id="3">
 <code>04</code>
 <name>K. jazyku</name>
 <acronym>KJ</acronym>
-<color>15724527</color>
+<color>11184810</color>
 </department>
 <department id="4">
 <code>11</code>
 <name>K. inženýrství pevných látek</name>
 <acronym>KIPL</acronym>
-<color>2099945</color>
+<color>13369344</color>
 </department>
 <department id="5">
 <code>12</code>
 <name>K. fyzikálni elektroniky</name>
 <acronym>KFE</acronym>
-<color>2249465</color>
+<color>16087296</color>
 </department>
 <department id="6">
 <code>14</code>
 <name>K. materiálu</name>
 <acronym>KMAT</acronym>
-<color>12184995</color>
+<color>52411</color>
 </department>
 <department id="7">
 <code>15</code>
 <name>K. jaderné chemie</name>
 <acronym>KJCH</acronym>
-<color>4748754</color>
+<color>7688315</color>
 </department>
 <department id="8">
 <code>16</code>
 <name>K. dozimetrie a aplikace ionizujícího zárení</name>
 <acronym>KDAIZ</acronym>
-<color>16776960</color>
+<color>3433892</color>
 </department>
 <department id="9">
 <code>17</code>
 <name>K. jaderných reaktoru</name>
 <acronym>KJR</acronym>
-<color>65535</color>
+<color>15586304</color>
 </department>
 <department id="10">
 <code>18</code>
 <name>K. softwarového inženýrství v ekonomii</name>
 <acronym>KSE</acronym>
-<color>13674</color>
+<color>12680465</color>
 </department>
 </departments>
 <courses>
