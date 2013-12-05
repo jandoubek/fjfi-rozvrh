@@ -18,8 +18,13 @@ namespace Rozvrh.Models
 		private Config()
 		{
             XMLTimetableFilePath = "C:\\Aktualni_databaze.xml";
+
+            //FIX ME(VASEK): Load from config file instead of fixed values
             SemesterStart = new DateTime(2013, 9, 23);
             SemesterEnd = new DateTime(2014, 2, 14);
+            Created = new DateTime(2012,10,16);
+            LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pd";
+
 	    }
 	
 	   // accessor for instance
@@ -31,22 +36,50 @@ namespace Rozvrh.Models
 		   }
 	   }
 
+       /// <summary> 
+       /// Hyperlink to webpage with additional information about timetable
+       /// </summary>
+       /// <remarks>Used in SVG export.</remarks>
+       [XmlElement("LinkToInfo")]
+       public string LinkToAdditionalInformation
+       {
+           get; set;
+       }
+
+       /// <summary> 
+       /// Date the timetable was created
+       /// </summary>
+       /// <remarks>Used in SVG export.</remarks>
+       [XmlElement("Created")]
+       public DateTime Created
+       {
+           get; set;
+       }
+
+       /// <summary> 
+       /// When does the semester starts.
+       /// </summary>
        [XmlElement("SemesterStart")]
        public DateTime SemesterStart
        {
-           get; private set;
+           get; set;
        }
 
+       /// <summary> 
+       /// When does the semester start.
+       /// </summary>
        [XmlElement("SemesterEnd")]
        public DateTime SemesterEnd
        {
-           get;
-           private set;
+           get; set;
        }
 
+       /// <summary> 
+       /// File path to XML with timetables. 
+       /// </summary>
         [XmlElement("XMLTimeTablePath")]
         public String XMLTimetableFilePath{
-            get; private set;
+            get; set;
         }
 
         public void UpdateXmlTimetablePath(String path){

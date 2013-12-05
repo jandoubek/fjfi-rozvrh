@@ -57,10 +57,12 @@ namespace Rozvrh.Exporters
         /// <returns> SVG file in XML syntax. </returns>
         /// <param name="lectures">List of lectures.</param>
         /// <param name="title">Title displayed at top-left corner of the SVG.</param>
-        public ActionResult DownloadAsSVG(string title)
+        /// <param name="created">Date the timetable was created from config.</param>
+        /// <param name="linkToInfo">Hyperlink to webpage with additional information.</param>
+        public ActionResult DownloadAsSVG(string title,DateTime created, string linkToInfo)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(convertToExportFormat(lectures), title);
+            string text = gen.generateSVG(convertToExportFormat(lectures), title,created,linkToInfo);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIrozvrh.svg";

@@ -33,7 +33,7 @@ namespace Rozvrh.Exporters.Generators
         /// <returns> String following SVG XML format. </returns>
         /// <param name="lectures">List of lectures with ExportLecture interface to export.</param>
         /// <param name="title">Title rendered at the top of the SVG.</param>
-        public string generateSVG(List<ExportLecture> lectures, string title)
+        public string generateSVG(List<ExportLecture> lectures, string title, DateTime created, string linkToInformation)
         {
 
             string header = @"<?xml version=""1.0"" encoding=""UTF-8""?>
@@ -43,7 +43,7 @@ namespace Rozvrh.Exporters.Generators
   </g>
 </svg>";
 
-            return header + headerStyles() + headerRootAndBottoms() + headerTitle(title)
+            return header + headerStyles() + headerRootAndBottoms(created,linkToInformation) + headerTitle(title)
                 + headerHours() + headerDays() + RenderLectures(lectures) + tail;
         }
 
@@ -219,17 +219,17 @@ namespace Rozvrh.Exporters.Generators
 ";
         }
 
-        private string headerRootAndBottoms()
+        private string headerRootAndBottoms(DateTime created,string link)
         {
             return @"
  <g id=""#root"">
     <g transform=""translate(7, 0)"">
       <g transform=""translate(0, 350)"" class=""info"">
         <!-- CREATED TEXT -->
-        <text x=""9.0693359"" style=""font-size:12px;fill:#babdb6;"">Vytvořeno 2012-10-16</text>
+        <text x=""9.0693359"" style=""font-size:12px;fill:#babdb6;"">Vytvořeno "+String.Format("{0}-{1}-{2}",created.Year,created.Month,created.Day)+@"</text>
         <!-- IMPORTANT INFORMATION TEXT -->
         <text x=""730"" style=""font-size:12px;fill:#babdb6; text-anchor: end;"">
-          <tspan id=""tspan23441"">Důležité doplňující informace si přečtěte na <tspan style=""fill:#729fcf;"">http://www.km.fjfi.cvut.cz/rozvrh/info.pdf</tspan>
+          <tspan id=""tspan23441"">Důležité doplňující informace si přečtěte na <tspan style=""fill:#729fcf;"">"+link+@"</tspan>
           </tspan>
         </text>
       </g>

@@ -29,7 +29,7 @@ namespace Rozvrh.Controllers
         public ActionResult ExportToSVG()
         {
             //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
-            return ImportExport.Instance.DownloadAsSVG("Rozvrh");
+            return ImportExport.Instance.DownloadAsSVG("Rozvrh",Config.Instance.Created,Config.Instance.LinkToAdditionalInformation);
         }
 
         public ActionResult ExportToICal()
