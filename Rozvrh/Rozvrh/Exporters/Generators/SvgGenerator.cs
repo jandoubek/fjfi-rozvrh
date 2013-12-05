@@ -57,12 +57,16 @@ namespace Rozvrh.Exporters.Generators
                     DateTime.Compare(x.StartTime, y.StartTime) :
                     x.Day.CompareTo(y.Day));
                 List<List<ExportLecture>> groups = divideToGroups(lectures);
-
                 foreach (var group in groups)
                 {
                     foreach (var lecture in group)
                     {
-                        res += RenderLecture(lecture,group.Count,group.IndexOf(lecture));
+                        //Dont render fake lectures created in grouping process
+                        if (lecture.Name != null)
+                        {
+                            res += RenderLecture(lecture, group.Count, group.IndexOf(lecture));
+                        }
+                        
                     }
                 }
             }
@@ -70,7 +74,7 @@ namespace Rozvrh.Exporters.Generators
             return res;
         }
 
-        private static List<List<ExportLecture>> divideToGroups(List<ExportLecture> lectures)
+        private List<List<ExportLecture>> divideToGroups(List<ExportLecture> lectures)
         {
             List<List<ExportLecture>> groups = new List<List<ExportLecture>>();
             groups.Add(new List<ExportLecture>());
@@ -81,11 +85,33 @@ namespace Rozvrh.Exporters.Generators
                 {
                     groups[groups.Count - 1].Add(l);
                 }
-                    //Is lecture l starting sooner than end of the last lecture (with 10 minutes toleration)?
+                    //Is lecture l starting sooner than end time of the last lecture in last group (with 10 minutes toleration)?
                 else if (DateTime.Compare(l.StartTime, lastgroup.Max(lec => lec.StartTime + lec.Length - new TimeSpan(0, 10, 0))) < 0
                     && l.Day == lastgroup[lastgroup.Count - 1].Day)
                 {
-                    lastgroup.Add(l);
+                    //All lectures intersecting with l
+                    IEnumerable<ExportLecture> intersecting = lastgroup.Where(lec => (DateTime.Compare(l.StartTime, lec.StartTime + lec.Length - new TimeSpan(0, 10, 0)) < 0));
+                    //Only have to worry about 3 and more lectures in one group
+                    //If lecture l is intersecting with all of lectures in lastgroup then it belongs to the group
+                    if (lastgroup.Count <= 1 || intersecting.Count() == lastgroup.Count)
+                    {
+                        lastgroup.Add(l);
+                    }
+                    else 
+                    {                        
+                        List<ExportLecture> newGroup = new List<ExportLecture>();
+                        //Otherwise create a fake lectures from all intersecting lectures
+                        foreach (ExportLecture interLec in intersecting)
+                        {
+                            ExportLecture fakeLecture = new ExportLecture(null, interLec.Day, interLec.StartTime, interLec.Length, null, null, null);
+                            newGroup.Add(fakeLecture);
+                        }
+                        //And create a new last group from l and the fake lectures
+                        newGroup.Add(l);
+                        groups.Add(newGroup);
+                        lastgroup = newGroup;
+                    }
+                   
                 }
                 else
                 {
@@ -96,6 +122,7 @@ namespace Rozvrh.Exporters.Generators
             }
             return groups;
         }
+
 
         private string RenderLecture(ExportLecture lecture,int split,int pos)
         {
