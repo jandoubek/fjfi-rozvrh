@@ -121,20 +121,20 @@ namespace Rozvrh.Exporters.Generators
                 res += String.Format(new NumberFormatInfo(), "<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardTop\" fill=\"{4}\"/>",
                     height / (4 - split), width, y + dy, x, lecture.DepartementColor) + System.Environment.NewLine;
                 //Texts
-                //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 3}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
-                    y + dy + height / 5 * 2 + 3, x + width / 2, lecture.Name) + System.Environment.NewLine;
-                //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 3 }"
+                //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 6}"
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
+                    y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name) + System.Environment.NewLine;
+                //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 6 }"
                 //if red in krbalek then it have class=\"label&#10; periodic\"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
-                    y + dy + height / 5 * 2 + 3, x + width / 2, lecture.Name) + System.Environment.NewLine;
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
+                    y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //Room
-                //x="{$x + $width - 5}" y="{$y + $dy + $height - 5}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
+                //x="{$x + $width - 5}" y="{$y + $dy + $height - 3}"
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
                     y + dy + height - 5, x + width - 5, lecture.Room) + System.Environment.NewLine;
                 //Lecturer
-                //x="{$x + 5}" y="{$y + $dy + $height - 5}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
+                //x="{$x + 5}" y="{$y + $dy + $height - 3}"
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
                     y + dy + height - 5, x + 5, lecture.Lecturer) + System.Environment.NewLine;
             }
             else
@@ -148,20 +148,20 @@ namespace Rozvrh.Exporters.Generators
                     height / (4 - split), width, y + dy + (height - (height / (4 - split))), x) + System.Environment.NewLine;
                 //Texts
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter;  font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
                     y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
                 //if red in krbalek then it have class=\"label&#10; periodic\"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"dominant-baseline: middle; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
                     y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //Room
                 //x="{$x + $width - 5}" y="{$y + $dy + $height - 6 + $split}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
                     y + dy + height - 6 + split, x + width - 5, lecture.Room) + System.Environment.NewLine;
 
                 //Lecturer
                 //x="{$x + 5}" y="{$y + $dy + $height - 6 + $split}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; dominant-baseline: middle; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
                     y + dy + height - 6 + split, x + 5, lecture.Lecturer) + System.Environment.NewLine;
             }
 
@@ -199,7 +199,6 @@ namespace Rozvrh.Exporters.Generators
   <style type=""text/css"">
                 rect.cardBack, rect.cardTop, rect.cardBottom {
                 stroke-width: 0;
-                outline: 1px solid black;
                 fill-opacity: .5;
                 stroke: #fff;
                 }
