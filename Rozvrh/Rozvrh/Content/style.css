@@ -47,3 +47,4 @@
 
 footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: center; padding: 10px 0; font-size: 0.9em; height: 40px; width: 100%; color: #787878; }
 
+.export-tooltip-styling { max-width: 400px !important; padding: 5px; }

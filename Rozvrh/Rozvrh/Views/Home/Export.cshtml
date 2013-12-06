@@ -1,62 +1,33 @@
-﻿@{
-    var icalshort = "iCal použijte pro import rozvrhu do vašeho kalendáře.";
-    var svgshort = "SVG použijte pokud chcete přehledný obrázek rozvrhu.";
-    var xmlshort = "Xml slouží pro zpětný import do této aplikace.";
+﻿<script type="text/javascript">
+    $(function () {
+        $(document).tooltip({ tooltipClass: "export-tooltip-styling", position: { my: "left-430 middle", at: "left middle", collision: "fit" } });
+    });
+</script>
+
+@{
+    var ical = "iCalendar (iCal) je mezinárodní standard pro výměnu kalendářových dat. Lze ho jednoduše importovat do populárních aplikací jako je Apple Calendar, Google Calendar nebo Microsoft Outlook.";
+    var svg = "Scalable Vector Graphics (SVG) je vektorový obrázkový formát, podporovaný vetšinou moderních prohlížečů.";
+    var xml = "Pokud víte, že budete rozvrh brzo měnit, využijte exportu do našeho xml formátu. Xml soubor si uložte na bezpečné místo, budete ho potřebovat na import do naší aplikace.";
     }
 
-<div class="exportLink" id="icalLink">
-    @Html.ActionLink("Exportuj rozvrh do iCal", "ExportToICal", "Home")
-    <div class="exportToolip" id="icalTooltip">@icalshort</div>
+<div class="exportLink">
+    @Html.ActionLink("Exportuj rozvrh do iCal", "ExportToICal", "Home", new { title = @ical })
+    <div class="exportToolip">iCal použijte pro import rozvrhu do vašeho kalendáře.</div>
 </div>
 
 
-<div class="exportLink" id="svgLink">
-    @Html.ActionLink("Exportuj rozvrh do SVG", "ExportToSVG", "Home")
-    <div class="exportToolip" id="svgTooltip">@svgshort</div>
+<div class="exportLink">
+    @Html.ActionLink("Exportuj rozvrh do SVG", "ExportToSVG", "Home", new { title = @svg })
+    <div class="exportToolip">SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a></div>
 </div>
 
 
-<div class="exportLink" id="xmlLink">
-    @Html.ActionLink("Exportuj rozvrh do XML", "ExportToXML", "Home")
-    <div class="exportToolip" id="xmlTooltip">@xmlshort</div>
+<div class="exportLink">
+    @Html.ActionLink("Exportuj rozvrh do XML", "ExportToXML", "Home", new { title = @xml })
+    <div class="exportToolip">Xml slouží pro zpětný import do této aplikace.</div>
 </div>
 
 
 
-<script>
-    $(function () {
-        $('#icalLink').mouseenter(function () {
-            $('#icalTooltip').html('iCalendar (iCal) je mezinárodní standard pro výměnu kalendářových dat. Lze ho jednoduše importovat do populárních aplikací jako je Apple Calendar, Google Calendar nebo Microsoft Outlook.');
-            $('#icalTooltip').addClass("tooltipSelected");
-
-        });
-        $('#icalLink').mouseleave(function () {
-            $('#icalTooltip').html('@icalshort');
-            $('#icalTooltip').removeClass("tooltipSelected");
-        });
-
-        $('#svgLink').mouseenter(function () {
-            $('#svgTooltip').html('Scalable Vector Graphics (SVG) je vektorový obrázkový formát, podporovaný vetšinou moderních prohlížečů. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a>.');
-            $('#svgTooltip').addClass("tooltipSelected");
-
-        });
-        $('#svgLink').mouseleave(function () {
-            $('#svgTooltip').html('@svgshort');
-            $('#svgTooltip').removeClass("tooltipSelected");
-        });
-
-        $('#xmlLink').mouseenter(function () {
-            $('#xmlTooltip').html('Pokud víte, že budete rozvrh brzo měnit, využijte exportu do našeho xml formátu. Xml soubor si uložte na bezpečné místo, budete ho potřebovat na import do naší aplikace.');
-            $('#xmlTooltip').addClass("tooltipSelected");
-
-        });
-        $('#xmlLink').mouseleave(function () {
-            $('#xmlTooltip').html('@xmlshort');
-            $('#xmlTooltip').removeClass("tooltipSelected");
-        });
-
-    });
-
-</script>
 
 
