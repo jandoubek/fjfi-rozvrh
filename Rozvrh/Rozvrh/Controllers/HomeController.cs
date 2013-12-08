@@ -19,6 +19,7 @@ namespace Rozvrh.Controllers
         {
             System.Diagnostics.Debug.WriteLine("Controller constructor");
             M = new Model();
+            LoadFromSession();
         }
 
         public ActionResult Index()
@@ -116,7 +117,26 @@ namespace Rozvrh.Controllers
                     tf.color += Convert.ToInt32(Math.Floor(x)).ToString("X2");
                 }
             }
+            SaveToSession();
+
             return PartialView("Rozvrh", M);
+        }
+
+        /// <summary>
+        /// Loads data from session to model.
+        /// </summary>
+        private void LoadFromSession() {
+                M.CustomTimetableFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["CustomTimetableFields"];
+                if (M.CustomTimetableFields == null) {
+                    M.CustomTimetableFields = new List<TimetableField>();
+                }
+       }
+
+        /// <summary>
+        /// Saves data from model to session.
+        /// </summary>
+        private void SaveToSession() {
+            System.Web.HttpContext.Current.Session["CustomTimetableFields"] = M.CustomTimetableFields;
         }
     }
 }
