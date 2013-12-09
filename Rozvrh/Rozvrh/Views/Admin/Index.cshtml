@@ -1,0 +1,16 @@
+﻿@model string
+
+@{ViewBag.Title = "- Admin LogIn";}
+
+@using (Html.BeginForm("ValidatePassword", "Admin"))
+{
+<div id="LogInContainer">
+    <fieldset>
+        <legend>Přihlášení do konfigurace</legend>
+            <div>@Html.Label("Heslo")</div>
+            <div>@Html.Password("passwordBox")</div>
+            <div><button>Přihlásit!</button></div>
+            <div><p>@Model</p></div>
+    </fieldset>
+</div>
+}

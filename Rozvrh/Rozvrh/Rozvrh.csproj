@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -129,10 +129,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Exporters\Generators\ICalGenerator.cs" />
     <Compile Include="Exporters\Generators\SvgGenerator.cs" />
     <Compile Include="Exporters\ImportExport.cs" />
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\IConfig.cs" />
     <Compile Include="Models\IXMLTimetable.cs" />
     <Compile Include="Models\Timetable\Building.cs" />
     <Compile Include="Models\Timetable\Classroom.cs" />
@@ -266,6 +268,8 @@
     <Content Include="Views\Home\Editace.cshtml" />
     <Content Include="Views\Home\VyfiltrovaneLekce.cshtml" />
     <Content Include="Views\Home\Rozvrh.cshtml" />
+    <Content Include="Views\Admin\Config.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

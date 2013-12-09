@@ -45,7 +45,7 @@ namespace Rozvrh.Models
         /// <summary>
         /// address to the www pages of the previous year school pool 
         /// </summary>
-        public string course_href              { get; set; }
+        public string course_href       { get; set; }
 
         /// <summary>
         /// Miscellaneous info about lecture.
@@ -127,7 +127,8 @@ namespace Rozvrh.Models
             else
                 period = "Ne";
             duration = lec.duration;   //will be replaced to the config setting
-            course_href = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/" + dep.code + c.acronym.Replace(@"/", "");
+            Config config = Config.Instance;
+            course_href = config.PrefixPoolLink + dep.code + c.acronym.Replace(@"/", "") + config.SufixPoolLink;
             tag = lec.tag; 
             practice = lec.practice;
             lecturer = ler.name;

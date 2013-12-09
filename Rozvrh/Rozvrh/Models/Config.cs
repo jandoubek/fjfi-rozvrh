@@ -7,28 +7,73 @@ using System.Xml.Serialization;
 
 namespace Rozvrh.Models
 {
-    [Serializable]
-	public class Config
+    
+	public class Config : IConfig
 	{
         // static holder for instance, need to use lambda to construct since constructor private
-		private static readonly Lazy<Config> _instance
-			= new Lazy<Config>(() => new Config());
-	 
-		// private to prevent direct instantiation.
+		private static readonly Lazy<Config> _instance = new Lazy<Config>(() => new Config());
+        private string configFilePath = "C:\\config.xml";
+
+        // private to prevent direct instantiation.
 		private Config()
 		{
-            XMLTimetableFilePath = "C:\\Aktualni_databaze.xml";
+            if (!LoadFromFile())
+            {
+                SetDefault();
+                //POPUP
+            }
+	    }
 
-            //FIX ME(VASEK): Load from config file instead of fixed values
+        public IConfig GetIConfig()
+        {
+            IConfig ic = new IConfig();
+            ic.LinkToAdditionalInformation = LinkToAdditionalInformation;
+            ic.SemesterStart = SemesterStart;
+            ic.SemesterEnd = SemesterEnd;
+            ic.Created = Created;
+            ic.SufixPoolLink = SufixPoolLink;
+            ic.PrefixPoolLink = PrefixPoolLink;
+            ic.XMLTimetableFilePath = XMLTimetableFilePath;
+
+            return ic;
+        }
+
+        public void Set(IConfig src)
+        {
+            LinkToAdditionalInformation = src.LinkToAdditionalInformation;
+            SemesterStart = src.SemesterStart;
+            SemesterEnd = src.SemesterEnd;
+            Created = src.Created;
+            SufixPoolLink = src.SufixPoolLink;
+            PrefixPoolLink = src.PrefixPoolLink;
+            XMLTimetableFilePath = src.XMLTimetableFilePath;
+        }
+
+        public void Set(string XMLTimetableFilePathField, DateTime SemesterStart, DateTime SemesterEnd,
+                        DateTime Created, string LinkToInfo, string PrefixPoolLinkField, string SufixPoolLinkField)
+        {
+            this.XMLTimetableFilePath = XMLTimetableFilePathField;
+            this.SemesterStart = SemesterStart;
+            this.SemesterEnd = SemesterEnd;
+            this.Created = Created;
+            this.LinkToAdditionalInformation = LinkToInfo;
+            this.PrefixPoolLink = PrefixPoolLinkField;
+            this.SufixPoolLink = SufixPoolLinkField;
+        }
+
+        public void SetDefault()
+        {
+            XMLTimetableFilePath = "C:\\Aktualni_databaze.xml";
             SemesterStart = new DateTime(2013, 9, 23);
             SemesterEnd = new DateTime(2014, 2, 14);
             Created = new DateTime(2012,10,16);
-            LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pd";
+            LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pdf";
+            PrefixPoolLink = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/LS2013/67_pub/courses/";
+            SufixPoolLink = "/index.html";
+        }
 
-	    }
-	
-	   // accessor for instance
-	   public static Config Instance
+	    // accessor for instance
+	    public static Config Instance
 	   {
 		   get
 		   {
@@ -36,60 +81,38 @@ namespace Rozvrh.Models
 		   }
 	   }
 
-       /// <summary> 
-       /// Hyperlink to webpage with additional information about timetable
-       /// </summary>
-       /// <remarks>Used in SVG export.</remarks>
-       [XmlElement("LinkToInfo")]
-       public string LinkToAdditionalInformation
-       {
-           get; set;
-       }
-
-       /// <summary> 
-       /// Date the timetable was created
-       /// </summary>
-       /// <remarks>Used in SVG export.</remarks>
-       [XmlElement("Created")]
-       public DateTime Created
-       {
-           get; set;
-       }
-
-       /// <summary> 
-       /// When does the semester starts.
-       /// </summary>
-       [XmlElement("SemesterStart")]
-       public DateTime SemesterStart
-       {
-           get; set;
-       }
-
-       /// <summary> 
-       /// When does the semester start.
-       /// </summary>
-       [XmlElement("SemesterEnd")]
-       public DateTime SemesterEnd
-       {
-           get; set;
-       }
-
-       /// <summary> 
-       /// File path to XML with timetables. 
-       /// </summary>
-        [XmlElement("XMLTimeTablePath")]
-        public String XMLTimetableFilePath{
-            get; set;
-        }
-
-        public void UpdateXmlTimetablePath(String path){
-            XMLTimetableFilePath = path;
-            var serializer = new XmlSerializer(typeof(Config));
-            using(var writer = new StreamWriter("C:\\config.xml"))
+        public void SaveToFile()
+        {
+            var serializer = new XmlSerializer(typeof(Rozvrh.Models.IConfig));
+            using (var writer = new StreamWriter(configFilePath))
             {
-                serializer.Serialize(writer, Config.Instance);
+                serializer.Serialize(writer, this.GetIConfig());
             }
+
         }
 
+        public bool LoadFromFile()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(IConfig));
+                TextReader reader = new StreamReader(configFilePath);
+                if (reader == null)
+                {
+                    //LOG unable to open the config file 
+                }
+                IConfig readConfig = (IConfig)serializer.Deserialize(reader);
+                reader.Close();
+
+                Set(readConfig);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+            
+
+        }
 	}
 }
