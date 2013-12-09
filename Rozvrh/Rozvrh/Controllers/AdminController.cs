@@ -11,25 +11,40 @@ using Rozvrh.Models;
 
 namespace Rozvrh.Controllers
 {
+    /// <summary>
+    /// Controller for the Admin site.
+    /// </summary>
     public class AdminController : Controller
     {
-
+        /// <summary>
+        /// Property holding the configuration instatnce.
+        /// </summary>
         Config m_config;
 
+        /// <summary>
+        /// Controller constructor.
+        /// </summary>
         public AdminController()
         {
             m_config = Config.Instance;
         }
 
+        /// <summary>
+        /// Method giving the Index when ~/Admin site is called.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View("Index");
         }
 
+        /// <summary>
+        /// Method processing the input of the password field.
+        /// </summary>
+        /// <param name="passwordBox">Given password.</param>
+        /// <returns>The Index view for invalid password, Config view otherwise.</returns>
         public ActionResult ValidatePassword(string passwordBox)
         {
-
-
             if (passwordPassed(passwordBox))
             {
                 return View("Config", m_config.GetIConfig());
@@ -40,6 +55,18 @@ namespace Rozvrh.Controllers
             }
         }
 
+        /// <summary>
+        /// Method processing input from the configuration fields of the Config view.
+        /// </summary>
+        /// <param name="submitButton">Which type of action should be done.</param>
+        /// <param name="XMLTimetableFilePathField">Path to the data file.</param>
+        /// <param name="SemesterStartField">Starting date of the study period.</param>
+        /// <param name="SemesterEndField">Ending date of the study period.</param>
+        /// <param name="CreatedField">The date when the timetable data generated.</param>
+        /// <param name="LinkToInfoField">Link to the additional info in timetable footer.</param>
+        /// <param name="PrefixPoolLinkField">Prefix of the link to the course popularity pool.</param>
+        /// <param name="SufixPoolLinkField">Sufix of the link to the course popularity link.
+        /// <returns>Partial view of the actualized Config.</returns>
         [HttpPost]
         public PartialViewResult ConfigButtonAction(string submitButton, string XMLTimetableFilePathField, DateTime SemesterStartField, DateTime SemesterEndField, 
                                                     DateTime CreatedField, string LinkToInfoField, string PrefixPoolLinkField, string SufixPoolLinkField)
@@ -70,7 +97,12 @@ namespace Rozvrh.Controllers
             }
             
         }
-
+        
+        /// <summary>
+        /// Validates given password.
+        /// </summary>
+        /// <param name="password">Given password string.</param>
+        /// <returns>True for registered password, false otherwise.</returns>
         private bool passwordPassed(string password)
         {
             //pro debug
