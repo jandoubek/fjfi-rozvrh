@@ -8,6 +8,9 @@ using System.Xml.Serialization;
 
 namespace Rozvrh.Models
 {
+    /// <summary>
+    /// 'Interface' class of the config. Only the data part.
+    /// </summary>
     [Serializable]
     public class IConfig
     {

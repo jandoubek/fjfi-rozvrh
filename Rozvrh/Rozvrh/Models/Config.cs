@@ -7,15 +7,25 @@ using System.Xml.Serialization;
 
 namespace Rozvrh.Models
 {
-    
+    /// <summary>
+    /// Config class derived from IConfig (data part) adding method functionalities.
+    /// </summary>
 	public class Config : IConfig
 	{
-        // static holder for instance, need to use lambda to construct since constructor private
-		private static readonly Lazy<Config> _instance = new Lazy<Config>(() => new Config());
+		/// <summary>
+        /// Static holder for instance, need to use lambda to construct since constructor private.
+		/// </summary>
+        private static readonly Lazy<Config> _instance = new Lazy<Config>(() => new Config());
+        
+        /// <summary>
+        /// Property holding the path to the config file.
+        /// </summary>
         private string configFilePath = "C:\\config.xml";
 
-        // private to prevent direct instantiation.
-		private Config()
+		/// <summary>
+        /// Constructor. Private to prevent direct instantiation. Primary loading from config file, but set some default setting from code when the file is inaccessible.
+		/// </summary>
+        private Config()
 		{
             if (!LoadFromFile())
             {
@@ -24,6 +34,10 @@ namespace Rozvrh.Models
             }
 	    }
 
+        /// <summary>
+        /// Return data part of the config.
+        /// </summary>
+        /// <returns>IConfig class, only data.</returns>
         public IConfig GetIConfig()
         {
             IConfig ic = new IConfig();
@@ -38,6 +52,10 @@ namespace Rozvrh.Models
             return ic;
         }
 
+        /// <summary>
+        /// Set the properties values.
+        /// </summary>
+        /// <param name="src">Another Config or IConfig instance.</param>
         public void Set(IConfig src)
         {
             LinkToAdditionalInformation = src.LinkToAdditionalInformation;
@@ -49,18 +67,31 @@ namespace Rozvrh.Models
             XMLTimetableFilePath = src.XMLTimetableFilePath;
         }
 
-        public void Set(string XMLTimetableFilePathField, DateTime SemesterStart, DateTime SemesterEnd,
-                        DateTime Created, string LinkToInfo, string PrefixPoolLinkField, string SufixPoolLinkField)
+        /// <summary>
+        /// Set the properties values.
+        /// </summary>
+        /// <param name="XMLTimetableFilePath">Path to the data file.</param>
+        /// <param name="SemesterStart">Starting date of the study period.</param>
+        /// <param name="SemesterEnd">Ending date of the study period.</param>
+        /// <param name="Created">The date when the timetable data generated.</param>
+        /// <param name="LinkToInfo">Link to the additional info in timetable footer.</param>
+        /// <param name="PrefixPoolLink">Prefix of the link to the course popularity pool.</param>
+        /// <param name="SufixPoolLink">Sufix of the link to the course popularity link.
+        public void Set(string XMLTimetableFilePath, DateTime SemesterStart, DateTime SemesterEnd,
+                        DateTime Created, string LinkToInfo, string PrefixPoolLink, string SufixPoolLink)
         {
-            this.XMLTimetableFilePath = XMLTimetableFilePathField;
+            this.XMLTimetableFilePath = XMLTimetableFilePath;
             this.SemesterStart = SemesterStart;
             this.SemesterEnd = SemesterEnd;
             this.Created = Created;
             this.LinkToAdditionalInformation = LinkToInfo;
-            this.PrefixPoolLink = PrefixPoolLinkField;
-            this.SufixPoolLink = SufixPoolLinkField;
+            this.PrefixPoolLink = PrefixPoolLink;
+            this.SufixPoolLink = SufixPoolLink;
         }
 
+        /// <summary>
+        /// Sets config to some values when the config file inaccessible.
+        /// </summary>
         public void SetDefault()
         {
             XMLTimetableFilePath = "C:\\Aktualni_databaze.xml";
@@ -72,7 +103,9 @@ namespace Rozvrh.Models
             SufixPoolLink = "/index.html";
         }
 
-	    // accessor for instance
+        /// <summary>
+        /// Accessir for the instance.
+        /// </summary>
 	    public static Config Instance
 	   {
 		   get
@@ -81,6 +114,9 @@ namespace Rozvrh.Models
 		   }
 	   }
 
+        /// <summary>
+        /// Saves setting to config file.
+        /// </summary>
         public void SaveToFile()
         {
             var serializer = new XmlSerializer(typeof(Rozvrh.Models.IConfig));
@@ -91,6 +127,10 @@ namespace Rozvrh.Models
 
         }
 
+        /// <summary>
+        /// Loads setting from config file.
+        /// </summary>
+        /// <returns></returns>
         public bool LoadFromFile()
         {
             try
