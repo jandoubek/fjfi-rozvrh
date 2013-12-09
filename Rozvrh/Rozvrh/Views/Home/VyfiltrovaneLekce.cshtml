@@ -1,30 +1,64 @@
 ﻿@model Rozvrh.Models.Model
+<script>
+    $(document).ready(function () {
+        $("#Tabulka").tablesorter();
+    }
+);
+</script>
+
 
 <canvas id="canvas" width="900px" height="600px"></canvas>
-
-<div id="FiltredTimetableFieds">
-    @{
-        using (Html.BeginForm("Sort", "Home", System.Web.Mvc.FormMethod.Get))
+<table id="Tabulka" class="tablesorter">
+    <thead>
+        <tr>
+            <th>Předmět</th>
+            <th>Katedra</th>
+            <th>Vyučující</th>
+            <th>Den</th>
+            <th>Čas</th>
+            <th>Délka (hod)</th>
+            <th>Místnost</th>
+            <th>Pravidelně</th>
+            <th>Vybrat</th>
+        </tr>
+    </thead>
+    <tbody>
+    @if (Model.FiltredTimetableFields != null)
+    {
+        foreach (var item in Model.FiltredTimetableFields)
         {
-            var grid = new WebGrid(canSort: true, canPage: false, ajaxUpdateContainerId: "FiltredTimetableFieds");
-            grid.Bind(Model.FiltredTimetableFields, rowCount: Model.FiltredTimetableFields.Count, autoSortAndPage: false);
-
-            if (Model.FiltredTimetableFields != null)
-            {
-        @grid.GetHtml(
-                columns: grid.Columns(
-                         grid.Column("lecture_acr", "Předmět"),
-                         grid.Column("department", "Katedra"),
-                         grid.Column("lecturer", "Vyučující"),
-                         grid.Column("day", "Den"),
-                         grid.Column("time", "Čas"),
-                         grid.Column("duration", "Délka"),
-                         grid.Column("classroom", "Místnost"),
-                         grid.Column("period", "Pravidelnost"),
-                    grid.Column(header: "Vybrat", format: @<text><input name="Selector" type="checkbox" checked="checked" /></text>)
-                     )
-                 )
-            }
+            <tr>
+                <td>
+                    <a href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.department_acr)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.lecturer)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.day)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.time)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.duration)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.classroom)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.period)
+                </td>
+                <td>
+                    @{
+                        <input name="Selector" type="checkbox" checked="checked" />
+                    }
+                </td>
+            </tr>
         }
     }
-</div>
+</tbody>
+</table>
