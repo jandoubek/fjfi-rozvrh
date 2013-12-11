@@ -2,6 +2,11 @@
     $(function () {
         $(document).tooltip({ tooltipClass: "export-tooltip-styling", position: { my: "left-430 middle", at: "left middle", collision: "fit" } });
     });
+
+    $(function() {
+        $( "a.exButton" )
+          .button();
+    });
 </script>
 
 @{
@@ -11,19 +16,19 @@
     }
 
 <div class="exportLink">
-    @Html.ActionLink("Exportuj rozvrh do iCal", "ExportToICal", "Home", new { title = @ical })
+    @Html.ActionLink("Exportuj rozvrh do iCal", "ExportToICal", "Home", new { title = @ical, @class = "exButton" })
     <div class="exportToolip">iCal použijte pro import rozvrhu do vašeho kalendáře.</div>
 </div>
 
 
 <div class="exportLink">
-    @Html.ActionLink("Exportuj rozvrh do SVG", "ExportToSVG", "Home", new { title = @svg })
+    @Html.ActionLink("Exportuj rozvrh do SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton"  })
     <div class="exportToolip">SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a></div>
 </div>
 
 
 <div class="exportLink">
-    @Html.ActionLink("Exportuj rozvrh do XML", "ExportToXML", "Home", new { title = @xml })
+    @Html.ActionLink("Exportuj rozvrh do XML", "ExportToXML", "Home", new { title = @xml, @class = "exButton" })
     <div class="exportToolip">Xml slouží pro zpětný import do této aplikace.</div>
 </div>
 
