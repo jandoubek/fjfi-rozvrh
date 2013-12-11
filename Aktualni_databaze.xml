@@ -8994,7 +8994,7 @@
 </lecturers>
 <days>
 <day id="1">
-<czech>Pondelí</czech>
+<czech>Pondělí</czech>
 <english>Monday</english>
 <daysorder>0</daysorder>
 </day>
@@ -9004,12 +9004,12 @@
 <daysorder>1</daysorder>
 </day>
 <day id="3">
-<czech>Streda</czech>
+<czech>Středa</czech>
 <english>Wednesday</english>
 <daysorder>2</daysorder>
 </day>
 <day id="4">
-<czech>Ctvrtek</czech>
+<czech>Čtvrtek</czech>
 <english>Thursday</english>
 <daysorder>3</daysorder>
 </day>

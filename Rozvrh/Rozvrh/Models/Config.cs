@@ -99,7 +99,7 @@ namespace Rozvrh.Models
             SemesterEnd = new DateTime(2014, 2, 14);
             Created = new DateTime(2012,10,16);
             LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pdf";
-            PrefixPoolLink = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/LS2013/67_pub/courses/";
+            PrefixPoolLink = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/";
             SufixPoolLink = "/index.html";
         }
 
