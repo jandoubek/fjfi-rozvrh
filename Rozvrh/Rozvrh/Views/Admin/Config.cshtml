@@ -2,7 +2,7 @@
 
 @{ViewBag.Title = "- Admin Config";}
 
-@using (Ajax.BeginForm("ConfigButtonAction", "Admin", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "FormContainer" }))
+@using (Ajax.BeginForm("ConfigButtonAction", "Admin", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "FormContainer"}))
 {
 <div id="FormContainer"> 
          <fieldset>
@@ -11,16 +11,16 @@
              <div>@Html.TextBox("XMLTimetableFilePathField", Model.XMLTimetableFilePath)</div>
          
              <div>@Html.Label("Opětovné načtení dat ze souboru")</div>
-             <div><input type="submit" name="submitButton" value="Reload" /></div>
+             <div><input class="btnSubmit exButton" onclick="return isValidDate()" type="submit" name="submitButton" value="Reload" /></div>
          </fieldset>
     
         <fieldset>
             <legend>Začátek a konec semestru</legend>
             <div>@Html.Label("Začátek semestru")</div>
-            <div>@Html.TextBox("SemesterStartField", Model.SemesterStart, "{0: dd/MM/yyyy}")</div>
+            <div>@Html.TextBox("SemesterStartField", Model.SemesterStart, "{0:dd/MM/yyyy}", new { @class = "txtDate" })</div>
 
             <div>@Html.Label("Konec semestru")</div>
-            <div>@Html.TextBox("SemesterEndField", Model.SemesterEnd, "{0: dd/MM/yyyy}")</div>            
+            <div>@Html.TextBox("SemesterEndField", Model.SemesterEnd, "{0:dd/MM/yyyy}", new { @class = "txtDate" })</div>            
         </fieldset>
         <fieldset>
             <legend>Zápatí rozvrhu</legend>
@@ -28,7 +28,7 @@
             <div>@Html.TextBox("LinkToInfoField", Model.LinkToAdditionalInformation)</div>
 
             <div>@Html.Label("Datum buildu rozvrhu")</div>
-            <div>@Html.TextBox("CreatedField", Model.Created, "{0: dd/MM/yyyy}")</div>
+            <div>@Html.TextBox("CreatedField", Model.Created, "{0:dd/MM/yyyy}", new { @class = "txtDate" })</div>
         </fieldset>
         <fieldset>
             <legend>Anketa</legend>
@@ -38,14 +38,22 @@
             <div>@Html.Label("Sufix odkazu na předmět")</div>
             <div>@Html.TextBox("SufixPoolLinkField", Model.SufixPoolLink)</div>
         </fieldset>
-        <fieldset>
+        @* <fieldset>
             <legend>Logování</legend>
             <div>@Html.Label("Cesta k logu")</div>
-            @*<div>@Html.TextBox("LogPathField", Model.PrefixPoolLink)</div>*@
-        </fieldset>
+           <div>@Html.TextBox("LogPathField", Model.PrefixPoolLink)</div>
+        </fieldset>*@
         <div>
-            <input type="submit" name="submitButton" value="Zrušit" />
-            <input type="submit" name="submitButton" value="Uložit" />
+            <input class="exButton" type="submit" name="submitButton" value="Zrušit" />
+            <input class="btnSubmit exButton" onclick="return isValidDate()" type="submit" name="submitButton" value="Uložit" />
         </div>
+
+<script type="text/javascript">
+        $(function () {
+            $(".exButton")
+              .button();
+        });
+</script>
+
 </div> 
 }

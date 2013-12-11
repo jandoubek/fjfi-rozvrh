@@ -10,27 +10,30 @@
 
 <script>
 
-    // Olda: Still working on this  part
-    
-    //$(function() {
-    //    $("button").button({
-    //        icons: { primary: "ui-icon-pencil" },
-    //        text: false
-    //    });
-    //});
+    $(function () {
+        $("button.edit").button({
+            icons: { primary: "ui-icon-pencil" },
+            text: false
+        });
+        $("button.delete").button({
+            icons: { primary: "ui-icon-trash" },
+            text: false
+        });
+        $(".border").mouseenter(function () { $(".edit", this).show(); $(".delete", this).show(); })
+            .mouseleave(function () { $(".edit", this).hide(); $(".delete", this).hide(); });
+        $("button").tooltip({ tooltipClass: "timetable-tooltip-styling", show: null, hide: null, position: { my: "right-5 center", at: "left center" } });
+    });
 
-    //function select(field) {
-    //    if ($(field).hasClass("selected")) {
-    //        $(field).removeClass("selected");
-    //        $(field).children(".border").show();
-    //        $(field).children("button").hide();
-    //    }
-    //    else {
-    //        $(field).addClass("selected");
-    //        $(field).children(".border").hide();
-    //        $(field).children("button").show();
-    //    }
-    //}
+    function select(field) {
+        if ($(field).hasClass("selected")) {
+            $(field).removeClass("selected");
+            $(field).prev().children(".edit").hide();
+        }
+        else {
+            $(field).addClass("selected");
+            $(field).prev().children(".edit").show();
+        }
+    }
 
 </script>
 
@@ -104,9 +107,9 @@
         <div class="details@(height < 50 ? "Small" : "")" style="width:@(width - 6)px; height:@(height - nameHeight - 6)px; left:@(left + 2)px;top:@(fieldTop + 2 + nameHeight)px;">@field.lecturer
             <div>@field.classroom</div>
         </div>
-        <div onclick="select(this)" style="width:@(width - 4)px; height:@(height - 4)px; position:absolute; left:@(left)px; top:@(fieldTop)px;">
-            <div class="border" style="border-color:#@field.color;"></div>
-@*            <button style="display:none">text</button>*@
+        <div class="border" style="width:@(width - 4)px; height:@(height - 4)px; position:absolute; left:@(left)px; top:@(fieldTop)px;border-color:#@field.color;">
+            <button class="edit">Upravit</button>
+            <button class="delete">Odstranit</button>
         </div>
                 }
             }

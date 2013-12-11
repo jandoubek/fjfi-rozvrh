@@ -6,11 +6,11 @@
 
 #rightSection { width: 500px; float: right; margin: 8px; padding-bottom: 0.8em; }
 
-    #rightSection .exportLink { margin-left:5px;}
+    #rightSection .exportLink { margin-left: 5px; }
 
-    #rightSection .exportToolip { margin:5px 10px 5px 10px; font-size:0.9em; width:90%;  padding:5px 10px; }
+    #rightSection .exportToolip { margin: 5px 10px 5px 10px; font-size: 0.9em; width: 90%; padding: 5px 10px; }
 
-    #rightSection .tooltipSelected { background-color:#f1f1f1; }
+    #rightSection .tooltipSelected { background-color: #f1f1f1; }
 
     #rightSection #tabs { width: 492px; height: 100%; }
 
@@ -28,7 +28,7 @@
 
         #rightSection div.box select { width: 95px; border: 1px solid #a8a8a8; padding: 5px; font-size: 0.85em; }
 
-        #rightSection div.box#noscroll ::-webkit-scrollbar { display: none;}
+        #rightSection div.box#noscroll ::-webkit-scrollbar { display: none; }
 
     #rightSection #clearAll { padding: 2px; line-height: 1.8em; }
 
@@ -53,9 +53,9 @@
 
     #Timetable div.border { -ms-opacity: 0.75; opacity: 0.75; position: absolute; border-width: 2px; border-style: solid; width: 100%; height: 100%; }
 
-    #Timetable div.selected { -ms-opacity: 0.6; opacity: 0.6; background: #fff; border: 2px solid #dddddd; }
+    #Timetable button.edit, #Timetable button.delete { border: 1px solid #c2c2c2; display: none; width: 20px; height: 20px;border-radius: 4px; }
 
-    #Timetable div.button { border: 1px solid #000; display: none; width: 20px; height: 20px;border-radius: 4px; }
+    #Timetable button.delete { float: right; }
 
     #Timetable div.name { position: absolute; text-align: center; }
 
@@ -90,42 +90,14 @@ footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: c
 
 .export-tooltip-styling { max-width: 400px !important; padding: 5px; }
 
+.timetable-tooltip-styling{ position: absolute;font-size: 12px;padding: 5px;}
+
 /* tables */
-table.tablesorter {
-	font-family:arial;
-	background-color: #CDCDCD;
-	margin:10px 0pt 15px;
-	font-size: 8pt;
-	width: 100%;
-	text-align: left;
-}
-table.tablesorter thead tr th, table.tablesorter tfoot tr th {
-	background-color: #e6EEEE;
-	border: 1px solid #FFF;
-	font-size: 8pt;
-	padding: 4px;
-}
-table.tablesorter thead tr .header {
-	background-image: url(bg.gif);
-	background-repeat: no-repeat;
-	background-position: center right;
-	cursor: pointer;
-}
-table.tablesorter tbody td {
-	color: #3D3D3D;
-	padding: 4px;
-	background-color: #FFF;
-	vertical-align: top;
-}
-table.tablesorter tbody tr.odd td {
-	background-color:#F0F0F6;
-}
-table.tablesorter thead tr .headerSortUp {
-	background-image: url(asc.gif);
-}
-table.tablesorter thead tr .headerSortDown {
-	background-image: url(desc.gif);
-}
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
-background-color: #8dbdd8;
-}
+table.tablesorter { font-family: arial; background-color: #CDCDCD; margin: 10px 0pt 15px; font-size: 8pt; width: 100%; text-align: left; }
+    table.tablesorter thead tr th, table.tablesorter tfoot tr th { background-color: #e6EEEE; border: 1px solid #FFF; font-size: 8pt; padding: 4px; }
+    table.tablesorter thead tr .header { background-image: url(bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; }
+    table.tablesorter tbody td { color: #3D3D3D; padding: 4px; background-color: #FFF; vertical-align: top; }
+    table.tablesorter tbody tr.odd td { background-color: #F0F0F6; }
+    table.tablesorter thead tr .headerSortUp { background-image: url(asc.gif); }
+    table.tablesorter thead tr .headerSortDown { background-image: url(desc.gif); }
+    table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp { background-color: #8dbdd8; }

@@ -2,6 +2,13 @@
 
 @{ViewBag.Title = "- Admin LogIn";}
 
+<script type="text/javascript">
+    $(function() {
+        $( ".exButton" )
+          .button();
+    });
+</script>
+
 @using (Html.BeginForm("ValidatePassword", "Admin"))
 {
 <div id="LogInContainer">
@@ -9,7 +16,7 @@
         <legend>Přihlášení do konfigurace</legend>
             <div>@Html.Label("Heslo")</div>
             <div>@Html.Password("passwordBox")</div>
-            <div><button>Přihlásit!</button></div>
+            <div><button class="exButton">Přihlásit</button></div>
             <div><p>@Model</p></div>
     </fieldset>
 </div>
