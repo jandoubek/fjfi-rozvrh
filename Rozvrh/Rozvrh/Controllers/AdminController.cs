@@ -71,7 +71,6 @@ namespace Rozvrh.Controllers
         public PartialViewResult ConfigButtonAction(string submitButton, string XMLTimetableFilePathField, DateTime SemesterStartField, DateTime SemesterEndField, 
                                                     DateTime CreatedField, string LinkToInfoField, string PrefixPoolLinkField, string SufixPoolLinkField)
         {
-           
             switch (submitButton)
             {
                 case "Reload":
@@ -95,7 +94,6 @@ namespace Rozvrh.Controllers
                      ModelState.Clear();
                     return PartialView("Config", m_config.GetIConfig());    
             }
-            
         }
         
         /// <summary>
@@ -114,21 +112,43 @@ namespace Rozvrh.Controllers
             var sha1 = new SHA1CryptoServiceProvider();
             byte[] sha1PasswordBytes = sha1.ComputeHash(passwordBytes);
 
-            byte[] blatsky = Convert.FromBase64String("007WijuwGMvJvrMwzwcFPKkQCnc=");
-            byte[] honzik = Convert.FromBase64String("RyQGOE2nps7o6Sn0Obix8w1omiA=");
+            byte[] blatsky =    Convert.FromBase64String("bLg4fw+vN4eaplzxMZJxIgfDPv4=");
+            byte[] honzik =     Convert.FromBase64String("RyQGOE2nps7o6Sn0Obix8w1omiA=");
+            byte[] stika =      Convert.FromBase64String("ninWl/mecK3avILqBewMgHXHuMU=");
+            byte[] salac =      Convert.FromBase64String("");
+            byte[] smola =      Convert.FromBase64String("");
+            byte[] krbalek =    Convert.FromBase64String("");
 
+            if (sha1PasswordBytes.SequenceEqual(krbalek))
+            {
+                //LOG(úspěšné přihlášení uživatele krbalek)
+                return true;
+            }
             if (sha1PasswordBytes.SequenceEqual(blatsky))
             {
                 //LOG(úspěšné přihlášení uživatele blatsky)
                 return true;
             }
-
             if (sha1PasswordBytes.SequenceEqual(honzik))
             {
                 //LOG(úspěšné přihlášení uživatele honzik)
                 return true;
             }
-
+            if (sha1PasswordBytes.SequenceEqual(stika))
+            {
+                //LOG(úspěšné přihlášení uživatele stika)
+                return true;
+            }
+            if (sha1PasswordBytes.SequenceEqual(salac))
+            {
+                //LOG(úspěšné přihlášení uživatele salac)
+                return true;
+            }
+            if (sha1PasswordBytes.SequenceEqual(smola))
+            {
+                //LOG(úspěšné přihlášení uživatele smola)
+                return true;
+            }
 
             //LOG(neúspěšné přihlášení)
             return false;

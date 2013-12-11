@@ -97,7 +97,7 @@ namespace Rozvrh.Models
             XMLTimetableFilePath = "C:\\Aktualni_databaze.xml";
             SemesterStart = new DateTime(2013, 9, 23);
             SemesterEnd = new DateTime(2014, 2, 14);
-            Created = new DateTime(2012,10,16);
+            Created = new DateTime(2013,11,13);
             LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pdf";
             PrefixPoolLink = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/";
             SufixPoolLink = "/index.html";

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <IConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <LinkToInfo>kravina</LinkToInfo>
-  <Created>2013-12-16T00:00:00</Created>
+  <LinkToInfo>http://www.km.fjfi.cvut.cz/rozvrh/info.pdf</LinkToInfo>
+  <Created>2013-11-13T00:00:00</Created>
   <SemesterStart>2013-09-23T00:00:00</SemesterStart>
   <SemesterEnd>2014-02-14T00:00:00</SemesterEnd>
   <XMLTimeTablePath>C:\Aktualni_databaze.xml</XMLTimeTablePath>
