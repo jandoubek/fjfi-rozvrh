@@ -95,7 +95,11 @@ namespace Rozvrh.Exporters
             }
             catch (InvalidOperationException ioe)
             {
-                throw new System.IO.InvalidDataException("Failed to load XML, the file was corrupted.");
+                throw new System.IO.InvalidDataException("Špatný formát souboru.");
+            }
+            catch (NullReferenceException nre)
+            {
+                throw new System.IO.InvalidDataException("Nebyl vybrán soubor.");
             }
 
             return hodiny;

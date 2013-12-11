@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Rozvrh.Exporters.Common;
 using Rozvrh.Models;
 using Rozvrh.Exporters;
+using System.IO;
 
 namespace Rozvrh.Controllers
 {
@@ -44,6 +45,26 @@ namespace Rozvrh.Controllers
         {
             ImportExport instance = new ImportExport();
             return instance.DownloadAsXML(M.CustomTimetableFields);
+        }
+
+        [HttpPost]
+        public ActionResult ImportFromXML(HttpPostedFileBase file)
+        {
+            ImportExport instance = new ImportExport();
+            try
+            {
+                List<TimetableField> result;
+                result = instance.ImportXML(file);
+                M.CustomTimetableFields = result;
+                SaveToSession();
+            }
+            catch (InvalidDataException ex)
+            {
+                M.ImportErrorMessage = ex.Message;
+            }
+
+            return View("Index", M);
+            
         }
 
         public PartialViewResult Filter(Model returnedModel)

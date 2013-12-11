@@ -37,6 +37,8 @@ namespace Rozvrh.Models
         /// </summary>
         private void initialize(){
 
+            ImportErrorMessage = "";
+
             Specializations = new List<Specialization>();
             Groups = new List<Group>();
             Lecturers = new List<Lecturer>();
@@ -436,5 +438,6 @@ namespace Rozvrh.Models
         public List<int> SelectedClassrooms { get; set; }
         public List<int> SelectedDays { get; set; }
         public List<int> SelectedTimes { get; set; }
+        public string ImportErrorMessage { get; set; }
     }
 }

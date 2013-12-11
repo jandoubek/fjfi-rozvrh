@@ -1,14 +1,19 @@
-﻿@{
+﻿@model Rozvrh.Models.Model
+@{
     ViewBag.Title = "Úvodní stránka";
 }
+
 @section right{
+    <div id="error" class="ui-state-error" style="text-align:center"></div>
     <div id="tabs">
         <ul>
             <li><a href="#tabs-1">Výběr</a></li>
             <li><a href="#tabs-2">Export</a></li>
+            <li><a href="#tabs-3">Import</a></li>
         </ul>
         <div id="tabs-1">@{Html.RenderPartial("Vyber");}</div>
         <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
+        <div id="tabs-3">@{Html.RenderPartial("Import");}</div>
     </div>
 }
 
@@ -16,9 +21,21 @@
     <script>
         $(function () {
             $("#tabs").tabs();
+            @if (Model.ImportErrorMessage != "")
+            { 
+                @:$("#error").show("Blind");
+                @:$("#error").text("@Html.Raw(Model.ImportErrorMessage)");
+            }
+            else
+            {
+                 @:$("#error").hide();
+            }
+            
         });
     </script>
 }
+
+
 <div id="Timetable"></div><br/>
 @Ajax.ActionLink("Vybrat vše", "SelectAll", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "Timetable" })
 <div id="Fltr">@Html.Partial("VyfiltrovaneLekce")</div>
