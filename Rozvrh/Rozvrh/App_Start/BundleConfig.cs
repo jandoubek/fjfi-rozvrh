@@ -8,7 +8,8 @@ namespace Rozvrh
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.0.3.js"));
+                        "~/Scripts/jquery-2.0.3.js",
+                        "~/Scripts/jquery.tablesorter.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-1.10.3.js"));
@@ -22,7 +23,7 @@ namespace Rozvrh
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(/*"~/Content/site.css",*/
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/themes/base/jquery-ui.css",
                         "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

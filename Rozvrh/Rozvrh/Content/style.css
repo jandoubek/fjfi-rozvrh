@@ -45,6 +45,47 @@
     #Loading img { display: inline-block; vertical-align: middle; width: 80px; height: 80px; }
 
 
+#Timetable { min-height: 400px; }
+
+    #Timetable div.content { position: absolute; top: 10px; left: 10px; }
+
+    #Timetable div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
+
+    #Timetable div.border { -ms-opacity: 0.75; opacity: 0.75; position: absolute; border-width: 2px; border-style: solid; width: 100%; height: 100%; }
+
+    #Timetable div.selected { -ms-opacity: 0.6; opacity: 0.6; background: #fff; border: 2px solid #dddddd; }
+
+    #Timetable div.button { border: 1px solid #000; display: none; width: 20px; height: 20px;border-radius: 4px; }
+
+    #Timetable div.name { position: absolute; text-align: center; }
+
+        #Timetable div.name div { font-size: 12px; font-weight: 700; font-family: Arial; line-height: 29px; vertical-align: middle; -ms-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; -webkit-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; }
+
+    #Timetable div.small div { font-size: 8px; line-height: 10px; }
+
+    #Timetable div.detailsBackground { position: absolute; background: white; -ms-opacity: 0.5; opacity: 0.5; }
+
+    #Timetable div.details, #Timetable div.detailsSmall { position: absolute; padding: 2px; font-size: 9px; font-family: Arial; }
+
+    #Timetable div.detailsSmall { padding: 1px; font-size: 8px; }
+
+        #Timetable div.details div, #Timetable div.detailsSmall div { float: right; margin-right: 2px; }
+
+#backgroundTable { border-spacing: 0; border-collapse: separate; position: absolute; top: 0; left: 0; }
+
+    #backgroundTable div.header div { height: 20px; font-size: 12px; font-family: Arial; font-weight: 400; width: 50px; padding: 0; text-align: center; float: left; }
+
+        #backgroundTable div.header div:first-child { width: 75px; }
+
+    #backgroundTable div.begining, #backgroundTable div.horizontal { height: 49px; width: 725px; border-bottom: 1px solid #ddd; padding: 0; }
+
+    #backgroundTable div.begining { height: 19px; clear: left; }
+
+    #backgroundTable div.horizontal { padding: 0 0 0 10px; vertical-align: middle; line-height: 49px; }
+
+    #backgroundTable div.vertical { height: 290px; width: 49px; border-right: 1px solid #ddd; position: absolute; top: 20px; }
+
+
 footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: center; padding: 10px 0; font-size: 0.9em; height: 40px; width: 100%; color: #787878; }
 
 .export-tooltip-styling { max-width: 400px !important; padding: 5px; }
