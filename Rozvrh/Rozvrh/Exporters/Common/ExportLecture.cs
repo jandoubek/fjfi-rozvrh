@@ -55,8 +55,13 @@ namespace Rozvrh.Exporters.Common
         /// </remarks>
         private string departementColor;
 
+        /// <summary>
+        /// Whether the lecture is everyweek or is irregular.
+        /// </summary>
+        private bool regularLecture;
+
         public ExportLecture(string n,DayOfWeek dow,DateTime st, TimeSpan len, string lec,
-            string r,string dep) {
+            string r,string dep,bool regular) {
             name = n;
             day = dow;
             startTime = st;
@@ -64,6 +69,7 @@ namespace Rozvrh.Exporters.Common
             lecturer = lec;
             room = r;
             departementColor = dep;
+            regularLecture = regular;
         }
 
         public ExportLecture(TimetableField ttf)
@@ -77,6 +83,7 @@ namespace Rozvrh.Exporters.Common
             lecturer = ttf.lecturer;
             room = ttf.classroom;
             departementColor = "#"+ttf.color;
+            regularLecture = ttf.period=="Ano" ? true : false;
         }
 
 
@@ -130,6 +137,12 @@ namespace Rozvrh.Exporters.Common
             {
                 length = value;
             }
+        }
+
+        public bool RegularLecture
+        {
+            get { return regularLecture; }
+            set { regularLecture = value; }
         }
 
         public long LengthTicks

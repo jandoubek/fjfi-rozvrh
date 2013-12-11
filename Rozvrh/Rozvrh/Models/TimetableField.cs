@@ -33,7 +33,7 @@ namespace Rozvrh.Models
         public string color             { get; set; }
         
         /// <summary>
-        /// Week regularity of lessons. Number 0 for regular every week lesson and 1 for irregular lesson.
+        /// Week regularity of lessons. "Ano" for regular every week lesson and "No" for irregular lesson.
         /// </summary>
         public string period            { get; set; }
         

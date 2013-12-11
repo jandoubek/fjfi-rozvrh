@@ -43,14 +43,14 @@ namespace Rozvrh.Exporters.Generators
   </g>
 </svg>";
 
-            return header + headerStyles() + headerRootAndBottoms(created,linkToInformation) + headerTitle(title)
+            return header + headerStyles() + headerRootAndBottoms(created, linkToInformation) + headerTitle(title)
                 + headerHours() + headerDays() + RenderLectures(lectures) + tail;
         }
 
 
         private string RenderLectures(List<ExportLecture> lectures)
         {
-            string res = "";            
+            string res = "";
             if (lectures != null)
             {
                 lectures.Sort((x, y) => x.Day == y.Day ?
@@ -66,7 +66,7 @@ namespace Rozvrh.Exporters.Generators
                         {
                             res += RenderLecture(lecture, group.Count, group.IndexOf(lecture));
                         }
-                        
+
                     }
                 }
             }
@@ -85,7 +85,7 @@ namespace Rozvrh.Exporters.Generators
                 {
                     groups[groups.Count - 1].Add(l);
                 }
-                    //Is lecture l starting sooner than end time of the last lecture in last group (with 10 minutes toleration)?
+                //Is lecture l starting sooner than end time of the last lecture in last group (with 10 minutes toleration)?
                 else if (DateTime.Compare(l.StartTime, lastgroup.Max(lec => lec.StartTime + lec.Length - new TimeSpan(0, 10, 0))) < 0
                     && l.Day == lastgroup[lastgroup.Count - 1].Day)
                 {
@@ -97,13 +97,13 @@ namespace Rozvrh.Exporters.Generators
                     {
                         lastgroup.Add(l);
                     }
-                    else 
-                    {                        
+                    else
+                    {
                         List<ExportLecture> newGroup = new List<ExportLecture>();
                         //Otherwise create a fake lectures from all intersecting lectures
                         foreach (ExportLecture interLec in intersecting)
                         {
-                            ExportLecture fakeLecture = new ExportLecture(null, interLec.Day, interLec.StartTime, interLec.Length, null, null, null);
+                            ExportLecture fakeLecture = new ExportLecture(null, interLec.Day, interLec.StartTime, interLec.Length, null, null, null, true);
                             newGroup.Add(fakeLecture);
                         }
                         //And create a new last group from l and the fake lectures
@@ -111,7 +111,7 @@ namespace Rozvrh.Exporters.Generators
                         groups.Add(newGroup);
                         lastgroup = newGroup;
                     }
-                   
+
                 }
                 else
                 {
@@ -124,7 +124,7 @@ namespace Rozvrh.Exporters.Generators
         }
 
 
-        private string RenderLecture(ExportLecture lecture,int split,int pos)
+        private string RenderLecture(ExportLecture lecture, int split, int pos)
         {
             string res = "";
 
@@ -135,13 +135,13 @@ namespace Rozvrh.Exporters.Generators
             double dy = height * pos;
 
             //Borders
-             res += String.Format(new NumberFormatInfo(),"<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBack\" fill=\"#fff\"/>",
-                height, width, y + dy, x) + System.Environment.NewLine;
+            res += String.Format(new NumberFormatInfo(), "<rect height=\"{0}\" width=\"{1}\" y=\"{2}\" x=\"{3}\" class=\"cardBack\" fill=\"#fff\"/>",
+               height, width, y + dy, x) + System.Environment.NewLine;
             //x="{$x + 1}" y="{$y + $dy + 1}" width="{$width - 2}" height="{$height - 2}"
-            res += String.Format(new NumberFormatInfo(),"<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"{0}\" width=\"{1}\" stroke=\"{4}\" y=\"{2}\" x=\"{3}\" stroke-width=\"2\" class=\"cardFrame\"/>",
-                height - 2,width - 2, y + dy + 1, x + 1, lecture.DepartementColor) + System.Environment.NewLine;
+            res += String.Format(new NumberFormatInfo(), "<rect stroke-opacity=\"0.5\" fill-opacity=\"0\" height=\"{0}\" width=\"{1}\" stroke=\"{4}\" y=\"{2}\" x=\"{3}\" stroke-width=\"2\" class=\"cardFrame\"/>",
+                height - 2, width - 2, y + dy + 1, x + 1, lecture.DepartementColor) + System.Environment.NewLine;
 
-            
+
             if (split >= 3)
             {
                 //Fills
@@ -153,8 +153,8 @@ namespace Rozvrh.Exporters.Generators
                     y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 6 }"
                 //if red in krbalek then it have class=\"label&#10; periodic\"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
-                    y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name) + System.Environment.NewLine;
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; {3}\">{2}</text>",
+                    y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name, lecture.RegularLecture ? "" : "periodic") + System.Environment.NewLine;
                 //Room
                 //x="{$x + $width - 5}" y="{$y + $dy + $height - 3}"
                 res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
@@ -179,8 +179,8 @@ namespace Rozvrh.Exporters.Generators
                     y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
                 //if red in krbalek then it have class=\"label&#10; periodic\"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; \">{2}</text>",
-                    y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; {3}\">{2}</text>",
+                    y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name, lecture.RegularLecture ? "" : "periodic") + System.Environment.NewLine;
                 //Room
                 //x="{$x + $width - 5}" y="{$y + $dy + $height - 6 + $split}"
                 res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
@@ -246,17 +246,17 @@ namespace Rozvrh.Exporters.Generators
 ";
         }
 
-        private string headerRootAndBottoms(DateTime created,string link)
+        private string headerRootAndBottoms(DateTime created, string link)
         {
             return @"
  <g id=""#root"">
     <g transform=""translate(7, 0)"">
       <g transform=""translate(0, 350)"" class=""info"">
         <!-- CREATED TEXT -->
-        <text x=""9.0693359"" style=""font-size:12px;fill:#babdb6;"">Vytvořeno "+String.Format("{0}-{1}-{2}",created.Year,created.Month,created.Day)+@"</text>
+        <text x=""9.0693359"" style=""font-size:12px;fill:#babdb6;"">Vytvořeno " + String.Format("{0}-{1}-{2}", created.Year, created.Month, created.Day) + @"</text>
         <!-- IMPORTANT INFORMATION TEXT -->
         <text x=""730"" style=""font-size:12px;fill:#babdb6; text-anchor: end;"">
-          <tspan id=""tspan23441"">Důležité doplňující informace si přečtěte na <tspan style=""fill:#729fcf;"">"+link+@"</tspan>
+          <tspan id=""tspan23441"">Důležité doplňující informace si přečtěte na <tspan style=""fill:#729fcf;"">" + link + @"</tspan>
           </tspan>
         </text>
       </g>
