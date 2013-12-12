@@ -19,8 +19,7 @@
         });
     </script>
 }
-<div id="Timetable"></div><br/>
-@Ajax.ActionLink("Vybrat vše", "SelectAll", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "Timetable" })
+<div id="Timetable">@Html.Partial("Rozvrh")</div><br/>
 <div id="Fltr">@Html.Partial("VyfiltrovaneLekce")</div>
 <br />
 

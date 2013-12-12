@@ -10,7 +10,7 @@
 
 <script>
 
-    $(function () {
+    $(document).ready(function () {
         $("button.edit").button({
             icons: { primary: "ui-icon-pencil" },
             text: false
@@ -22,6 +22,106 @@
         $(".border").mouseenter(function () { $(".edit", this).show(); $(".delete", this).show(); })
             .mouseleave(function () { $(".edit", this).hide(); $(".delete", this).hide(); });
         $("button").tooltip({ tooltipClass: "timetable-tooltip-styling", show: null, hide: null, position: { my: "right-5 center", at: "left center" } });
+
+        $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Ano": function () {
+                    $.post('@Url.Action("RemoveOne", "Home")', { uid: $(this).data("uid") }, function (data) {
+                        $('#Timetable').html(data);
+                        $("#dialog-confirm").dialog("close");
+                    });
+                },
+                "Ne": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        var lecture = $("#lecture"),
+        lecturer = $("#lecturer"),
+        room = $("#room"),
+        department = $("#department"),
+        time = $("#time"),
+        duration = $("#duration"),
+        period = $("#period"),
+        allFields = $([]).add(lecture).add(lecturer).add(room).add(department).add(time).add(duration).add(period),
+        tips = $(".validateTips");
+
+        function updateTips(t) {
+            tips.text(t);
+        }
+
+        function checkLength(o, n, min, max) {
+            if (o.val().length > max || o.val().length < min) {
+                o.addClass("ui-state-error");
+                updateTips("Délka pole " + n + " musí být mezi " +
+                  min + " a " + max + ".");
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function checkRegexp(o, regexp, n) {
+            if (!(regexp.test(o.val()))) {
+                o.addClass("ui-state-error");
+                updateTips(n);
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function checkValue(o, min, max, n) {
+            if (!(o.val() > min && o.val() < max)) {
+                o.addClass("ui-state-error");
+                updateTips(n);
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+
+        $("#dialog-form").dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                "Uložit změny": function () {
+                    var bValid = true;
+                    allFields.removeClass("ui-state-error");
+
+                    bValid = bValid && checkLength(lecture, "předmět", 1, 20);
+                    bValid = bValid && checkLength(lecturer, "vyučující", 1, 100);
+                    bValid = bValid && checkLength(room, "místnost", 1, 50);
+                    bValid = bValid && checkRegexp(duration, /^\d{1,2}$/, "Délka hodiny musí být celé číslo.");
+                    bValid = bValid && checkValue(duration, 0, 13, "Délka hodiny nemůže být delší než 12 hodin.")
+
+                    if (bValid) {
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.Action("EditTimetableField", "Home")',
+                            data: "uid=" + $(this).data("uid") + "&lecture=" + $("#lecture").val() + "&lecturer=" + $("#lecturer").val() + "&room=" + $("#room").val() + "&day=" + $("#day").val()
+                                     + "&department=" + $("#department").val() + "&time=" + $("#time").val() + "&duration=" + $("#duration").val() + "&period=" + $("#period").prop("checked"),
+                            success: function (data) {
+                                $('#Timetable').html(data);
+                                $("#dialog-form").dialog("close");
+                            }
+                        });
+                    }
+                },
+                "Storno": function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                allFields.val("").removeClass("ui-state-error");
+            }
+        });
+
     });
 
     function select(field) {
@@ -35,9 +135,76 @@
         }
     }
 
+    function removeField(uid) {
+        $('#dialog-confirm').data("uid", uid)
+            .dialog('open');
+    }
+
+
+    function edit(uid) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetTimetableField", "Home")',
+            data: "uid=" + uid,
+            success: function (result) {
+                $("#lecture").val(result.lecture_acr);
+                $("#dialog-form #lecturer").val(result.lecturer);
+                $("#dialog-form #room").val(result.classroom);
+                $("#dialog-form #department").val(result.department_acr);
+                $("#dialog-form #time").val(result.time);
+                $("#dialog-form #day").val(result.day);
+                $("#dialog-form #duration").val(result.duration);
+                $("#dialog-form #period").prop("checked", result.period == "Ano" ? true : false);
+                $("#dialog-form").data("uid", uid).dialog("open");
+            }
+        });
+    }
 </script>
 
 
+<div id="dialog-confirm" title="Odstranit vybraný předmět?">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Opravdu chcete odstranit vybraný předmět z vašeho rozvrhu?</p>
+</div>
+
+<div id="dialog-form" title="Upravit předmět">
+    <p class="validateTips">Všechna pole musí být vyplněna.</p>
+
+    <form>
+        <fieldset>
+            <label for="lecture">Předmět</label>
+            <input type="text" name="lecture" id="lecture" class="text ui-widget-content ui-corner-all" />
+            <label for="lecturer">Vyučující</label>
+            <input type="text" name="lecturer" id="lecturer" class="text ui-widget-content ui-corner-all" />
+            <label for="room">Místnost</label>
+            <input type="text" name="room" id="room" class="text ui-widget-content ui-corner-all" />
+            <label for="department">Katedra</label>
+            <select name="department" id="department" class="text ui-widget-content ui-corner-all">
+                @foreach (var d in Model.Departments)
+                {
+                    <option id="@d.id">@d.acronym</option>
+                }
+            </select>
+            <label for="day">Den</label>
+            <select name="day" id="day" class="text ui-widget-content ui-corner-all">
+                @foreach (var d in Model.Days)
+                {
+                    <option id="@(d.id)">@(d.name)</option>
+                }
+            </select>
+            <label for="time">Začátek</label>
+            <select name="time" id="time" class="text ui-widget-content ui-corner-all">
+                @foreach (var t in Model.Times)
+                {
+                    <option id="@t.id">@t.acronym</option>
+                }
+            </select>
+            <label for="duration">Délka (zaokrouhleně na hodiny nahoru)</label>
+            <input type="text" name="duration" id="duration" class="text ui-widget-content ui-corner-all" pattern="[0-9]*" />
+            <label for="period">Pravidelně</label>
+            <input type="checkbox" name="period" id="period" class="text ui-widget-content ui-corner-all" />
+        </fieldset>
+    </form>
+</div>
 
 <div class="content">
     <div id="backgroundTable">
@@ -57,63 +224,67 @@
             <div>18:30</div>
             <div>19:30</div>
         </div>
-        <div class="begining"></div>
-        @foreach (var day in Model.Days)
-        {
-            <div class="horizontal">@day.name</div>
-        }
         @for (int i = 0; i < 13; i++)
         {
             <div class="vertical" style="left:@(51 + i * 50)px"></div>
         }
+        <div class="begining"></div>
+
+
+        @{
+            int top = 39;
+
+            foreach (var day in Model.Days)
+            {
+                int dayHeight = 50;
+                var dayGroups = HomeController.getGroups(Model.CustomTimetableFields.Where(m => m.day == day.name).ToList());
+
+            <div id="@day.id" class="horizontal">@day.name
+
+                @foreach (var group in dayGroups)
+                {
+                    foreach (var field in group)
+                    {
+                        if (field is FakeTimetableField)
+                        {
+                            continue;
+                        }
+                        int width = Convert.ToInt32(field.duration) * 50;
+                        int left = 100 + (Convert.ToInt32(field.time_hours) - 7) * 50;
+                        int height = 50;
+                        int nameHeight = 31;
+                        int fieldTop = top;
+                        string color = int.Parse(field.color).ToString("X6");
+                        if (group.Count >= 2)
+                        {
+                            height = 25;
+                            nameHeight = 10;
+                            if (group.Count * 25 > dayHeight)
+                            {
+                                dayHeight = group.Count * 25;
+                            }
+                            fieldTop = top + group.IndexOf(field) * 25;
+                        }
+                    <div class="background" style="width:@(width - 4)px; height:@(nameHeight)px; background:#@color; left:@(left + 2)px; top:@(fieldTop + 2)px;"></div>
+                    <div class="name @(height < 50 ? "small" : "")" style="width:@(width - 4)px; height:@(nameHeight)px; left:@(left + 2)px;top:@(fieldTop + 2)px;">
+                        <div style="color:@(field.period.ToLower() == "ne" ? "red" : "#000")">@field.lecture_acr</div>
+                    </div>
+                    <div class="detailsBackground" style="width:@(width - 4)px; height:@(height - nameHeight - 4)px; left:@(left + 2)px;top:@(fieldTop + 2 + nameHeight)px;"></div>
+                    <div class="details@(height < 50 ? "Small" : "")" style="width:@(width - 6)px; height:@(height - nameHeight - 6)px; left:@(left + 2)px;top:@(fieldTop + 2 + nameHeight)px;">@field.lecturer
+                        <div>@field.classroom</div>
+                    </div>
+                    <div class="border" style="width:@(width - 4)px; height:@(height - 4)px; position:absolute; left:@(left)px; top:@(fieldTop)px;border-color:#@color;">
+                        <button class="edit" onclick="edit(@(field.UniqueID));">Upravit</button>
+                        <button class="delete" onclick="removeField(@(field.UniqueID));">Odstranit</button>
+                    </div>
+                    }
+                }
+                @{ top += dayHeight; }
+                <script> $(document).ready(function () { $('#@(day.id)').css('line-height', @(dayHeight - 1) + "px").height(@(dayHeight - 1)); });</script>
+            </div>
+
+            }
+        }
     </div>
 
-
-    @{
-        int top = 39;
-
-        foreach (var day in Model.Days)
-        {
-            int dayHeight = 50;
-            var dayGroups = HomeController.getGroups(Model.CustomTimetableFields.Where(m => m.day == day.name).ToList());
-            foreach (var group in dayGroups)
-            {
-                foreach (var field in group)
-                {
-                    if (field is FakeTimetableField)
-                    {
-                        continue;
-                    }
-                    int width = Convert.ToInt32(field.duration) * 50;
-                    int left = 100 + (Convert.ToInt32(field.time_hours) - 7) * 50;
-                    int height = 50;
-                    int nameHeight = 31;
-                    int fieldTop = top;
-                    if (group.Count >= 2)
-                    {
-                        height = 25;
-                        nameHeight = 10;
-                        if (group.Count * 25 > dayHeight)
-                        {
-                            dayHeight = group.Count * 25;
-                        }
-                        fieldTop = top + group.IndexOf(field) * 25;
-                    }
-        <div class="background" style="width:@(width - 4)px; height:@(nameHeight)px; background:#@field.color; left:@(left + 2)px; top:@(fieldTop + 2)px;"></div>
-        <div class="name @(height < 50 ? "small" : "")" style="width:@(width - 4)px; height:@(nameHeight)px; left:@(left + 2)px;top:@(fieldTop + 2)px;">
-            <div>@field.lecture_acr</div>
-        </div>
-        <div class="detailsBackground" style="width:@(width - 4)px; height:@(height - nameHeight - 4)px; left:@(left + 2)px;top:@(fieldTop + 2 + nameHeight)px;"></div>
-        <div class="details@(height < 50 ? "Small" : "")" style="width:@(width - 6)px; height:@(height - nameHeight - 6)px; left:@(left + 2)px;top:@(fieldTop + 2 + nameHeight)px;">@field.lecturer
-            <div>@field.classroom</div>
-        </div>
-        <div class="border" style="width:@(width - 4)px; height:@(height - 4)px; position:absolute; left:@(left)px; top:@(fieldTop)px;border-color:#@field.color;">
-            <button class="edit">Upravit</button>
-            <button class="delete">Odstranit</button>
-        </div>
-                }
-            }
-            top += dayHeight;
-        }
-    }
 </div>

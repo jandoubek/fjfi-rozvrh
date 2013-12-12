@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Rozvrh.Exporters.Common;
 using Rozvrh.Models;
 using Rozvrh.Exporters;
+using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Controllers
 {
@@ -31,13 +32,13 @@ namespace Rozvrh.Controllers
         {
             //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
             ImportExport instance = new ImportExport();
-            return instance.DownloadAsSVG(M.CustomTimetableFields,"Rozvrh", Config.Instance.Created, Config.Instance.LinkToAdditionalInformation);
+            return instance.DownloadAsSVG(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created, Config.Instance.LinkToAdditionalInformation);
         }
 
         public ActionResult ExportToICal()
         {
             ImportExport instance = new ImportExport();
-            return instance.DownloadAsICAL(M.CustomTimetableFields,Config.Instance.SemesterStart, Config.Instance.SemesterEnd);
+            return instance.DownloadAsICAL(M.CustomTimetableFields, Config.Instance.SemesterStart, Config.Instance.SemesterEnd);
         }
 
         public ActionResult ExportToXML()
@@ -82,6 +83,7 @@ namespace Rozvrh.Controllers
 
                 M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times);
 
+            System.Web.HttpContext.Current.Session["FiltredTimetableFields"] = M.FiltredTimetableFields;
 
             return PartialView("VyfiltrovaneLekce", M);
         }
@@ -102,36 +104,120 @@ namespace Rozvrh.Controllers
                 list.RemoveAt(0);
         }
 
-        public ActionResult SelectAll()
+        public JsonResult GetTimetableField(string uid)
         {
-            //2. Bc, ASI, 1 - 1,9,25
-            //2. Bc, APIN, 1 - 1,15,32
-            //2. Bc, FYT, 1 - 1,121,133
-            M.FilterTimetableFieldsByAll(new List<string> { "1" }, new List<string> { "121" }, new List<string> { "133" }, new List<string>(), new List<string>(), new List<string>(), new List<string>(), new List<string>(), new List<string>());
-            M.CustomTimetableFields = M.FiltredTimetableFields;
-            foreach (var tf in M.CustomTimetableFields)
+            int uniqueID;
+            if (int.TryParse(uid, out uniqueID))
             {
-                tf.color = int.Parse(tf.color).ToString("X6");
+
+                var field = M.CustomTimetableFields.Where(f => f.UniqueID == uniqueID).ToArray()[0];
+                return Json(field, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
+
+        public ActionResult EditTimetableField(string uid, string lecture, string lecturer, string room, string department,string day, string time, string duration, string period)
+        {
+            int uniqueID;
+            if (int.TryParse(uid, out uniqueID))
+            {
+                M.CustomTimetableFields.RemoveAll(field => field.UniqueID == uniqueID);
+
+                var newField = new TimetableField {lecturer = lecturer, lecture_acr = lecture, classroom = room, department_acr = department, day = day, time = time, duration = duration};
+                newField.period = (period.ToLower() == "true" ? "Ano" : "Ne");
+
+                var possibleDepartments = M.Departments.Where(dep => dep.acronym == department).ToArray();
+                if (possibleDepartments.Any())
+                    newField.color = possibleDepartments[0].color;
+
+                var possibleTimes = M.Times.Where(t => t.acronym == time).ToArray();
+                if (possibleTimes.Any())
+                {
+                    newField.time_hours = possibleTimes[0].hours;
+                    newField.time_minutes = possibleTimes[0].minutes;
+                }
+
+                var possibleDays = M.Days.Where(d => d.name == day).ToArray();
+                if (possibleDays.Any())
+                    newField.day_order = possibleDays[0].daysOrder;
+
+                newField.RecalculateUniqueID();
+                M.CustomTimetableFields.Add(newField);
+            }
+            SaveToSession();
+            return PartialView("Rozvrh", M);
+        }
+
+        public ActionResult AddAll(List<string> uids)
+        {
+            var filtredFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["FiltredTimetableFields"];
+            if (filtredFields != null)
+            {
+                M.CustomTimetableFields.AddRange(filtredFields);
+
+                //Removes all duplicates according to UniqueID
+                var elements = new HashSet<int>();
+                M.CustomTimetableFields.RemoveAll(i => !elements.Add(i.UniqueID));
             }
             SaveToSession();
 
             return PartialView("Rozvrh", M);
         }
 
+        public ActionResult AddSome(List<string> uids)
+        {
+            var filtredFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["FiltredTimetableFields"];
+            if (filtredFields != null)
+            {
+                M.CustomTimetableFields.AddRange(filtredFields.Where(field => uids.Contains(field.UniqueID.ToString())));
+
+                //Removes all duplicates according to UniqueID
+                var elements = new HashSet<int>();
+                M.CustomTimetableFields.RemoveAll(i => !elements.Add(i.UniqueID));
+            }
+            
+            SaveToSession();
+
+            return PartialView("Rozvrh", M);
+        }
+
+        public ActionResult RemoveAll()
+        {
+            M.CustomTimetableFields.Clear();
+
+            SaveToSession();
+
+            return PartialView("Rozvrh", M);
+        }
+
+        public ActionResult RemoveOne(string uid)
+        {
+            int uniqueID;
+            if(int.TryParse(uid, out uniqueID))
+            {
+                M.CustomTimetableFields.RemoveAll(field => field.UniqueID == uniqueID);
+            }
+            SaveToSession();
+            return PartialView("Rozvrh", M);
+        }
+
         /// <summary>
         /// Loads data from session to model.
         /// </summary>
-        private void LoadFromSession() {
-                M.CustomTimetableFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["CustomTimetableFields"];
-                if (M.CustomTimetableFields == null) {
-                    M.CustomTimetableFields = new List<TimetableField>();
-                }
-       }
+        private void LoadFromSession()
+        {
+            M.CustomTimetableFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["CustomTimetableFields"];
+            if (M.CustomTimetableFields == null)
+            {
+                M.CustomTimetableFields = new List<TimetableField>();
+            }
+        }
 
         /// <summary>
         /// Saves data from model to session.
         /// </summary>
-        private void SaveToSession() {
+        private void SaveToSession()
+        {
             System.Web.HttpContext.Current.Session["CustomTimetableFields"] = M.CustomTimetableFields;
         }
 

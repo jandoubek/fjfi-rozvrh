@@ -103,6 +103,11 @@ namespace Rozvrh.Models
         public string classroom         { get; set; }
 
         /// <summary>
+        /// Returns unique hash computed from lecture_acr, time_hours, time_minutes, classroom and lecturer
+        /// </summary>
+        public int UniqueID          { get; set; }
+
+        /// <summary>
         /// Class constructor. Fills '-' in the classroom and building properties for 'Jazyky' lessons. 
         /// </summary>
         /// <param name="dep">Department class.</param>
@@ -140,6 +145,7 @@ namespace Rozvrh.Models
             time_order = t.timesOrder;
             building = b.name;
             classroom = cr.name;
+            RecalculateUniqueID();
         }
 
         /// <summary>
@@ -148,6 +154,14 @@ namespace Rozvrh.Models
         public TimetableField()
         {
  
+        }
+
+        /// <summary>
+        /// Recalculates the UniqueID - need to be called after change in object data
+        /// </summary>
+        public void RecalculateUniqueID()
+        {
+            UniqueID = (lecture_acr + time + classroom + lecturer + department_acr + duration + period).GetHashCode();
         }
     }
 

@@ -2,11 +2,42 @@
 <script>
     $(document).ready(function () {
         $("#Tabulka").tablesorter();
+        $("#AddSome").button().click(function () { addSome(); });
+        $("#AddAll").button().click(function () { addAll(); });
+        $("#RemoveAll").button().click(function () { removeAll(); });
+    });
+
+    function addAll() {
+        var allVals = [];
+        $('#Tabulka input:checkbox').each(function () {
+            allVals.push($(this).val());
+        });
+        $.post('@Url.Action("AddAll", "Home")', { uids: allVals }, function (data) {
+            $('#Timetable').html(data);
+        });
     }
-);
+    
+    function addSome() {
+        var checkedVals = [];
+        $('#Tabulka :checked').each(function () {
+            checkedVals.push($(this).val());
+        });
+        $.post('@Url.Action("AddSome", "Home")', { uids: checkedVals }, function (data) {
+            $('#Timetable').html(data);
+        });
+    }
+
+
+    function removeAll() {
+        $.post('@Url.Action("RemoveAll", "Home")', { uids: null }, function (data) {
+            $('#Timetable').html(data);
+        });
+    }
 </script>
 
-
+<br />
+<br />
+<span id="AddSome">Přidat vybrané</span> <span id="AddAll">Přidat všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
 <table id="Tabulka" class="tablesorter">
     <thead>
         <tr>
@@ -22,10 +53,10 @@
         </tr>
     </thead>
     <tbody>
-    @if (Model.FiltredTimetableFields != null)
-    {
-        foreach (var item in Model.FiltredTimetableFields)
+        @if (Model.FiltredTimetableFields != null)
         {
+            foreach (var item in Model.FiltredTimetableFields)
+            {
             <tr>
                 <td>
                     <a href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
@@ -53,11 +84,11 @@
                 </td>
                 <td>
                     @{
-                        <input name="Selector" type="checkbox" checked="checked" />
+                        <input name="Selector" type="checkbox" checked="checked" value="@item.UniqueID" />
                     }
                 </td>
             </tr>
+            }
         }
-    }
-</tbody>
+    </tbody>
 </table>
