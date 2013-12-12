@@ -37,7 +37,7 @@
 
 <br />
 <br />
-<span id="AddSome">Přidat vybrané</span> <span id="AddAll">Přidat všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
+<span id="AddSome">Přidat zaškrtnuté</span> <span id="AddAll">Přidat všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
 <table id="Tabulka" class="tablesorter">
     <thead>
         <tr>
@@ -84,7 +84,7 @@
                 </td>
                 <td>
                     @{
-                        <input name="Selector" type="checkbox" checked="checked" value="@item.UniqueID" />
+                        <input name="Selector" type="checkbox" value="@item.UniqueID" />
                     }
                 </td>
             </tr>

@@ -82,7 +82,7 @@ namespace Rozvrh.Exporters.Common
             length = new TimeSpan(Int32.Parse(ttf.duration),0,0);
             lecturer = ttf.lecturer;
             room = ttf.classroom;
-            departementColor = "#"+ttf.color;
+            departementColor = "#" + int.Parse(ttf.color).ToString("X6");
             regularLecture = ttf.period=="Ano" ? true : false;
         }
 
