@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Rozvrh.Exporters.Common;
 using Rozvrh.Models;
 using Rozvrh.Exporters;
+using System.IO;
 using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Controllers
@@ -45,6 +46,26 @@ namespace Rozvrh.Controllers
         {
             ImportExport instance = new ImportExport();
             return instance.DownloadAsXML(M.CustomTimetableFields);
+        }
+
+        [HttpPost]
+        public ActionResult ImportFromXML(HttpPostedFileBase file)
+        {
+            ImportExport instance = new ImportExport();
+            try
+            {
+                List<TimetableField> result;
+                result = instance.ImportXML(file);
+                M.CustomTimetableFields = result;
+                SaveToSession();
+            }
+            catch (InvalidDataException ex)
+            {
+                M.ImportErrorMessage = ex.Message;
+            }
+
+            return View("Index", M);
+            
         }
 
         public PartialViewResult Filter(Model returnedModel)
@@ -179,7 +200,7 @@ namespace Rozvrh.Controllers
             SaveToSession();
 
             return PartialView("Rozvrh", M);
-        }
+            }
 
         public ActionResult RemoveAll()
         {
@@ -206,12 +227,12 @@ namespace Rozvrh.Controllers
         /// </summary>
         private void LoadFromSession()
         {
-            M.CustomTimetableFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["CustomTimetableFields"];
+                M.CustomTimetableFields = (List<TimetableField>)System.Web.HttpContext.Current.Session["CustomTimetableFields"];
             if (M.CustomTimetableFields == null)
             {
-                M.CustomTimetableFields = new List<TimetableField>();
-            }
-        }
+                    M.CustomTimetableFields = new List<TimetableField>();
+                }
+       }
 
         /// <summary>
         /// Saves data from model to session.

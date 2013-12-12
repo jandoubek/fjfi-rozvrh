@@ -1,0 +1,23 @@
+﻿<script type="text/javascript">
+
+    $(function () {
+        $("input.impButton").button();
+        $('input:file').change(
+            function () {
+                if ($(this).val()) {
+                    $('#importButton').attr('disabled', false);
+                }
+            }
+            );
+    });
+</script>
+
+<div class="exportLink">
+
+    @using (Html.BeginForm("ImportFromXML", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+            <input type="file" name="file" id="fileinput" />
+            <input type="submit" value="Import" class="impButton" id="importButton" />
+    }
+    <div class="exportToolip">Import z XML získáného pomocí Exportu.</div>
+</div>
