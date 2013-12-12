@@ -1,4 +1,4 @@
-﻿body { padding: 0; margin: 0; -moz-min-width: 1000px; -ms-min-width: 1000px; -o-min-width: 1000px; -webkit-min-width: 1000px; min-width: 1000px; min-height: 600px; font-size: 14px; font-family: Verdana; }
+﻿body { padding: 0; margin: 0; -moz-min-width: 1300px; -ms-min-width: 1300px; -o-min-width: 1300px; -webkit-min-width: 1300px; min-width: 1300px; min-height: 600px; font-size: 14px; font-family: Verdana; }
 
 .clear { clear: both; }
 
@@ -81,7 +81,7 @@
 
     #backgroundTable div.begining, #backgroundTable div.horizontal { height: 49px; width: 725px; border-bottom: 1px solid #ddd; padding: 0; }
 
-    #backgroundTable div.begining { height: 19px; clear: left; }
+    #backgroundTable div.begining { height: 19px; clear: left;width: 735px; }
 
     #backgroundTable div.horizontal { padding: 0 0 0 10px; vertical-align: middle; min-height: 49px; }
 
