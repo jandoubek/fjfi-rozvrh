@@ -3,8 +3,10 @@
     ViewBag.Title = "Úvodní stránka";
 }
 
+<div id="error" class="ui-state-error import-error"></div>
+
 @section right{
-    <div id="error" class="ui-state-error" style="text-align:center"></div>
+    
     <div id="tabs">
         <ul>
             <li><a href="#tabs-1">Výběr</a></li>
@@ -20,11 +22,19 @@
 @section scripts{
     <script>
         $(function () {
+
+            function fadecallback() {
+                setTimeout(function () {
+                    $("#error:visible").removeAttr("style").fadeOut();
+                }, 5000);
+            };
             $("#tabs").tabs();
             @if (Model.ImportErrorMessage != "")
             { 
-                @:$("#error").show("Blind");
                 @:$("#error").text("@Html.Raw(Model.ImportErrorMessage)");
+                @:$("#error").show("Blind",500,fadecallback);
+
+                
             }
             else
             {

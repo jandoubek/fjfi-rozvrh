@@ -97,6 +97,8 @@ footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: c
 
 .export-tooltip-styling { max-width: 400px !important; padding: 5px; }
 
+.import-error { text-align:center; height:20px; width:50%;  margin: 0 auto; position: absolute; top: 5px; left: 0; bottom: 0; right: 0; z-index: 999; }
+
 .timetable-tooltip-styling { position: absolute; font-size: 12px; padding: 5px; }
 
 /* tables */
