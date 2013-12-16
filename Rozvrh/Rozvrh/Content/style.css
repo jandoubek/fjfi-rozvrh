@@ -1,55 +1,84 @@
-﻿body { padding: 0; margin: 0; -moz-min-width: 1300px; -ms-min-width: 1300px; -o-min-width: 1300px; -webkit-min-width: 1300px; min-width: 1300px; min-height: 600px; font-size: 14px; font-family: Verdana; }
+﻿html {height: 100%; padding: 0px; margin: 0px;}
+
+body {height: 100%; padding: 0; margin: 0;
+       -moz-min-width: 1350px; -moz-max-width:1600px; -moz-min-height: 700px; 
+       -ms-min-width: 1350px;-ms-max-width:1600px;  -ms-min-height: 700px; 
+       -o-min-width: 1350px; -o-max-width:1600px; -o-min-height:700px;  
+       -webkit-min-width: 1350px; -webkit-max-width:1600px;  -webkit-min-height:700px; 
+       min-width: 1350px; max-width:1600px; min-height:700px; 
+       font-size: 80%; font-family: Verdana;} 
 
 .clear { clear: both; }
 
-.ui-dialog { font-size: 13px; }
+.relativeWrapper {position:relative; height:100%;}
 
-#leftSection { padding: 0 10px 0 10px; }
+.ui-dialog { font-size: 100% }
 
-#rightSection { width: 500px; float: right; margin: 8px; padding-bottom: 0.8em; }
+#Main {position:relative; height:100%;}
 
-    #rightSection .exportLink { margin-left: 5px; }
+footer {overflow: hidden; display: table; background-color: #e2e2e2; text-align: center; border-top: 1px solid #787878;  font-size: 80%; width:100%; height: 5%; color: #787878; z-index:3;}
+    
+    footer #innerFooter { display: table-cell; vertical-align: middle; height:100%; width:100%;  z-index:3;}
+    
 
-    #rightSection .exportToolip { margin: 5px 10px 5px 10px; font-size: 0.9em; width: 90%; padding: 5px 10px; }
+#leftSection {position:relative; height:100%; width:100%; overflow:hidden; }
 
-    #rightSection .tooltipSelected { background-color: #f1f1f1; }
 
-    #rightSection #tabs { width: 492px; height: 100%; }
+#rightSection {position:absolute; left:51%; height:31%; width: 48%; top: 1%; z-index:2; }
 
-    #rightSection .ui-tabs .ui-tabs-nav { padding-left: 0.8em; }
+    #rightSection .exportLink {height: 30%; }
 
-    #rightSection .ui-tabs .ui-tabs-panel { padding: 1em 0 0 0; }
+    #rightSection .exportLink .exButton {float: left; height:10%; width: 10%;  margin-right: 3%;}
 
-    #rightSection div.boxContainer { float: left; margin-right: 21px; }
+    #rightSection .ui-tabs {height:100%; position:relative;}
+    
+    #rightSection .ui-tabs .ui-tabs-nav { padding-left: 2%; }
+
+    #rightSection .ui-tabs .ui-tabs-panel {  padding: 2%; }
+
+                                        #AboutTab {float:right; margin-right:2%;}
+     
+    #rightSection div.box { float: left; margin-right: -1px; height:100%;}   
+
+    #rightSection div.box label { background: #e2e2e2; display: block; padding: 0.3em; border: 1px solid #a8a8a8; border-bottom: none; }
+
+    #rightSection div.box select {overflow:hidden; width:100%; border: 1px solid #a8a8a8; padding: 0.3em; font-size: 85%; }
+
+    #rightSection div.box.noscroll ::-webkit-scrollbar { }
+    
+    #rightSection div.boxContainer .box#rocnik  {width: 8%;}
+
+    #rightSection div.boxContainer .box#zamereni  {width: 11%;}
+
+    #rightSection div.boxContainer .box#kruh  {width: 7%;}
+
+    #rightSection div.boxContainer .box#katedra  {width: 10%; margin-left: 1%; }
+
+    #rightSection div.boxContainer .box#vyucujici  {width: 16%;}
+
+    #rightSection div.boxContainer .box#budova  {width: 13%; margin-left: 1%;}
+
+    #rightSection div.boxContainer .box#mistnost  {width: 12%;}
+
+    #rightSection div.boxContainer .box#den  {width: 9%; margin-left: 1%;}
+
+    #rightSection div.boxContainer .box#zacatek  {width: 10%; margin-left: 1%;}
 
     #rightSection div.nomargin { margin: 0; }
+  
+    #rightSection #clearAll {left: 3.5%; margin-top: 1.5%;}
 
-    #rightSection div.box { float: left; margin-right: -1px; }
 
-        #rightSection div.box label { background: #e2e2e2; display: block; padding: 5px; width: 83px; border: 1px solid #a8a8a8; border-bottom: none; }
-
-        #rightSection div.box select { width: 95px; border: 1px solid #a8a8a8; padding: 5px; font-size: 0.85em; }
-
-        #rightSection div.box#noscroll ::-webkit-scrollbar { display: none; }
-
-    #rightSection #clearAll { padding: 2px; line-height: 1.8em; }
-
-/*#Tabulka { border-left: 1px solid #a8a8a8; border-top: 1px solid #a8a8a8; width: 100%; padding: 0; border-spacing: 0; clear: both; }
-
-    #Tabulka th, #Tabulka td { text-align: left; padding: 5px; border-bottom: 1px solid #a8a8a8; border-right: 1px solid #a8a8a8; }
-
-    #Tabulka th { border-bottom: 3px #a8a8a8 double; font-weight: 400; }*/
-
-#Loading { position: absolute; width: 490px; display: none; height: 394px; border: 1px solid #929292; background: #c2c2c2 no-repeat; -ms-opacity: 0.6; opacity: 0.6; filter: alpha(opacity=60); text-align: center; vertical-align: middle; }
+#Loading {position:absolute; width: 100%;height: 100%; top:0; left:0; display: none;  border: 1px solid #929292; background: #c2c2c2 no-repeat; -ms-opacity: 0.6; opacity: 0.6; filter: alpha(opacity=60); text-align: center; vertical-align: middle; }
 
     #Loading span { display: inline-block; height: 100%; vertical-align: middle; }
 
     #Loading img { display: inline-block; vertical-align: middle; width: 80px; height: 80px; }
 
 
-#Timetable { min-height: 400px; }
+#Timetable {position: absolute; width:50%; height:45%; /*min-height: 280px; %;  */}
 
-    #Timetable div.content { position: absolute; top: 10px; left: 10px; }
+    #Timetable div.content {  }
 
     #Timetable div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
 
@@ -73,7 +102,8 @@
 
         #Timetable div.details div, #Timetable div.detailsSmall div { float: right; margin-right: 2px; }
 
-#backgroundTable { border-spacing: 0; border-collapse: separate; position: absolute; top: 0; left: 0; }
+
+#backgroundTable { border-spacing: 0; border-collapse: separate;  }
 
     #backgroundTable div.header div { height: 20px; font-size: 12px; font-family: Arial; font-weight: 400; width: 50px; padding: 0; text-align: center; float: left; }
 
@@ -93,18 +123,23 @@
 #dialog-form input { margin-bottom: 5px;}
 
 
-footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: center; padding: 10px 0; font-size: 0.9em; height: 40px; width: 100%; color: #787878; }
 
-.export-tooltip-styling { max-width: 400px !important; padding: 5px; }
-
-.timetable-tooltip-styling { position: absolute; font-size: 12px; padding: 5px; }
 
 /* tables */
-table.tablesorter { font-family: arial; background-color: #CDCDCD; margin: 10px 0pt 15px; font-size: 8pt; width: 100%; text-align: left; }
-    table.tablesorter thead tr th, table.tablesorter tfoot tr th { background-color: #e6EEEE; border: 1px solid #FFF; font-size: 8pt; padding: 4px; }
-    table.tablesorter thead tr .header { background-image: url(bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; }
-    table.tablesorter tbody td { color: #3D3D3D; padding: 4px; background-color: #FFF; vertical-align: top; }
+table.tablesorter { background-color: #CDCDCD; width: 100%; text-align: left; }
+    table.tablesorter thead tr th, table.tablesorter tfoot tr th { background-color: #e2e2e2; border: 1px solid #FFF;  padding: 0.3em; }
+    table.tablesorter thead tr .header { background-image: url(bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; font-weight:normal;}
+    table.tablesorter tbody td { color: #3D3D3D; padding: 0.3em; background-color: #f7f7f7; vertical-align: top; }
     table.tablesorter tbody tr.odd td { background-color: #F0F0F6; }
     table.tablesorter thead tr .headerSortUp { background-image: url(asc.gif); }
     table.tablesorter thead tr .headerSortDown { background-image: url(desc.gif); }
     table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp { background-color: #8dbdd8; }
+    table.tablesorter {border-color: #aaaaaa; border-spacing:1px;}
+
+#List {position:absolute; height:53%; width:98%; top:46%; left:1%; background-color: #f7f7f7;}
+
+#List div#AddButtons  {position:absolute; top:-15%; z-index:2; right:0;}
+
+#List #table-wrapper {position:relative; height:100%; border: 1px solid #aaaaaa;}
+
+        #table-scroll {position:absolute; height:100%; overflow:auto;  width:100%; background-color: #f7f7f7;}

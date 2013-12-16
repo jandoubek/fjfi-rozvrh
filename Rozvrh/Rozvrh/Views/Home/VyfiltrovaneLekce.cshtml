@@ -5,6 +5,8 @@
         $("#AddSome").button().click(function () { addSome(); });
         $("#AddAll").button().click(function () { addAll(); });
         $("#RemoveAll").button().click(function () { removeAll(); });
+
+        $(".courseAcronym").tooltip({  show: null, hide: null, position: { my: "left+10", at: "right top" } });
     });
 
     function addAll() {
@@ -17,6 +19,8 @@
         });
     }
     
+
+
     function addSome() {
         var checkedVals = [];
         $('#Tabulka :checked').each(function () {
@@ -34,61 +38,70 @@
         });
     }
 </script>
+<div class="relativeWrapper">
 
-<br />
-<br />
-<span id="AddSome">Přidat zaškrtnuté</span> <span id="AddAll">Přidat všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
-<table id="Tabulka" class="tablesorter">
-    <thead>
-        <tr>
-            <th>Předmět</th>
-            <th>Katedra</th>
-            <th>Vyučující</th>
-            <th>Den</th>
-            <th>Čas</th>
-            <th>Délka (hod)</th>
-            <th>Místnost</th>
-            <th>Pravidelně</th>
-            <th>Vybrat</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.FiltredTimetableFields != null)
-        {
-            foreach (var item in Model.FiltredTimetableFields)
-            {
+<div id="AddButtons">
+    <span id="AddSome">Vykreslit označené</span> <span id="AddAll">Vykreslit všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
+</div>
+<div class="clear"></div>
+<div id="table-wrapper">
+<div id="table-scroll">
+    <table id="Tabulka" class="tablesorter">
+        <thead>
             <tr>
-                <td>
-                    <a href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.department_acr)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.lecturer)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.day)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.time)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.duration)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.classroom)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.period)
-                </td>
-                <td>
-                    @{
-                        <input name="Selector" type="checkbox" value="@item.UniqueID" />
-                    }
-                </td>
+                <th>Vybrat</th>
+                <th>Předmět</th>
+                <th>Katedra</th>
+                <th>Vyučující</th>
+                <th>Den</th>
+                <th>Čas</th>
+                <th>Délka (hod)</th>
+                <th>Místnost</th>
+                <th>Pravidelně</th>
             </tr>
+        </thead>
+        <tbody>
+            @if (Model.FiltredTimetableFields != null)
+            {
+                foreach (var item in Model.FiltredTimetableFields)
+                {
+                <tr>
+                    <td>
+                        @{
+                            <input name="Selector" type="checkbox" value="@item.UniqueID" />
+                        }
+                    </td>
+
+                    <td>
+                        <a class="courseAcronym" href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.department_acr)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.lecturer)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.day)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.time)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.duration)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.classroom)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.period)
+                    </td>
+                
+                </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+  </div>
+</div>
+</div>

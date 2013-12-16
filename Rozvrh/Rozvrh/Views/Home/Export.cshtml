@@ -1,6 +1,6 @@
 ﻿<script type="text/javascript">
     $(function () {
-        $(document).tooltip({ tooltipClass: "export-tooltip-styling", position: { my: "left-430 middle", at: "left middle", collision: "fit" } });
+        $(document).tooltip({ tooltipClass: "export-tooltip-styling", position: { my: "right-10", at: "left", collision: "fit" } });
     });
 
     $(function() {
@@ -17,18 +17,18 @@
 
 <div class="exportLink">
     @Html.ActionLink("SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton" })
-    <div class="exportToolip">SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a></div>
+    <p>SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a></p>
 </div>
 
 
 <div class="exportLink">
     @Html.ActionLink("iCal", "ExportToICal", "Home", new { title = @ical, @class = "exButton" })
-    <div class="exportToolip">iCal použijte pro import rozvrhu do vašeho kalendáře.</div>
+     <p>iCal použijte pro import rozvrhu do vašeho kalendáře.</p>
 </div>
 
 <div class="exportLink">
     @Html.ActionLink("XML", "ExportToXML", "Home", new { title = @xml, @class = "exButton" })
-    <div class="exportToolip">Xml slouží pro zpětný import do této aplikace.</div>
+    <p>Xml slouží pro zpětný import do této aplikace.</p>
 </div>
 
 

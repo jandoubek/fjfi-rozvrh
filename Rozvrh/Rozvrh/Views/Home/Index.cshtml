@@ -1,6 +1,6 @@
 ﻿@model Rozvrh.Models.Model
 @{
-    ViewBag.Title = "Úvodní stránka";
+    ViewBag.Title = "";
 }
 
 @section right{
@@ -10,10 +10,12 @@
             <li><a href="#tabs-1">Výběr</a></li>
             <li><a href="#tabs-2">Export</a></li>
             <li><a href="#tabs-3">Import</a></li>
+            <li id="AboutTab"><a href="#tabs-4">O Aplikaci</a></li>
         </ul>
         <div id="tabs-1">@{Html.RenderPartial("Vyber");}</div>
         <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
         <div id="tabs-3">@{Html.RenderPartial("Import");}</div>
+        <div id="tabs-4">@{Html.RenderPartial("About");}</div>
     </div>
 }
 
@@ -24,17 +26,17 @@
             @if (Model.ImportErrorMessage != "")
             { 
                 @:$("#error").show("Blind");
-                @:$("#error").text("@Html.Raw(Model.ImportErrorMessage)");
-            }
+                            @:$("#error").text("@Html.Raw(Model.ImportErrorMessage)");
+                        }
             else
             {
                  @:$("#error").hide();
-            }
-            
+                        }
+
         });
     </script>
 }
-<div id="Timetable">@Html.Partial("Rozvrh")</div><br/>
-<div id="Fltr">@Html.Partial("VyfiltrovaneLekce")</div>
+<div id="Timetable">@Html.Partial("Rozvrh")</div>
+<div id="List">@Html.Partial("VyfiltrovaneLekce")</div>
 <br />
 

@@ -11,14 +11,13 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/jqueryui")       
-        @Scripts.Render("~/bundles/dateValidation") 
         @RenderSection("scripts", required: false)
         @Styles.Render("~/Content/css")
 
 </head>
     <body>
-        <div class="main">
-                        @RenderSection("featured", required: false)
+        <div id="Main">
+                @RenderSection("featured", required: false)
             <section id="rightSection">
                 @RenderSection("right", required: false)
             </section>
@@ -26,6 +25,10 @@
                 @RenderBody()
             </section>
         </div>
-    <footer>&copy; David Blatský, Václav Honzík, Richard Salač, Tomáš Smola a Oldřich Štika, 2013<br/>Vytvořeno jako projekt v rámci předmětu 18PVS, pod vedením Jana Doubka.</footer>
+   @* <footer>
+        <div id="innerFooter">
+            &copy; David Blatský, Václav Honzík, Richard Salač, Tomáš Smola a Oldřich Štika, 2013<br/>Vytvořeno jako projekt v rámci předmětu 18PVS, pod vedením Jana Doubka.
+        </div>
+    </footer>*@
     </body>
 </html>
