@@ -7,13 +7,15 @@ namespace Rozvrh
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-2.0.3.js",
                         "~/Scripts/jquery.tablesorter.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-1.10.3.js"));
+                        "~/Scripts/jquery-ui-1.10.3.js",
+                        "~/Scripts/jquery.selectBox.js",
+                        "~/Scripts/jquery.mousewheel.js",
+                        "~/Scripts/perfect-scrollbar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -39,7 +41,9 @@ namespace Rozvrh
                         "~/Content/themes/base/jquery.ui.slider.css",
                         "~/Content/themes/base/jquery.ui.tabs.css",
                         "~/Content/themes/base/jquery.ui.datepicker.css",
-                        "~/Content/themes/base/jquery.ui.progressbar.css"));
+                        "~/Content/themes/base/jquery.ui.progressbar.css",
+                        "~/Content/themes/base/perfect-scrollbar.css",
+                        "~/Content/themes/base/jquery.selectBox.css"));
         }
     }
 }

@@ -23,11 +23,25 @@
         filterAll();
     }
 
-    $("#clearAll").click(function () { $("select option").prop("selected", false); });
+    $(function () {
+        $('select').selectBox();
+        $(".selectBox-inline").perfectScrollbar({
+            suppressScrollX: true,
+        });
+        
+    });
+    
+    $("#clearAll").click(function () {
+        $("select option").prop("selected", false);
+        $("select option").removeAttr("selected");
+        $('select').selectBox('refresh');
+        filterAll();
+    });
 
     function unselectSpecializationsGroups () {
         $('#SelectedSpecializations').val([]);
         $('#SelectedGroups').val([]);
+    
     }
     
     $(document).ready(function () {
@@ -57,7 +71,7 @@
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
     <div class="boxContainer">
-        <div class="box noscroll" id="rocnik">
+        <div class="box" id="rocnik">
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
             @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
@@ -98,7 +112,7 @@
     </div>
 
     <div class="boxContainer" >
-        <div class="box noscroll" id="den">
+        <div class="box" id="den">
             @Html.LabelFor(m => m.SelectedDays, "Den")
             @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "5", onchange = "onListBoxChange(this);" })
         </div>
@@ -110,8 +124,6 @@
             @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "5", onchange = "onListBoxChange(this);" })
         </div>
     </div>
-
-    @*<div class="clear"></div>*@
 
     <a id="clearAll" class="niceButton"  href="#">Reset filtrů</a>
 }

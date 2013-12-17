@@ -11,10 +11,12 @@
             <li><a href="#tabs-2">Export</a></li>
             <li><a href="#tabs-3">Import</a></li>
             <li id="AboutTab"><a href="#tabs-4">O Aplikaci</a></li>
+            <li id="TutorialTab"><a href="#tabs-5">Tutorial</a></li>
         </ul>
         <div id="tabs-1">@{Html.RenderPartial("Vyber");}</div>
         <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
         <div id="tabs-3">@{Html.RenderPartial("Import");}</div>
+        <div id="tabs-5">@{Html.RenderPartial("Tutorial");}</div>
         <div id="tabs-4">@{Html.RenderPartial("About");}</div>
     </div>
 }

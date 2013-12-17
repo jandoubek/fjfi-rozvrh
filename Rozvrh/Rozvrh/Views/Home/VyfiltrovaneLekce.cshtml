@@ -19,8 +19,6 @@
         });
     }
     
-
-
     function addSome() {
         var checkedVals = [];
         $('#Tabulka :checked').each(function () {
@@ -31,14 +29,13 @@
         });
     }
 
-
     function removeAll() {
         $.post('@Url.Action("RemoveAll", "Home")', { uids: null }, function (data) {
             $('#Timetable').html(data);
         });
     }
 </script>
-<div class="relativeWrapper">
+
 
 <div id="AddButtons">
     <span id="AddSome">Vykreslit označené</span> <span id="AddAll">Vykreslit všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
@@ -103,5 +100,4 @@
         </tbody>
     </table>
   </div>
-</div>
 </div>
