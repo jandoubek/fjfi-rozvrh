@@ -10,7 +10,7 @@ namespace Rozvrh.Models
     /// </summary>
     public class Model : IModel
     {
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// Class constructor. Inits the properties which are used in View components.
         /// </summary>
@@ -176,6 +176,7 @@ namespace Rozvrh.Models
                                                List<string> departmentIds,  List<string> lecturerIds,        List<string> buildingIds,
                                                List<string> classroomIds,   List<string> dayIds,             List<string> timeIds)
         {
+            log.Info("Info logging");
             var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
 
             //by groups, specializations, degreeYears
