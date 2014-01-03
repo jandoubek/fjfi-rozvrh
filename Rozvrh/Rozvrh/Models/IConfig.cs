@@ -58,5 +58,10 @@ namespace Rozvrh.Models
         /// </summary>
         [XmlElement("SufixPoolLink")]
         public string SufixPoolLink { get; set; }
+
+        /// <summary>
+        /// For handling error message from Controller to View
+        /// </summary>
+        public string ErrorMessage { get; set; }
     }
 }

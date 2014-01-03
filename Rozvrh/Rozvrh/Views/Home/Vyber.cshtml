@@ -26,7 +26,7 @@
     $(function () {
         $('select').selectBox();
         $(".selectBox-inline").perfectScrollbar({
-            suppressScrollX: true,
+            suppressScrollX: true
         });
         
     });
@@ -35,13 +35,13 @@
         $("select option").prop("selected", false);
         $("select option").removeAttr("selected");
         $('select').selectBox('refresh');
+        $('#zamereni select, #kruh select, #vyucujici select, #mistnost select').selectBox('options', []);
         filterAll();
     });
 
     function unselectSpecializationsGroups () {
         $('#SelectedSpecializations').val([]);
         $('#SelectedGroups').val([]);
-    
     }
     
     $(document).ready(function () {
@@ -95,10 +95,6 @@
             @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
         </div>
     </div>
-
-    @*<div class="clear"></div>
-
-    <br />*@
 
     <div class="boxContainer">
         <div class="box" id="budova">

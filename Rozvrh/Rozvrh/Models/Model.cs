@@ -10,15 +10,19 @@ namespace Rozvrh.Models
     /// </summary>
     public class Model : IModel
     {
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         /// <summary>
         /// Class constructor. Inits the properties which are used in View components.
         /// </summary>
         public Model()
         {
+            log.Debug("Method entry.");
+
             initialize();
             xmlTimetable = XMLTimetable.Instance;
             loadData();
+
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -27,15 +31,21 @@ namespace Rozvrh.Models
         /// <param name="timetableData"></param>
         public Model(IXMLTimetable timetableData)
         {
+            log.Debug("Method entry.");
+
             initialize();
             xmlTimetable = timetableData;
             loadData();
+
+            log.Debug("Method exit.");
         }
 
         /// <summary>
         /// Initializes fields to empty lists.
         /// </summary>
-        private void initialize(){
+        private void initialize()
+        {
+            log.Debug("Method entry.");
 
             ImportErrorMessage = "";
 
@@ -57,6 +67,8 @@ namespace Rozvrh.Models
 
             FiltredTimetableFields = new List<TimetableField>();
             CustomTimetableFields = new List<TimetableField>();
+
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -64,6 +76,8 @@ namespace Rozvrh.Models
         /// </summary>
         private void loadData()
         {
+            log.Debug("Method entry.");
+
             try
             {
                 Departments = xmlTimetable.m_departments;
@@ -71,14 +85,13 @@ namespace Rozvrh.Models
                 Buildings = xmlTimetable.m_buildings;
                 Days = xmlTimetable.m_days;
                 Times = xmlTimetable.m_times;
-
             }
             catch (Exception e)
             {
-                // FIX ME !!! - implement proper logging
-                System.Diagnostics.Debug.WriteLine("Error when parsing timetable XML.");
-                System.Diagnostics.Debug.WriteLine(e.StackTrace);
+                log.Error("Error when parsing timetable XML." + e.StackTrace);
             }
+
+            log.Debug("Method exit.");
         }
 
         private IXMLTimetable xmlTimetable { get; set; }
@@ -90,6 +103,7 @@ namespace Rozvrh.Models
         /// <param name="degreeYearIds"></param>
         public void FilterSpecializationsByDegreeYears(List<string> degreeYearIds)
         {
+            log.Debug("Method entry.");
             if (anyId(degreeYearIds) && degreeYearIds.Count == 1)
             {
                 var filteredSpecializations =
@@ -100,6 +114,7 @@ namespace Rozvrh.Models
 
                 Specializations = filteredSpecializations.ToList();
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -109,6 +124,7 @@ namespace Rozvrh.Models
         /// <param name="specializationIds"></param>
         public void FilterGroupsBySpecializations(List<string> specializationIds)
         {
+            log.Debug("Method entry.");
             if (anyId(specializationIds) && specializationIds.Count == 1)
             {
                 var filteredGroups =
@@ -118,6 +134,7 @@ namespace Rozvrh.Models
 
                 Groups = filteredGroups.ToList();
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -126,6 +143,7 @@ namespace Rozvrh.Models
         /// <param name="departmentIds">Ids of the given departments</param>
         public void FilterLecturersByDepartments(List<string> departmentIds)
         {
+            log.Debug("Method entry.");
             if (anyId(departmentIds))
             {
                 var filteredLecturersByDepartments =
@@ -138,6 +156,7 @@ namespace Rozvrh.Models
 
                 Lecturers = filteredLecturersByDepartments.ToList();
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -146,6 +165,7 @@ namespace Rozvrh.Models
         /// <param name="buildingIds">Ids of the given buildings</param>
         public void FilterClassroomsByBuildings(List<string> buildingIds)
         {
+            log.Debug("Method entry.");
             if (anyId(buildingIds))
             {
                 var filteredClassrooms =
@@ -156,6 +176,7 @@ namespace Rozvrh.Models
 
                 Classrooms = filteredClassrooms.ToList();
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -176,6 +197,7 @@ namespace Rozvrh.Models
                                                List<string> departmentIds,  List<string> lecturerIds,        List<string> buildingIds,
                                                List<string> classroomIds,   List<string> dayIds,             List<string> timeIds)
         {
+            log.Debug("Method entry.");
             var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
 
             //by groups, specializations, degreeYears
@@ -223,6 +245,7 @@ namespace Rozvrh.Models
                 select new TimetableField(dep, c, lec, ler, d, t, b, cr);
 
             FiltredTimetableFields = filteredTimetableFields.ToList();
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -232,6 +255,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByDegreeYears(List<string> degreeYearIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(degreeYearIds))
             {
                 var specializationIdsByDegreeYear =
@@ -241,6 +265,7 @@ namespace Rozvrh.Models
 
                 filterLessonsBySpecializations(specializationIdsByDegreeYear.ToList(), lessonsFromAllFilters);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -250,6 +275,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsBySpecializations(List<string> specializationIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(specializationIds))
             {
                 var groupIdsBySpecializations =
@@ -259,6 +285,7 @@ namespace Rozvrh.Models
 
                 filterLessonsByGroups(groupIdsBySpecializations.ToList(), lessonsFromAllFilters);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -268,6 +295,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByGroups(List<string> groupIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(groupIds))
             {
                 var lessonsFilteredByGroups =
@@ -280,6 +308,7 @@ namespace Rozvrh.Models
                      ).Distinct();
                 lessonsFromAllFilters.Add(lessonsFilteredByGroups);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -289,6 +318,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByDepartments(List<string> departmentIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(departmentIds))
             {
                 var lessonsFilteredByDepartments =
@@ -301,6 +331,7 @@ namespace Rozvrh.Models
                      select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByDepartments);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -310,6 +341,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByLecturers(List<string> lecturerIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(lecturerIds))
             {
                 var lessonsFilteredByLecturers =
@@ -318,6 +350,7 @@ namespace Rozvrh.Models
                      select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByLecturers);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -327,6 +360,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByBuildings(List<string> buildingIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(buildingIds))
             {
                 var classroomIdsFilteredByBuildings =
@@ -336,6 +370,7 @@ namespace Rozvrh.Models
 
                 filterLessonsByClassrooms(classroomIdsFilteredByBuildings.ToList(), lessonsFromAllFilters);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -345,6 +380,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByClassrooms(List<string> classroomIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(classroomIds))
             {
                 var lessonsFilteredByClassrooms =
@@ -353,6 +389,7 @@ namespace Rozvrh.Models
                      select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByClassrooms);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -362,6 +399,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByDays(List<string> dayIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if (anyId(dayIds))
             {
                 var lessonsFilteredByDays =
@@ -370,6 +408,7 @@ namespace Rozvrh.Models
                      select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByDays);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>
@@ -379,6 +418,7 @@ namespace Rozvrh.Models
         /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
         private void filterLessonsByTimes(List<string> timeIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
+            log.Debug("Method entry.");
             if ( anyId(timeIds) )
             {
                 var lessonsFilteredByTime =
@@ -387,6 +427,7 @@ namespace Rozvrh.Models
                      select h;
                 lessonsFromAllFilters.Add(lessonsFilteredByTime);
             }
+            log.Debug("Method exit.");
         }
 
         /// <summary>

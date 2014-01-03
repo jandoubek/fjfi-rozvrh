@@ -5,9 +5,6 @@ using Rozvrh.Models.Timetable;
 using System.Xml.Linq;
 using System.IO;
 
-
-//FIX ME !!! Richard: Needs to be abstracted to an interface becouse of unit testing.
-
 namespace Rozvrh.Models
 {
     /// <summary>
@@ -18,8 +15,12 @@ namespace Rozvrh.Models
 
         // static holder for instance, need to use lambda to construct since constructor private
         private static readonly Lazy<XMLTimetable> _instance = new Lazy<XMLTimetable>(() => new XMLTimetable());
+        
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        // accessor for instance
+        /// <summary>
+        ///  Accessor for instance.
+        /// </summary>
         public static XMLTimetable Instance
         {
             get
@@ -38,8 +39,9 @@ namespace Rozvrh.Models
         /// Reloads xml file, parses and initializes properties which holds base data of the application. This method should be used for refreshing the model after updating thxml with timetable.
         /// </summary>
         /// <param name="xmlPath">Path to the source xml file.</param>
-        public void Refresh(string xmlPath)
+        public bool Refresh(string xmlPath)
         {
+            log.Debug("Method entry.");
             m_dataXmlFilePath = xmlPath;
 
             m_departments = new List<Department>();
@@ -56,8 +58,18 @@ namespace Rozvrh.Models
             m_groups = new List<Group>();
             m_groupLessonBinder = new List<GroupLessonBinder>();
 
-            this.LoadXml();
-            this.InitData();
+            if (!this.LoadXml())
+            {
+                log.Debug("Method exit.");
+                return false;
+            }
+            if (!this.InitData())
+            {
+                log.Debug("Method exit.");
+                return false;
+            }
+            log.Debug("Method exit.");
+            return true;
         }
 
         /// <summary>
@@ -138,30 +150,49 @@ namespace Rozvrh.Models
         /// <summary>
         /// Method which open and parse the xml file.
         /// </summary>
-        private void LoadXml()
+        /// <returns>Bool result.</returns>
+        private bool LoadXml()
         {
+            log.Debug("Method entry.");
             try
             {
-                //LOG Console.WriteLine("RozvrhDataProvider::LoadXML: pouším se načíst XML soubor '{0}' ...", m_rozvhXmlFilePath);
-                m_xelDefinitions = XElement.Load(m_dataXmlFilePath);
+                log.Debug("Trying to load XML database file: '" + m_dataXmlFilePath + "'.");
+
+                //if the path starts with ~ - use local server loading
+                if (String.CompareOrdinal("~", 0, m_dataXmlFilePath, 0, 1) == 0)
+                {
+                    log.Info("Loading XML file from a server map path: '" + m_dataXmlFilePath + "'.");
+                    m_xelDefinitions = XElement.Load(System.Web.HttpContext.Current.Server.MapPath(m_dataXmlFilePath));
+                }
+                else
+                {
+                    log.Info("Loading XML file from an absolute path (like http): '" + m_dataXmlFilePath + "'.");
+                    m_xelDefinitions = XElement.Load(m_dataXmlFilePath);
+                }
+                log.Info("XML loaded.");
+                log.Debug("Method exit.");
+                return true;
             }
-            catch (IOException e)
+            catch
             {
-                throw new Exception("Unable to load and parse the xml data file.");
-                //LOG Console.WriteLine("RozvrhDataProvider::LoadXML: CHYBA - nepovedlo se načíst XML soubor: {0}", m_rozvhXmlFilePath);
+                log.Error("Unable to load and parse the XML data file: '" + m_dataXmlFilePath + "'.");
+                log.Debug("Method exit.");
+                return false;
             }
-            //LOG Console.WriteLine("RozvrhDataProvider::LoadXML: XML soubor '{0}' načten", m_rozvhXmlFilePath);
         }
 
 
         /// <summary>
         /// Init class properties by xml data.
         /// </summary>
-        private void InitData()
+        /// <returns>Bool result.</returns>
+        private bool InitData()
         {
+            log.Debug("Method entry.");
             try
             {
                 // Init m_departments. Only depertments with name filled in the xml. e.g. departments with acronym "REZERVA", a "PROPAGACE" are ommited.
+                log.Debug("Loading departments data.");
                 var enumDepartment =
                     from dep in m_xelDefinitions.Element("departments").Descendants("department")
                     where !dep.Element("name").IsEmpty
@@ -170,9 +201,11 @@ namespace Rozvrh.Models
                 foreach (XElement dep in enumDepartment)
                     m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
                 m_departments.Add(new Department("0", "0", "---", "---", "0"));
+                log.Debug("Loaded" + m_departments.Count + "departments data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_courses. Only courses of the departments specified in m_departments.
+                log.Debug("Loading course data.");
                 var enumCourse =
                     from dep in m_departments
                     from c in m_xelDefinitions.Element("courses").Descendants("course")
@@ -180,9 +213,11 @@ namespace Rozvrh.Models
                     select c;
                 foreach (XElement c in enumCourse)
                     m_courses.Add(new Course(c.Attribute("id").Value, c.Element("department").Attribute("ref").Value, c.Element("name").Value, c.Element("acronym").Value));
+                log.Debug("Loaded" + m_courses.Count + "courses data.");                
                 //--------------------------------------------------------------------------
 
                 // Init m_lectures. Only lectures of the courses specified in m_courses.
+                log.Debug("Loading lectures data.");
                 var enumLecture =
                     from c in m_courses
                     from lec in m_xelDefinitions.Element("lectures").Descendants("lecture")
@@ -192,9 +227,11 @@ namespace Rozvrh.Models
                     m_lectures.Add(new Lecture(lec.Attribute("id").Value, lec.Element("course").Attribute("ref").Value,
                                                lec.Element("practice").Value, lec.Element("tag").Value, lec.Element("duration").Value,
                                                lec.Element("period").Value));
+                log.Debug("Loaded" + m_lectures.Count + "lecturers data.");                
                 //--------------------------------------------------------------------------
 
                 // Init m_lessons. Only lessons with specified time, day and lecture specified in m_lectures. If the lecturer and classroom not given in xml, '0' ids are filed
+                log.Debug("Loading lessons data.");
                 var lecIds = 
                     from lec in m_lectures
                     select lec.id;
@@ -223,6 +260,7 @@ namespace Rozvrh.Models
                                             card.Element("time").Attribute("ref").Value, crId,
                                             card.Element("tag").Value));
                 }
+                log.Debug("Loaded" + m_lessons.Count + "lessons data.");
                 //--------------------------------------------------------------------------
 
                 //lets get ids of lessons, times, lecturers and classrooms from all lessons
@@ -245,6 +283,7 @@ namespace Rozvrh.Models
                 //--------------------------------------------------------------------------
 
                 // Init m_lecturers. Only lecturers with at least one lesson
+                log.Debug("Loading lecturers data.");
                 var enumLecturer =    //only lecturers who give one or more lessons  
                     (
                     from ler in m_xelDefinitions.Element("lecturers").Descendants("lecturer")
@@ -256,9 +295,11 @@ namespace Rozvrh.Models
                     m_lecturers.Add(new Lecturer(ler.Attribute("id").Value, ler.Element("name").Value,
                                                  ler.Element("forename").Value, ler.Element("department").Attribute("ref").Value));
                 m_lecturers.Add(new Lecturer("0", "---", "", "0")); //adds an general null lecturer - need in the JAZ course
+                log.Debug("Loaded" + m_lecturers.Count + "lecturers data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_times.
+                log.Debug("Loading times data.");
                 var enumTimes =
                     from el in m_xelDefinitions.Element("times").Descendants("time")
                     where timeIds.Contains(el.Attribute("id").Value)  //get all times when at least on lesson take place
@@ -267,18 +308,22 @@ namespace Rozvrh.Models
                 foreach (XElement el in enumTimes)
                     m_times.Add(new Time(el.Attribute("id").Value, el.Element("hours").Value,
                                          el.Element("minutes").Value, el.Element("timesorder").Value));
+                log.Debug("Loaded" + m_times.Count + "times data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_days.
+                log.Debug("Loading days data.");
                 var enumDays =
                     from d in m_xelDefinitions.Element("days").Descendants("day")
                     orderby d.Element("daysorder").Value
                     select d;
                 foreach (XElement d in enumDays)
                     m_days.Add(new Day(d.Attribute("id").Value, d.Element("czech").Value, d.Element("daysorder").Value));
+                log.Debug("Loaded" + m_days.Count + "days data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_classrooms.
+                log.Debug("Loading classrooms data.");
                 var enumClassrooms =
                     from cl in m_xelDefinitions.Element("classrooms").Descendants("classroom")
                     where classroomIds.Contains(cl.Attribute("id").Value)
@@ -286,9 +331,11 @@ namespace Rozvrh.Models
                 foreach (XElement cl in enumClassrooms)
                     m_classrooms.Add(new Classroom(cl.Attribute("id").Value, cl.Element("name").Value, cl.Element("building").Attribute("ref").Value));
                 m_classrooms.Add(new Classroom("0", "---", "0")); //adds an general null classroom
+                log.Debug("Loaded " + m_classrooms.Count + " classrooms data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_buildings.
+                log.Debug("Loading buildings data.");
                 var buildingsUsed =
                     (
                     from cl in m_classrooms
@@ -303,9 +350,11 @@ namespace Rozvrh.Models
                 foreach (XElement b in enumBuildings)
                     m_buildings.Add(new Building(b.Attribute("id").Value, b.Element("name").Value));
                 m_buildings.Add(new Building("0", "---")); //adds an general null building
+                log.Debug("Loaded  " + m_buildings.Count + "  buildings data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_degreeYears and m_specializations.
+                log.Debug("Loading 'degreeYears' and specializations data.");
                 //get all degrees
                 var enumDegrees =
                     from el in m_xelDefinitions.Element("degrees").Descendants("degree")
@@ -339,9 +388,11 @@ namespace Rozvrh.Models
                     i++;
                 }
                 m_degreeyears = m_degreeyears.OrderBy(d => d.acronym).ToList();
+                log.Debug("Loaded " + m_degreeyears.Count + " 'degreeYears' and " + m_specializations.Count + " specializations data.");
                 //--------------------------------------------------------------------------
 
                 // Init m_groups and m_groupLessonBinder.
+                log.Debug("Loading groups and 'groupLessonBinder' data.");
                 var enumParts =
                     from el in m_xelDefinitions.Element("parts").Descendants("part")
                     select el;
@@ -359,15 +410,18 @@ namespace Rozvrh.Models
                     }
                 }
                 m_groups = m_groups.OrderBy(k => k.groupNo).ToList();
-
+                log.Debug("Loaded " + m_groups.Count + " groups and " + m_groupLessonBinder.Count + " 'groupLessonBinder' data.");
+                log.Debug("Method exit.");
+                return true;
             }
 
-            catch (IOException e)
+            catch
             {
-                //LOG Console.WriteLine("RozvrhDataProvider::InitData: CHYBA - nepovedlo se načíst data do modelu");
-                throw new Exception("XML data file parsing error.");
+                log.Error("XML data file parsing error.");
+                log.Debug("Method exit.");
+                return false;
             }
-            //LOG Console.WriteLine("RozvrhDataProvider::InitData: data načtena");
+            
         }
 
     }

@@ -1,11 +1,6 @@
 ﻿html {height: 100%; padding: 0px; margin: 0px;}
 
 body {height: 100%; padding: 0; margin: 0;
-       -moz-min-width: 1350px; -moz-max-width:1600px; -moz-min-height: 700px; 
-       -ms-min-width: 1350px;-ms-max-width:1600px;  -ms-min-height: 700px; 
-       -o-min-width: 1350px; -o-max-width:1600px; -o-min-height:700px;  
-       -webkit-min-width: 1350px; -webkit-max-width:1600px;  -webkit-min-height:700px; 
-       min-width: 1350px; max-width:1600px; min-height:700px; 
        font-size: 80%; font-family: Verdana;} 
 
 .clear { clear: both; }
@@ -13,7 +8,15 @@ body {height: 100%; padding: 0; margin: 0;
 
 .ui-dialog { font-size: 100% }
 
-#Main {position:relative; height:100%;}
+#BodyWrapper {  height:100%; margin-left: auto; margin-right: auto;
+               -moz-min-width: 1350px; -moz-max-width:1600px; -moz-min-height: 700px; 
+               -ms-min-width: 1350px;-ms-max-width:1600px;  -ms-min-height: 700px; 
+               -o-min-width: 1350px; -o-max-width:1600px; -o-min-height:700px;  
+               -webkit-min-width: 1350px; -webkit-max-width:1600px;  -webkit-min-height:700px; 
+               min-width: 1350px; max-width:1600px; min-height:700px; 
+}
+
+#Main {position:relative; height:100%; }
     
 #leftSection {position:relative; height:100%; width:100%; overflow:hidden; }
 
@@ -28,7 +31,7 @@ body {height: 100%; padding: 0; margin: 0;
     
     #rightSection .ui-tabs .ui-tabs-nav { padding-left: 2%; }
 
-    #rightSection .ui-tabs .ui-tabs-panel {  padding: 2%; font-size:85%;}
+    #rightSection .ui-tabs .ui-tabs-panel {  padding: 2%; font-size:95%;}
 
                                         #AboutTab {float:right; margin-right:2%;}
 
@@ -61,7 +64,7 @@ body {height: 100%; padding: 0; margin: 0;
         
     #rightSection div.nomargin { margin: 0; }
   
-    #rightSection #clearAll {margin-left: 3.5%; margin-top: 3.5%;}
+    #rightSection #clearAll {margin: 3% 0% 0% 3%;}
 
 
 #Loading {position:absolute; width: 100%;height: 100%; top:0; left:0; display: none;  border: 1px solid #929292; background: #c2c2c2 no-repeat; -ms-opacity: 0.6; opacity: 0.6; filter: alpha(opacity=60); text-align: center; vertical-align: middle; }
@@ -71,9 +74,9 @@ body {height: 100%; padding: 0; margin: 0;
     #Loading img { display: inline-block; vertical-align: middle; width: 80px; height: 80px; }
 
 
-#Timetable {position: absolute; width:48%; height:44%; top:1%; left:1%; /*min-height: 280px; %;  */}
+#Timetable {position: relative; width:48%; height:44%; top:1%; left:1%; overflow: hidden;/*min-height: 280px; %;  */}
 
-    #Timetable div.content {  }
+    #Timetable div.content {width:auto; height:auto; position:absolute;  }
 
     #Timetable div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
 
@@ -135,8 +138,23 @@ table.tablesorter { width: 100%; text-align: left; border-collapse:collapse;}
 
 #List div#AddButtons  {position:absolute; top:-12%; z-index:2; right:0;}
 
-#List #table-wrapper { height:100%; border: 1px solid #a8a8a8;
+#List .fht-table-wrapper { height:100%; border: 1px solid #a8a8a8; position:relative; overflow:hidden;
                                   -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
 
-        #table-scroll {height:100%; background-color: #f7f7f7; overflow:auto;}
+        .fht-tbody {overflow:hidden; position:relative;}
 
+
+
+
+
+/*ADMIN section*/
+
+div#LogInContainer, div#FormContainer {width: 35%; margin:1.5%;}
+
+div#LogInContainer fieldset div, div#FormContainer fieldset div {margin:1% 2%;}
+
+div#LogInContainer fieldset, div#FormContainer fieldset{margin: 2% 0%;}
+
+div#FormContainer input#XMLTimetableFilePathField,  input#LinkToInfoField,  input#PrefixPoolLinkField, input#SufixPoolLinkField {width:98%;}
+
+div#FormContainer input {margin: 0% 0% 3% 0%;}

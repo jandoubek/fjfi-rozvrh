@@ -6,7 +6,8 @@
         $("#AddAll").button().click(function () { addAll(); });
         $("#RemoveAll").button().click(function () { removeAll(); });
 
-        $(".courseAcronym").tooltip({  show: null, hide: null, position: { my: "left+10", at: "right top" } });
+        $(".courseAcronym").tooltip({ show: null, hide: null, position: { my: "left+10", at: "right top" } });
+        $("td").tooltip({ show: null, hide: null, position: { my: "bottom", at: "top" } });
     });
 
     function addAll() {
@@ -34,6 +35,21 @@
             $('#Timetable').html(data);
         });
     }
+
+    $(function () {
+        
+
+        $('#Tabulka').fixedHeaderTable({
+            footer: false,
+            cloneHeadToFoot: false,
+            fixedColumn: false
+        });
+        
+        $('.fht-tbody').perfectScrollbar({
+            suppressScrollX: true,
+            wheelSpeed: 30
+        });
+    });
 </script>
 
 
@@ -41,8 +57,7 @@
     <span id="AddSome">Vykreslit označené</span> <span id="AddAll">Vykreslit všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
 </div>
 <div class="clear"></div>
-<div id="table-wrapper">
-<div id="table-scroll">
+
     <table id="Tabulka" class="tablesorter">
         <thead>
             <tr>
@@ -60,6 +75,7 @@
         <tbody>
             @if (Model.FiltredTimetableFields != null)
             {
+                
                 foreach (var item in Model.FiltredTimetableFields)
                 {
                 <tr>
@@ -72,7 +88,7 @@
                     <td>
                         <a class="courseAcronym" href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
                     </td>
-                    <td>
+                    <td title="@Html.DisplayTextFor(modelItem => item.department)">
                         @Html.DisplayTextFor(modelItem => item.department_acr)
                     </td>
                     <td>
@@ -99,5 +115,3 @@
             }
         </tbody>
     </table>
-  </div>
-</div>

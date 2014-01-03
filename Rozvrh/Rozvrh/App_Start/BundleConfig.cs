@@ -15,6 +15,7 @@ namespace Rozvrh
                         "~/Scripts/jquery-ui-1.10.3.js",
                         "~/Scripts/jquery.selectBox.js",
                         "~/Scripts/jquery.mousewheel.js",
+                        "~/Scripts/jquery.fixedheadertable.js",
                         "~/Scripts/perfect-scrollbar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -26,11 +27,12 @@ namespace Rozvrh
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/themes/base/jquery-ui.css", 
-                        "~/Content/themes/base/jquery.ui.dialog.css",
+            bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                        "~/Content/themes/base/jquery-ui.css",
+                        "~/Content/themes/base/jquery.ui.dialog.css",
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
                         "~/Content/themes/base/jquery.ui.selectable.css",

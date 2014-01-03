@@ -3,7 +3,7 @@
 <html>
 <head>
         <meta charset="utf-8" />
-        <title>Rozvrh @ViewBag.Title</title> 
+        <title>MůjRozvrh FJFI @ViewBag.Title</title> 
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />        
         @Styles.Render("~/Content/themes/base/css")
@@ -16,14 +16,16 @@
 
 </head>
     <body>
-        <div id="Main">
-                @RenderSection("featured", required: false)
-            <section id="rightSection">
-                @RenderSection("right", required: false)
-            </section>
-            <section id="leftSection">
-                @RenderBody()
-            </section>
+        <div id="BodyWrapper">
+            <div id="Main">
+                    @RenderSection("featured", required: false)
+                <section id="rightSection">
+                    @RenderSection("right", required: false)
+                </section>
+                <section id="leftSection">
+                    @RenderBody()
+                </section>
+            </div>
         </div>
     </body>
 </html>

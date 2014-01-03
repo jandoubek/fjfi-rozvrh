@@ -140,6 +140,11 @@
             .dialog('open');
     }
 
+    $(function () {
+        $('#Timetable').perfectScrollbar({
+            useBothWheelAxes:true
+        });
+    });
 
     function edit(uid) {
         $.ajax({
