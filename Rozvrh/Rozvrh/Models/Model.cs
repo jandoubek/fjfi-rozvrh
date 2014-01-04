@@ -47,7 +47,9 @@ namespace Rozvrh.Models
         {
             log.Debug("Method entry.");
 
-            ImportErrorMessage = "";
+            ImportErrorMessage = ""; //populated in the controller
+            CreatedDate = Config.Instance.Created.ToString("dd.MM.yyyy");
+            WelcomeMessage = Config.Instance.WelcomeMessage;
 
             Specializations = new List<Specialization>();
             Groups = new List<Group>();
@@ -479,6 +481,20 @@ namespace Rozvrh.Models
         public List<int> SelectedClassrooms { get; set; }
         public List<int> SelectedDays { get; set; }
         public List<int> SelectedTimes { get; set; }
+        
+        /// <summary>
+        /// Used for holding the xml import message.
+        /// </summary>
         public string ImportErrorMessage { get; set; }
+        
+        /// <summary>
+        /// Used for holding the date of the last database update.
+        /// </summary>
+        public string CreatedDate { get; set; }
+
+        /// <summary>
+        /// Message to be shown on the empty filtering result list.
+        /// </summary>
+        public string WelcomeMessage { get; set; }
     }
 }

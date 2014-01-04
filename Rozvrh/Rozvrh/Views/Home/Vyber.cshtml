@@ -64,8 +64,11 @@
 {
     HttpMethod = "Post",
     UpdateTargetId = "tabs-1",
-    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
-}))
+    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+    
+},
+new { id = "filterForm" }
+))
 {
 
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>

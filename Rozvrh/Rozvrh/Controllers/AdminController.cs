@@ -73,19 +73,20 @@ namespace Rozvrh.Controllers
         /// <param name="SemesterEndField">Ending date of the study period.</param>
         /// <param name="CreatedField">The date when the timetable data generated.</param>
         /// <param name="LinkToInfoField">Link to the additional info in timetable footer.</param>
+        /// <param name="WelcomeMessage">Message to be shown on the empty filtering result list.</param>
         /// <param name="PrefixPoolLinkField">Prefix of the link to the course popularity pool.</param>
         /// <param name="SufixPoolLinkField">Sufix of the link to the course popularity link.
         /// <returns>Partial view of the actualized Config.</returns>
         [HttpPost]
         public PartialViewResult ConfigButtonAction(string submitButton, string XMLTimetableFilePathField, DateTime SemesterStartField, DateTime SemesterEndField, 
-                                                    DateTime CreatedField, string LinkToInfoField, string PrefixPoolLinkField, string SufixPoolLinkField)
+                                                    DateTime CreatedField, string LinkToInfoField, string WelcomeMessage, string PrefixPoolLinkField, string SufixPoolLinkField)
         {
             log.Debug("Method entry.");
             m_config.ErrorMessage = "";
             switch (submitButton)
             {
                 case "Reload":
-                    m_config.Set(XMLTimetableFilePathField, SemesterStartField, SemesterEndField, CreatedField, LinkToInfoField, PrefixPoolLinkField, SufixPoolLinkField);
+                    m_config.Set(XMLTimetableFilePathField, SemesterStartField, SemesterEndField, CreatedField, LinkToInfoField, WelcomeMessage, PrefixPoolLinkField, SufixPoolLinkField);
                     if (!m_config.SaveToFile())
                         m_config.ErrorMessage = "Nepovedlo se uložit nastavení do souboru, více v logovacím souboru./n";
                     ModelState.Clear();
@@ -95,7 +96,7 @@ namespace Rozvrh.Controllers
                     return PartialView("Config", m_config.GetIConfig());
 
                 case "Uložit":
-                    m_config.Set(XMLTimetableFilePathField, SemesterStartField, SemesterEndField, CreatedField, LinkToInfoField, PrefixPoolLinkField, SufixPoolLinkField);
+                    m_config.Set(XMLTimetableFilePathField, SemesterStartField, SemesterEndField, CreatedField, LinkToInfoField, WelcomeMessage, PrefixPoolLinkField, SufixPoolLinkField);
                     if (!m_config.SaveToFile())
                         m_config.ErrorMessage = "Nepovedlo se uložit nastavení do souboru, více v logovacím souboru.";
                     ModelState.Clear();

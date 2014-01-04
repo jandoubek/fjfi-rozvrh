@@ -54,6 +54,7 @@ namespace Rozvrh.Models
             ic.SemesterStart = SemesterStart;
             ic.SemesterEnd = SemesterEnd;
             ic.Created = Created;
+            ic.WelcomeMessage = WelcomeMessage;
             ic.SufixPoolLink = SufixPoolLink;
             ic.PrefixPoolLink = PrefixPoolLink;
             ic.XMLTimetableFilePath = XMLTimetableFilePath;
@@ -75,6 +76,7 @@ namespace Rozvrh.Models
             SemesterStart = src.SemesterStart;
             SemesterEnd = src.SemesterEnd;
             Created = src.Created;
+            WelcomeMessage = src.WelcomeMessage;
             SufixPoolLink = src.SufixPoolLink;
             PrefixPoolLink = src.PrefixPoolLink;
             XMLTimetableFilePath = src.XMLTimetableFilePath;
@@ -90,10 +92,11 @@ namespace Rozvrh.Models
         /// <param name="SemesterEnd">Ending date of the study period.</param>
         /// <param name="Created">The date when the timetable data generated.</param>
         /// <param name="LinkToInfo">Link to the additional info in timetable footer.</param>
+        /// <param name="WelcomeMessage">Message to be shown on the empty filtering result list.</param>
         /// <param name="PrefixPoolLink">Prefix of the link to the course popularity pool.</param>
         /// <param name="SufixPoolLink">Sufix of the link to the course popularity link.
         public void Set(string XMLTimetableFilePath, DateTime SemesterStart, DateTime SemesterEnd,
-                        DateTime Created, string LinkToInfo, string PrefixPoolLink, string SufixPoolLink)
+                        DateTime Created, string LinkToInfo, string WelcomeMessage, string PrefixPoolLink, string SufixPoolLink)
         {
             log.Debug("Method entry.");
             
@@ -101,6 +104,7 @@ namespace Rozvrh.Models
             this.SemesterStart = SemesterStart;
             this.SemesterEnd = SemesterEnd;
             this.Created = Created;
+            this.WelcomeMessage = WelcomeMessage;
             this.LinkToAdditionalInformation = LinkToInfo;
             this.PrefixPoolLink = PrefixPoolLink;
             this.SufixPoolLink = SufixPoolLink;
@@ -120,6 +124,7 @@ namespace Rozvrh.Models
             SemesterEnd = new DateTime(2014, 2, 14);
             Created = new DateTime(2013,11,13);
             LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pdf";
+            WelcomeMessage = "Vítej v aplikaci MůjRozvrh FIFJ! Začni v sekci filtrování vpravo.";
             PrefixPoolLink = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/";
             SufixPoolLink = "/index.html";
 

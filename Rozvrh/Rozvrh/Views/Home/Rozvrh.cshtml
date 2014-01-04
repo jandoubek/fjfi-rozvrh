@@ -11,6 +11,7 @@
 <script>
 
     $(document).ready(function () {
+
         $("button.edit").button({
             icons: { primary: "ui-icon-pencil" },
             text: false
@@ -122,6 +123,8 @@
             }
         });
 
+        $('#Timetable').perfectScrollbar('destroy'); // for the case that there's already one
+        $('#Timetable').perfectScrollbar();
     });
 
     function select(field) {
@@ -139,12 +142,6 @@
         $('#dialog-confirm').data("uid", uid)
             .dialog('open');
     }
-
-    $(function () {
-        $('#Timetable').perfectScrollbar({
-            useBothWheelAxes:true
-        });
-    });
 
     function edit(uid) {
         $.ajax({
@@ -285,7 +282,11 @@
                     }
                 }
                 @{ top += dayHeight; }
-                <script> $(document).ready(function () { $('#@(day.id)').css('line-height', @(dayHeight - 1) + "px").height(@(dayHeight - 1)); });</script>
+                <script>
+                    $(document).ready(function () {
+                        $('#@(day.id)').css('line-height', @(dayHeight - 1) + "px").height(@(dayHeight - 1));
+                    });
+                </script>
             </div>
 
             }

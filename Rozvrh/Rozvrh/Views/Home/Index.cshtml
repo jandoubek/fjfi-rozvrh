@@ -61,6 +61,11 @@
 </div>
 
 <div id="Timetable">@Html.Partial("Rozvrh")</div>
-<div id="List">@Html.Partial("VyfiltrovaneLekce")</div>
+<div id="List">
+    <div id="welcomeMessage">@Model.WelcomeMessage</div>
+    <img id="fjfiLogo" />
+    <div id="lastUpdate">Poslední aktualizace databáze: @Model.CreatedDate</div>
+    @Html.Partial("VyfiltrovaneLekce")
+</div>
 <br />
 

@@ -177,6 +177,11 @@
             <div>@Html.TextBox("CreatedField", Model.Created, "{0:dd.MM.yyyy}", new { @class = "txtDate" })</div>
         </fieldset>
         <fieldset>
+            <legend>Uvítácí zpráva</legend>
+            <div>@Html.Label("Zpráva co bude zobrazene po příchodu na stránky")</div>
+            <div>@Html.TextBox("WelcomeMessage", Model.WelcomeMessage)</div>
+        </fieldset>
+        <fieldset>
             <legend>Anketa</legend>
             <div>@Html.Label("Předpona odkazu na předmět v anketě")</div>
             <div>@Html.TextBox("PrefixPoolLinkField", Model.PrefixPoolLink)</div>
@@ -185,7 +190,7 @@
             <div>@Html.TextBox("SufixPoolLinkField", Model.SufixPoolLink)</div>
         </fieldset>
 
-        <div>
+        <div id="configButtons">
             <input class="exButton"  onclick="return resetClick()" type="submit" name="submitButton" value="Zrušit" />
             <input class="btnSubmit exButton" onclick="return saveClick()" type="submit" name="submitButton" value="Uložit" />
         </div>
