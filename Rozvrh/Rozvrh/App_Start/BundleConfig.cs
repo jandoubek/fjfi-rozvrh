@@ -8,14 +8,15 @@ namespace Rozvrh
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.0.3.js",
-                        "~/Scripts/jquery.tablesorter.js"));
+                        "~/Scripts/jquery-2.0.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-1.10.3.js",
                         "~/Scripts/jquery.selectBox.js",
                         "~/Scripts/jquery.mousewheel.js",
                         "~/Scripts/jquery.fixedheadertable.js",
+                        "~/Scripts/jquery.tablesorter.js",
+                        "~/Scripts/jquery.tablesorter.widgets.js",
                         "~/Scripts/perfect-scrollbar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -45,7 +46,8 @@ namespace Rozvrh
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/perfect-scrollbar.css",
-                        "~/Content/themes/base/jquery.selectBox.css"));
+                        "~/Content/themes/base/jquery.selectBox.css",
+                        "~/Content/themes/base/theme.default.css"));
         }
     }
 }

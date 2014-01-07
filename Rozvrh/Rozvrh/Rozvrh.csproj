@@ -240,7 +240,7 @@
     <Content Include="Content\bg.gif" />
     <Content Include="Content\desc.gif" />
     <Content Include="Content\themes\base\perfect-scrollbar.css" />
-    <Content Include="Content\themes\sortedTableStyle.css" />
+    <Content Include="Content\themes\base\theme.default.css" />
     <Content Include="Editable\Aktualni_databaze.xml" />
     <Content Include="Editable\config.xml" />
     <Content Include="Editable\MůjRozvrhLog.txt" />
@@ -259,6 +259,7 @@
     <Content Include="Scripts\jquery.mousewheel.js" />
     <Content Include="Scripts\jquery.selectBox.js" />
     <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\jquery.tablesorter.widgets.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

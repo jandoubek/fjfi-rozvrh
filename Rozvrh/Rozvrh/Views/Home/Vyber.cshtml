@@ -73,54 +73,54 @@ new { id = "filterForm" }
 
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
-    <div class="boxContainer">
+    <div class="boxContainer" id="prvni">
         <div class="box" id="rocnik">
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
-            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="zamereni">
             @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
-            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "9", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="kruh">
             @Html.LabelFor(m => m.SelectedGroups, "Kruh")
-            @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "8", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="boxContainer">
+    <div class="boxContainer" id="druhy">
         <div class="box" id="katedra">
             @Html.LabelFor(m => m.SelectedDepartments, "Katedra")
-            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "8", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "9", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="vyucujici">
             @Html.LabelFor(m => m.SelectedLecturers, "Vyučující")
-            @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="boxContainer">
+    <div class="boxContainer" id="treti">
         <div class="box" id="budova">
             @Html.LabelFor(m => m.SelectedBuildings, "Budova")
-            @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "8", onchange = "$('#SelectedClassrooms').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "9", onchange = "$('#SelectedClassrooms').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="mistnost">
             @Html.LabelFor(m => m.SelectedClassrooms, "Místnost")
-            @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="boxContainer" >
-        <div class="box" id="den">
+    <div class="boxContainer" id="den">
+        <div class="box">
             @Html.LabelFor(m => m.SelectedDays, "Den")
-            @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "5", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "6", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="boxContainer">
-        <div class="box" id="zacatek">
+    <div class="boxContainer" id="zacatek">
+        <div class="box">
             @Html.LabelFor(m => m.SelectedTimes, "Začátek")
-            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "5", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "6", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
