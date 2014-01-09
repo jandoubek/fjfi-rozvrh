@@ -16,14 +16,23 @@
     }
 
 <div class="exportLink">
-    @Html.ActionLink("SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton" })
-    <p>SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a></p>
+    @Html.ActionLink("iCal", "ExportToICal", "Home", new { title = @ical, @class = "exButton" })
+    <p>iCal použijte pro import rozvrhu do vašeho kalendáře.</p>
 </div>
 
+<div class="exportLink">
+    @Html.ActionLink("PNG", "ExportToPNG", "Home", new { @class = "exButton" })
+    <p>Bitmapový obrázek ve fromátu PNG.</p>
+</div>
 
 <div class="exportLink">
-    @Html.ActionLink("iCal", "ExportToICal", "Home", new { title = @ical, @class = "exButton" })
-     <p>iCal použijte pro import rozvrhu do vašeho kalendáře.</p>
+    @Html.ActionLink("JPG", "ExportToJPG", "Home", new { @class = "exButton" })
+    <p>Bitmapový obrázek ve formátu JPEG.</p>
+</div>
+
+<div class="exportLink">
+    @Html.ActionLink("SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton" })
+    <p>SVG použijte pokud chcete přehledný obrázek rozvrhu.</p>
 </div>
 
 <div class="exportLink">

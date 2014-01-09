@@ -36,6 +36,30 @@ namespace Rozvrh.Controllers
             return instance.DownloadAsSVG(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created, Config.Instance.LinkToAdditionalInformation);
         }
 
+        public ActionResult ExportToPNG()
+        {
+            ImportExport instance = new ImportExport();
+
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "png");
+        }
+
+        public ActionResult ExportToJPG()
+        {
+            ImportExport instance = new ImportExport();
+
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "jpg");
+        }
+
+        public ActionResult ExportToPDF()
+        {
+            ImportExport instance = new ImportExport();
+
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "pdf");
+        }
+
         public ActionResult ExportToICal()
         {
             ImportExport instance = new ImportExport();

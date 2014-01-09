@@ -3,6 +3,7 @@ using Rozvrh.Exporters.Generators;
 using Rozvrh.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -58,6 +59,48 @@ namespace Rozvrh.Exporters
                 res.FileDownloadName = "FJFIRozvrh.XML" ;
                 return res;
             }
+        }
+        /// <summary>
+        /// Exports lectures to bitmap format.
+        /// </summary>
+        /// <param name="lectures">List of lectures.</param>
+        /// <param name="title">Title displayed at top-left corner of the image.</param>
+        /// <param name="created">Date the timetable was created from config.</param>
+        /// <param name="linkToInfo">Hyperlink to webpage with additional information.</param>
+        /// <param name="path">Path to folder where temp files will be created and where Inkspace folder is.</param>
+        /// <param name="format">Bitmap format to export ie. png jpg pdf</param>
+        /// <returns></returns>
+        public FileResult DownloadAsBITMAP(List<TimetableField> lectures, string title, DateTime created, string linkToInfo,
+            string path, string format)
+        {
+            SvgGenerator gen = new SvgGenerator();
+            string text = gen.generateSVG(convertToExportFormat(lectures), title, created, linkToInfo);
+            Guid id = Guid.NewGuid();
+            string svgName = string.Format(@"{0}.svg", id);
+            string svgFileName = path + svgName;
+            using (StreamWriter outfile = new StreamWriter(svgFileName))
+            {
+                outfile.Write(text);
+            }
+
+            string expName = string.Format(@"{0}.{1}", id, format);
+            string expFileName = path + expName;
+
+            string inkscapeArgs = string.Format(@"-f ""{0}"" -w 1600 -h 728 -e ""{1}""", svgFileName, expFileName);
+            string inkspacePath = path + "InkscapePortable/InkscapePortable.exe";
+
+            Process inkscape = Process.Start(new ProcessStartInfo(inkspacePath, inkscapeArgs));
+
+            inkscape.WaitForExit(3000);
+            FileStream fs = File.OpenRead(expFileName);
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, data.Length);
+            var res = new FileContentResult(data, "image/" + format);
+            res.FileDownloadName = "FJFIRozvrh." + format;
+            fs.Close();
+            File.Delete(expFileName);
+            File.Delete(svgFileName);
+            return res;
         }
 
         /// <summary>
