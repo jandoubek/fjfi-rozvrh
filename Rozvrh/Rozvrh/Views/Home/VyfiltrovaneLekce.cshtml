@@ -39,13 +39,32 @@
             wheelSpeed: 30
         });
 
-        $("#AddSome").button().click(function () { addSome(); });
-        $("#AddAll").button().click(function () { addAll(); });
-        $("#RemoveAll").button().click(function () { removeAll(); });
+        $("button.add").button({
+            icons: { primary: "ui-icon-plus" },
+            text: false
+        });
+
+        $("button#AddAll").button({
+            icons: { primary: "ui-icon-plus" },
+            text: true
+        });
+
+        $("button#RemoveAll").button({
+            icons: { primary: "ui-icon-trash" },
+            text: true
+        });
 
         $(".courseAcronym").tooltip({ show: null, hide: null, position: { my: "left+10", at: "right top" } });
         $("td").tooltip({ show: null, hide: null, position: { my: "bottom", at: "top" } });
     });
+
+    function addField(uid) {
+        var value = [];
+        value.push(uid);
+        $.post('@Url.Action("AddSome", "Home")', { uids: value }, function (data) {
+            $('#Timetable').html(data);
+        });
+    }
 
     function addAll() {
         var allVals = [];
@@ -53,16 +72,6 @@
             allVals.push($(this).val());
         });
         $.post('@Url.Action("AddAll", "Home")', { uids: allVals }, function (data) {
-            $('#Timetable').html(data);
-        });
-    }
-    
-    function addSome() {
-        var checkedVals = [];
-        $('#Tabulka :checked').each(function () {
-            checkedVals.push($(this).val());
-        });
-        $.post('@Url.Action("AddSome", "Home")', { uids: checkedVals }, function (data) {
             $('#Timetable').html(data);
         });
     }
@@ -77,7 +86,8 @@
 
 
 <div id="AddButtons">
-    <span id="AddSome">Vykreslit označené</span> <span id="AddAll">Vykreslit všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
+    <button id="AddAll" onclick="addAll();">Přidat vše</button>
+    <button id="RemoveAll" onclick="removeAll();">Odstranit vše</button>
 </div>
 <div class="clear"></div>
 <div id="table-wrapper">
@@ -103,9 +113,7 @@
                 {
                 <tr>
                     <td>
-                        @{
-                            <input name="Selector" type="checkbox" value="@item.UniqueID" />
-                        }
+                        <button class="add" onclick="addField(@(item.UniqueID));">Přidat</button>
                     </td>
 
                     <td>
