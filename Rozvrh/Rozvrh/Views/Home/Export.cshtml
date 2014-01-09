@@ -17,7 +17,17 @@
 
 <div class="exportLink">
     @Html.ActionLink("SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton" })
-    <div class="exportToolip">SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro jeho konverzi do vámi oblibeného formátu (PDF,JPEG,PNG) můžete využít <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics#Online_SVG_converters" target="_blank">webové aplikace</a></div>
+    <div class="exportToolip">Vektorový obrázek rozvrhu.</div>
+</div>
+
+<div class="exportLink">
+    @Html.ActionLink("PNG", "ExportToPNG", "Home", new { @class = "exButton" })
+    <div class="exportToolip">Bitmapový obrázek ve fromátu PNG.</div>
+</div>
+
+<div class="exportLink">
+    @Html.ActionLink("JPG", "ExportToJPG", "Home", new { @class = "exButton" })
+    <div class="exportToolip">Bitmapový obrázek ve formátu JPEG.</div>
 </div>
 
 
