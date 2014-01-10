@@ -14,30 +14,18 @@
         });
     }
 
-    $(function() {
-        $( ".niceButton" ).button();
-    });
-
     function onListBoxChange(listBox) {
         $(listBox.form).submit();
         filterAll();
     }
 
-    $(function () {
-        $('select').selectBox();
-        $(".selectBox-inline").perfectScrollbar({
-            suppressScrollX: true
-        });
-        
-    });
-    
-    $("#clearAll").click(function () {
+    function resetAll() {
         $("select option").prop("selected", false);
         $("select option").removeAttr("selected");
         $('select').selectBox('refresh');
         $('#zamereni select, #kruh select, #vyucujici select, #mistnost select').selectBox('options', []);
         filterAll();
-    });
+    }
 
     function unselectSpecializationsGroups () {
         $('#SelectedSpecializations').val([]);
@@ -46,6 +34,24 @@
     
     $(document).ready(function () {
         BindSpinner();
+
+        $('select').selectBox();
+        $(".selectBox-inline").perfectScrollbar({
+            suppressScrollX: true
+        });
+
+        $("button#clearAll").button({
+            icons: { primary: "ui-icon-close" },
+            text: true
+        });
+
+        $("button.resetOne").button({
+            icons: { primary: "ui-icon-close" },
+            text: false
+        });
+
+        $(".box").mouseenter(function () { $(".resetOne", this).show(); })
+                 .mouseleave(function () { $(".resetOne", this).hide(); });
     });
 
     function BindSpinner() {
@@ -57,6 +63,16 @@
             $(this).hide();
         });
     };
+
+    function resetOne(boxId) {
+        if (boxId == "rocnik" || boxId == "zamereni")
+            unselectSpecializationsGroups();
+        var res = "#".concat(boxId, " select option");
+        $(res).prop("selected", false);
+        $(res).removeAttr("selected");
+        $('select').selectBox('refresh');
+        filterAll();
+    }
 
 </script>
 
@@ -75,14 +91,17 @@ new { id = "filterForm" }
 
     <div class="boxContainer" id="prvni">
         <div class="box" id="rocnik">
+            <button class="resetOne" onclick="resetOne('rocnik');">Reset</button>
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
             @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="zamereni">
+            <button class="resetOne" onclick="resetOne('zamereni');">Reset</button>
             @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
             @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "9", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="kruh">
+            <button class="resetOne" onclick="resetOne('kruh');">Reset</button>
             @Html.LabelFor(m => m.SelectedGroups, "Kruh")
             @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
@@ -90,10 +109,12 @@ new { id = "filterForm" }
 
     <div class="boxContainer" id="druhy">
         <div class="box" id="katedra">
+            <button class="resetOne" onclick="resetOne('katedra');">Reset</button>
             @Html.LabelFor(m => m.SelectedDepartments, "Katedra")
             @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "9", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="vyucujici">
+            <button class="resetOne" onclick="resetOne('vyucujici');">Reset</button>
             @Html.LabelFor(m => m.SelectedLecturers, "Vyučující")
             @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
@@ -101,10 +122,12 @@ new { id = "filterForm" }
 
     <div class="boxContainer" id="treti">
         <div class="box" id="budova">
+            <button class="resetOne" onclick="resetOne('budova');">Reset</button>
             @Html.LabelFor(m => m.SelectedBuildings, "Budova")
             @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "9", onchange = "$('#SelectedClassrooms').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="mistnost">
+            <button class="resetOne" onclick="resetOne('mistnost');">Reset</button>
             @Html.LabelFor(m => m.SelectedClassrooms, "Místnost")
             @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
@@ -112,6 +135,7 @@ new { id = "filterForm" }
 
     <div class="boxContainer" id="den">
         <div class="box">
+            <button class="resetOne" onclick="resetOne('den');">Reset</button>
             @Html.LabelFor(m => m.SelectedDays, "Den")
             @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "6", onchange = "onListBoxChange(this);" })
         </div>
@@ -119,10 +143,10 @@ new { id = "filterForm" }
 
     <div class="boxContainer" id="zacatek">
         <div class="box">
+            <button class="resetOne" onclick="resetOne('zacatek');">Reset</button>
             @Html.LabelFor(m => m.SelectedTimes, "Začátek")
             @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "6", onchange = "onListBoxChange(this);" })
         </div>
     </div>
-
-    <a id="clearAll" class="niceButton"  href="#">Reset filtrů</a>
+    <button id="clearAll" onclick="resetAll()">Reset vše</button>
 }

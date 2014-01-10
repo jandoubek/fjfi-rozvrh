@@ -23,7 +23,7 @@ body {height: 100%; padding: 0; margin: 0;
 
 #rightSection {position:absolute; left:50.5%; height:38%; width: 48.5%; top: 1.5%; z-index:2; }
 
-    #rightSection .exportLink {height: 30%; }
+    #rightSection .exportLink {height: 15%; }
 
     #rightSection .exportLink .exButton {float: left; width: 10%;  margin-right: 3%;}
 
@@ -104,6 +104,8 @@ body {height: 100%; padding: 0; margin: 0;
     #Timetable button.delete { float: right; }
 
     #List button.add { border: 1px solid #c2c2c2;  width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px; margin-left: 0.5em;}
+    
+    #rightSection button.resetOne {position:absolute; right:0; top:0; display: none; border: 1px solid #c2c2c2;  width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px; margin:0;}
     
     #Timetable div.name { position: absolute; text-align: center; }
 
