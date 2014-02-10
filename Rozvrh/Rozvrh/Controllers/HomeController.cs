@@ -266,68 +266,11 @@ namespace Rozvrh.Controllers
             System.Web.HttpContext.Current.Session["CustomTimetableFields"] = M.CustomTimetableFields;
         }
 
-        /// <summary>
-        /// Returns 1.1.2001 date with hours and minutes of the TimetableField
-        /// </summary>
-        /// <param name="field">Field to be processed</param>
-        /// <returns></returns>
-        private static DateTime getStartTime(TimetableField field)
-        {
-            return new DateTime(2001, 1, 1, int.Parse(field.time_hours), int.Parse(field.time_minutes), 0);
-        }
 
-        /// <summary>
-        /// Returns fields duration
-        /// </summary>
-        /// <param name="field">Field to be processed</param>
-        /// <returns></returns>
-        private static TimeSpan getDuration(TimetableField field)
-        {
-            return new TimeSpan(int.Parse(field.duration), 0, 0);
-        }
 
         public static List<List<TimetableField>> getGroups(List<TimetableField> fields)
-        {
-            fields.Sort((x, y) => DateTime.Compare(getStartTime(x), getStartTime(y)));
-            var groups = new List<List<TimetableField>> { new List<TimetableField>() };
-
-            foreach (TimetableField l in fields)
-            {
-                var lastgroup = groups[groups.Count - 1];
-                if (lastgroup.Count < 1)
-                {
-                    groups[groups.Count - 1].Add(l);
-                }
-                //Is lecture l starting sooner than end time of the last lecture in last group (with 10 minutes toleration)?
-                else if (DateTime.Compare(getStartTime(l), lastgroup.Max(lec => getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0))) < 0)
-                {
-                    //All lectures intersecting with l
-                    List<TimetableField> intersecting = lastgroup.Where(lec => (DateTime.Compare(getStartTime(l), getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0)) < 0)).ToList();
-                    //Only have to worry about 3 and more lectures in one group
-                    //If lecture l is intersecting with all of lectures in lastgroup then it belongs to the group
-                    if (lastgroup.Count <= 1 || intersecting.Count() == lastgroup.Count)
-                    {
-                        lastgroup.Add(l);
-                    }
-                    else
-                    {
-                        //Otherwise create a fake lectures from all intersecting lectures
-                        var newGroup = intersecting.Select(interLec => new FakeTimetableField(interLec.time_hours, interLec.time_minutes, interLec.duration))
-                            .Cast<TimetableField>().ToList();
-
-                        //And create a new last group from l and the fake lectures
-                        newGroup.Add(l);
-                        groups.Add(newGroup);
-                    }
-
-                }
-                else
-                {
-                    groups.Add(new List<TimetableField>());
-                    lastgroup = groups[groups.Count - 1];
-                    lastgroup.Add(l);
-                }
-            }
+        {            
+            List<List<TimetableField>> groups = new LecturesGroupDivider().divideToGroups(fields);
             return groups;
         }
 
