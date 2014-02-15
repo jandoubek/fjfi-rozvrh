@@ -242,6 +242,7 @@
     <Content Include="Content\themes\base\perfect-scrollbar.css" />
     <Content Include="Content\themes\base\theme.default.css" />
     <Content Include="Editable\Aktualni_databaze.xml" />
+    <Content Include="Editable\Chris_Botti.xml" />
     <Content Include="Editable\config.xml" />
     <Content Include="Editable\MůjRozvrhLog.txt" />
     <Content Include="favicon.ico" />

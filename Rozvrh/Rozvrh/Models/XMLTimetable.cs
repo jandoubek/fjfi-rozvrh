@@ -191,11 +191,11 @@ namespace Rozvrh.Models
             log.Debug("Method entry.");
             try
             {
-                // Init m_departments. Only depertments with name filled in the xml. e.g. departments with acronym "REZERVA", a "PROPAGACE" are ommited.
+                // Init m_departments. Only depertments with code number less than 50. e.g. departments with acronym "REZERVA", a "PROPAGACE" are ommited.
                 log.Debug("Loading departments data.");
                 var enumDepartment =
                     from dep in m_xelDefinitions.Element("departments").Descendants("department")
-                    where !dep.Element("name").IsEmpty
+                    where Convert.ToInt32(dep.Element("code").Value) < 50
                     orderby dep.Element("code").Value
                     select dep;
                 foreach (XElement dep in enumDepartment)
@@ -302,7 +302,7 @@ namespace Rozvrh.Models
                 log.Debug("Loading times data.");
                 var enumTimes =
                     from el in m_xelDefinitions.Element("times").Descendants("time")
-                    where timeIds.Contains(el.Attribute("id").Value)  //get all times when at least on lesson take place
+                    //where timeIds.Contains(el.Attribute("id").Value)  //get all times when at least on lesson take place
                     orderby Convert.ToInt32(el.Element("timesorder").Value)
                     select el;
                 foreach (XElement el in enumTimes)

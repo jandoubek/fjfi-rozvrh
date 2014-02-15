@@ -456,3 +456,245 @@
 2014-01-07 17:07:31,793 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
 2014-01-07 17:07:31,821 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
 2014-01-07 17:07:31,833 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 20:16:55,957 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 20:16:55,977 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 20:16:55,995 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 20:37:46,706 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 20:37:46,736 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 20:37:46,757 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 20:55:00,581 [12] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 20:55:00,614 [12] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 20:55:00,643 [12] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 20:56:44,915 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 20:56:44,934 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 20:56:44,953 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:04:30,418 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:04:30,444 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:04:30,455 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:09:33,436 [6] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:09:33,453 [6] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:09:33,463 [6] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:26:18,977 [11] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:26:19,013 [11] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:26:19,032 [11] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:39:58,263 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:39:58,288 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:39:58,316 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:42:29,098 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:42:29,121 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:42:29,135 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:43:41,076 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:43:41,125 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:43:41,163 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:45:42,177 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:45:42,206 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:45:42,225 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:50:32,256 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:50:32,277 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:50:32,287 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:52:49,904 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:52:49,936 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:52:49,959 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-09 21:57:06,244 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-09 21:57:06,277 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-09 21:57:06,289 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:13:27,056 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:13:27,075 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:13:27,085 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:13:34,871 [10] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:13:34,887 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:13:34,897 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:23:37,376 [35] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:23:37,393 [37] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:23:37,403 [37] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:26:21,077 [10] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:26:21,105 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:26:21,122 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:29:22,377 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:29:22,406 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:29:22,417 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:49:36,843 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:49:36,870 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:49:36,891 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:52:29,743 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:52:29,769 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:52:29,819 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 10:58:30,693 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 10:58:30,722 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 10:58:30,733 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 11:00:34,118 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 11:00:34,145 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 11:00:34,167 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 11:06:31,054 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 11:06:31,082 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 11:06:31,093 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 11:08:35,939 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 11:08:35,966 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 11:08:36,027 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 11:10:34,708 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 11:10:34,734 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 11:10:34,744 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 11:11:31,917 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 11:11:31,960 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 11:11:31,978 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 19:16:38,299 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 19:16:38,332 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 19:16:38,343 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-01-10 19:38:56,920 [91] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-01-10 19:38:56,937 [91] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-01-10 19:38:56,949 [91] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 22:16:41,854 [7] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 22:16:41,872 [7] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 22:16:41,914 [7] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 22:22:24,968 [34] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 22:22:24,986 [34] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 22:22:25,002 [34] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 22:34:54,235 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 22:34:54,264 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 22:34:54,293 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 23:38:57,891 [10] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 23:38:57,914 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 23:38:57,927 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 23:52:37,361 [11] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 23:52:37,386 [11] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 23:52:37,401 [11] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 23:52:56,752 [12] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 23:52:56,769 [12] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 23:52:56,779 [12] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-10 23:56:00,355 [12] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-10 23:56:00,385 [12] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-10 23:56:00,397 [12] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-11 00:09:06,290 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-11 00:09:06,314 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-11 00:09:06,333 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-11 20:16:20,879 [10] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-11 20:16:20,899 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-11 20:16:20,910 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 14:58:52,482 [89] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 14:58:52,525 [89] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Aktualni_databaze.xml'.
+2014-02-12 14:58:52,535 [89] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 14:59:04,193 [96] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 14:59:08,173 [95] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 14:59:08,181 [95] INFO Rozvrh.Controllers.AdminController passwordPassed - Debug login (no password).
+2014-02-12 15:00:30,160 [96] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:00:30,321 [96] INFO Rozvrh.Models.Config SaveToFile - Configuration successfully saved to file: '~/Editable/config.xml'
+2014-02-12 15:00:30,326 [96] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:00:30,336 [96] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:00:30,432 [96] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:00:30,441 [96] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:00:42,677 [94] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:00:42,694 [94] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:00:42,704 [94] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:00:46,903 [94] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:00:46,914 [94] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:00:46,923 [94] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:00:59,577 [94] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:00:59,589 [98] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:00:59,598 [98] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:01:04,616 [94] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:01:04,629 [94] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:01:04,640 [94] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:01:11,953 [98] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:01:11,964 [98] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:01:11,972 [98] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:03:23,742 [93] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:03:23,753 [93] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:03:23,762 [93] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 15:07:42,368 [82] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 15:07:42,392 [82] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 15:07:42,407 [82] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 21:40:18,039 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 21:40:18,062 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 21:40:18,083 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 21:47:18,832 [35] INFO Rozvrh.Controllers.AdminController passwordPassed - Debug login (no password).
+2014-02-12 21:49:18,296 [6] INFO Rozvrh.Models.Config SaveToFile - Configuration successfully saved to file: '~/Editable/config.xml'
+2014-02-12 21:51:08,318 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 21:51:08,340 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 21:51:08,361 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 22:01:33,280 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 22:01:33,300 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 22:01:33,311 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-12 22:16:29,564 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-12 22:16:29,586 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-12 22:16:29,595 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 13:05:01,756 [11] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 13:05:01,775 [11] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 13:05:01,797 [11] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 13:44:43,567 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 13:44:43,586 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 13:44:43,608 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 13:50:18,692 [10] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 13:50:18,707 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 13:50:18,720 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:25:26,898 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:25:26,937 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:25:26,976 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:26:59,752 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:26:59,783 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:26:59,816 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:43:45,744 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:43:45,771 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:43:45,795 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:48:08,584 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:48:08,611 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:48:08,645 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:49:47,665 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:49:47,694 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:49:47,718 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:50:19,504 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:50:19,552 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:50:19,592 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:51:23,798 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:51:23,829 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:51:23,855 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 14:57:53,251 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 14:57:53,282 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 14:57:53,307 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 15:09:28,849 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 15:09:28,879 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 15:09:28,903 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 15:12:03,518 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 15:12:03,556 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 15:12:03,620 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 15:17:54,739 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 15:17:54,768 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 15:17:54,800 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 15:26:20,986 [10] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 15:26:21,014 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 15:26:21,039 [10] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:10:55,394 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:10:55,425 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:10:55,454 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:28:33,826 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:28:33,854 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:28:33,886 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:34:24,012 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:34:24,042 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:34:24,071 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:40:22,498 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:40:22,528 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:40:22,553 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:45:21,166 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:45:21,194 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:45:21,225 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:48:32,820 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:48:32,856 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:48:32,883 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 17:50:00,176 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 17:50:00,212 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 17:50:00,241 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 19:41:54,378 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 19:41:54,424 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 19:41:54,447 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 20:49:22,699 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 20:49:22,724 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 20:49:22,735 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 20:56:08,349 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 20:56:08,386 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 20:56:08,402 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 20:57:48,080 [8] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 20:57:48,110 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 20:57:48,120 [8] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
+2014-02-15 21:11:42,703 [7] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-15 21:11:42,724 [7] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-15 21:11:42,742 [7] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
