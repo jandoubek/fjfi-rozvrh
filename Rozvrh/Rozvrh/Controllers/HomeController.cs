@@ -161,26 +161,31 @@ namespace Rozvrh.Controllers
             return null;
         }
 
-        public ActionResult EditTimetableField(string uid, string lecture, string lecturer, string room, string department,string day, string time, string duration, string period)
+        public ActionResult EditTimetableField(string uid, string lecture, string lecturer, string room, string department, string day, string hours, string minutes, string duration, string period)
         {
             int uniqueID;
             if (int.TryParse(uid, out uniqueID))
             {
+                minutes = Convert.ToInt32(minutes).ToString("00");
+
                 M.CustomTimetableFields.RemoveAll(field => field.UniqueID == uniqueID);
 
-                var newField = new TimetableField {lecturer = lecturer, lecture_acr = lecture, classroom = room, department_acr = department, day = day, time = time, duration = duration};
+                var newField = new TimetableField { lecturer = lecturer, lecture_acr = lecture, classroom = room, department_acr = department, day = day, time = hours + minutes, duration = duration };
                 newField.period = (period.ToLower() == "true" ? "Ano" : "Ne");
 
                 var possibleDepartments = M.Departments.Where(dep => dep.acronym == department).ToArray();
                 if (possibleDepartments.Any())
                     newField.color = possibleDepartments[0].color;
-
-                var possibleTimes = M.Times.Where(t => t.acronym == time).ToArray();
+                /*
+                var possibleTimes = M.Times.Where(t => t.hours == hours).ToArray();
                 if (possibleTimes.Any())
                 {
                     newField.time_hours = possibleTimes[0].hours;
                     newField.time_minutes = possibleTimes[0].minutes;
                 }
+                */
+                newField.time_hours = hours;
+                newField.time_minutes = minutes;
 
                 var possibleDays = M.Days.Where(d => d.name == day).ToArray();
                 if (possibleDays.Any())

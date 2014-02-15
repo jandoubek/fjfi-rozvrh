@@ -45,10 +45,11 @@
         lecturer = $("#lecturer"),
         room = $("#room"),
         department = $("#department"),
-        time = $("#time"),
+        hours = $("#hours"),
+        minutes = $("#minutes"),
         duration = $("#duration"),
         period = $("#period"),
-        allFields = $([]).add(lecture).add(lecturer).add(room).add(department).add(time).add(duration).add(period),
+        allFields = $([]).add(lecture).add(lecturer).add(room).add(department).add(hours).add(minutes).add(duration).add(period),
         tips = $(".validateTips");
 
         function updateTips(t) {
@@ -77,7 +78,7 @@
         }
 
         function checkValue(o, min, max, n) {
-            if (!(o.val() > min && o.val() < max)) {
+            if (!(o.val() >= min && o.val() <= max)) {
                 o.addClass("ui-state-error");
                 updateTips(n);
                 return false;
@@ -98,15 +99,17 @@
                     bValid = bValid && checkLength(lecture, "předmět", 1, 20);
                     bValid = bValid && checkLength(lecturer, "vyučující", 1, 100);
                     bValid = bValid && checkLength(room, "místnost", 1, 50);
+                    bValid = bValid && checkValue(hours, 7, 19, "Přípustný začátek je jen od 7 do 19 hodin.")
+                    bValid = bValid && checkValue(minutes, 0, 59, "Přípustný začátek je jen od 0 do 59 minut.")
                     bValid = bValid && checkRegexp(duration, /^\d{1,2}$/, "Délka hodiny musí být celé číslo.");
-                    bValid = bValid && checkValue(duration, 0, 13, "Délka hodiny nemůže být delší než 12 hodin.")
+                    bValid = bValid && checkValue(duration, 1, 12, "Délka hodiny nemůže být delší než 12 hodin.")
 
                     if (bValid) {
                         $.ajax({
                             type: "POST",
                             url: '@Url.Action("EditTimetableField", "Home")',
                             data: "uid=" + $(this).data("uid") + "&lecture=" + $("#lecture").val() + "&lecturer=" + $("#lecturer").val() + "&room=" + $("#room").val() + "&day=" + $("#day").val()
-                                     + "&department=" + $("#department").val() + "&time=" + $("#time").val() + "&duration=" + $("#duration").val() + "&period=" + $("#period").prop("checked"),
+                                     + "&department=" + $("#department").val() + "&hours=" + $("#hours").val() + "&minutes=" + $("#minutes").val() + "&duration=" + $("#duration").val() + "&period=" + $("#period").prop("checked"),
                             success: function (data) {
                                 $('#Timetable').html(data);
                                 $("#dialog-form").dialog("close");
@@ -153,7 +156,8 @@
                 $("#dialog-form #lecturer").val(result.lecturer);
                 $("#dialog-form #room").val(result.classroom);
                 $("#dialog-form #department").val(result.department_acr);
-                $("#dialog-form #time").val(result.time);
+                $("#dialog-form #hours").val(result.time_hours);
+                $("#dialog-form #minutes").val(result.time_minutes);
                 $("#dialog-form #day").val(result.day);
                 $("#dialog-form #duration").val(result.duration);
                 $("#dialog-form #period").prop("checked", result.period == "Ano" ? true : false);
@@ -173,12 +177,22 @@
 
     <form>
         <fieldset>
+            <div>
             <label for="lecture">Předmět</label>
             <input type="text" name="lecture" id="lecture" class="text ui-widget-content ui-corner-all" />
+            </div>
+            <br />
+            <div>
             <label for="lecturer">Vyučující</label>
             <input type="text" name="lecturer" id="lecturer" class="text ui-widget-content ui-corner-all" />
+            </div>
+            <br />
+            <div>
             <label for="room">Místnost</label>
             <input type="text" name="room" id="room" class="text ui-widget-content ui-corner-all" />
+            </div>
+            <br />
+            <div>
             <label for="department">Katedra</label>
             <select name="department" id="department" class="text ui-widget-content ui-corner-all">
                 @foreach (var d in Model.Departments)
@@ -186,6 +200,9 @@
                     <option id="@d.id">@d.acronym</option>
                 }
             </select>
+            </div>
+            <br />
+            <div>
             <label for="day">Den</label>
             <select name="day" id="day" class="text ui-widget-content ui-corner-all">
                 @foreach (var d in Model.Days)
@@ -193,17 +210,24 @@
                     <option id="@(d.id)">@(d.name)</option>
                 }
             </select>
-            <label for="time">Začátek</label>
-            <select name="time" id="time" class="text ui-widget-content ui-corner-all">
-                @foreach (var t in Model.Times)
-                {
-                    <option id="@t.id">@t.acronym</option>
-                }
-            </select>
-            <label for="duration">Délka (zaokrouhleně na hodiny nahoru)</label>
-            <input type="text" name="duration" id="duration" class="text ui-widget-content ui-corner-all" pattern="[0-9]*" />
-            <label for="period">Pravidelně</label>
+            </div>
+            <br />
+            <div>
+            <label for="time"  style="float:left;">Začátek [hodin : minut]</label>
+            <input type="text" name="hours" id="hours" class="text ui-widget-content ui-corner-all" style="float:left; width:10%;" /><span style="float:left">:</span>
+            <input type="text" name="minutes" id="minutes" class="text ui-widget-content ui-corner-all" style="float:left; width:10%;"/>
+            </div>
+            <br style="clear:both;"/>
+            <br />
+            <div>
+            <label for="duration">Délka (zaok. na hodiny nahoru)</label>
+            <input type="text" name="duration" id="duration" class="text ui-widget-content ui-corner-all" pattern="[0-9]*"   style="width:10%;" />
+            </div>
+            <br />
+            <div>
+            <label for="period" style="float:left;">Pravidelně</label>
             <input type="checkbox" name="period" id="period" class="text ui-widget-content ui-corner-all" />
+            </div>
         </fieldset>
     </form>
 </div>
@@ -252,7 +276,7 @@
                             continue;
                         }
                         int width = Convert.ToInt32(field.duration) * 50;
-                        int left = 100 + (Convert.ToInt32(field.time_hours) - 7) * 50;
+                        int left = Convert.ToInt32(75 + (Convert.ToDecimal(field.time_hours) - 7 + Convert.ToDecimal(field.time_minutes) / 60) * 50);
                         int height = 50;
                         int nameHeight = 31;
                         int fieldTop = top;
