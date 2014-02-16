@@ -8428,130 +8428,65 @@
 </day>
 </days>
 <times>
-<time id="-1">
-<hours>7</hours>
-<minutes>00</minutes>
-<timesorder>1</timesorder>
-</time>
 <time id="1">
 <hours>7</hours>
 <minutes>30</minutes>
 <timesorder>2</timesorder>
-</time>
-<time id="-3">
-<hours>8</hours>
-<minutes>00</minutes>
-<timesorder>3</timesorder>
 </time>
 <time id="2">
 <hours>8</hours>
 <minutes>30</minutes>
 <timesorder>4</timesorder>
 </time>
-<time id="-5">
-<hours>9</hours>
-<minutes>00</minutes>
-<timesorder>5</timesorder>
-</time>
 <time id="3">
 <hours>9</hours>
 <minutes>30</minutes>
 <timesorder>6</timesorder>
-</time>
-<time id="-7">
-<hours>10</hours>
-<minutes>00</minutes>
-<timesorder>7</timesorder>
 </time>
 <time id="4">
 <hours>10</hours>
 <minutes>30</minutes>
 <timesorder>8</timesorder>
 </time>
-<time id="-9">
-<hours>11</hours>
-<minutes>00</minutes>
-<timesorder>9</timesorder>
-</time>
 <time id="5">
 <hours>11</hours>
 <minutes>30</minutes>
 <timesorder>10</timesorder>
-</time>
-<time id="-11">
-<hours>12</hours>
-<minutes>00</minutes>
-<timesorder>11</timesorder>
 </time>
 <time id="6">
 <hours>12</hours>
 <minutes>30</minutes>
 <timesorder>12</timesorder>
 </time>
-<time id="-13">
-<hours>13</hours>
-<minutes>00</minutes>
-<timesorder>13</timesorder>
-</time>
 <time id="7">
 <hours>13</hours>
 <minutes>30</minutes>
 <timesorder>14</timesorder>
-</time>
-<time id="-15">
-<hours>14</hours>
-<minutes>00</minutes>
-<timesorder>15</timesorder>
 </time>
 <time id="8">
 <hours>14</hours>
 <minutes>30</minutes>
 <timesorder>16</timesorder>
 </time>
-<time id="-17">
-<hours>15</hours>
-<minutes>00</minutes>
-<timesorder>17</timesorder>
-</time>
 <time id="9">
 <hours>15</hours>
 <minutes>30</minutes>
 <timesorder>18</timesorder>
-</time>
-<time id="-19">
-<hours>16</hours>
-<minutes>00</minutes>
-<timesorder>19</timesorder>
 </time>
 <time id="10">
 <hours>16</hours>
 <minutes>30</minutes>
 <timesorder>20</timesorder>
 </time>
-<time id="-21">
-<hours>17</hours>
-<minutes>00</minutes>
-<timesorder>21</timesorder>
-</time>
 <time id="11">
 <hours>17</hours>
 <minutes>30</minutes>
 <timesorder>22</timesorder>
 </time>
-<time id="-23">
-<hours>18</hours>
-<minutes>00</minutes>
-<timesorder>23</timesorder>
-</time>
 <time id="12">
 <hours>18</hours>
 <minutes>30</minutes>
 <timesorder>24</timesorder>
-</time>
-<time id="-25">
-<hours>19</hours>
-<minutes>00</minutes>
-<timesorder>25</timesorder>
 </time>
 <time id="13">
 <hours>19</hours>

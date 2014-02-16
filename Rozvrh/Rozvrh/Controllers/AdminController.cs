@@ -122,14 +122,6 @@ namespace Rozvrh.Controllers
         /// <returns>True for registered password, false otherwise.</returns>
         private bool passwordPassed(string password)
         {
-            //pro debug
-            if (password.Length == 0)
-            {
-                log.Info("Debug login (no password).");
-                return true;
-            }
-            //pro debug
-
             log.Debug("Trying to validate password.");
 
             byte[] passwordBytes = Encoding.ASCII.GetBytes(password);

@@ -302,7 +302,7 @@ namespace Rozvrh.Models
                 log.Debug("Loading times data.");
                 var enumTimes =
                     from el in m_xelDefinitions.Element("times").Descendants("time")
-                    //where timeIds.Contains(el.Attribute("id").Value)  //get all times when at least on lesson take place
+                    where timeIds.Contains(el.Attribute("id").Value)  //get all times when at least on lesson take place
                     orderby Convert.ToInt32(el.Element("timesorder").Value)
                     select el;
                 foreach (XElement el in enumTimes)

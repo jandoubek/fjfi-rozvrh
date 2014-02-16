@@ -243,7 +243,6 @@
     <Content Include="Content\themes\base\theme.default.css" />
     <Content Include="Editable\Aktualni_databaze.xml" />
     <Content Include="Editable\Chris_Botti.xml" />
-    <Content Include="Editable\config.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-2.0.3.js" />
