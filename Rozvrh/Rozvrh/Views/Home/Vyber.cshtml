@@ -111,7 +111,19 @@ new { id = "filterForm" }
         <div class="box" id="katedra">
             <button class="resetOne" onclick="resetOne('katedra');">Reset</button>
             @Html.LabelFor(m => m.SelectedDepartments, "Katedra")
-            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "9", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
+            @{
+                List<object> tempDeparts = new List<object>();
+                foreach(var dep in Model.Departments) 
+                {
+                    tempDeparts.Add( new {
+                        id = dep.id,
+                        acronym = (Convert.ToInt32(dep.code) >= 0 ? dep.code + "\u2005" : "\u2005") + dep.acronym
+                    } 
+                    );
+                }
+            }
+
+            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(tempDeparts, "id", "acronym"), new { size = "9", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
         </div>
         <div class="box" id="vyucujici">
             <button class="resetOne" onclick="resetOne('vyucujici');">Reset</button>

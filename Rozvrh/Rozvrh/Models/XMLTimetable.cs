@@ -200,7 +200,7 @@ namespace Rozvrh.Models
                     select dep;
                 foreach (XElement dep in enumDepartment)
                     m_departments.Add(new Department(dep.Attribute("id").Value, dep.Element("code").Value, dep.Element("name").Value, dep.Element("acronym").Value, dep.Element("color").Value));
-                m_departments.Add(new Department("0", "0", "---", "---", "0"));
+                m_departments.Add(new Department("0", "-1", "---", "---", "0"));
                 log.Debug("Loaded" + m_departments.Count + "departments data.");
                 //--------------------------------------------------------------------------
 
