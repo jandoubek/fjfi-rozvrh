@@ -161,7 +161,7 @@ namespace Rozvrh.Models
         /// </summary>
         public void RecalculateUniqueID()
         {
-            UniqueID = (lecture_acr + time + classroom + lecturer + department_acr + duration + period).GetHashCode();
+            UniqueID = (lecture_acr + time + day + classroom + lecturer + department_acr + duration + period).GetHashCode();
         }
     }
 
