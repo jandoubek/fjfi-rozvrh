@@ -132,7 +132,7 @@ namespace Rozvrh.Controllers
             byte[] blatsky =    Convert.FromBase64String("E3oVOby8gYF+HUdfP3JV5tK+3a4=");
             byte[] honzik =     Convert.FromBase64String("4zJDk3AHl5HuiaKAdeH3bcweE1Y=");
             byte[] stika =      Convert.FromBase64String("VenMx97CkpVO0NmJb+cywDpEZ18=");
-            byte[] krbalek =    Convert.FromBase64String("");
+            byte[] krbalek =    Convert.FromBase64String("ULhngopNWAsQhSq4cWuMj+yC3YY=");
 
             if (sha1PasswordBytes.SequenceEqual(krbalek))
             {
@@ -155,7 +155,6 @@ namespace Rozvrh.Controllers
                 return true;
             }
 
-            //LOG(neúspěšné přihlášení)
             log.Info("Uuccessfull logging on attempt.");
             return false;
         }
