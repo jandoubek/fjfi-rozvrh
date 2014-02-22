@@ -1,0 +1,3 @@
+2014-02-22 11:38:31,893 [9] INFO Rozvrh.Models.Config LoadFromFile - Configuration successfully loaded from file: '~/Editable/config.xml'
+2014-02-22 11:38:31,917 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - Loading XML file from a server map path: '~/Editable/Chris_Botti.xml'.
+2014-02-22 11:38:31,937 [9] INFO Rozvrh.Models.XMLTimetable LoadXml - XML loaded.
