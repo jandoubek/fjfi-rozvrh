@@ -162,7 +162,10 @@ namespace Rozvrh.Controllers
         /// <returns></returns>
         private static TimeSpan getDuration(TimetableField field)
         {
-            return new TimeSpan(int.Parse(field.duration), 0, 0);
+            Double time_duration = Double.Parse(field.duration);
+            int hours = (int) time_duration;
+            int minutes = (int) (time_duration-hours)*60;
+            return new TimeSpan(hours, minutes, 0);
         }
     }
 }

@@ -101,8 +101,8 @@
                     bValid = bValid && checkLength(room, "místnost", 1, 50);
                     bValid = bValid && checkValue(hours, 7, 19, "Přípustný začátek je jen od 7 do 19 hodin.")
                     bValid = bValid && checkValue(minutes, 0, 59, "Přípustný začátek je jen od 0 do 59 minut.")
-                    bValid = bValid && checkRegexp(duration, /^\d{1,2}$/, "Délka hodiny musí být celé číslo.");
-                    bValid = bValid && checkValue(duration, 1, 12, "Délka hodiny nemůže být delší než 12 hodin.")
+                    bValid = bValid && checkRegexp(duration, /^([1-9]{1})(\,[0-9])?$/, "Délka hodiny musí být celé nebo desetinné číslo od 1 do 9,9 s jedním desetinným číslem.");
+                    //bValid = bValid && checkValue(duration, 0.1, 12, "Délka hodiny nemůže být kratší než 0,1 a delší než 12 hodin.")
 
                     if (bValid) {
                         $.ajax({
@@ -220,7 +220,7 @@
             <br style="clear:both;"/>
             <br />
             <div>
-            <label for="duration">Délka (zaok. na hodiny nahoru)</label>
+            <label for="duration">Délka [h] (od 1,0 do 9,9)</label>
             <input type="text" name="duration" id="duration" class="text ui-widget-content ui-corner-all" pattern="[0-9]*"   style="width:10%;" />
             </div>
             <br />
@@ -275,7 +275,8 @@
                         {
                             continue;
                         }
-                        int width = Convert.ToInt32(field.duration) * 50;
+                        double dur = Convert.ToDouble(field.duration);
+                        int width = (int) (dur * 50);
                         int left = Convert.ToInt32(75 + (Convert.ToDecimal(field.time_hours) - 7 + Convert.ToDecimal(field.time_minutes) / 60) * 50);
                         int height = 50;
                         int nameHeight = 31;
