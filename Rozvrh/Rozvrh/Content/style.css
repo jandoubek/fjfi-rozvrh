@@ -93,11 +93,11 @@ body {height: 100%; padding: 0; margin: 0;
 #Timetable {position: relative; width:48.5%; height:44%; top:1.5%; left:1%; overflow: hidden;  background-color: #f7f7f7; border: 1px solid #a8a8a8;
                                   -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;}
 
-    #Timetable div.content {width:auto; height:auto; position:absolute;  }
+    #Timetable div.content, #TimetableExport div.content {width:auto; height:auto; position:absolute;  }
 
-    #Timetable div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
+    #Timetable div.background, #TimetableExport div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
 
-    #Timetable div.border { -ms-opacity: 0.75; opacity: 0.75; position: absolute; border-width: 2px; border-style: solid; width: 100%; height: 100%; line-height: normal; }
+    #Timetable div.border, #TimetableExport div.border { -ms-opacity: 0.75; opacity: 0.75; position: absolute; border-width: 2px; border-style: solid; width: 100%; height: 100%; line-height: normal; }
 
     #Timetable button.edit, #Timetable button.delete { border: 1px solid #c2c2c2; display: none; width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px;float: left; }
 
@@ -107,19 +107,19 @@ body {height: 100%; padding: 0; margin: 0;
     
     #rightSection button.resetOne {position:absolute; opacity:0.8; -ms-opacity: 0.8; right:0; top:0; display: none; border: 1px solid #c2c2c2;  width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px; margin:0;}
     
-    #Timetable div.name { position: absolute; text-align: center; }
+    #Timetable div.name, #TimetableExport div.name { position: absolute; text-align: center; }
 
-        #Timetable div.name div { font-size: 12px; font-weight: 700; font-family: Arial; line-height: 29px; vertical-align: middle; -ms-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; -webkit-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; }
+        #Timetable div.name div, #TimetableExport div.name div  { font-size: 12px; font-weight: 700; font-family: Arial; line-height: 29px; vertical-align: middle; -ms-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; -webkit-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; }
 
-    #Timetable div.small div { font-size: 8px; line-height: 10px; }
+    #Timetable div.small div, #TimetableExport div.small div { font-size: 8px; line-height: 10px; }
 
-    #Timetable div.detailsBackground { position: absolute; background: white; -ms-opacity: 0.5; opacity: 0.5; }
+    #Timetable div.detailsBackground, #TimetableExport div.detailsBackground { position: absolute; background: white; -ms-opacity: 0.5; opacity: 0.5; }
 
-    #Timetable div.details, #Timetable div.detailsSmall { position: absolute; padding: 2px; font-size: 9px; font-family: Arial; line-height: normal; }
+    #Timetable div.details, #Timetable div.detailsSmall, #TimetableExport div.details, #TimetableExport div.detailsSmall { position: absolute; padding: 2px; font-size: 9px; font-family: Arial; line-height: normal; }
 
-    #Timetable div.detailsSmall { padding: 1px; font-size: 8px; }
+    #Timetable div.detailsSmall, #TimetableExport div.detailsSmall { padding: 1px; font-size: 8px; }
 
-        #Timetable div.details div, #Timetable div.detailsSmall div { float: right; margin-right: 2px; }
+        #Timetable div.details div, #Timetable div.detailsSmall div, #TimetableExport div.details div, #TimetableExport div.detailsSmall div { float: right; margin-right: 2px; }
 
 
 #backgroundTable { border-spacing: 0; border-collapse: separate;  }

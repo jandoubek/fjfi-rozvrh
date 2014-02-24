@@ -36,7 +36,7 @@ namespace Rozvrh.Exporters
         public ActionResult DownloadAsSVG(List<TimetableField> lectures,string title,DateTime created, string linkToInfo)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(convertToExportFormat(lectures), title,created,linkToInfo);
+            string text = gen.generateSVG(lectures, title, created, linkToInfo);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIrozvrh.svg";
@@ -74,7 +74,7 @@ namespace Rozvrh.Exporters
             string path, string format)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(convertToExportFormat(lectures), title, created, linkToInfo);
+            string text = gen.generateSVG(lectures, title, created, linkToInfo);
             Guid id = Guid.NewGuid();
             string svgName = string.Format(@"{0}.svg", id);
             string svgFileName = path + svgName;
@@ -113,7 +113,7 @@ namespace Rozvrh.Exporters
         public ActionResult DownloadAsICAL(List<TimetableField> lectures,DateTime semStart, DateTime semEnd)
         {
             ICalGenerator gen = new ICalGenerator();
-            string text = gen.generateICal(convertToExportFormat(lectures), semStart, semEnd);
+            string text = gen.generateICal(lectures, semStart, semEnd);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIRozvrh.ical";

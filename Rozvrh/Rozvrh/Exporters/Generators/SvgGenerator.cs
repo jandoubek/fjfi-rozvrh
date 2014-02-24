@@ -1,5 +1,6 @@
 using Rozvrh.Controllers;
 using Rozvrh.Exporters.Common;
+using Rozvrh.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -34,9 +35,13 @@ namespace Rozvrh.Exporters.Generators
         /// <returns> String following SVG XML format. </returns>
         /// <param name="lectures">List of lectures with ExportLecture interface to export.</param>
         /// <param name="title">Title rendered at the top of the SVG.</param>
-        public string generateSVG(List<ExportLecture> lectures, string title, DateTime created, string linkToInformation)
+        public string generateSVG(List<TimetableField> ttFields, string title, DateTime created, string linkToInformation)
         {
-
+            List<ExportLecture> lectures = new List<ExportLecture>();
+            foreach (var ttf in ttFields)
+            {
+                lectures.Add(new ExportLecture(ttf));
+            }
             string header = @"<?xml version=""1.0"" encoding=""UTF-8""?>
 <svg xmlns=""http://www.w3.org/2000/svg"" xmlns:xlink=""http://www.w3.org/1999/xlink"" width=""800"" version=""1.0"" height=""364"">";
 
@@ -55,9 +60,9 @@ namespace Rozvrh.Exporters.Generators
             if (lectures != null)
             {
                 lectures.Sort((x, y) => x.Day == y.Day ?
-                    DateTime.Compare(x.StartTime, y.StartTime) :
-                    x.Day.CompareTo(y.Day));
-                List<List<ExportLecture>> groups = new LecturesGroupDivider().divideToGroups(lectures);
+                DateTime.Compare(x.StartTime, y.StartTime) :
+                x.Day.CompareTo(y.Day));
+                List < List < ExportLecture >> groups = new LecturesGroupDivider().divideToGroups(lectures);
                 foreach (var group in groups)
                 {
                     foreach (var lecture in group)
@@ -101,19 +106,19 @@ namespace Rozvrh.Exporters.Generators
                     height / (4 - split), width, y + dy, x, lecture.DepartementColor) + System.Environment.NewLine;
                 //Texts
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 6}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter; font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans-serif;\">{2}</text>",
                     y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 6 }"
                 //if red in krbalek then it have class=\"label&#10; periodic\"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; {3}\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans-serif;\" class=\"label&#10; {3}\">{2}</text>",
                     y + dy + height / 5 * 2 + 6, x + width / 2, lecture.Name, lecture.RegularLecture ? "" : "periodic") + System.Environment.NewLine;
                 //Room
                 //x="{$x + $width - 5}" y="{$y + $dy + $height - 3}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans-serif;\" class=\"classroomText\">{2}</text>",
                     y + dy + height - 5, x + width - 5, lecture.Room) + System.Environment.NewLine;
                 //Lecturer
                 //x="{$x + 5}" y="{$y + $dy + $height - 3}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size:9px; text-anchor: start; font-family: sans-serif;\" class=\"lecturerText\">{2}</text>",
                     y + dy + height - 5, x + 5, lecture.Lecturer) + System.Environment.NewLine;
             }
             else
@@ -127,20 +132,20 @@ namespace Rozvrh.Exporters.Generators
                     height / (4 - split), width, y + dy + (height - (height / (4 - split))), x) + System.Environment.NewLine;
                 //Texts
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter;  font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"stroke-width: 2px; stroke: #fff; stroke-linejoin: miter;  font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans-serif;\">{2}</text>",
                     y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name) + System.Environment.NewLine;
                 //x="{$x + $width div 2}" y="{$y + $dy + $height div 5 * 2 + 4 - $split * 2}"
                 //if red in krbalek then it have class=\"label&#10; periodic\"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans;\" class=\"label&#10; {3}\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"font-size: 12px; font-weight: bold; text-anchor: middle; font-family: sans-serif;\" class=\"label&#10; {3}\">{2}</text>",
                     y + dy + height / 5 * 2 + 4 - split * 2, x + width / 2, lecture.Name, lecture.RegularLecture ? "" : "periodic") + System.Environment.NewLine;
                 //Room
                 //x="{$x + $width - 5}" y="{$y + $dy + $height - 6 + $split}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans;\" class=\"classroomText\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size: 9px; text-anchor: end; font-family: sans-serif;\" class=\"classroomText\">{2}</text>",
                     y + dy + height - 6 + split, x + width - 5, lecture.Room) + System.Environment.NewLine;
 
                 //Lecturer
                 //x="{$x + 5}" y="{$y + $dy + $height - 6 + $split}"
-                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size:9px; text-anchor: start; font-family: sans;\" class=\"lecturerText\">{2}</text>",
+                res += String.Format(new NumberFormatInfo(), "<text y=\"{0}\" x=\"{1}\" style=\"fill: #000; font-size:9px; text-anchor: start; font-family: sans-serif;\" class=\"lecturerText\">{2}</text>",
                     y + dy + height - 6 + split, x + 5, lecture.Lecturer) + System.Environment.NewLine;
             }
 
@@ -257,15 +262,15 @@ namespace Rozvrh.Exporters.Generators
             return @"
 <rect height=""1"" width=""725"" y=""57"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
 <rect height=""1"" width=""725"" y=""107"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""85"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Pondělí</text>
+<text y=""85"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Pondělí</text>
 <rect height=""1"" width=""725"" y=""157"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""135"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Úterý</text>
+<text y=""135"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Úterý</text>
 <rect height=""1"" width=""725"" y=""207"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""185"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Středa</text>
+<text y=""185"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Středa</text>
 <rect height=""1"" width=""725"" y=""257"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""235"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Čtvrtek</text>
+<text y=""235"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Čtvrtek</text>
 <rect height=""1"" width=""725"" y=""307"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""285"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Pátek</text>
+<text y=""285"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Pátek</text>
 ";
         }
     }

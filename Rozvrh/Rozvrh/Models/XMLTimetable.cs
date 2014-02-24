@@ -158,17 +158,19 @@ namespace Rozvrh.Models
             {
                 log.Debug("Trying to load XML database file: '" + m_dataXmlFilePath + "'.");
 
+                string pathString;
                 //if the path starts with ~ - use local server loading
                 if (String.CompareOrdinal("~", 0, m_dataXmlFilePath, 0, 1) == 0)
                 {
                     log.Info("Loading XML file from a server map path: '" + m_dataXmlFilePath + "'.");
-                    m_xelDefinitions = XElement.Load(System.Web.HttpContext.Current.Server.MapPath(m_dataXmlFilePath));
+                    pathString = System.Web.HttpContext.Current.Server.MapPath(m_dataXmlFilePath);
                 }
                 else
                 {
                     log.Info("Loading XML file from an absolute path (like http): '" + m_dataXmlFilePath + "'.");
-                    m_xelDefinitions = XElement.Load(m_dataXmlFilePath);
+                    pathString = m_dataXmlFilePath;
                 }
+                m_xelDefinitions = XElement.Load(pathString);
                 log.Info("XML loaded.");
                 log.Debug("Method exit.");
                 return true;

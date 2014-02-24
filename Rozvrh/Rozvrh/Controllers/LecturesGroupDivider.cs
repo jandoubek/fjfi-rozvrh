@@ -79,11 +79,11 @@ namespace Rozvrh.Controllers
         }
 
         /// <summary> 
-        /// Divides list ofTimetableField(s) to groups of overlapping lectures.
+        /// Divides list of TimetableField(s) in one day to groups of overlapping lectures.
         /// </summary> 
         /// <returns> List of groups (group = another list) of TimetableField(s)  </returns>
         /// <param name="lectures">List of TimetableField(s) to divide.</param>
-        public List<List<Models.TimetableField>> divideToGroups(List<Models.TimetableField> fields)
+        public List<List<Models.TimetableField>> divideToGroups(List<TimetableField> fields)
         {
             fields.Sort((x, y) => DateTime.Compare(getStartTime(x), getStartTime(y)));
             var groups = new List<List<TimetableField>> { new List<TimetableField>() };
@@ -99,13 +99,25 @@ namespace Rozvrh.Controllers
                 else if (DateTime.Compare(getStartTime(l), lastgroup.Max(lec => getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0))) < 0)
                 {
 
-                    //All lectures intersecting with l
-                    List<TimetableField> intersecting = lastgroup.Where(lec => (DateTime.Compare(getStartTime(l), getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0)) < 0)).ToList();
+                    //All lectures intersecting with l, omit the empty slots lectures known for 0 duration
+                     List<TimetableField> intersecting = lastgroup.Where(lec => 
+                         (DateTime.Compare(getStartTime(l), getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0)) < 0)
+                         && !lec.duration.Equals("0")).ToList();
                     //Only have to worry about 3 and more lectures in one group
                     //If lecture l is intersecting with all of lectures in lastgroup then it belongs to the group
                     if (lastgroup.Count <= 1 || intersecting.Count() == lastgroup.Count)
                     {
-                        lastgroup.Add(l);
+                       //Look if there are any empty slots known for 0 duration
+                         int index = lastgroup.FindIndex(lecture => lecture.duration.Equals("0"));
+                         //If yes add l to the slot
+                         if (index >= 0)
+                         {
+                              lastgroup[index] = l;
+                         }
+                         else 
+                         {
+                             lastgroup.Add(l);
+                         }
                     }
                         //Otherwise create a new group with fake lectures
                     else
@@ -115,12 +127,15 @@ namespace Rozvrh.Controllers
                         foreach (TimetableField lastGroupLec in lastgroup)
                         {
 
-                            TimetableField fakeLecture = null;
-                            //Treat intersecting lectures as not null
+                            //Treat non-intersecting lecture as 0 duration fake lectures = empty slots
+                            TimetableField fakeLecture = (TimetableField)new FakeTimetableField(lastGroupLec.time_hours, 
+                                 lastGroupLec.time_minutes, "0");
+                             //Treat intersecting lectures as fake lectures with non zero duration
                             if (intersecting.Contains(lastGroupLec))
                             {
-                                
-                                fakeLecture = (TimetableField)new FakeTimetableField(lastGroupLec.time_hours, lastGroupLec.time_minutes, lastGroupLec.duration);
+
+                                fakeLecture = (TimetableField)new FakeTimetableField(lastGroupLec.time_hours,
+                                lastGroupLec.time_minutes, lastGroupLec.duration);
                            
                             }
                             //Non-intersecting lecture are null = empty slots
@@ -128,10 +143,9 @@ namespace Rozvrh.Controllers
                         }
 
                         //Find first empty slot in newGroup (null lecture) and swap with lecture l
-                        int index = newGroup.FindIndex(lecture => lecture == null);
+                        int index = newGroup.FindIndex(lecture => lecture.duration.Equals("0"));
                         newGroup[index] = l;
-                        //Finally remove all empty slots and add the newGroup to the groups
-                        newGroup.RemoveAll(lecture => lecture == null);
+                        //Finally add the newGroup to the groups
                         groups.Add(newGroup);
                     }
                 }

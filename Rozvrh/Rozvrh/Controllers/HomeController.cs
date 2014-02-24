@@ -10,6 +10,8 @@ using Rozvrh.Models;
 using Rozvrh.Exporters;
 using System.IO;
 using Rozvrh.Models.Timetable;
+using System.Text;
+using System.Web.UI;
 
 namespace Rozvrh.Controllers
 {
@@ -36,6 +38,11 @@ namespace Rozvrh.Controllers
             return instance.DownloadAsSVG(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created, Config.Instance.LinkToAdditionalInformation);
         }
 
+        public ActionResult ViewRozvrh()
+        {
+            return View("RozvrhForExport", M);
+        }
+
         public ActionResult ExportToPNG()
         {
             ImportExport instance = new ImportExport();
@@ -54,10 +61,17 @@ namespace Rozvrh.Controllers
 
         public ActionResult ExportToPDF()
         {
-            ImportExport instance = new ImportExport();
+            /*ImportExport instance = new ImportExport();
 
             return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
-                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "pdf");
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "pdf");*/
+            return new Rotativa.ViewAsPdf(M)
+            {
+                FileName = "MůjRozvrh.pdf",
+                //PageSize = Rotativa.Options.Size.A4,
+                //PageOrientation = Rotativa.Options.Orientation.Landscape
+            }; 
+          
         }
 
         public ActionResult ExportToICal()

@@ -11,6 +11,7 @@
 
 @{
     var ical = "iCalendar (iCal) je mezinárodní standard pro výměnu kalendářových dat. Lze ho jednoduše importovat do populárních aplikací jako je Apple Calendar, Google Calendar nebo Microsoft Outlook.";
+    var pdf = "Formát pro přímý tisk rozvrhu.";
     var svg = "Scalable Vector Graphics (SVG) je vektorový obrázkový formát, podporovaný vetšinou moderních prohlížečů.";
     var xml = "Pokud víte, že budete rozvrh brzo měnit, využijte exportu do našeho xml formátu. Xml soubor si uložte na bezpečné místo, budete ho potřebovat na import do naší aplikace.";
     }
@@ -21,22 +22,27 @@
 </div>
 @*  
 <div class="exportLink">
-    @Html.ActionLink("PNG", "ExportToPNG", "Home", new { @class = "exButton" })
+    @Html.ActionLink("PNG", "ExportToPNG", "Home", null, new { @class = "exButton" })
     <p>Bitmapový obrázek ve fromátu PNG.</p>
 </div>
 
 <div class="exportLink">
-    @Html.ActionLink("JPG", "ExportToJPG", "Home", new { @class = "exButton" })
+    @Html.ActionLink("JPG", "ExportToJPG", "Home", null, new { @class = "exButton" })
     <p>Bitmapový obrázek ve formátu JPEG.</p>
 </div>
 *@
 <div class="exportLink">
-    @Html.ActionLink("SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton" })
+    @Html.ActionLink("PDF","ExportToPDF", "Home", null, new {  title = @pdf, @class = "exButton" })
+    <p>PDF dokument.</p>
+</div>
+
+<div class="exportLink">
+    @Html.ActionLink("SVG", "ExportToSVG", "Home", null, new { title = @svg, @class = "exButton" })
     <p>SVG použijte pokud chcete přehledný obrázek rozvrhu. Pro konverzi do JPG použij například tuto <a href="https://cloudconvert.org/svg-to-jpg" target="_blank">aplikaci</a>.</p>
 </div>
 
 <div class="exportLink">
-    @Html.ActionLink("XML", "ExportToXML", "Home", new { title = @xml, @class = "exButton" })
+    @Html.ActionLink("XML", "ExportToXML", "Home", null, new { title = @xml, @class = "exButton" })
     <p>Xml slouží pro zpětný import do této aplikace.</p>
 </div>
 
