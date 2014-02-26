@@ -73,7 +73,8 @@
                     {
                         continue;
                     }
-                    int width = Convert.ToInt32(field.duration) * 50;
+                    double dur = Convert.ToDouble(field.duration);
+                    int width = (int)(dur * 50);
                     int left = Convert.ToInt32(75 + (Convert.ToDecimal(field.time_hours) - 7 + Convert.ToDecimal(field.time_minutes) / 60) * 50);
                     int height = 50;
                     int nameHeight = 31;

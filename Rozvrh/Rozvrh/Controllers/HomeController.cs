@@ -65,7 +65,7 @@ namespace Rozvrh.Controllers
 
             return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
                 Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "pdf");*/
-            return new Rotativa.ViewAsPdf(M)
+            return new Rotativa.ViewAsPdf("ExportToPDF", M)
             {
                 FileName = "MůjRozvrh.pdf",
                 //PageSize = Rotativa.Options.Size.A4,
