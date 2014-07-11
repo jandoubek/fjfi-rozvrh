@@ -261,6 +261,7 @@
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\aspone.pubxml" />
+    <None Include="Properties\PublishProfiles\schedule.fjfi.cvut.cz.pubxml" />
     <None Include="Properties\PublishProfiles\smarterasp.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.0.3-vsdoc.js" />
