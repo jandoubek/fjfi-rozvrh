@@ -10,7 +10,7 @@
             lecturers: $('#SelectedLecturers').val(), buildings: $('#SelectedBuildings').val(),
             classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val()
         }, function (data) {
-            $('#Fltr').html(data);
+            $('#List').html(data);
         });
     }
 
@@ -19,7 +19,13 @@
         filterAll();
     }
 
-    $("#clearAll").click(function () { $("select option").prop("selected", false); });
+    function resetAll() {
+        $("select option").prop("selected", false);
+        $("select option").removeAttr("selected");
+        $('select').selectBox('refresh');
+        $('#zamereni select, #kruh select, #vyucujici select, #mistnost select').selectBox('options', []);
+        filterAll();
+    }
 
     function unselectSpecializationsGroups () {
         $('#SelectedSpecializations').val([]);
@@ -28,6 +34,24 @@
     
     $(document).ready(function () {
         BindSpinner();
+
+        $('select').selectBox();
+        $(".selectBox-inline").perfectScrollbar({
+            suppressScrollX: true
+        });
+
+        $("button#clearAll").button({
+            icons: { primary: "ui-icon-close" },
+            text: true
+        });
+
+        $("button.resetOne").button({
+            icons: { primary: "ui-icon-close" },
+            text: false
+        });
+
+        $(".box").mouseenter(function () { $(".resetOne", this).show(); })
+                 .mouseleave(function () { $(".resetOne", this).hide(); });
     });
 
     function BindSpinner() {
@@ -40,74 +64,101 @@
         });
     };
 
+    function resetOne(boxId) {
+        if (boxId == "rocnik" || boxId == "zamereni")
+            unselectSpecializationsGroups();
+        var res = "#".concat(boxId, " select option");
+        $(res).prop("selected", false);
+        $(res).removeAttr("selected");
+        $('select').selectBox('refresh');
+        filterAll();
+    }
+
 </script>
 
 @using (Ajax.BeginForm("Filter", "Home", new AjaxOptions
 {
     HttpMethod = "Post",
     UpdateTargetId = "tabs-1",
-    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace
-}))
+    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
+    
+},
+new { id = "filterForm" }
+))
 {
 
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
-    <div class="boxContainer">
-        <div class="box" id="noscroll">
+    <div class="boxContainer" id="prvni">
+        <div class="box" id="rocnik">
+            <button class="resetOne" onclick="resetOne('rocnik');">Reset</button>
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
-            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "8", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
-        <div class="box" >
+        <div class="box" id="zamereni">
+            <button class="resetOne" onclick="resetOne('zamereni');">Reset</button>
             @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
-            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "8", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "9", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
         </div>
-        <div class="box">
+        <div class="box" id="kruh">
+            <button class="resetOne" onclick="resetOne('kruh');">Reset</button>
             @Html.LabelFor(m => m.SelectedGroups, "Kruh")
-            @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "8", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="boxContainer nomargin">
-        <div class="box">
+    <div class="boxContainer" id="druhy">
+        <div class="box" id="katedra">
+            <button class="resetOne" onclick="resetOne('katedra');">Reset</button>
             @Html.LabelFor(m => m.SelectedDepartments, "Katedra")
-            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(Model.Departments, "id", "acronym"), new { size = "8", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
+            @{
+                List<object> tempDeparts = new List<object>();
+                foreach(var dep in Model.Departments) 
+                {
+                    tempDeparts.Add( new {
+                        id = dep.id,
+                        acronym = (Convert.ToInt32(dep.code) >= 0 ? dep.code + "\u2005" : "\u2005") + dep.acronym
+                    } 
+                    );
+                }
+            }
+
+            @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(tempDeparts, "id", "acronym"), new { size = "9", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
         </div>
-        <div class="box">
+        <div class="box" id="vyucujici">
+            <button class="resetOne" onclick="resetOne('vyucujici');">Reset</button>
             @Html.LabelFor(m => m.SelectedLecturers, "Vyučující")
-            @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="clear"></div>
-
-    <br />
-
-    <div class="boxContainer">
-        <div class="box">
+    <div class="boxContainer" id="treti">
+        <div class="box" id="budova">
+            <button class="resetOne" onclick="resetOne('budova');">Reset</button>
             @Html.LabelFor(m => m.SelectedBuildings, "Budova")
-            @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "8", onchange = "$('#SelectedClassrooms').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedBuildings, new MultiSelectList(Model.Buildings, "id", "name"), new { size = "9", onchange = "$('#SelectedClassrooms').val([]);onListBoxChange(this);" })
         </div>
-        <div class="box">
+        <div class="box" id="mistnost">
+            <button class="resetOne" onclick="resetOne('mistnost');">Reset</button>
             @Html.LabelFor(m => m.SelectedClassrooms, "Místnost")
-            @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="boxContainer">
-        <div class="box" id="noscroll">
-            @Html.LabelFor(m => m.SelectedDays, "Den")
-            @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "8", onchange = "onListBoxChange(this);" })
-        </div>
-    </div>
-
-    <div class="boxContainer">
+    <div class="boxContainer" id="den">
         <div class="box">
-            @Html.LabelFor(m => m.SelectedTimes, "Začátek")
-            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "8", onchange = "onListBoxChange(this);" })
+            <button class="resetOne" onclick="resetOne('den');">Reset</button>
+            @Html.LabelFor(m => m.SelectedDays, "Den")
+            @Html.ListBoxFor(m => m.SelectedDays, new MultiSelectList(Model.Days, "id", "name"), new { size = "6", onchange = "onListBoxChange(this);" })
         </div>
     </div>
 
-    <div class="clear"></div>
-
-    <a id="clearAll" href="#">Odznačit vše</a>
+    <div class="boxContainer" id="zacatek">
+        <div class="box">
+            <button class="resetOne" onclick="resetOne('zacatek');">Reset</button>
+            @Html.LabelFor(m => m.SelectedTimes, "Začátek")
+            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "6", onchange = "onListBoxChange(this);" })
+        </div>
+    </div>
+    <button id="clearAll" onclick="resetAll()">Reset vše</button>
 }

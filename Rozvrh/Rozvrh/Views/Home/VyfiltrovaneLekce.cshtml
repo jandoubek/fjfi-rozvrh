@@ -1,11 +1,70 @@
 ﻿@model Rozvrh.Models.Model
 <script>
     $(document).ready(function () {
-        $("#Tabulka").tablesorter();
-        $("#AddSome").button().click(function () { addSome(); });
-        $("#AddAll").button().click(function () { addAll(); });
-        $("#RemoveAll").button().click(function () { removeAll(); });
+
+        $("#Tabulka").tablesorter({
+            // fix the column widths
+            widthFixed: true,
+
+            // Show an indeterminate timer icon in the header when the table
+            // is sorted or filtered
+            showProcessing: false,
+
+            widgets: ['stickyHeaders', 'zebra'],
+
+            widgetOptions: {
+
+                // extra class name added to the sticky header row
+            stickyHeaders : '',
+                // number or jquery selector targeting the position:fixed element
+            stickyHeaders_offset : 0,
+                // added to table ID, if it exists
+            stickyHeaders_cloneId : '-sticky',
+                // The zIndex of the stickyHeaders, allows the user to adjust this to their needs
+            stickyHeaders_zIndex : 2,
+                // jQuery selector or object to attach sticky header to
+            stickyHeaders_attachTo: $('#table-wrapper'),
+
+                // adding zebra striping, using content and default styles - the ui css removes the background from default
+                // even and odd class names included for this demo to allow switching themes
+            zebra   : ["ui-widget-content even", "ui-state-default odd"],
+                // use uitheme widget to apply defauly jquery ui (jui) class names
+                // see the uitheme demo for more details on how to change the class names
+            uitheme : 'jui'
+        }
+        });
+
+        $('#table-wrapper').perfectScrollbar({
+            suppressScrollX: true,
+            wheelSpeed: 30
+        });
+
+        $("button.add").button({
+            icons: { primary: "ui-icon-plus" },
+            text: false
+        });
+
+        $("button#AddAll").button({
+            icons: { primary: "ui-icon-plus" },
+            text: true
+        });
+
+        $("button#RemoveAll").button({
+            icons: { primary: "ui-icon-trash" },
+            text: true
+        });
+
+        $(".courseAcronym").tooltip({ show: null, hide: null, position: { my: "left+10", at: "right top" } });
+        $("td").tooltip({ show: null, hide: null, position: { my: "bottom", at: "top" } });
     });
+
+    function addField(uid) {
+        var value = [];
+        value.push(uid);
+        $.post('@Url.Action("AddSome", "Home")', { uids: value }, function (data) {
+            $('#Timetable').html(data);
+        });
+    }
 
     function addAll() {
         var allVals = [];
@@ -16,79 +75,75 @@
             $('#Timetable').html(data);
         });
     }
-    
-    function addSome() {
-        var checkedVals = [];
-        $('#Tabulka :checked').each(function () {
-            checkedVals.push($(this).val());
-        });
-        $.post('@Url.Action("AddSome", "Home")', { uids: checkedVals }, function (data) {
-            $('#Timetable').html(data);
-        });
-    }
-
 
     function removeAll() {
         $.post('@Url.Action("RemoveAll", "Home")', { uids: null }, function (data) {
             $('#Timetable').html(data);
         });
     }
+
 </script>
 
-<br />
-<br />
-<span id="AddSome">Přidat zaškrtnuté</span> <span id="AddAll">Přidat všechny</span> <span id="RemoveAll">Odstranit vše z rozvrhu</span>
-<table id="Tabulka" class="tablesorter">
-    <thead>
-        <tr>
-            <th>Předmět</th>
-            <th>Katedra</th>
-            <th>Vyučující</th>
-            <th>Den</th>
-            <th>Čas</th>
-            <th>Délka (hod)</th>
-            <th>Místnost</th>
-            <th>Pravidelně</th>
-            <th>Vybrat</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.FiltredTimetableFields != null)
-        {
-            foreach (var item in Model.FiltredTimetableFields)
-            {
+
+<div id="AddButtons">
+    <button id="AddAll" onclick="addAll();">Přidat vše</button>
+    <button id="RemoveAll" onclick="removeAll();">Odstranit vše</button>
+</div>
+<div class="clear"></div>
+<div id="table-wrapper">
+    <table id="Tabulka" class="tablesorter">
+        <thead>
             <tr>
-                <td>
-                    <a href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.department_acr)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.lecturer)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.day)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.time)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.duration)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.classroom)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.period)
-                </td>
-                <td>
-                    @{
-                        <input name="Selector" type="checkbox" value="@item.UniqueID" />
-                    }
-                </td>
+                <th>Vybrat</th>
+                <th>Předmět</th>
+                <th>Katedra</th>
+                <th>Vyučující</th>
+                <th>Den</th>
+                <th>Čas</th>
+                <th>Délka (hod)</th>
+                <th>Místnost</th>
+                <th>Pravidelně</th>
             </tr>
+        </thead>
+        <tbody>
+            @if (Model.FiltredTimetableFields != null)
+            {
+                
+                foreach (var item in Model.FiltredTimetableFields)
+                {
+                <tr>
+                    <td>
+                        <button class="add" onclick="addField(@(item.UniqueID));">Přidat</button>
+                    </td>
+
+                    <td>
+                        <a class="courseAcronym" href="@Html.DisplayTextFor(modelItem => item.course_href)" title="@Html.DisplayTextFor(modelItem => item.lecture_name)" target="_blank">@Html.DisplayTextFor(modelItem => item.lecture_acr)</a>
+                    </td>
+                    <td title="@Html.DisplayTextFor(modelItem => item.department)">
+                        @Html.DisplayTextFor(modelItem => item.department_acr)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.lecturer)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.day)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.time)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.duration)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.classroom)
+                    </td>
+                    <td>
+                        @Html.DisplayTextFor(modelItem => item.period)
+                    </td>
+                
+                </tr>
+                }
             }
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

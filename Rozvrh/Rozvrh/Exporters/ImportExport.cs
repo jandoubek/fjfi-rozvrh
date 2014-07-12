@@ -1,9 +1,9 @@
 ﻿using Rozvrh.Exporters.Common;
 using Rozvrh.Exporters.Generators;
-using Rozvrh.Exporters.Generators;
 using Rozvrh.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -36,7 +36,7 @@ namespace Rozvrh.Exporters
         public ActionResult DownloadAsSVG(List<TimetableField> lectures,string title,DateTime created, string linkToInfo)
         {
             SvgGenerator gen = new SvgGenerator();
-            string text = gen.generateSVG(convertToExportFormat(lectures), title,created,linkToInfo);
+            string text = gen.generateSVG(lectures, title, created, linkToInfo);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIrozvrh.svg";
@@ -60,6 +60,48 @@ namespace Rozvrh.Exporters
                 return res;
             }
         }
+        /// <summary>
+        /// Exports lectures to bitmap format.
+        /// </summary>
+        /// <param name="lectures">List of lectures.</param>
+        /// <param name="title">Title displayed at top-left corner of the image.</param>
+        /// <param name="created">Date the timetable was created from config.</param>
+        /// <param name="linkToInfo">Hyperlink to webpage with additional information.</param>
+        /// <param name="path">Path to folder where temp files will be created and where Inkspace folder is.</param>
+        /// <param name="format">Bitmap format to export ie. png jpg pdf</param>
+        /// <returns></returns>
+        public FileResult DownloadAsBITMAP(List<TimetableField> lectures, string title, DateTime created, string linkToInfo,
+            string path, string format)
+        {
+            SvgGenerator gen = new SvgGenerator();
+            string text = gen.generateSVG(lectures, title, created, linkToInfo);
+            Guid id = Guid.NewGuid();
+            string svgName = string.Format(@"{0}.svg", id);
+            string svgFileName = path + svgName;
+            using (StreamWriter outfile = new StreamWriter(svgFileName))
+            {
+                outfile.Write(text);
+            }
+
+            string expName = string.Format(@"{0}.{1}", id, format);
+            string expFileName = path + expName;
+
+            string inkscapeArgs = string.Format(@"-f ""{0}"" -w 1600 -h 728 -e ""{1}""", svgFileName, expFileName);
+            string inkspacePath = path + "InkscapePortable/InkscapePortable.exe";
+
+            Process inkscape = Process.Start(new ProcessStartInfo(inkspacePath, inkscapeArgs));
+
+            inkscape.WaitForExit(3000);
+            FileStream fs = File.OpenRead(expFileName);
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, data.Length);
+            var res = new FileContentResult(data, "image/" + format);
+            res.FileDownloadName = "FJFIRozvrh." + format;
+            fs.Close();
+            File.Delete(expFileName);
+            File.Delete(svgFileName);
+            return res;
+        }
 
         /// <summary>
         /// Exports lectures to ICal format.
@@ -71,7 +113,7 @@ namespace Rozvrh.Exporters
         public ActionResult DownloadAsICAL(List<TimetableField> lectures,DateTime semStart, DateTime semEnd)
         {
             ICalGenerator gen = new ICalGenerator();
-            string text = gen.generateICal(convertToExportFormat(lectures), semStart, semEnd);
+            string text = gen.generateICal(lectures, semStart, semEnd);
             byte[] buffer = System.Text.Encoding.UTF8.GetBytes(text);
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIRozvrh.ical";

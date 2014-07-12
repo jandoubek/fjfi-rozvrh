@@ -28,12 +28,17 @@ namespace Rozvrh.Models
         [XmlElement("Created")]
         public DateTime Created { get; set; }
 
+        /// <summary>
+        ///  Message to be shown on the empty filtering result list.
+        /// </summary>
+        [XmlElement("WelcomeMessage")]
+        public string WelcomeMessage { get; set; }
+
         /// <summary> 
         /// When does the semester starts.
         /// </summary>
         [XmlElement("SemesterStart")]
         public DateTime SemesterStart { get; set; }
-
 
         /// <summary> 
         /// When does the semester start.
@@ -58,5 +63,10 @@ namespace Rozvrh.Models
         /// </summary>
         [XmlElement("SufixPoolLink")]
         public string SufixPoolLink { get; set; }
+
+        /// <summary>
+        /// For handling error message from Controller to View
+        /// </summary>
+        public string ErrorMessage { get; set; }
     }
 }

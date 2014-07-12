@@ -79,7 +79,13 @@ namespace Rozvrh.Exporters.Common
             day = (DayOfWeek)Enum.ToObject(typeof(DayOfWeek), Int32.Parse(ttf.day_order) + 1);
             startTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 
                 Int32.Parse(ttf.time_hours), Int32.Parse(ttf.time_minutes), 0);
-            length = new TimeSpan(Int32.Parse(ttf.duration),0,0);
+
+            Double time_duration = Double.Parse(ttf.duration);
+            int hours = (int)time_duration;
+            int minutes = (int)((time_duration - hours) * 60);
+            length = new TimeSpan(hours, minutes, 0);
+            
+            //length = new TimeSpan(Int32.Parse(ttf.duration),0,0);
             lecturer = ttf.lecturer;
             room = ttf.classroom;
             departementColor = "#" + int.Parse(ttf.color).ToString("X6");

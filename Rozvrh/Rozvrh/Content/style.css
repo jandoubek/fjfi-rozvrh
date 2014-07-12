@@ -1,83 +1,132 @@
-﻿body { padding: 0; margin: 0; -moz-min-width: 1300px; -ms-min-width: 1300px; -o-min-width: 1300px; -webkit-min-width: 1300px; min-width: 1300px; min-height: 600px; font-size: 14px; font-family: Verdana; }
+﻿html {height: 100%; padding: 0px; margin: 0px;}
+
+body {height: 100%; padding: 0; margin: 0;
+       font-size: 80%; font-family: Verdana;} 
 
 .clear { clear: both; }
 
-.ui-dialog { font-size: 13px; }
 
-#leftSection { padding: 0 10px 0 10px; }
+.ui-dialog { font-size: 100% }
 
-#rightSection { width: 500px; float: right; margin: 8px; padding-bottom: 0.8em; }
+#BodyWrapper {  height:100%; margin-left: auto; margin-right: auto;
+               -moz-min-width: 1280px; -moz-max-width:1600px; -moz-min-height: 700px; -moz-max-height: 1000px; 
+               -ms-min-width: 1280px;-ms-max-width:1600px;  -ms-min-height: 700px; -ms-max-height: 1000px; 
+               -o-min-width: 1280px; -o-max-width:1600px; -o-min-height:700px;  -o-max-height:1000px;  
+               -webkit-min-width: 1280px; -webkit-max-width:1600px;  -webkit-min-height:700px; -webkit-max-height:1000px;
+               min-width: 1280px; max-width:1600px; min-height:700px; max-height:1000px; 
+}
 
-    #rightSection .exportLink { margin-left: 5px; }
+#Main {position:relative; height:100%; }
+    
+#leftSection {position:relative; height:100%; width:100%; overflow:hidden; }
 
-    #rightSection .exportToolip { margin: 5px 10px 5px 10px; font-size: 0.9em; width: 90%; padding: 5px 10px; }
 
-    #rightSection .tooltipSelected { background-color: #f1f1f1; }
+#rightSection {position:absolute; left:50.5%; height:38%; width: 48.5%; top: 1.5%; z-index:2; }
 
-    #rightSection #tabs { width: 492px; height: 100%; }
+    #rightSection .exportLink {height: 15%; }
 
-    #rightSection .ui-tabs .ui-tabs-nav { padding-left: 0.8em; }
+    #rightSection .exportLink .exButton {float: left; width: 10%;  margin-right: 3%;}
 
-    #rightSection .ui-tabs .ui-tabs-panel { padding: 1em 0 0 0; }
+    #rightSection .ui-tabs {height:100%;}
+    
+    #rightSection .ui-tabs .ui-tabs-nav { padding-left: 2%; }
 
-    #rightSection div.boxContainer { float: left; margin-right: 21px; }
+    #rightSection .ui-tabs .ui-tabs-panel {  padding: 2%; font-size:95%; height:78%;}
 
+                                        #AboutTab {float:right; margin-right:2%;}
+
+                                        #TutorialTab {float:right; visibility:hidden;}
+     
+    #rightSection div.box {position:relative; float: left; margin-right: -1px; height:100%;}   
+
+    #rightSection div.box label { background: #e2e2e2; display: block; text-align:center; width:100%; border: 1px solid #a8a8a8; border-bottom: none; 
+                                  -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; padding: 0.5em 0;}
+
+    #rightSection #filterForm {height: 100%;}
+
+                    a.selectBox {height:86% !important}
+
+    #rightSection div.box select {overflow:hidden; width:100%; border: 1px solid #a8a8a8; padding: 0.3em; font-size: 85%; }                  
+   
+        div.boxContainer {height:100%; float:left;}    
+
+        div#prvni.boxContainer {width:26%; margin-right:1%;}
+            
+            .box#rocnik  {width: 33%; }
+
+            .box#zamereni  {width: 44%; margin-left:1px;}
+
+            .box#kruh  {width: 23%; margin-left:1px;}
+
+        div#druhy.boxContainer {width:25%; margin-right:1%;}
+
+            .box#katedra  {width: 38%;}
+
+            .box#vyucujici  {width: 62%; margin-left:1px;}
+
+        div#treti.boxContainer {width:24%; margin-right:1%;}
+
+            .box#budova  {width: 49%; }
+
+            .box#mistnost  {width: 51%; margin-left:1px; }
+
+        div#den.boxContainer {width:10%; height:78%; margin-right:1%;}
+
+            div#den.boxContainer .box {width:100%;}
+
+        div#zacatek.boxContainer {width:10%; height:78%;}
+
+            div#zacatek.boxContainer .box {width:100%; }
+ 
     #rightSection div.nomargin { margin: 0; }
+  
+    #rightSection #clearAll {margin: 3% 0% 0% 3%;}
 
-    #rightSection div.box { float: left; margin-right: -1px; }
 
-        #rightSection div.box label { background: #e2e2e2; display: block; padding: 5px; width: 83px; border: 1px solid #a8a8a8; border-bottom: none; }
-
-        #rightSection div.box select { width: 95px; border: 1px solid #a8a8a8; padding: 5px; font-size: 0.85em; }
-
-        #rightSection div.box#noscroll ::-webkit-scrollbar { display: none; }
-
-    #rightSection #clearAll { padding: 2px; line-height: 1.8em; }
-
-/*#Tabulka { border-left: 1px solid #a8a8a8; border-top: 1px solid #a8a8a8; width: 100%; padding: 0; border-spacing: 0; clear: both; }
-
-    #Tabulka th, #Tabulka td { text-align: left; padding: 5px; border-bottom: 1px solid #a8a8a8; border-right: 1px solid #a8a8a8; }
-
-    #Tabulka th { border-bottom: 3px #a8a8a8 double; font-weight: 400; }*/
-
-#Loading { position: absolute; width: 490px; display: none; height: 394px; border: 1px solid #929292; background: #c2c2c2 no-repeat; -ms-opacity: 0.6; opacity: 0.6; filter: alpha(opacity=60); text-align: center; vertical-align: middle; }
+#Loading {position:absolute; width: 100%;height: 100%; top:0; left:0; display: none;  border: 1px solid #929292; background: #c2c2c2 no-repeat; -ms-opacity: 0.6; opacity: 0.6; filter: alpha(opacity=60); text-align: center; vertical-align: middle; }
 
     #Loading span { display: inline-block; height: 100%; vertical-align: middle; }
 
     #Loading img { display: inline-block; vertical-align: middle; width: 80px; height: 80px; }
 
 
-#Timetable { min-height: 400px; }
+#Timetable {position: relative; width:48.5%; height:44%; top:1.5%; left:1%; overflow: hidden;  background-color: #f7f7f7; border: 1px solid #a8a8a8;
+                                  -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px;}
 
-    #Timetable div.content { position: absolute; top: 10px; left: 10px; }
+    #Timetable div.content, #TimetableExport div.content {width:auto; height:auto; position:absolute;  }
 
-    #Timetable div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
+    #Timetable div.background, #TimetableExport div.background { -ms-opacity: 0.5; opacity: 0.5; position: absolute; }
 
-    #Timetable div.border { -ms-opacity: 0.75; opacity: 0.75; position: absolute; border-width: 2px; border-style: solid; width: 100%; height: 100%; line-height: normal; }
+    #Timetable div.border, #TimetableExport div.border { -ms-opacity: 0.75; opacity: 0.75; position: absolute; border-width: 2px; border-style: solid; width: 100%; height: 100%; line-height: normal; }
 
     #Timetable button.edit, #Timetable button.delete { border: 1px solid #c2c2c2; display: none; width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px;float: left; }
 
     #Timetable button.delete { float: right; }
 
-    #Timetable div.name { position: absolute; text-align: center; }
+    #List button.add { border: 1px solid #c2c2c2;  width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px; margin-left: 0.5em;}
+    
+    #rightSection button.resetOne {position:absolute; opacity:0.8; -ms-opacity: 0.8; right:0; top:0; display: none; border: 1px solid #c2c2c2;  width: 20px; height: 20px; -ms-border-radius: 4px; border-radius: 4px; margin:0;}
+    
+    #Timetable div.name, #TimetableExport div.name { position: absolute; text-align: center; }
 
-        #Timetable div.name div { font-size: 12px; font-weight: 700; font-family: Arial; line-height: 29px; vertical-align: middle; -ms-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; -webkit-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; }
+        #Timetable div.name div, #TimetableExport div.name div  { font-size: 12px; font-weight: 700; font-family: Arial; line-height: 29px; vertical-align: middle; -ms-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; -webkit-text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; text-shadow: 0 1px white,0 -1px white, 1px 0 white, -1px 0 white,1px 1px white, 1px -1px white, -1px 1px white, -1px -1px white; }
 
-    #Timetable div.small div { font-size: 8px; line-height: 10px; }
+    #Timetable div.small div, #TimetableExport div.small div { font-size: 8px; line-height: 10px; }
 
-    #Timetable div.detailsBackground { position: absolute; background: white; -ms-opacity: 0.5; opacity: 0.5; }
+    #Timetable div.detailsBackground, #TimetableExport div.detailsBackground { position: absolute; background: white; -ms-opacity: 0.5; opacity: 0.5; }
 
-    #Timetable div.details, #Timetable div.detailsSmall { position: absolute; padding: 2px; font-size: 9px; font-family: Arial; line-height: normal; }
+    #Timetable div.details, #Timetable div.detailsSmall, #TimetableExport div.details, #TimetableExport div.detailsSmall { position: absolute; padding: 2px; font-size: 9px; font-family: Arial; line-height: normal; }
 
-    #Timetable div.detailsSmall { padding: 1px; font-size: 8px; }
+    #Timetable div.detailsSmall, #TimetableExport div.detailsSmall { padding: 1px; font-size: 8px; }
 
-        #Timetable div.details div, #Timetable div.detailsSmall div { float: right; margin-right: 2px; }
+        #Timetable div.details div, #Timetable div.detailsSmall div, #TimetableExport div.details div, #TimetableExport div.detailsSmall div { float: right; margin-right: 2px; }
 
-#backgroundTable { border-spacing: 0; border-collapse: separate; position: absolute; top: 0; left: 0; }
+
+#backgroundTable { border-spacing: 0; border-collapse: separate;  }
 
     #backgroundTable div.header div { height: 20px; font-size: 12px; font-family: Arial; font-weight: 400; width: 50px; padding: 0; text-align: center; float: left; }
 
-        #backgroundTable div.header div:first-child { width: 75px; }
+    #backgroundTable div.header div:first-child { width: 75px; }
 
     #backgroundTable div.begining, #backgroundTable div.horizontal { height: 49px; width: 725px; border-bottom: 1px solid #ddd; padding: 0; }
 
@@ -93,18 +142,36 @@
 #dialog-form input { margin-bottom: 5px;}
 
 
-footer { background-color: #e2e2e2; border-top: 1px solid #333333; text-align: center; padding: 10px 0; font-size: 0.9em; height: 40px; width: 100%; color: #787878; }
+#List {position:absolute; height:51%; width:98%; bottom:1.5%; left:1%; background-color: #f7f7f7;}
 
-.export-tooltip-styling { max-width: 400px !important; padding: 5px; }
+#List div#AddButtons  {position:absolute; top:-10.5%; z-index:2; right:0;}
 
-.timetable-tooltip-styling { position: absolute; font-size: 12px; padding: 5px; }
+#List #lastUpdate {position: absolute; bottom:5%; left:1%;}
 
-/* tables */
-table.tablesorter { font-family: arial; background-color: #CDCDCD; margin: 10px 0pt 15px; font-size: 8pt; width: 100%; text-align: left; }
-    table.tablesorter thead tr th, table.tablesorter tfoot tr th { background-color: #e6EEEE; border: 1px solid #FFF; font-size: 8pt; padding: 4px; }
-    table.tablesorter thead tr .header { background-image: url(bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; }
-    table.tablesorter tbody td { color: #3D3D3D; padding: 4px; background-color: #FFF; vertical-align: top; }
-    table.tablesorter tbody tr.odd td { background-color: #F0F0F6; }
-    table.tablesorter thead tr .headerSortUp { background-image: url(asc.gif); }
-    table.tablesorter thead tr .headerSortDown { background-image: url(desc.gif); }
-    table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp { background-color: #8dbdd8; }
+#List #welcomeMessage {position: absolute; top:10%; left:1%; width:55%; font-size: 130%;}
+
+#List #fjfiLogo {position: absolute; top:20%; left:1%; height:20em; width:20em; content:url(fjfiLogo.gif);}
+
+#List #videoFrame {position: absolute; right:1%; top:8%; width:40%; height:90%; z-index:5;}
+
+#List #table-wrapper { height:100%; border: 1px solid #a8a8a8; border-top-width:0px; position:relative; overflow:hidden;
+                                  -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+
+        .fht-tbody {overflow:hidden; position:relative;}
+
+
+/*ADMIN section*/
+
+div#LogInContainer, div#FormContainer {width: 97%; margin:1.5%; height:100%; position:absolute; z-index:5; }
+
+div#LogInContainer fieldset div, div#FormContainer fieldset div {margin:1% 2%; }
+
+div#LogInContainer fieldset, div#FormContainer fieldset {margin: 1%; width: 28%; float: left; height:20%; background-color: #f7f7f7;}
+
+                                               div#configButtons{clear: both; margin: 1%; width: 28%; height:20%;}
+
+div#FormContainer input#XMLTimetableFilePathField,  input#LinkToInfoField,  input#PrefixPoolLinkField, input#SufixPoolLinkField, input#WelcomeMessage {width:98%;}
+
+div#FormContainer input {margin: 0% 0% 3% 0%;}
+
+div#FormContainer #WelcomeMessage {width: 100%; min-height: 7em; height: 100%;}

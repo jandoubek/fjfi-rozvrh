@@ -1,0 +1,2630 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Web.Optimization.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundle">
+            <summary>Shim type of System.Web.Optimization.Bundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundle.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundle.#ctor(System.Web.Optimization.Bundle)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundle.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundle.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ApplyTransformsBundleContextStringIEnumerableOfBundleFile">
+            <summary>Sets the shim of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.BuilderGet">
+            <summary>Sets the shim of Bundle.get_Builder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.BuilderSetIBundleBuilder">
+            <summary>Sets the shim of Bundle.set_Builder(IBundleBuilder value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.CacheKeysGet">
+            <summary>Sets the shim of Bundle.get_CacheKeys()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.CacheLookupBundleContext">
+            <summary>Sets the shim of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.CdnFallbackExpressionGet">
+            <summary>Sets the shim of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.CdnFallbackExpressionSetString">
+            <summary>Sets the shim of Bundle.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.CdnPathGet">
+            <summary>Sets the shim of Bundle.get_CdnPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.CdnPathSetString">
+            <summary>Sets the shim of Bundle.set_CdnPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ConcatenationTokenGet">
+            <summary>Sets the shim of Bundle.get_ConcatenationToken()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ConcatenationTokenSetString">
+            <summary>Sets the shim of Bundle.set_ConcatenationToken(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.Constructor">
+            <summary>Sets the shim of Bundle.Bundle()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ConstructorString">
+            <summary>Sets the shim of Bundle.Bundle(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ConstructorStringIBundleTransformArray">
+            <summary>Sets the shim of Bundle.Bundle(String virtualPath, IBundleTransform[] transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ConstructorStringString">
+            <summary>Sets the shim of Bundle.Bundle(String virtualPath, String cdnPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ConstructorStringStringIBundleTransformArray">
+            <summary>Sets the shim of Bundle.Bundle(String virtualPath, String cdnPath, IBundleTransform[] transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.EnableFileExtensionReplacementsGet">
+            <summary>Sets the shim of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.EnableFileExtensionReplacementsSetBoolean">
+            <summary>Sets the shim of Bundle.set_EnableFileExtensionReplacements(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.EnumerateFilesBundleContext">
+            <summary>Sets the shim of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.GenerateBundleResponseBundleContext">
+            <summary>Sets the shim of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.GetBundleResponseBundleContext">
+            <summary>Sets the shim of Bundle.GetBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.GetBundleUrlBundleContextBoolean">
+            <summary>Sets the shim of Bundle.GetBundleUrl(BundleContext context, Boolean includeContentHash)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.GetCacheKeyBundleContext">
+            <summary>Sets the shim of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.GetInstrumentationModeHttpContextBase">
+            <summary>Sets the shim of Bundle.GetInstrumentationMode(HttpContextBase context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.IncludeDirectoryStringString">
+            <summary>Sets the shim of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.IncludeDirectoryStringStringBoolean">
+            <summary>Sets the shim of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.IncludeStringArray">
+            <summary>Sets the shim of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.IncludeStringIItemTransformArray">
+            <summary>Sets the shim of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.InvalidateCacheEntries">
+            <summary>Sets the shim of Bundle.InvalidateCacheEntries()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.OrdererGet">
+            <summary>Sets the shim of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.OrdererSetIBundleOrderer">
+            <summary>Sets the shim of Bundle.set_Orderer(IBundleOrderer value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.PathGet">
+            <summary>Sets the shim of Bundle.get_Path()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.PathSetString">
+            <summary>Sets the shim of Bundle.set_Path(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.ProcessRequestBundleContext">
+            <summary>Sets the shim of Bundle.ProcessRequest(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.SetHeadersBundleResponseBundleContextBoolean">
+            <summary>Sets the shim of Bundle.SetHeaders(BundleResponse response, BundleContext context, Boolean noCache)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.TransformsGet">
+            <summary>Sets the shim of Bundle.get_Transforms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.UpdateCacheBundleContextBundleResponse">
+            <summary>Sets the shim of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundle.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.ApplyTransformsBundleContextStringIEnumerableOfBundleFile">
+            <summary>Sets the shim of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.BuilderGet">
+            <summary>Sets the shim of Bundle.get_Builder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.BuilderSetIBundleBuilder">
+            <summary>Sets the shim of Bundle.set_Builder(IBundleBuilder value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.CacheKeysGet">
+            <summary>Sets the shim of Bundle.get_CacheKeys()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.CacheLookupBundleContext">
+            <summary>Sets the shim of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.CdnFallbackExpressionGet">
+            <summary>Sets the shim of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.CdnFallbackExpressionSetString">
+            <summary>Sets the shim of Bundle.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.CdnPathGet">
+            <summary>Sets the shim of Bundle.get_CdnPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.CdnPathSetString">
+            <summary>Sets the shim of Bundle.set_CdnPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.ConcatenationTokenGet">
+            <summary>Sets the shim of Bundle.get_ConcatenationToken()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.ConcatenationTokenSetString">
+            <summary>Sets the shim of Bundle.set_ConcatenationToken(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.EnableFileExtensionReplacementsGet">
+            <summary>Sets the shim of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.EnableFileExtensionReplacementsSetBoolean">
+            <summary>Sets the shim of Bundle.set_EnableFileExtensionReplacements(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.EnumerateFilesBundleContext">
+            <summary>Sets the shim of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.GenerateBundleResponseBundleContext">
+            <summary>Sets the shim of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.GetBundleResponseBundleContext">
+            <summary>Sets the shim of Bundle.GetBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.GetBundleUrlBundleContextBoolean">
+            <summary>Sets the shim of Bundle.GetBundleUrl(BundleContext context, Boolean includeContentHash)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.GetCacheKeyBundleContext">
+            <summary>Sets the shim of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.IncludeDirectoryStringString">
+            <summary>Sets the shim of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.IncludeDirectoryStringStringBoolean">
+            <summary>Sets the shim of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.IncludeStringArray">
+            <summary>Sets the shim of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.IncludeStringIItemTransformArray">
+            <summary>Sets the shim of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.InvalidateCacheEntries">
+            <summary>Sets the shim of Bundle.InvalidateCacheEntries()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.OrdererGet">
+            <summary>Sets the shim of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.OrdererSetIBundleOrderer">
+            <summary>Sets the shim of Bundle.set_Orderer(IBundleOrderer value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.PathGet">
+            <summary>Sets the shim of Bundle.get_Path()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.PathSetString">
+            <summary>Sets the shim of Bundle.set_Path(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.ProcessRequestBundleContext">
+            <summary>Sets the shim of Bundle.ProcessRequest(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.TransformsGet">
+            <summary>Sets the shim of Bundle.get_Transforms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundle.AllInstances.UpdateCacheBundleContextBundleResponse">
+            <summary>Sets the shim of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleCollection">
+            <summary>Shim type of System.Web.Optimization.BundleCollection</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleCollection.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleCollection.#ctor(System.Web.Optimization.BundleCollection)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleCollection.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleCollection.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleCollection.Bind(System.Collections.IEnumerable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleCollection.Bind(System.Collections.Generic.IEnumerable{System.Web.Optimization.Bundle})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AddBundle">
+            <summary>Sets the shim of BundleCollection.Add(Bundle bundle)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AddDefaultFileExtensionReplacementsFileExtensionReplacementList">
+            <summary>Sets the shim of BundleCollection.AddDefaultFileExtensionReplacements(FileExtensionReplacementList list)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AddDefaultFileOrderingsIListOfBundleFileSetOrdering">
+            <summary>Sets the shim of BundleCollection.AddDefaultFileOrderings(IList`1&lt;BundleFileSetOrdering&gt; list)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AddDefaultIgnorePatternsIgnoreList">
+            <summary>Sets the shim of BundleCollection.AddDefaultIgnorePatterns(IgnoreList ignoreList)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.Clear">
+            <summary>Sets the shim of BundleCollection.Clear()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.Constructor">
+            <summary>Sets the shim of BundleCollection.BundleCollection()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.ContextGet">
+            <summary>Sets the shim of BundleCollection.get_Context()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.ContextSetHttpContextBase">
+            <summary>Sets the shim of BundleCollection.set_Context(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.CountGet">
+            <summary>Sets the shim of BundleCollection.get_Count()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.DirectoryFilterGet">
+            <summary>Sets the shim of BundleCollection.get_DirectoryFilter()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.DynamicBundlesGet">
+            <summary>Sets the shim of BundleCollection.get_DynamicBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.FileExtensionReplacementListGet">
+            <summary>Sets the shim of BundleCollection.get_FileExtensionReplacementList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.FileExtensionReplacementListSetFileExtensionReplacementList">
+            <summary>Sets the shim of BundleCollection.set_FileExtensionReplacementList(FileExtensionReplacementList value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.FileSetOrderListGet">
+            <summary>Sets the shim of BundleCollection.get_FileSetOrderList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.GetBundleForString">
+            <summary>Sets the shim of BundleCollection.GetBundleFor(String bundleVirtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.GetEnumerator">
+            <summary>Sets the shim of BundleCollection.GetEnumerator()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.GetRegisteredBundles">
+            <summary>Sets the shim of BundleCollection.GetRegisteredBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.IgnoreListGet">
+            <summary>Sets the shim of BundleCollection.get_IgnoreList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.RemoveBundle">
+            <summary>Sets the shim of BundleCollection.Remove(Bundle bundle)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.ResetAll">
+            <summary>Sets the shim of BundleCollection.ResetAll()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.ResolveBundleUrlString">
+            <summary>Sets the shim of BundleCollection.ResolveBundleUrl(String bundleVirtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.ResolveBundleUrlStringBoolean">
+            <summary>Sets the shim of BundleCollection.ResolveBundleUrl(String bundleVirtualPath, Boolean includeContentHash)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.StaticBundlesGet">
+            <summary>Sets the shim of BundleCollection.get_StaticBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.SystemCollectionsGenericIEnumerableSystemWebOptimizationBundleGetEnumerator">
+            <summary>Sets the shim of BundleCollection.System.Collections.Generic.IEnumerable&lt;System.Web.Optimization.Bundle&gt;.GetEnumerator()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.SystemCollectionsIEnumerableGetEnumerator">
+            <summary>Sets the shim of BundleCollection.System.Collections.IEnumerable.GetEnumerator()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.UseCdnGet">
+            <summary>Sets the shim of BundleCollection.get_UseCdn()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.UseCdnSetBoolean">
+            <summary>Sets the shim of BundleCollection.set_UseCdn(Boolean value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.AddBundle">
+            <summary>Sets the shim of BundleCollection.Add(Bundle bundle)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.Clear">
+            <summary>Sets the shim of BundleCollection.Clear()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.ContextGet">
+            <summary>Sets the shim of BundleCollection.get_Context()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.ContextSetHttpContextBase">
+            <summary>Sets the shim of BundleCollection.set_Context(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.CountGet">
+            <summary>Sets the shim of BundleCollection.get_Count()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.DirectoryFilterGet">
+            <summary>Sets the shim of BundleCollection.get_DirectoryFilter()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.DynamicBundlesGet">
+            <summary>Sets the shim of BundleCollection.get_DynamicBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.FileExtensionReplacementListGet">
+            <summary>Sets the shim of BundleCollection.get_FileExtensionReplacementList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.FileExtensionReplacementListSetFileExtensionReplacementList">
+            <summary>Sets the shim of BundleCollection.set_FileExtensionReplacementList(FileExtensionReplacementList value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.FileSetOrderListGet">
+            <summary>Sets the shim of BundleCollection.get_FileSetOrderList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.GetBundleForString">
+            <summary>Sets the shim of BundleCollection.GetBundleFor(String bundleVirtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.GetEnumerator">
+            <summary>Sets the shim of BundleCollection.GetEnumerator()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.GetRegisteredBundles">
+            <summary>Sets the shim of BundleCollection.GetRegisteredBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.IgnoreListGet">
+            <summary>Sets the shim of BundleCollection.get_IgnoreList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.RemoveBundle">
+            <summary>Sets the shim of BundleCollection.Remove(Bundle bundle)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.ResetAll">
+            <summary>Sets the shim of BundleCollection.ResetAll()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.ResolveBundleUrlString">
+            <summary>Sets the shim of BundleCollection.ResolveBundleUrl(String bundleVirtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.ResolveBundleUrlStringBoolean">
+            <summary>Sets the shim of BundleCollection.ResolveBundleUrl(String bundleVirtualPath, Boolean includeContentHash)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.StaticBundlesGet">
+            <summary>Sets the shim of BundleCollection.get_StaticBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.SystemCollectionsGenericIEnumerableSystemWebOptimizationBundleGetEnumerator">
+            <summary>Sets the shim of BundleCollection.System.Collections.Generic.IEnumerable&lt;System.Web.Optimization.Bundle&gt;.GetEnumerator()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.SystemCollectionsIEnumerableGetEnumerator">
+            <summary>Sets the shim of BundleCollection.System.Collections.IEnumerable.GetEnumerator()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.UseCdnGet">
+            <summary>Sets the shim of BundleCollection.get_UseCdn()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleCollection.AllInstances.UseCdnSetBoolean">
+            <summary>Sets the shim of BundleCollection.set_UseCdn(Boolean value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleContext">
+            <summary>Shim type of System.Web.Optimization.BundleContext</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleContext.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleContext.#ctor(System.Web.Optimization.BundleContext)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleContext.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleContext.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.BundleCollectionGet">
+            <summary>Sets the shim of BundleContext.get_BundleCollection()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.BundleCollectionSetBundleCollection">
+            <summary>Sets the shim of BundleContext.set_BundleCollection(BundleCollection value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.BundleVirtualPathGet">
+            <summary>Sets the shim of BundleContext.get_BundleVirtualPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.BundleVirtualPathSetString">
+            <summary>Sets the shim of BundleContext.set_BundleVirtualPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.CacheDependencyDirectoriesGet">
+            <summary>Sets the shim of BundleContext.get_CacheDependencyDirectories()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.Constructor">
+            <summary>Sets the shim of BundleContext.BundleContext()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.ConstructorHttpContextBaseBundleCollectionString">
+            <summary>Sets the shim of BundleContext.BundleContext(HttpContextBase context, BundleCollection collection, String bundleVirtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.EnableInstrumentationGet">
+            <summary>Sets the shim of BundleContext.get_EnableInstrumentation()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.EnableInstrumentationSetBoolean">
+            <summary>Sets the shim of BundleContext.set_EnableInstrumentation(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.EnableOptimizationsGet">
+            <summary>Sets the shim of BundleContext.get_EnableOptimizations()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.EnableOptimizationsSetBoolean">
+            <summary>Sets the shim of BundleContext.set_EnableOptimizations(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.HttpContextGet">
+            <summary>Sets the shim of BundleContext.get_HttpContext()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.HttpContextSetHttpContextBase">
+            <summary>Sets the shim of BundleContext.set_HttpContext(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.UseServerCacheGet">
+            <summary>Sets the shim of BundleContext.get_UseServerCache()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.UseServerCacheSetBoolean">
+            <summary>Sets the shim of BundleContext.set_UseServerCache(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.VirtualPathProviderGet">
+            <summary>Sets the shim of BundleContext.get_VirtualPathProvider()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.VirtualPathProviderSetVirtualPathProvider">
+            <summary>Sets the shim of BundleContext.set_VirtualPathProvider(VirtualPathProvider value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.BundleCollectionGet">
+            <summary>Sets the shim of BundleContext.get_BundleCollection()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.BundleCollectionSetBundleCollection">
+            <summary>Sets the shim of BundleContext.set_BundleCollection(BundleCollection value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.BundleVirtualPathGet">
+            <summary>Sets the shim of BundleContext.get_BundleVirtualPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.BundleVirtualPathSetString">
+            <summary>Sets the shim of BundleContext.set_BundleVirtualPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.CacheDependencyDirectoriesGet">
+            <summary>Sets the shim of BundleContext.get_CacheDependencyDirectories()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.EnableInstrumentationGet">
+            <summary>Sets the shim of BundleContext.get_EnableInstrumentation()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.EnableInstrumentationSetBoolean">
+            <summary>Sets the shim of BundleContext.set_EnableInstrumentation(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.EnableOptimizationsGet">
+            <summary>Sets the shim of BundleContext.get_EnableOptimizations()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.EnableOptimizationsSetBoolean">
+            <summary>Sets the shim of BundleContext.set_EnableOptimizations(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.HttpContextGet">
+            <summary>Sets the shim of BundleContext.get_HttpContext()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.HttpContextSetHttpContextBase">
+            <summary>Sets the shim of BundleContext.set_HttpContext(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.UseServerCacheGet">
+            <summary>Sets the shim of BundleContext.get_UseServerCache()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.UseServerCacheSetBoolean">
+            <summary>Sets the shim of BundleContext.set_UseServerCache(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.VirtualPathProviderGet">
+            <summary>Sets the shim of BundleContext.get_VirtualPathProvider()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleContext.AllInstances.VirtualPathProviderSetVirtualPathProvider">
+            <summary>Sets the shim of BundleContext.set_VirtualPathProvider(VirtualPathProvider value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleDefinition">
+            <summary>Shim type of System.Web.Optimization.BundleDefinition</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleDefinition.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleDefinition.#ctor(System.Web.Optimization.BundleDefinition)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleDefinition.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleDefinition.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.CdnFallbackExpressionGet">
+            <summary>Sets the shim of BundleDefinition.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.CdnFallbackExpressionSetString">
+            <summary>Sets the shim of BundleDefinition.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.CdnPathGet">
+            <summary>Sets the shim of BundleDefinition.get_CdnPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.CdnPathSetString">
+            <summary>Sets the shim of BundleDefinition.set_CdnPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.Constructor">
+            <summary>Sets the shim of BundleDefinition.BundleDefinition()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.IncludesGet">
+            <summary>Sets the shim of BundleDefinition.get_Includes()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.IncludesSetIListOfString">
+            <summary>Sets the shim of BundleDefinition.set_Includes(IList`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.PathGet">
+            <summary>Sets the shim of BundleDefinition.get_Path()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.PathSetString">
+            <summary>Sets the shim of BundleDefinition.set_Path(String value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.CdnFallbackExpressionGet">
+            <summary>Sets the shim of BundleDefinition.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.CdnFallbackExpressionSetString">
+            <summary>Sets the shim of BundleDefinition.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.CdnPathGet">
+            <summary>Sets the shim of BundleDefinition.get_CdnPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.CdnPathSetString">
+            <summary>Sets the shim of BundleDefinition.set_CdnPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.IncludesGet">
+            <summary>Sets the shim of BundleDefinition.get_Includes()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.IncludesSetIListOfString">
+            <summary>Sets the shim of BundleDefinition.set_Includes(IList`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.PathGet">
+            <summary>Sets the shim of BundleDefinition.get_Path()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleDefinition.AllInstances.PathSetString">
+            <summary>Sets the shim of BundleDefinition.set_Path(String value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleFile">
+            <summary>Shim type of System.Web.Optimization.BundleFile</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFile.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFile.#ctor(System.Web.Optimization.BundleFile)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFile.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFile.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.ApplyTransforms">
+            <summary>Sets the shim of BundleFile.ApplyTransforms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.ConstructorStringVirtualFile">
+            <summary>Sets the shim of BundleFile.BundleFile(String includedVirtualPath, VirtualFile file)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.ConstructorStringVirtualFileIListOfIItemTransform">
+            <summary>Sets the shim of BundleFile.BundleFile(String includedVirtualPath, VirtualFile file, IList`1&lt;IItemTransform&gt; transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.IncludedVirtualPathGet">
+            <summary>Sets the shim of BundleFile.get_IncludedVirtualPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.IncludedVirtualPathSetString">
+            <summary>Sets the shim of BundleFile.set_IncludedVirtualPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.TransformsGet">
+            <summary>Sets the shim of BundleFile.get_Transforms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.VirtualFileGet">
+            <summary>Sets the shim of BundleFile.get_VirtualFile()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.VirtualFileSetVirtualFile">
+            <summary>Sets the shim of BundleFile.set_VirtualFile(VirtualFile value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances.ApplyTransforms">
+            <summary>Sets the shim of BundleFile.ApplyTransforms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances.IncludedVirtualPathGet">
+            <summary>Sets the shim of BundleFile.get_IncludedVirtualPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances.IncludedVirtualPathSetString">
+            <summary>Sets the shim of BundleFile.set_IncludedVirtualPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances.TransformsGet">
+            <summary>Sets the shim of BundleFile.get_Transforms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances.VirtualFileGet">
+            <summary>Sets the shim of BundleFile.get_VirtualFile()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFile.AllInstances.VirtualFileSetVirtualFile">
+            <summary>Sets the shim of BundleFile.set_VirtualFile(VirtualFile value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering">
+            <summary>Shim type of System.Web.Optimization.BundleFileSetOrdering</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.#ctor(System.Web.Optimization.BundleFileSetOrdering)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.ConstructorString">
+            <summary>Sets the shim of BundleFileSetOrdering.BundleFileSetOrdering(String name)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.FilesGet">
+            <summary>Sets the shim of BundleFileSetOrdering.get_Files()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.FilesSetIListOfString">
+            <summary>Sets the shim of BundleFileSetOrdering.set_Files(IList`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.NameGet">
+            <summary>Sets the shim of BundleFileSetOrdering.get_Name()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.NameSetString">
+            <summary>Sets the shim of BundleFileSetOrdering.set_Name(String value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.AllInstances.FilesGet">
+            <summary>Sets the shim of BundleFileSetOrdering.get_Files()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.AllInstances.FilesSetIListOfString">
+            <summary>Sets the shim of BundleFileSetOrdering.set_Files(IList`1&lt;String&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.AllInstances.NameGet">
+            <summary>Sets the shim of BundleFileSetOrdering.get_Name()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleFileSetOrdering.AllInstances.NameSetString">
+            <summary>Sets the shim of BundleFileSetOrdering.set_Name(String value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleManifest">
+            <summary>Shim type of System.Web.Optimization.BundleManifest</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleManifest.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleManifest.#ctor(System.Web.Optimization.BundleManifest)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleManifest.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleManifest.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.BundleManifestPathGet">
+            <summary>Sets the shim of BundleManifest.get_BundleManifestPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.Constructor">
+            <summary>Sets the shim of BundleManifest.BundleManifest()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.GetXmlDocumentStream">
+            <summary>Sets the shim of BundleManifest.GetXmlDocument(Stream bundleStream)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.ReadBundleManifest">
+            <summary>Sets the shim of BundleManifest.ReadBundleManifest()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.ReadBundleManifestStream">
+            <summary>Sets the shim of BundleManifest.ReadBundleManifest(Stream bundleStream)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.ReadBundleManifestVirtualPathProvider">
+            <summary>Sets the shim of BundleManifest.ReadBundleManifest(VirtualPathProvider vpp)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.ReadBundleXmlElement">
+            <summary>Sets the shim of BundleManifest.ReadBundle(XmlElement element)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.RegisterBundleCollection">
+            <summary>Sets the shim of BundleManifest.Register(BundleCollection collection)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.ScriptBundlesGet">
+            <summary>Sets the shim of BundleManifest.get_ScriptBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.ScriptBundlesSetIListOfBundleDefinition">
+            <summary>Sets the shim of BundleManifest.set_ScriptBundles(IList`1&lt;BundleDefinition&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.StyleBundlesGet">
+            <summary>Sets the shim of BundleManifest.get_StyleBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.StyleBundlesSetIListOfBundleDefinition">
+            <summary>Sets the shim of BundleManifest.set_StyleBundles(IList`1&lt;BundleDefinition&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest._GetXmlDocumentb__0ObjectValidationEventArgs">
+            <summary>Sets the shim of BundleManifest.&lt;GetXmlDocument&gt;b__0(Object sender, ValidationEventArgs e)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest._ReadBundleb__3XmlElement">
+            <summary>Sets the shim of BundleManifest.&lt;ReadBundle&gt;b__3(XmlElement s)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleManifest.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.AllInstances.RegisterBundleCollection">
+            <summary>Sets the shim of BundleManifest.Register(BundleCollection collection)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.AllInstances.ScriptBundlesGet">
+            <summary>Sets the shim of BundleManifest.get_ScriptBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.AllInstances.ScriptBundlesSetIListOfBundleDefinition">
+            <summary>Sets the shim of BundleManifest.set_ScriptBundles(IList`1&lt;BundleDefinition&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.AllInstances.StyleBundlesGet">
+            <summary>Sets the shim of BundleManifest.get_StyleBundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleManifest.AllInstances.StyleBundlesSetIListOfBundleDefinition">
+            <summary>Sets the shim of BundleManifest.set_StyleBundles(IList`1&lt;BundleDefinition&gt; value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleModule">
+            <summary>Shim type of System.Web.Optimization.BundleModule</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleModule.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleModule.#ctor(System.Web.Optimization.BundleModule)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleModule.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleModule.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleModule.Bind(System.Web.IHttpModule)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.Constructor">
+            <summary>Sets the shim of BundleModule.BundleModule()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.Dispose">
+            <summary>Sets the shim of BundleModule.Dispose()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.InitHttpApplication">
+            <summary>Sets the shim of BundleModule.Init(HttpApplication application)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.OnApplicationPostResolveRequestCacheObjectEventArgs">
+            <summary>Sets the shim of BundleModule.OnApplicationPostResolveRequestCache(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.SystemWebIHttpModuleDispose">
+            <summary>Sets the shim of BundleModule.System.Web.IHttpModule.Dispose()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.SystemWebIHttpModuleInitHttpApplication">
+            <summary>Sets the shim of BundleModule.System.Web.IHttpModule.Init(HttpApplication application)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleModule.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.AllInstances.Dispose">
+            <summary>Sets the shim of BundleModule.Dispose()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.AllInstances.InitHttpApplication">
+            <summary>Sets the shim of BundleModule.Init(HttpApplication application)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.AllInstances.OnApplicationPostResolveRequestCacheObjectEventArgs">
+            <summary>Sets the shim of BundleModule.OnApplicationPostResolveRequestCache(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.AllInstances.SystemWebIHttpModuleDispose">
+            <summary>Sets the shim of BundleModule.System.Web.IHttpModule.Dispose()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleModule.AllInstances.SystemWebIHttpModuleInitHttpApplication">
+            <summary>Sets the shim of BundleModule.System.Web.IHttpModule.Init(HttpApplication application)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleResolver">
+            <summary>Shim type of System.Web.Optimization.BundleResolver</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResolver.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResolver.#ctor(System.Web.Optimization.BundleResolver)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResolver.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResolver.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResolver.Bind(System.Web.Optimization.IBundleResolver)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.BundlesGet">
+            <summary>Sets the shim of BundleResolver.get_Bundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.BundlesSetBundleCollection">
+            <summary>Sets the shim of BundleResolver.set_Bundles(BundleCollection value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.Constructor">
+            <summary>Sets the shim of BundleResolver.BundleResolver()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.ConstructorBundleCollection">
+            <summary>Sets the shim of BundleResolver.BundleResolver(BundleCollection bundles)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.ConstructorBundleCollectionHttpContextBase">
+            <summary>Sets the shim of BundleResolver.BundleResolver(BundleCollection bundles, HttpContextBase context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.ContextGet">
+            <summary>Sets the shim of BundleResolver.get_Context()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.ContextSetHttpContextBase">
+            <summary>Sets the shim of BundleResolver.set_Context(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.CurrentGet">
+            <summary>Sets the shim of BundleResolver.get_Current()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.CurrentSetIBundleResolver">
+            <summary>Sets the shim of BundleResolver.set_Current(IBundleResolver value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.GetBundleContentsString">
+            <summary>Sets the shim of BundleResolver.GetBundleContents(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.GetBundleUrlString">
+            <summary>Sets the shim of BundleResolver.GetBundleUrl(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.IsBundleVirtualPathString">
+            <summary>Sets the shim of BundleResolver.IsBundleVirtualPath(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.StaticConstructor">
+            <summary>Sets the shim of BundleResolver.BundleResolver()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.BundlesGet">
+            <summary>Sets the shim of BundleResolver.get_Bundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.BundlesSetBundleCollection">
+            <summary>Sets the shim of BundleResolver.set_Bundles(BundleCollection value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.ContextGet">
+            <summary>Sets the shim of BundleResolver.get_Context()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.ContextSetHttpContextBase">
+            <summary>Sets the shim of BundleResolver.set_Context(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.GetBundleContentsString">
+            <summary>Sets the shim of BundleResolver.GetBundleContents(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.GetBundleUrlString">
+            <summary>Sets the shim of BundleResolver.GetBundleUrl(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResolver.AllInstances.IsBundleVirtualPathString">
+            <summary>Sets the shim of BundleResolver.IsBundleVirtualPath(String virtualPath)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleResponse">
+            <summary>Shim type of System.Web.Optimization.BundleResponse</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResponse.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResponse.#ctor(System.Web.Optimization.BundleResponse)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResponse.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleResponse.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllowOnlyFipsAlgorithmsGet">
+            <summary>Sets the shim of BundleResponse.get_AllowOnlyFipsAlgorithms()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.CacheabilityGet">
+            <summary>Sets the shim of BundleResponse.get_Cacheability()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.CacheabilitySetHttpCacheability">
+            <summary>Sets the shim of BundleResponse.set_Cacheability(HttpCacheability value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.ComputeHashString">
+            <summary>Sets the shim of BundleResponse.ComputeHash(String input)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.Constructor">
+            <summary>Sets the shim of BundleResponse.BundleResponse()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.ConstructorStringIEnumerableOfBundleFile">
+            <summary>Sets the shim of BundleResponse.BundleResponse(String content, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.ContentGet">
+            <summary>Sets the shim of BundleResponse.get_Content()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.ContentSetString">
+            <summary>Sets the shim of BundleResponse.set_Content(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.ContentTypeGet">
+            <summary>Sets the shim of BundleResponse.get_ContentType()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.ContentTypeSetString">
+            <summary>Sets the shim of BundleResponse.set_ContentType(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.CreationDateGet">
+            <summary>Sets the shim of BundleResponse.get_CreationDate()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.CreationDateSetDateTimeOffset">
+            <summary>Sets the shim of BundleResponse.set_CreationDate(DateTimeOffset value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.FilesGet">
+            <summary>Sets the shim of BundleResponse.get_Files()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.FilesSetIEnumerableOfBundleFile">
+            <summary>Sets the shim of BundleResponse.set_Files(IEnumerable`1&lt;BundleFile&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.GetContentHashCode">
+            <summary>Sets the shim of BundleResponse.GetContentHashCode()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.StaticConstructor">
+            <summary>Sets the shim of BundleResponse.BundleResponse()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.CacheabilityGet">
+            <summary>Sets the shim of BundleResponse.get_Cacheability()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.CacheabilitySetHttpCacheability">
+            <summary>Sets the shim of BundleResponse.set_Cacheability(HttpCacheability value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.ContentGet">
+            <summary>Sets the shim of BundleResponse.get_Content()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.ContentSetString">
+            <summary>Sets the shim of BundleResponse.set_Content(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.ContentTypeGet">
+            <summary>Sets the shim of BundleResponse.get_ContentType()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.ContentTypeSetString">
+            <summary>Sets the shim of BundleResponse.set_ContentType(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.CreationDateGet">
+            <summary>Sets the shim of BundleResponse.get_CreationDate()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.CreationDateSetDateTimeOffset">
+            <summary>Sets the shim of BundleResponse.set_CreationDate(DateTimeOffset value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.FilesGet">
+            <summary>Sets the shim of BundleResponse.get_Files()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.FilesSetIEnumerableOfBundleFile">
+            <summary>Sets the shim of BundleResponse.set_Files(IEnumerable`1&lt;BundleFile&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleResponse.AllInstances.GetContentHashCode">
+            <summary>Sets the shim of BundleResponse.GetContentHashCode()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimBundleTable">
+            <summary>Shim type of System.Web.Optimization.BundleTable</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleTable.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleTable.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimBundleTable.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.BundlesGet">
+            <summary>Sets the shim of BundleTable.get_Bundles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.EnableOptimizationsGet">
+            <summary>Sets the shim of BundleTable.get_EnableOptimizations()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.EnableOptimizationsSetBoolean">
+            <summary>Sets the shim of BundleTable.set_EnableOptimizations(Boolean value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.EnsureBundleSetup">
+            <summary>Sets the shim of BundleTable.EnsureBundleSetup()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.StaticConstructor">
+            <summary>Sets the shim of BundleTable.BundleTable()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.VirtualPathProviderGet">
+            <summary>Sets the shim of BundleTable.get_VirtualPathProvider()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimBundleTable.VirtualPathProviderSetVirtualPathProvider">
+            <summary>Sets the shim of BundleTable.set_VirtualPathProvider(VirtualPathProvider value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimCssMinify">
+            <summary>Shim type of System.Web.Optimization.CssMinify</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssMinify.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssMinify.#ctor(System.Web.Optimization.CssMinify)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssMinify.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssMinify.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssMinify.Bind(System.Web.Optimization.IBundleTransform)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssMinify.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssMinify.Constructor">
+            <summary>Sets the shim of CssMinify.CssMinify()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssMinify.ProcessBundleContextBundleResponse">
+            <summary>Sets the shim of CssMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssMinify.StaticConstructor">
+            <summary>Sets the shim of CssMinify.CssMinify()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimCssMinify.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssMinify.AllInstances.ProcessBundleContextBundleResponse">
+            <summary>Sets the shim of CssMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform">
+            <summary>Shim type of System.Web.Optimization.CssRewriteUrlTransform</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.#ctor(System.Web.Optimization.CssRewriteUrlTransform)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.Bind(System.Web.Optimization.IItemTransform)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.Constructor">
+            <summary>Sets the shim of CssRewriteUrlTransform.CssRewriteUrlTransform()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.ConvertUrlsToAbsoluteStringString">
+            <summary>Sets the shim of CssRewriteUrlTransform.ConvertUrlsToAbsolute(String baseUrl, String content)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.ProcessStringString">
+            <summary>Sets the shim of CssRewriteUrlTransform.Process(String includedVirtualPath, String input)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.RebaseUrlToAbsoluteStringString">
+            <summary>Sets the shim of CssRewriteUrlTransform.RebaseUrlToAbsolute(String baseUrl, String url)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimCssRewriteUrlTransform.AllInstances.ProcessStringString">
+            <summary>Sets the shim of CssRewriteUrlTransform.Process(String includedVirtualPath, String input)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder">
+            <summary>Shim type of System.Web.Optimization.DefaultBundleBuilder</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.#ctor(System.Web.Optimization.DefaultBundleBuilder)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.Bind(System.Web.Optimization.IBundleBuilder)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.BuildBundleContentBundleBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of DefaultBundleBuilder.BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.Constructor">
+            <summary>Sets the shim of DefaultBundleBuilder.DefaultBundleBuilder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.ConvertToAppRelativePathStringString">
+            <summary>Sets the shim of DefaultBundleBuilder.ConvertToAppRelativePath(String appPath, String fullName)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.GenerateBundlePreambleString">
+            <summary>Sets the shim of DefaultBundleBuilder.GenerateBundlePreamble(String bundleHash)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.GetApplicationPathVirtualPathProvider">
+            <summary>Sets the shim of DefaultBundleBuilder.GetApplicationPath(VirtualPathProvider vpp)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.GetBoundaryIdentifierBundle">
+            <summary>Sets the shim of DefaultBundleBuilder.GetBoundaryIdentifier(Bundle bundle)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.GetFileHeaderBundleContextVirtualFileString">
+            <summary>Sets the shim of DefaultBundleBuilder.GetFileHeader(BundleContext context, VirtualFile file, String fileHeaderFormat)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.GetInstrumentedBundlePreambleString">
+            <summary>Sets the shim of DefaultBundleBuilder.GetInstrumentedBundlePreamble(String boundaryValue)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.GetInstrumentedFileHeaderFormatString">
+            <summary>Sets the shim of DefaultBundleBuilder.GetInstrumentedFileHeaderFormat(String boundaryValue)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.StaticConstructor">
+            <summary>Sets the shim of DefaultBundleBuilder.DefaultBundleBuilder()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleBuilder.AllInstances.BuildBundleContentBundleBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of DefaultBundleBuilder.BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer">
+            <summary>Shim type of System.Web.Optimization.DefaultBundleOrderer</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.#ctor(System.Web.Optimization.DefaultBundleOrderer)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.Bind(System.Web.Optimization.IBundleOrderer)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.AddOrderingFilesBundleFileSetOrderingIEnumerableOfBundleFileDictionaryOfStringHashSetOfBundleFileHashSetOfVirtualFileListOfBundleFile">
+            <summary>Sets the shim of DefaultBundleOrderer.AddOrderingFiles(BundleFileSetOrdering ordering, IEnumerable`1&lt;BundleFile&gt; files, Dictionary`2&lt;String,HashSet`1&lt;BundleFile&gt;&gt; fileMap, HashSet`1&lt;VirtualFile&gt; foundFiles, List`1&lt;BundleFile&gt; result)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.BuildFileMapIEnumerableOfBundleFile">
+            <summary>Sets the shim of DefaultBundleOrderer.BuildFileMap(IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.Constructor">
+            <summary>Sets the shim of DefaultBundleOrderer.DefaultBundleOrderer()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.OrderFilesBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of DefaultBundleOrderer.OrderFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.StaticConstructor">
+            <summary>Sets the shim of DefaultBundleOrderer.DefaultBundleOrderer()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDefaultBundleOrderer.AllInstances.OrderFilesBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of DefaultBundleOrderer.OrderFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimDynamicFolderBundle">
+            <summary>Shim type of System.Web.Optimization.DynamicFolderBundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.#ctor(System.Web.Optimization.DynamicFolderBundle)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.CdnPathGet">
+            <summary>Sets the shim of DynamicFolderBundle.get_CdnPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.CdnPathSetString">
+            <summary>Sets the shim of DynamicFolderBundle.set_CdnPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.ConstructorStringString">
+            <summary>Sets the shim of DynamicFolderBundle.DynamicFolderBundle(String pathSuffix, String searchPattern)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.ConstructorStringStringBoolean">
+            <summary>Sets the shim of DynamicFolderBundle.DynamicFolderBundle(String pathSuffix, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.ConstructorStringStringBooleanIBundleTransformArray">
+            <summary>Sets the shim of DynamicFolderBundle.DynamicFolderBundle(String pathSuffix, String searchPattern, Boolean searchSubdirectories, IBundleTransform[] transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.ConstructorStringStringIBundleTransformArray">
+            <summary>Sets the shim of DynamicFolderBundle.DynamicFolderBundle(String pathSuffix, String searchPattern, IBundleTransform[] transforms)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.EnumerateFilesBundleContext">
+            <summary>Sets the shim of DynamicFolderBundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.IsInvalidRouteUrlString">
+            <summary>Sets the shim of DynamicFolderBundle.IsInvalidRouteUrl(String routeUrl)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.SearchPatternGet">
+            <summary>Sets the shim of DynamicFolderBundle.get_SearchPattern()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.SearchPatternSetString">
+            <summary>Sets the shim of DynamicFolderBundle.set_SearchPattern(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.SearchSubdirectoriesGet">
+            <summary>Sets the shim of DynamicFolderBundle.get_SearchSubdirectories()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.SearchSubdirectoriesSetBoolean">
+            <summary>Sets the shim of DynamicFolderBundle.set_SearchSubdirectories(Boolean value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.CdnPathGet">
+            <summary>Sets the shim of DynamicFolderBundle.get_CdnPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.CdnPathSetString">
+            <summary>Sets the shim of DynamicFolderBundle.set_CdnPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.EnumerateFilesBundleContext">
+            <summary>Sets the shim of DynamicFolderBundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.SearchPatternGet">
+            <summary>Sets the shim of DynamicFolderBundle.get_SearchPattern()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.SearchPatternSetString">
+            <summary>Sets the shim of DynamicFolderBundle.set_SearchPattern(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.SearchSubdirectoriesGet">
+            <summary>Sets the shim of DynamicFolderBundle.get_SearchSubdirectories()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimDynamicFolderBundle.AllInstances.SearchSubdirectoriesSetBoolean">
+            <summary>Sets the shim of DynamicFolderBundle.set_SearchSubdirectories(Boolean value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList">
+            <summary>Shim type of System.Web.Optimization.FileExtensionReplacementList</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.#ctor(System.Web.Optimization.FileExtensionReplacementList)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AddString">
+            <summary>Sets the shim of FileExtensionReplacementList.Add(String extension)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AddStringOptimizationMode">
+            <summary>Sets the shim of FileExtensionReplacementList.Add(String extension, OptimizationMode mode)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.Clear">
+            <summary>Sets the shim of FileExtensionReplacementList.Clear()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.Constructor">
+            <summary>Sets the shim of FileExtensionReplacementList.FileExtensionReplacementList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.CountGet">
+            <summary>Sets the shim of FileExtensionReplacementList.get_Count()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.FindReplacementFileBundleContextBundleFileString">
+            <summary>Sets the shim of FileExtensionReplacementList.FindReplacementFile(BundleContext context, BundleFile file, String replacementExtension)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.ReplaceFileExtensionsBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of FileExtensionReplacementList.ReplaceFileExtensions(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AllInstances.AddString">
+            <summary>Sets the shim of FileExtensionReplacementList.Add(String extension)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AllInstances.AddStringOptimizationMode">
+            <summary>Sets the shim of FileExtensionReplacementList.Add(String extension, OptimizationMode mode)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AllInstances.Clear">
+            <summary>Sets the shim of FileExtensionReplacementList.Clear()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AllInstances.CountGet">
+            <summary>Sets the shim of FileExtensionReplacementList.get_Count()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimFileExtensionReplacementList.AllInstances.ReplaceFileExtensionsBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of FileExtensionReplacementList.ReplaceFileExtensions(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimIgnoreList">
+            <summary>Shim type of System.Web.Optimization.IgnoreList</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimIgnoreList.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimIgnoreList.#ctor(System.Web.Optimization.IgnoreList)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimIgnoreList.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimIgnoreList.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.Clear">
+            <summary>Sets the shim of IgnoreList.Clear()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.Constructor">
+            <summary>Sets the shim of IgnoreList.IgnoreList()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.FilterIgnoredFilesBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of IgnoreList.FilterIgnoredFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.IgnoreString">
+            <summary>Sets the shim of IgnoreList.Ignore(String item)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.IgnoreStringOptimizationMode">
+            <summary>Sets the shim of IgnoreList.Ignore(String pattern, OptimizationMode mode)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.InitializeMatches">
+            <summary>Sets the shim of IgnoreList.InitializeMatches()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.ShouldIgnoreBundleContextString">
+            <summary>Sets the shim of IgnoreList.ShouldIgnore(BundleContext context, String fileName)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.ValidateIgnoreModeOptimizationModeString">
+            <summary>Sets the shim of IgnoreList.ValidateIgnoreMode(OptimizationMode mode, String argName)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances.Clear">
+            <summary>Sets the shim of IgnoreList.Clear()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances.FilterIgnoredFilesBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the shim of IgnoreList.FilterIgnoredFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances.IgnoreString">
+            <summary>Sets the shim of IgnoreList.Ignore(String item)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances.IgnoreStringOptimizationMode">
+            <summary>Sets the shim of IgnoreList.Ignore(String pattern, OptimizationMode mode)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances.InitializeMatches">
+            <summary>Sets the shim of IgnoreList.InitializeMatches()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimIgnoreList.AllInstances.ShouldIgnoreBundleContextString">
+            <summary>Sets the shim of IgnoreList.ShouldIgnore(BundleContext context, String fileName)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimJsMinify">
+            <summary>Shim type of System.Web.Optimization.JsMinify</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimJsMinify.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimJsMinify.#ctor(System.Web.Optimization.JsMinify)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimJsMinify.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimJsMinify.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimJsMinify.Bind(System.Web.Optimization.IBundleTransform)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimJsMinify.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimJsMinify.Constructor">
+            <summary>Sets the shim of JsMinify.JsMinify()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimJsMinify.GenerateErrorResponseBundleResponseIEnumerableOfObject">
+            <summary>Sets the shim of JsMinify.GenerateErrorResponse(BundleResponse bundle, IEnumerable`1&lt;Object&gt; errors)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimJsMinify.ProcessBundleContextBundleResponse">
+            <summary>Sets the shim of JsMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimJsMinify.StaticConstructor">
+            <summary>Sets the shim of JsMinify.JsMinify()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimJsMinify.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimJsMinify.AllInstances.ProcessBundleContextBundleResponse">
+            <summary>Sets the shim of JsMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimOptimizationSettings">
+            <summary>Shim type of System.Web.Optimization.OptimizationSettings</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizationSettings.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizationSettings.#ctor(System.Web.Optimization.OptimizationSettings)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizationSettings.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizationSettings.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.ApplicationPathGet">
+            <summary>Sets the shim of OptimizationSettings.get_ApplicationPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.ApplicationPathSetString">
+            <summary>Sets the shim of OptimizationSettings.set_ApplicationPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.BundleManifestPathGet">
+            <summary>Sets the shim of OptimizationSettings.get_BundleManifestPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.BundleManifestPathSetString">
+            <summary>Sets the shim of OptimizationSettings.set_BundleManifestPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.BundleSetupMethodGet">
+            <summary>Sets the shim of OptimizationSettings.get_BundleSetupMethod()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.BundleSetupMethodSetActionOfBundleCollection">
+            <summary>Sets the shim of OptimizationSettings.set_BundleSetupMethod(Action`1&lt;BundleCollection&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.BundleTableGet">
+            <summary>Sets the shim of OptimizationSettings.get_BundleTable()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.BundleTableSetBundleCollection">
+            <summary>Sets the shim of OptimizationSettings.set_BundleTable(BundleCollection value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.Constructor">
+            <summary>Sets the shim of OptimizationSettings.OptimizationSettings()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.ApplicationPathGet">
+            <summary>Sets the shim of OptimizationSettings.get_ApplicationPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.ApplicationPathSetString">
+            <summary>Sets the shim of OptimizationSettings.set_ApplicationPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.BundleManifestPathGet">
+            <summary>Sets the shim of OptimizationSettings.get_BundleManifestPath()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.BundleManifestPathSetString">
+            <summary>Sets the shim of OptimizationSettings.set_BundleManifestPath(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.BundleSetupMethodGet">
+            <summary>Sets the shim of OptimizationSettings.get_BundleSetupMethod()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.BundleSetupMethodSetActionOfBundleCollection">
+            <summary>Sets the shim of OptimizationSettings.set_BundleSetupMethod(Action`1&lt;BundleCollection&gt; value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.BundleTableGet">
+            <summary>Sets the shim of OptimizationSettings.get_BundleTable()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizationSettings.AllInstances.BundleTableSetBundleCollection">
+            <summary>Sets the shim of OptimizationSettings.set_BundleTable(BundleCollection value)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimOptimizer">
+            <summary>Shim type of System.Web.Optimization.Optimizer</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizer.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizer.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimOptimizer.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizer.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizer.BuildAllBundlesOptimizationSettings">
+            <summary>Sets the shim of Optimizer.BuildAllBundles(OptimizationSettings settings)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizer.BuildBundleStringOptimizationSettings">
+            <summary>Sets the shim of Optimizer.BuildBundle(String bundlePath, OptimizationSettings settings)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimOptimizer.InitializeBundleCollectionOptimizationSettings">
+            <summary>Sets the shim of Optimizer.InitializeBundleCollection(OptimizationSettings settings)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimPreApplicationStartCode">
+            <summary>Shim type of System.Web.Optimization.PreApplicationStartCode</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimPreApplicationStartCode.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimPreApplicationStartCode.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimPreApplicationStartCode.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimPreApplicationStartCode.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimPreApplicationStartCode.Start">
+            <summary>Sets the shim of PreApplicationStartCode.Start()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimScriptBundle">
+            <summary>Shim type of System.Web.Optimization.ScriptBundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScriptBundle.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScriptBundle.#ctor(System.Web.Optimization.ScriptBundle)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScriptBundle.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScriptBundle.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScriptBundle.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScriptBundle.ConstructorString">
+            <summary>Sets the shim of ScriptBundle.ScriptBundle(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScriptBundle.ConstructorStringString">
+            <summary>Sets the shim of ScriptBundle.ScriptBundle(String virtualPath, String cdnPath)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimScriptBundle.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimScripts">
+            <summary>Shim type of System.Web.Optimization.Scripts</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScripts.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScripts.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimScripts.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.ContextGet">
+            <summary>Sets the shim of Scripts.get_Context()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.ContextSetHttpContextBase">
+            <summary>Sets the shim of Scripts.set_Context(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.DefaultTagFormatGet">
+            <summary>Sets the shim of Scripts.get_DefaultTagFormat()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.DefaultTagFormatSetString">
+            <summary>Sets the shim of Scripts.set_DefaultTagFormat(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.RenderFormatStringStringArray">
+            <summary>Sets the shim of Scripts.RenderFormat(String tagFormat, String[] paths)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.RenderStringArray">
+            <summary>Sets the shim of Scripts.Render(String[] paths)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.StaticConstructor">
+            <summary>Sets the shim of Scripts.Scripts()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimScripts.UrlString">
+            <summary>Sets the shim of Scripts.Url(String virtualPath)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimStyleBundle">
+            <summary>Shim type of System.Web.Optimization.StyleBundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyleBundle.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyleBundle.#ctor(System.Web.Optimization.StyleBundle)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyleBundle.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyleBundle.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyleBundle.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyleBundle.ConstructorString">
+            <summary>Sets the shim of StyleBundle.StyleBundle(String virtualPath)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyleBundle.ConstructorStringString">
+            <summary>Sets the shim of StyleBundle.StyleBundle(String virtualPath, String cdnPath)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimStyleBundle.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.ShimStyles">
+            <summary>Shim type of System.Web.Optimization.Styles</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyles.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyles.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.ShimStyles.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.ContextGet">
+            <summary>Sets the shim of Styles.get_Context()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.ContextSetHttpContextBase">
+            <summary>Sets the shim of Styles.set_Context(HttpContextBase value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.DefaultTagFormatGet">
+            <summary>Sets the shim of Styles.get_DefaultTagFormat()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.DefaultTagFormatSetString">
+            <summary>Sets the shim of Styles.set_DefaultTagFormat(String value)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.RenderFormatStringStringArray">
+            <summary>Sets the shim of Styles.RenderFormat(String tagFormat, String[] paths)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.RenderStringArray">
+            <summary>Sets the shim of Styles.Render(String[] paths)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.StaticConstructor">
+            <summary>Sets the shim of Styles.Styles()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.ShimStyles.UrlString">
+            <summary>Sets the shim of Styles.Url(String virtualPath)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundle">
+            <summary>Stub type of System.Web.Optimization.Bundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.#ctor(System.String,System.Web.Optimization.IBundleTransform[])">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.#ctor(System.String,System.String,System.Web.Optimization.IBundleTransform[])">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.ApplyTransforms(System.Web.Optimization.BundleContext,System.String,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.ApplyTransformsBundleContextStringIEnumerableOfBundleFile">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.AttachBackingFieldToBuilder">
+            <summary>Attaches delegates to emulate StubBundle.Builder as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.AttachBackingFieldToCdnFallbackExpression">
+            <summary>Attaches delegates to emulate StubBundle.CdnFallbackExpression as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.AttachBackingFieldToEnableFileExtensionReplacements">
+            <summary>Attaches delegates to emulate StubBundle.EnableFileExtensionReplacements as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.AttachBackingFieldToOrderer">
+            <summary>Attaches delegates to emulate StubBundle.Orderer as a property with a backing field.</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.BuilderGet">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.BuilderSetIBundleBuilder">
+            <summary>Sets the stub of Bundle.set_Builder(IBundleBuilder value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.CacheLookup(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.CacheLookupBundleContext">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.CdnFallbackExpressionGet">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.CdnFallbackExpressionSetString">
+            <summary>Sets the stub of Bundle.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.EnableFileExtensionReplacementsGet">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.EnableFileExtensionReplacementsSetBoolean">
+            <summary>Sets the stub of Bundle.set_EnableFileExtensionReplacements(Boolean value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.EnumerateFiles(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.EnumerateFilesBundleContext">
+            <summary>Sets the stub of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.GenerateBundleResponse(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.GenerateBundleResponseBundleContext">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.GetCacheKey(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.GetCacheKeyBundleContext">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.Include(System.String[])">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.Include(System.String,System.Web.Optimization.IItemTransform[])">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.IncludeDirectory(System.String,System.String)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.IncludeDirectory(System.String,System.String,System.Boolean)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.IncludeDirectoryStringString">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.IncludeDirectoryStringStringBoolean">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.IncludeStringArray">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.IncludeStringIItemTransformArray">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.InitializeStub">
+            <summary>Initializes a new instance of type StubBundle</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.OrdererGet">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.OrdererSetIBundleOrderer">
+            <summary>Sets the stub of Bundle.set_Orderer(IBundleOrderer value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundle.UpdateCache(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundle.UpdateCacheBundleContextBundleResponse">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.Builder">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.CdnFallbackExpression">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.EnableFileExtensionReplacements">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundle.Orderer">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleCollection">
+            <summary>Stub type of System.Web.Optimization.BundleCollection</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleCollection.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleCollection.GetEnumerator">
+            <summary>Sets the stub of BundleCollection.GetEnumerator()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundleCollection.GetEnumerator01">
+            <summary>Sets the stub of BundleCollection.GetEnumerator()</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleCollection.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleCollection</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleCollection.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleCollection.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleCollection.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleContext">
+            <summary>Stub type of System.Web.Optimization.BundleContext</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleContext.#ctor(System.Web.HttpContextBase,System.Web.Optimization.BundleCollection,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleContext.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleContext</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleContext.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleContext.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleContext.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleFile">
+            <summary>Stub type of System.Web.Optimization.BundleFile</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleFile.#ctor(System.String,System.Web.Hosting.VirtualFile)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleFile.#ctor(System.String,System.Web.Hosting.VirtualFile,System.Collections.Generic.IList{System.Web.Optimization.IItemTransform})">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleFile.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleFile</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleFile.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleFile.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleFile.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleFileSetOrdering">
+            <summary>Stub type of System.Web.Optimization.BundleFileSetOrdering</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleFileSetOrdering.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleFileSetOrdering.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleFileSetOrdering</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleFileSetOrdering.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleFileSetOrdering.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleFileSetOrdering.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleModule">
+            <summary>Stub type of System.Web.Optimization.BundleModule</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleModule.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleModule.Dispose">
+            <summary>Sets the stub of BundleModule.Dispose()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundleModule.Dispose01">
+            <summary>Sets the stub of BundleModule.Dispose()</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleModule.Init(System.Web.HttpApplication)">
+            <summary>Sets the stub of BundleModule.Init(HttpApplication application)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubBundleModule.InitHttpApplication">
+            <summary>Sets the stub of BundleModule.Init(HttpApplication application)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleModule.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleModule</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleModule.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleModule.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleModule.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleResolver">
+            <summary>Stub type of System.Web.Optimization.BundleResolver</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResolver.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResolver.#ctor(System.Web.Optimization.BundleCollection)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResolver.#ctor(System.Web.Optimization.BundleCollection,System.Web.HttpContextBase)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResolver.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleResolver</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleResolver.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleResolver.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleResolver.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubBundleResponse">
+            <summary>Stub type of System.Web.Optimization.BundleResponse</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResponse.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResponse.#ctor(System.String,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubBundleResponse.InitializeStub">
+            <summary>Initializes a new instance of type StubBundleResponse</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleResponse.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleResponse.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubBundleResponse.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubCssMinify">
+            <summary>Stub type of System.Web.Optimization.CssMinify</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubCssMinify.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubCssMinify.InitializeStub">
+            <summary>Initializes a new instance of type StubCssMinify</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubCssMinify.Process(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of CssMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubCssMinify.ProcessBundleContextBundleResponse">
+            <summary>Sets the stub of CssMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubCssMinify.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubCssMinify.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubCssMinify.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubCssRewriteUrlTransform">
+            <summary>Stub type of System.Web.Optimization.CssRewriteUrlTransform</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubCssRewriteUrlTransform.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubCssRewriteUrlTransform.InitializeStub">
+            <summary>Initializes a new instance of type StubCssRewriteUrlTransform</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubCssRewriteUrlTransform.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubCssRewriteUrlTransform.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubCssRewriteUrlTransform.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubDefaultBundleBuilder">
+            <summary>Stub type of System.Web.Optimization.DefaultBundleBuilder</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDefaultBundleBuilder.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDefaultBundleBuilder.InitializeStub">
+            <summary>Initializes a new instance of type StubDefaultBundleBuilder</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDefaultBundleBuilder.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDefaultBundleBuilder.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDefaultBundleBuilder.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubDefaultBundleOrderer">
+            <summary>Stub type of System.Web.Optimization.DefaultBundleOrderer</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.InitializeStub">
+            <summary>Initializes a new instance of type StubDefaultBundleOrderer</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.OrderFiles(System.Web.Optimization.BundleContext,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of DefaultBundleOrderer.OrderFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.OrderFilesBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the stub of DefaultBundleOrderer.OrderFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDefaultBundleOrderer.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubDynamicFolderBundle">
+            <summary>Stub type of System.Web.Optimization.DynamicFolderBundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.#ctor(System.String,System.String,System.Boolean)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.#ctor(System.String,System.String,System.Web.Optimization.IBundleTransform[])">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.#ctor(System.String,System.String,System.Boolean,System.Web.Optimization.IBundleTransform[])">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.ApplyTransforms(System.Web.Optimization.BundleContext,System.String,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.ApplyTransformsBundleContextStringIEnumerableOfBundleFile">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.AttachBackingFieldToBuilder">
+            <summary>Attaches delegates to emulate StubDynamicFolderBundle.Builder as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.AttachBackingFieldToCdnFallbackExpression">
+            <summary>Attaches delegates to emulate StubDynamicFolderBundle.CdnFallbackExpression as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.AttachBackingFieldToEnableFileExtensionReplacements">
+            <summary>Attaches delegates to emulate StubDynamicFolderBundle.EnableFileExtensionReplacements as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.AttachBackingFieldToOrderer">
+            <summary>Attaches delegates to emulate StubDynamicFolderBundle.Orderer as a property with a backing field.</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.BuilderGet">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.BuilderSetIBundleBuilder">
+            <summary>Sets the stub of Bundle.set_Builder(IBundleBuilder value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.CacheLookup(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.CacheLookupBundleContext">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.CdnFallbackExpressionGet">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.CdnFallbackExpressionSetString">
+            <summary>Sets the stub of Bundle.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.EnableFileExtensionReplacementsGet">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.EnableFileExtensionReplacementsSetBoolean">
+            <summary>Sets the stub of Bundle.set_EnableFileExtensionReplacements(Boolean value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.EnumerateFiles(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of DynamicFolderBundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.EnumerateFilesBundleContext">
+            <summary>Sets the stub of DynamicFolderBundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.GenerateBundleResponse(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.GenerateBundleResponseBundleContext">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.GetCacheKey(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.GetCacheKeyBundleContext">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.Include(System.String[])">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.Include(System.String,System.Web.Optimization.IItemTransform[])">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.IncludeDirectory(System.String,System.String)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.IncludeDirectory(System.String,System.String,System.Boolean)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.IncludeDirectoryStringString">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.IncludeDirectoryStringStringBoolean">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.IncludeStringArray">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.IncludeStringIItemTransformArray">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.InitializeStub">
+            <summary>Initializes a new instance of type StubDynamicFolderBundle</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.OrdererGet">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.OrdererSetIBundleOrderer">
+            <summary>Sets the stub of Bundle.set_Orderer(IBundleOrderer value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubDynamicFolderBundle.UpdateCache(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubDynamicFolderBundle.UpdateCacheBundleContextBundleResponse">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.Builder">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.CdnFallbackExpression">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.EnableFileExtensionReplacements">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubDynamicFolderBundle.Orderer">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubFileExtensionReplacementList">
+            <summary>Stub type of System.Web.Optimization.FileExtensionReplacementList</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.InitializeStub">
+            <summary>Initializes a new instance of type StubFileExtensionReplacementList</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.ReplaceFileExtensions(System.Web.Optimization.BundleContext,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of FileExtensionReplacementList.ReplaceFileExtensions(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.ReplaceFileExtensionsBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the stub of FileExtensionReplacementList.ReplaceFileExtensions(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubFileExtensionReplacementList.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubIBundleBuilder">
+            <summary>Stub type of System.Web.Optimization.IBundleBuilder</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleBuilder.#ctor">
+            <summary>Initializes a new instance of type StubIBundleBuilder</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIBundleBuilder.BuildBundleContentBundleBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the stub of IBundleBuilder.BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleBuilder.swo::System#Web#Optimization#IBundleBuilder#BuildBundleContent(System.Web.Optimization.Bundle,System.Web.Optimization.BundleContext,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of IBundleBuilder.BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubIBundleOrderer">
+            <summary>Stub type of System.Web.Optimization.IBundleOrderer</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleOrderer.#ctor">
+            <summary>Initializes a new instance of type StubIBundleOrderer</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIBundleOrderer.OrderFilesBundleContextIEnumerableOfBundleFile">
+            <summary>Sets the stub of IBundleOrderer.OrderFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleOrderer.swo::System#Web#Optimization#IBundleOrderer#OrderFiles(System.Web.Optimization.BundleContext,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of IBundleOrderer.OrderFiles(BundleContext context, IEnumerable`1&lt;BundleFile&gt; files)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubIBundleResolver">
+            <summary>Stub type of System.Web.Optimization.IBundleResolver</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleResolver.#ctor">
+            <summary>Initializes a new instance of type StubIBundleResolver</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIBundleResolver.GetBundleContentsString">
+            <summary>Sets the stub of IBundleResolver.GetBundleContents(String virtualPath)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIBundleResolver.GetBundleUrlString">
+            <summary>Sets the stub of IBundleResolver.GetBundleUrl(String virtualPath)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIBundleResolver.IsBundleVirtualPathString">
+            <summary>Sets the stub of IBundleResolver.IsBundleVirtualPath(String virtualPath)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleResolver.swo::System#Web#Optimization#IBundleResolver#GetBundleContents(System.String)">
+            <summary>Sets the stub of IBundleResolver.GetBundleContents(String virtualPath)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleResolver.swo::System#Web#Optimization#IBundleResolver#GetBundleUrl(System.String)">
+            <summary>Sets the stub of IBundleResolver.GetBundleUrl(String virtualPath)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleResolver.swo::System#Web#Optimization#IBundleResolver#IsBundleVirtualPath(System.String)">
+            <summary>Sets the stub of IBundleResolver.IsBundleVirtualPath(String virtualPath)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubIBundleTransform">
+            <summary>Stub type of System.Web.Optimization.IBundleTransform</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleTransform.#ctor">
+            <summary>Initializes a new instance of type StubIBundleTransform</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIBundleTransform.ProcessBundleContextBundleResponse">
+            <summary>Sets the stub of IBundleTransform.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIBundleTransform.swo::System#Web#Optimization#IBundleTransform#Process(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of IBundleTransform.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubIItemTransform">
+            <summary>Stub type of System.Web.Optimization.IItemTransform</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIItemTransform.#ctor">
+            <summary>Initializes a new instance of type StubIItemTransform</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubIItemTransform.ProcessStringString">
+            <summary>Sets the stub of IItemTransform.Process(String includedVirtualPath, String input)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubIItemTransform.swo::System#Web#Optimization#IItemTransform#Process(System.String,System.String)">
+            <summary>Sets the stub of IItemTransform.Process(String includedVirtualPath, String input)</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubJsMinify">
+            <summary>Stub type of System.Web.Optimization.JsMinify</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubJsMinify.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubJsMinify.InitializeStub">
+            <summary>Initializes a new instance of type StubJsMinify</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubJsMinify.Process(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of JsMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubJsMinify.ProcessBundleContextBundleResponse">
+            <summary>Sets the stub of JsMinify.Process(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubJsMinify.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubJsMinify.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubJsMinify.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubOptimizationSettings">
+            <summary>Stub type of System.Web.Optimization.OptimizationSettings</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubOptimizationSettings.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubOptimizationSettings.InitializeStub">
+            <summary>Initializes a new instance of type StubOptimizationSettings</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubOptimizationSettings.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubOptimizationSettings.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubOptimizationSettings.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubScriptBundle">
+            <summary>Stub type of System.Web.Optimization.ScriptBundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.ApplyTransforms(System.Web.Optimization.BundleContext,System.String,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.ApplyTransformsBundleContextStringIEnumerableOfBundleFile">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.AttachBackingFieldToBuilder">
+            <summary>Attaches delegates to emulate StubScriptBundle.Builder as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.AttachBackingFieldToCdnFallbackExpression">
+            <summary>Attaches delegates to emulate StubScriptBundle.CdnFallbackExpression as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.AttachBackingFieldToEnableFileExtensionReplacements">
+            <summary>Attaches delegates to emulate StubScriptBundle.EnableFileExtensionReplacements as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.AttachBackingFieldToOrderer">
+            <summary>Attaches delegates to emulate StubScriptBundle.Orderer as a property with a backing field.</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.BuilderGet">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.BuilderSetIBundleBuilder">
+            <summary>Sets the stub of Bundle.set_Builder(IBundleBuilder value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.CacheLookup(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.CacheLookupBundleContext">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.CdnFallbackExpressionGet">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.CdnFallbackExpressionSetString">
+            <summary>Sets the stub of Bundle.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.EnableFileExtensionReplacementsGet">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.EnableFileExtensionReplacementsSetBoolean">
+            <summary>Sets the stub of Bundle.set_EnableFileExtensionReplacements(Boolean value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.EnumerateFiles(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.EnumerateFilesBundleContext">
+            <summary>Sets the stub of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.GenerateBundleResponse(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.GenerateBundleResponseBundleContext">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.GetCacheKey(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.GetCacheKeyBundleContext">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.Include(System.String[])">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.Include(System.String,System.Web.Optimization.IItemTransform[])">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.IncludeDirectory(System.String,System.String)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.IncludeDirectory(System.String,System.String,System.Boolean)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.IncludeDirectoryStringString">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.IncludeDirectoryStringStringBoolean">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.IncludeStringArray">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.IncludeStringIItemTransformArray">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.InitializeStub">
+            <summary>Initializes a new instance of type StubScriptBundle</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.OrdererGet">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.OrdererSetIBundleOrderer">
+            <summary>Sets the stub of Bundle.set_Orderer(IBundleOrderer value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubScriptBundle.UpdateCache(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubScriptBundle.UpdateCacheBundleContextBundleResponse">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.Builder">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.CdnFallbackExpression">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.EnableFileExtensionReplacements">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubScriptBundle.Orderer">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="T:System.Web.Optimization.Fakes.StubStyleBundle">
+            <summary>Stub type of System.Web.Optimization.StyleBundle</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.ApplyTransforms(System.Web.Optimization.BundleContext,System.String,System.Collections.Generic.IEnumerable{System.Web.Optimization.BundleFile})">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.ApplyTransformsBundleContextStringIEnumerableOfBundleFile">
+            <summary>Sets the stub of Bundle.ApplyTransforms(BundleContext context, String bundleContent, IEnumerable`1&lt;BundleFile&gt; bundleFiles)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.AttachBackingFieldToBuilder">
+            <summary>Attaches delegates to emulate StubStyleBundle.Builder as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.AttachBackingFieldToCdnFallbackExpression">
+            <summary>Attaches delegates to emulate StubStyleBundle.CdnFallbackExpression as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.AttachBackingFieldToEnableFileExtensionReplacements">
+            <summary>Attaches delegates to emulate StubStyleBundle.EnableFileExtensionReplacements as a property with a backing field.</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.AttachBackingFieldToOrderer">
+            <summary>Attaches delegates to emulate StubStyleBundle.Orderer as a property with a backing field.</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.BuilderGet">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.BuilderSetIBundleBuilder">
+            <summary>Sets the stub of Bundle.set_Builder(IBundleBuilder value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.CacheLookup(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.CacheLookupBundleContext">
+            <summary>Sets the stub of Bundle.CacheLookup(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.CdnFallbackExpressionGet">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.CdnFallbackExpressionSetString">
+            <summary>Sets the stub of Bundle.set_CdnFallbackExpression(String value)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.EnableFileExtensionReplacementsGet">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.EnableFileExtensionReplacementsSetBoolean">
+            <summary>Sets the stub of Bundle.set_EnableFileExtensionReplacements(Boolean value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.EnumerateFiles(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.EnumerateFilesBundleContext">
+            <summary>Sets the stub of Bundle.EnumerateFiles(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.GenerateBundleResponse(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.GenerateBundleResponseBundleContext">
+            <summary>Sets the stub of Bundle.GenerateBundleResponse(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.GetCacheKey(System.Web.Optimization.BundleContext)">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.GetCacheKeyBundleContext">
+            <summary>Sets the stub of Bundle.GetCacheKey(BundleContext context)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.Include(System.String[])">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.Include(System.String,System.Web.Optimization.IItemTransform[])">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.IncludeDirectory(System.String,System.String)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.IncludeDirectory(System.String,System.String,System.Boolean)">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.IncludeDirectoryStringString">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.IncludeDirectoryStringStringBoolean">
+            <summary>Sets the stub of Bundle.IncludeDirectory(String directoryVirtualPath, String searchPattern, Boolean searchSubdirectories)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.IncludeStringArray">
+            <summary>Sets the stub of Bundle.Include(String[] virtualPaths)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.IncludeStringIItemTransformArray">
+            <summary>Sets the stub of Bundle.Include(String virtualPath, IItemTransform[] transforms)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.InitializeStub">
+            <summary>Initializes a new instance of type StubStyleBundle</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.OrdererGet">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.OrdererSetIBundleOrderer">
+            <summary>Sets the stub of Bundle.set_Orderer(IBundleOrderer value)</summary>
+        </member>
+        <member name="M:System.Web.Optimization.Fakes.StubStyleBundle.UpdateCache(System.Web.Optimization.BundleContext,System.Web.Optimization.BundleResponse)">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="F:System.Web.Optimization.Fakes.StubStyleBundle.UpdateCacheBundleContextBundleResponse">
+            <summary>Sets the stub of Bundle.UpdateCache(BundleContext context, BundleResponse response)</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.Builder">
+            <summary>Sets the stub of Bundle.get_Builder()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.CdnFallbackExpression">
+            <summary>Sets the stub of Bundle.get_CdnFallbackExpression()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.EnableFileExtensionReplacements">
+            <summary>Sets the stub of Bundle.get_EnableFileExtensionReplacements()</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:System.Web.Optimization.Fakes.StubStyleBundle.Orderer">
+            <summary>Sets the stub of Bundle.get_Orderer()</summary>
+        </member>
+    </members>
+</doc>

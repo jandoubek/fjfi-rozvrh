@@ -1,31 +1,35 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
         <meta charset="utf-8" />
-        <title>Rozvrh @ViewBag.Title</title> 
+        <title>MůjRozvrh FJFI @ViewBag.Title</title> 
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />        
+        <link rel="previewimage" href="~/Content/fjfiLogo.gif">
+        <meta name="viewport" content="width=device-width" />  
+        <meta property="og:image" content= "http://mujrozvrhfjfi.aspone.cz/Content/fjfiLogo.gif" />      
+        <meta property="og:title" content="Aplikace MůjRozvrh FJFI">
+        <meta property="og:description" content="Přehledně zobrazuje rozvrh a pomáhá studentům vybrat si předměty před zápisem.">
         @Styles.Render("~/Content/themes/base/css")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/jqueryui")       
-        @Scripts.Render("~/bundles/dateValidation") 
         @RenderSection("scripts", required: false)
         @Styles.Render("~/Content/css")
 
 </head>
     <body>
-        <div class="main">
-                        @RenderSection("featured", required: false)
-            <section id="rightSection">
-                @RenderSection("right", required: false)
-            </section>
-            <section id="leftSection">
-                @RenderBody()
-            </section>
+        <div id="BodyWrapper">
+            <div id="Main">
+                    @RenderSection("featured", required: false)
+                <section id="rightSection">
+                    @RenderSection("right", required: false)
+                </section>
+                <section id="leftSection">
+                    @RenderBody()
+                </section>
+            </div>
         </div>
-    <footer>&copy; David Blatský, Václav Honzík, Richard Salač, Tomáš Smola a Oldřich Štika, 2013<br/>Vytvořeno jako projekt v rámci předmětu 18PVS, pod vedením Jana Doubka.</footer>
     </body>
 </html>

@@ -10,6 +10,8 @@ using Rozvrh.Models;
 using Rozvrh.Exporters;
 using System.IO;
 using Rozvrh.Models.Timetable;
+using System.Text;
+using System.Web.UI;
 
 namespace Rozvrh.Controllers
 {
@@ -34,6 +36,42 @@ namespace Rozvrh.Controllers
             //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
             ImportExport instance = new ImportExport();
             return instance.DownloadAsSVG(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created, Config.Instance.LinkToAdditionalInformation);
+        }
+
+        public ActionResult ViewRozvrh()
+        {
+            return View("RozvrhForExport", M);
+        }
+
+        public ActionResult ExportToPNG()
+        {
+            ImportExport instance = new ImportExport();
+
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "png");
+        }
+
+        public ActionResult ExportToJPG()
+        {
+            ImportExport instance = new ImportExport();
+
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "jpg");
+        }
+
+        public ActionResult ExportToPDF()
+        {
+            /*ImportExport instance = new ImportExport();
+
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
+                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "pdf");*/
+            return new Rotativa.ViewAsPdf("ExportToPDF", M)
+            {
+                FileName = "MůjRozvrh.pdf",
+                //PageSize = Rotativa.Options.Size.A4,
+                //PageOrientation = Rotativa.Options.Orientation.Landscape
+            }; 
+          
         }
 
         public ActionResult ExportToICal()
@@ -137,26 +175,31 @@ namespace Rozvrh.Controllers
             return null;
         }
 
-        public ActionResult EditTimetableField(string uid, string lecture, string lecturer, string room, string department,string day, string time, string duration, string period)
+        public ActionResult EditTimetableField(string uid, string lecture, string lecturer, string room, string department, string day, string hours, string minutes, string duration, string period)
         {
             int uniqueID;
             if (int.TryParse(uid, out uniqueID))
             {
+                minutes = Convert.ToInt32(minutes).ToString("00");
+
                 M.CustomTimetableFields.RemoveAll(field => field.UniqueID == uniqueID);
 
-                var newField = new TimetableField {lecturer = lecturer, lecture_acr = lecture, classroom = room, department_acr = department, day = day, time = time, duration = duration};
+                var newField = new TimetableField { lecturer = lecturer, lecture_acr = lecture, classroom = room, department_acr = department, day = day, time = hours + minutes, duration = duration };
                 newField.period = (period.ToLower() == "true" ? "Ano" : "Ne");
 
                 var possibleDepartments = M.Departments.Where(dep => dep.acronym == department).ToArray();
                 if (possibleDepartments.Any())
                     newField.color = possibleDepartments[0].color;
-
-                var possibleTimes = M.Times.Where(t => t.acronym == time).ToArray();
+                /*
+                var possibleTimes = M.Times.Where(t => t.hours == hours).ToArray();
                 if (possibleTimes.Any())
                 {
                     newField.time_hours = possibleTimes[0].hours;
                     newField.time_minutes = possibleTimes[0].minutes;
                 }
+                */
+                newField.time_hours = hours;
+                newField.time_minutes = minutes;
 
                 var possibleDays = M.Days.Where(d => d.name == day).ToArray();
                 if (possibleDays.Any())
@@ -242,68 +285,11 @@ namespace Rozvrh.Controllers
             System.Web.HttpContext.Current.Session["CustomTimetableFields"] = M.CustomTimetableFields;
         }
 
-        /// <summary>
-        /// Returns 1.1.2001 date with hours and minutes of the TimetableField
-        /// </summary>
-        /// <param name="field">Field to be processed</param>
-        /// <returns></returns>
-        private static DateTime getStartTime(TimetableField field)
-        {
-            return new DateTime(2001, 1, 1, int.Parse(field.time_hours), int.Parse(field.time_minutes), 0);
-        }
 
-        /// <summary>
-        /// Returns fields duration
-        /// </summary>
-        /// <param name="field">Field to be processed</param>
-        /// <returns></returns>
-        private static TimeSpan getDuration(TimetableField field)
-        {
-            return new TimeSpan(int.Parse(field.duration), 0, 0);
-        }
 
         public static List<List<TimetableField>> getGroups(List<TimetableField> fields)
-        {
-            fields.Sort((x, y) => DateTime.Compare(getStartTime(x), getStartTime(y)));
-            var groups = new List<List<TimetableField>> { new List<TimetableField>() };
-
-            foreach (TimetableField l in fields)
-            {
-                var lastgroup = groups[groups.Count - 1];
-                if (lastgroup.Count < 1)
-                {
-                    groups[groups.Count - 1].Add(l);
-                }
-                //Is lecture l starting sooner than end time of the last lecture in last group (with 10 minutes toleration)?
-                else if (DateTime.Compare(getStartTime(l), lastgroup.Max(lec => getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0))) < 0)
-                {
-                    //All lectures intersecting with l
-                    List<TimetableField> intersecting = lastgroup.Where(lec => (DateTime.Compare(getStartTime(l), getStartTime(lec) + getDuration(lec) - new TimeSpan(0, 10, 0)) < 0)).ToList();
-                    //Only have to worry about 3 and more lectures in one group
-                    //If lecture l is intersecting with all of lectures in lastgroup then it belongs to the group
-                    if (lastgroup.Count <= 1 || intersecting.Count() == lastgroup.Count)
-                    {
-                        lastgroup.Add(l);
-                    }
-                    else
-                    {
-                        //Otherwise create a fake lectures from all intersecting lectures
-                        var newGroup = intersecting.Select(interLec => new FakeTimetableField(interLec.time_hours, interLec.time_minutes, interLec.duration))
-                            .Cast<TimetableField>().ToList();
-
-                        //And create a new last group from l and the fake lectures
-                        newGroup.Add(l);
-                        groups.Add(newGroup);
-                    }
-
-                }
-                else
-                {
-                    groups.Add(new List<TimetableField>());
-                    lastgroup = groups[groups.Count - 1];
-                    lastgroup.Add(l);
-                }
-            }
+        {            
+            List<List<TimetableField>> groups = new LecturesGroupDivider().divideToGroups(fields);
             return groups;
         }
 

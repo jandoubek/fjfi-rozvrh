@@ -7,15 +7,17 @@ namespace Rozvrh
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/dateValidation").Include(
-                       "~/Scripts/dateValidation.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-2.0.3.js",
-                        "~/Scripts/jquery.tablesorter.js"));
+                        "~/Scripts/jquery-2.0.3.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-1.10.3.js"));
+                        "~/Scripts/jquery-ui-1.10.3.js",
+                        "~/Scripts/jquery.selectBox.js",
+                        "~/Scripts/jquery.mousewheel.js",
+                        "~/Scripts/jquery.fixedheadertable.js",
+                        "~/Scripts/jquery.tablesorter.js",
+                        "~/Scripts/jquery.tablesorter.widgets.js",
+                        "~/Scripts/perfect-scrollbar.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
@@ -26,11 +28,12 @@ namespace Rozvrh
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/themes/base/jquery-ui.css", 
-                        "~/Content/themes/base/jquery.ui.dialog.css",
+            bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/style.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                        "~/Content/themes/base/jquery-ui.css",
+                        "~/Content/themes/base/jquery.ui.dialog.css",
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
                         "~/Content/themes/base/jquery.ui.selectable.css",
@@ -42,7 +45,9 @@ namespace Rozvrh
                         "~/Content/themes/base/jquery.ui.tabs.css",
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
-                        "~/Content/themes/base/jquery.ui.theme.css"));
+                        "~/Content/themes/base/perfect-scrollbar.css",
+                        "~/Content/themes/base/jquery.selectBox.css",
+                        "~/Content/themes/base/theme.default.css"));
         }
     }
 }

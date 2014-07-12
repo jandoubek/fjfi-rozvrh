@@ -1,8 +1,154 @@
 ﻿@model Rozvrh.Models.IConfig
 
-@{ViewBag.Title = "- Admin Config";}
+@{ViewBag.Title = "- Admin";}
 
-@using (Ajax.BeginForm("ConfigButtonAction", "Admin", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "FormContainer"}))
+<script type="text/javascript">
+
+    function isDate(txtDate) {
+        var currVal = txtDate;
+        if (currVal == '')
+            return false;
+
+        //Declare Regex  
+        var rxDatePattern = /^(\d{1,2})(.)(\d{1,2})(.)(\d{4})$/;
+        var dtArray = currVal.match(rxDatePattern); // is format OK?
+
+        if (dtArray == null)
+            return false;
+
+        //Checks for dd.mm.yyyy format.
+        dtDay = dtArray[1];
+        dtMonth = dtArray[3];
+        dtYear = dtArray[5];
+
+        if (dtMonth < 1 || dtMonth > 12)
+            return false;
+        else if (dtDay < 1 || dtDay > 31)
+            return false;
+        else if ((dtMonth == 4 || dtMonth == 6 || dtMonth == 9 || dtMonth == 11) && dtDay == 31)
+            return false;
+        else if (dtMonth == 2) {
+            var isleap = (dtYear % 4 == 0 && (dtYear % 100 != 0 || dtYear % 400 == 0));
+            if (dtDay > 29 || (dtDay == 29 && !isleap))
+                return false;
+        }
+        return true;
+    }
+
+    $(document).ready(function () {
+        var errorFlag = false;
+        var errorMessage =  '@Model.ErrorMessage';
+        if (errorMessage.length > 0 ){
+            errorFlag = true;
+        }
+        $("#dialog-error").dialog({
+            autoOpen: errorFlag,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Ok": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-reload").dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Ok": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-wrong").dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Ok": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-saved").dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Ok": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#dialog-reset").dialog({
+            autoOpen: false,
+            resizable: false,
+            modal: true,
+            buttons: {
+                "Ok": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+
+    function resetClick() {
+        $('#dialog-reset').dialog('open');
+    }
+
+    function reloadClick() {
+        if (isValidDate()) {
+            $('#dialog-reload').dialog('open');
+        }
+    }
+
+    function saveClick() {
+        if (isValidDate()) {
+            $('#dialog-saved').dialog('open');
+        }
+    }
+
+    function isValidDate() {
+        var inputs = document.getElementsByClassName("txtDate");
+        for (var index = 0; index < inputs.length; ++index) {
+            if (!isDate(inputs[index].value)) {
+                inputs[index].focus();
+                $('#dialog-wrong').dialog('open');
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+</script>
+
+<div id="dialog-error" title="Chyba!">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Vyskytla se chyba: @Model.ErrorMessage</p>
+</div>
+
+<div id="dialog-reload" title="Načítání">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Nastavení uloženo. Načítám databázi.</p>
+</div>
+
+<div id="dialog-saved" title="Uloženo">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Nastavení uloženo!</p>
+</div>
+
+<div id="dialog-wrong" title="Špatně">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Špatný formát data! Prosím oprav zvýrazněné pole.</p>
+</div>
+
+<div id="dialog-reset" title="Reset">
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Hodnoty nastavení byly resetovány z uloženého nastavení.</p>
+</div>
+
+@using (Ajax.BeginForm("ConfigButtonAction", "Admin", new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "leftSection" }))
 {
 <div id="FormContainer"> 
          <fieldset>
@@ -11,41 +157,42 @@
              <div>@Html.TextBox("XMLTimetableFilePathField", Model.XMLTimetableFilePath)</div>
          
              <div>@Html.Label("Opětovné načtení dat ze souboru")</div>
-             <div><input class="btnSubmit exButton" onclick="return isValidDate()" type="submit" name="submitButton" value="Reload" /></div>
+             <div><input class="btnSubmit exButton" onclick="return reloadClick()" type="submit" name="submitButton" value="Reload" /></div>
          </fieldset>
     
         <fieldset>
             <legend>Začátek a konec semestru</legend>
-            <div>@Html.Label("Začátek semestru")</div>
-            <div>@Html.TextBox("SemesterStartField", Model.SemesterStart, "{0:dd/MM/yyyy}", new { @class = "txtDate" })</div>
+            <div>@Html.Label("Začátek výuky v semestru")</div>
+            <div>@Html.TextBox("SemesterStartField", Model.SemesterStart, "{0:dd.MM.yyyy}", new { @class = "txtDate" })</div>
 
-            <div>@Html.Label("Konec semestru")</div>
-            <div>@Html.TextBox("SemesterEndField", Model.SemesterEnd, "{0:dd/MM/yyyy}", new { @class = "txtDate" })</div>            
+            <div>@Html.Label("Konec výuky v semestru")</div>
+            <div>@Html.TextBox("SemesterEndField", Model.SemesterEnd, "{0:dd.MM.yyyy}", new { @class = "txtDate" })</div>            
         </fieldset>
         <fieldset>
             <legend>Zápatí rozvrhu</legend>
-            <div>@Html.Label("Link na doplňující informace")</div>
+            <div>@Html.Label("Odkaz na doplňující informace")</div>
             <div>@Html.TextBox("LinkToInfoField", Model.LinkToAdditionalInformation)</div>
 
-            <div>@Html.Label("Datum buildu rozvrhu")</div>
-            <div>@Html.TextBox("CreatedField", Model.Created, "{0:dd/MM/yyyy}", new { @class = "txtDate" })</div>
+            <div>@Html.Label("Datum buildu (aktualizace databáze) rozvrhu")</div>
+            <div>@Html.TextBox("CreatedField", Model.Created, "{0:dd.MM.yyyy}", new { @class = "txtDate" })</div>
+        </fieldset>
+        <fieldset>
+            <legend>Uvítácí zpráva</legend>
+            <div>@Html.Label("Zpráva co bude zobrazena po příchodu na stránky")</div>
+            <div>@Html.TextArea("WelcomeMessage", Model.WelcomeMessage)</div>
         </fieldset>
         <fieldset>
             <legend>Anketa</legend>
-            <div>@Html.Label("Prefix odkazu na předmět")</div>
+            <div>@Html.Label("Předpona odkazu na předmět v anketě")</div>
             <div>@Html.TextBox("PrefixPoolLinkField", Model.PrefixPoolLink)</div>
 
-            <div>@Html.Label("Sufix odkazu na předmět")</div>
+            <div>@Html.Label("Přípona odkazu na předmět v anketě")</div>
             <div>@Html.TextBox("SufixPoolLinkField", Model.SufixPoolLink)</div>
         </fieldset>
-        @* <fieldset>
-            <legend>Logování</legend>
-            <div>@Html.Label("Cesta k logu")</div>
-           <div>@Html.TextBox("LogPathField", Model.PrefixPoolLink)</div>
-        </fieldset>*@
-        <div>
-            <input class="exButton" type="submit" name="submitButton" value="Zrušit" />
-            <input class="btnSubmit exButton" onclick="return isValidDate()" type="submit" name="submitButton" value="Uložit" />
+
+        <div id="configButtons">
+            <input class="exButton"  onclick="return resetClick()" type="submit" name="submitButton" value="Zrušit" />
+            <input class="btnSubmit exButton" onclick="return saveClick()" type="submit" name="submitButton" value="Uložit" />
         </div>
 
 <script type="text/javascript">
