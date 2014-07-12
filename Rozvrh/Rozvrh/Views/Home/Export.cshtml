@@ -1,4 +1,4 @@
-﻿<script type="text/javascript">
+<script type="text/javascript">
     $(function () {
         $(document).tooltip({ tooltipClass: "export-tooltip-styling", position: { my: "right-10", at: "left", collision: "fit" } });
     });
@@ -17,13 +17,18 @@
     }
 
 <div class="exportLink">
-    @Html.ActionLink("iCal", "ExportToICal", "Home", new { title = @ical, @class = "exButton" })
-    <p>iCal použijte pro import rozvrhu do vašeho kalendáře.</p>
+    @Html.ActionLink("SVG", "ExportToSVG", "Home", new { title = @svg, @class = "exButton" })
+    <div class="exportToolip">Vektorový obrázek rozvrhu.</div>
 </div>
-@*  
+
 <div class="exportLink">
-    @Html.ActionLink("PNG", "ExportToPNG", "Home", null, new { @class = "exButton" })
-    <p>Bitmapový obrázek ve fromátu PNG.</p>
+    @Html.ActionLink("PNG", "ExportToPNG", "Home", new { @class = "exButton" })
+    <div class="exportToolip">Bitmapový obrázek ve fromátu PNG.</div>
+</div>
+
+<div class="exportLink">
+    @Html.ActionLink("JPG", "ExportToJPG", "Home", new { @class = "exButton" })
+    <div class="exportToolip">Bitmapový obrázek ve formátu JPEG.</div>
 </div>
 
 <div class="exportLink">

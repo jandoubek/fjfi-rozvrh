@@ -18,7 +18,6 @@ namespace Rozvrh.Exporters
     public class ImportExport
     {
 
-        private static ImportExport instance;
 
         public ImportExport() 
         {
@@ -118,6 +117,38 @@ namespace Rozvrh.Exporters
             var res = new FileContentResult(buffer, "text/plain");
             res.FileDownloadName = "FJFIRozvrh.ical";
             return res;
+        }
+
+        public FileResult DownloadAsBITMAP(List<TimetableField> lectures, string title, DateTime created, string linkToInfo, string path, string format)
+        {
+            SvgGenerator gen = new SvgGenerator();
+            string text = gen.generateSVG(convertToExportFormat(lectures), title, created, linkToInfo);
+
+            string svgName = string.Format(@"{0}.svg", Guid.NewGuid());
+            string svgFileName = path + svgName;
+            using (StreamWriter outfile = new StreamWriter(svgFileName))
+            {
+                outfile.Write(text);
+            }
+
+            string expName = string.Format(@"{0}.{1}", Guid.NewGuid(),format);
+            string expFileName = path + expName;
+
+            string inkscapeArgs = string.Format(@"-f ""{0}"" -w 1600 -h 728 -e ""{1}""", svgFileName, expFileName);
+            string inkspacePath = path + "InkscapePortable/InkscapePortable.exe";
+
+            Process inkscape = Process.Start(new ProcessStartInfo(inkspacePath, inkscapeArgs));
+
+            inkscape.WaitForExit(3000);
+            FileStream fs = File.OpenRead(expFileName);
+            byte[] data = new byte[fs.Length];
+            fs.Read(data, 0, data.Length);
+            var res = new FileContentResult(data, "image/"+format);
+            res.FileDownloadName = "FJFIRozvrh."+format;
+            fs.Close();
+            File.Delete(expFileName);
+            File.Delete(svgFileName);
+            return res; 
         }
 
         /// <summary>

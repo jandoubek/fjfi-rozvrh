@@ -1,7 +1,9 @@
-﻿@model Rozvrh.Models.Model
+@model Rozvrh.Models.Model
 @{
     ViewBag.Title = "";
 }
+
+<div id="error" class="ui-state-error import-error"></div>
 
 @section right{
     <div id="tabs">
@@ -33,14 +35,24 @@
         ga('send', 'pageview');
 
         $(function () {
-            $("#tabs").tabs();
-        });
 
-        $(document).ready(function () {
-            var errorFlag = false;
-            var errorMessage = '@Model.ImportErrorMessage';
-            if (errorMessage.length > 0) {
-                errorFlag = true;
+            function fadecallback() {
+                setTimeout(function () {
+                    $("#error:visible").removeAttr("style").fadeOut();
+                }, 5000);
+            };
+            $("#tabs").tabs();
+
+            @if (Model.ImportErrorMessage != "")
+            { 
+                @:$("#error").text("@Html.Raw(Model.ImportErrorMessage)");
+                @:$("#error").show("Blind",500,fadecallback);
+
+                
+            }
+            else
+            {
+                 @:$("#error").hide();
             }
             $("#dialog-importError").dialog({
                 autoOpen: errorFlag,

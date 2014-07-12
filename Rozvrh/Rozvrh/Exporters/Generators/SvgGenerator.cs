@@ -1,4 +1,4 @@
-using Rozvrh.Controllers;
+﻿using Rozvrh.Controllers;
 using Rozvrh.Exporters.Common;
 using Rozvrh.Models;
 using System;
@@ -262,13 +262,13 @@ namespace Rozvrh.Exporters.Generators
             return @"
 <rect height=""1"" width=""725"" y=""57"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
 <rect height=""1"" width=""725"" y=""107"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""85"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Pondělí</text>
+<text y=""85"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Pondělí</text>
 <rect height=""1"" width=""725"" y=""157"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
 <text y=""135"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Úterý</text>
 <rect height=""1"" width=""725"" y=""207"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""185"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Středa</text>
+<text y=""185"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Středa</text>
 <rect height=""1"" width=""725"" y=""257"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
-<text y=""235"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Čtvrtek</text>
+<text y=""235"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans;"">Čtvrtek</text>
 <rect height=""1"" width=""725"" y=""307"" x=""7"" class=""categoryGrid"" fill=""#ddd""/>
 <text y=""285"" x=""7"" style=""fill: #000; dominant-baseline: middle; font-size: 12px; text-anchor: start; font-family: sans-serif;"">Pátek</text>
 ";
