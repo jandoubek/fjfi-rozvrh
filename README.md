@@ -17,6 +17,20 @@ Ostré nasazení na mujrozvrh.fjfi.cvut.cz
 * export do mnoha formátů: iCal, PDF, JPG, SVG
 * možnost uložit si vytvořený rozvrh pro další použití
 
+## Návrhy na upgrade 
+* fulltextové vyhledávání hodin
+* zlepšit/upravit/zdokonalit (pro širší rozsah rozlišení) layout
+* aby se po výběru položky v seznamu, neroloval seznam (ve filtrech) nahoru
+* v dialogovém okně úpravy se v seznamech nezobrazuje aktuální položka
+* tooltip pro položky seznamu ve filtru
+* zjistit proč se aplikace restartuje vždy po cca 30 hodinách
+* export do JPG
+* mobilní verze webu
+* uživatelské účty s přihlašováním přes KOS pro data persistence
+* dodělat tutorialy!
+* dohlédnout na kvalitu dat - háčky, čárky, barvy, jména předmětů
+* dostupnost databází i pro minulé semestry, možnost si je vybrat
+
 ## Team
 * David Blatský - zadání, aplikační logika, datový model, detaily GUI, odpovědný za chod
 * Václav Honzík - moduly pro export do iCal, PDF, SVG, JPG
