@@ -25,14 +25,12 @@ namespace Rozvrh.Exporters.Generators
         /// <param name="lectures">List of lectures with IExportHodina interface to export.</param>
         /// <param name="semesterStart">Beginning of the semester. Only Year, Month and Day are used. </param>
         /// <param name="semesterEnd">End of the semester. Only Year, Month and Day are used. </param>
-
         public string generateICal(List<TimetableField> lectures, DateTime semesterStart, DateTime semesterEnd)
         {
             string header = "BEGIN:VCALENDAR" + System.Environment.NewLine + "VERSION:2.0" +
                 System.Environment.NewLine + "PRODID:-//hacksw/handcal//NONSGML v1.0//EN" +
                 System.Environment.NewLine;
             string body = "";
-
 
             foreach (TimetableField lecture in lectures)
             {

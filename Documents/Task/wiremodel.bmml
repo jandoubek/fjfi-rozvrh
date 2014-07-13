@@ -1,0 +1,246 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1529" measuredH="838" mockupW="1280" mockupH="800">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="249" y="38" w="1280" h="800" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Rozvrh%20FJFI%0Ahttp%3A//rozvrh.fjfi.cvut.cz</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="1051" y="112" w="478" h="420" measuredW="212" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <selectedIndex>0</selectedIndex>
+        <tabHPosition>left</tabHPosition>
+        <tabVPosition>top</tabVPosition>
+        <text>v%FDb%u011Br%2C%20editace%2C%20export</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="254" y="147" w="796" h="367" measuredW="747" measuredH="311" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/rozvrh.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::List" x="1075" y="159" w="92" h="165" measuredW="100" measuredH="133" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <selectedIndex>1</selectedIndex>
+        <size>16</size>
+        <text>ro%u010Dn%EDk%0ABc.%201%0ABc.%202%0ABc.%203%0AIng.%201%0AIng.%202%0AIng.%203</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::List" x="1167" y="159" w="87" h="165" measuredW="100" measuredH="126" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <selectedIndex>0</selectedIndex>
+        <size>16</size>
+        <text>zam%u011B%u0159en%ED%0AZS%0AASI%0APRAK%0A...</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::List" x="1254" y="159" w="63" h="165" measuredW="100" measuredH="154" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <selectedIndex>0</selectedIndex>
+        <size>16</size>
+        <text>kruh%0A1%0A2%0A3%0A4%0A5%0A6%0A7</text>
+        <value>0</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::List" x="1332" y="162" w="74" h="162" measuredW="100" measuredH="217" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <selectedIndex>0</selectedIndex>
+        <size>16</size>
+        <text>katedra%0AKM%0AKF%0AKJ%0AKIPL%0AKFE%0AKMAT%0AKJCH%0AKDAIZ%0AKJR%0AKSI</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::List" x="1406" y="165" w="97" h="159" measuredW="100" measuredH="133" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <size>16</size>
+        <text>vyu%u010Duj%EDc%ED%0AAmbro%u017E%0AAugustov%E1%0ABalkov%E1%0ABauer%0ABene%u0161%0ABurd%EDk</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::List" x="1182" y="342" w="95" h="157" measuredW="100" measuredH="154" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <size>16</size>
+        <text>m%EDstnost%0AT-014%0AT-101%0AT-105%0AT-112%0AT-115%0AT-201%0AT-204</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::HRule" x="1051" y="532" w="478" h="-1" measuredW="100" measuredH="10" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Canvas" x="1254" y="220" w="43" h="23" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <borderStyle>none</borderStyle>
+        <color>7317724</color>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Canvas" x="1334" y="268" w="60" h="20" measuredW="100" measuredH="70" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <borderStyle>none</borderStyle>
+        <color>7317724</color>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::List" x="1075" y="342" w="107" h="157" measuredW="100" measuredH="133" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <selectedIndex>1</selectedIndex>
+        <size>16</size>
+        <text>budova%0AB%u0159ehov%E1%0ATrojanova%0AHlavova%0AFS%0AMFF%20UK%0ATroja</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::List" x="1297" y="342" w="91" h="157" measuredW="100" measuredH="126" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <size>16</size>
+        <text>den%0Apond%u011Bl%ED%0A%FAter%FD%0Ast%u0159eda%0A%u010Dtvrtek%0Ap%E1tek</text>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::List" x="1412" y="342" w="91" h="157" measuredW="100" measuredH="280" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <alternateRowColor>15594478</alternateRowColor>
+        <hasHeader>true</hasHeader>
+        <size>16</size>
+        <text>za%u010D%E1tek%0A7%3A30%0A8%3A30%0A9%3A30%0A10%3A30%0A11%3A30%0A12%3A30%0A13%3A30%0A14%3A30%0A15%3A30%0A16%3A30%0A17%3A30%0A18%3A30%0A19%3A30</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::DataGrid" x="249" y="530" w="1280" h="283" measuredW="771" measuredH="289" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hLines>false</hLines>
+        <rowHeight>29</rowHeight>
+        <size>20</size>
+        <text>p%u0159edm%u011Bt%20%5Ev%2C%20katedra%20%5Ev%2C%20vyu%u010Duj%EDc%ED%20%5Ev%2C%20den%20%5Ev%2C%20%u010Das%20%5Ev%2C%20d%E9lka%20%28hod%29%20%5Ev%2C%20m%EDstnost%20%5Ev%2C%20perioda%20%5Ev%2C%20%0AMAA3%2C%20KM%2C%20Vr%E1na%2C%20Po%2C%2011%3A30%2C%202%2C%20T-212%2C%201%0AMAA3cv%2C%20KM%2C%20Fu%u010D%EDk%2C%20%DAt%2C%209%3A30%2C%202%2C%20T-208%2C%201%0AMAA3cv%2C%20KM%2C%20Fu%u010D%EDk%2C%20St%2C%2011%3A30%2C%202%2C%20T-205%2C%201%0ASSM1%2C%20KM%2C%20Klika%2C%20St%2C%209%3A30%2C%202%2C%20T-210%2C%201%0ASOS1%2C%20KM%2C%20%u010Cul%EDk%2C%20%u010Ct%2C%2015%3A30%2C%202%2C%20T-115%2C%201%0ADIM3%2C%20KM%2C%20Mas%E1kov%E1%2C%20P%E1%2C%2011%3A30%2C%202%2C%20T-209%2C%201%0AZEL1%2C%20KFE%2C%20J.%20Pavel%2C%20St%2C%2015%3A30%2C%203%2C%20T-301%2C%201%0APIN2%2C%20KFE%2C%20M.%20Sinor%2C%20P%E1%2C%2013%3A30%2C%202%2C%20T-201%2C%202%0APIN2cv%2C%20KFE%2C%20M.%20Sinor%2C%20P%E1%2C%2013%3A30%2C%202%2C%20PC-UNIX%2C%202%0A%7B35L%2C%2015L%2C%2040L%2C%200L%7D</text>
+        <value>0</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Arrow" x="1135" y="266" w="73" h="15" measuredW="150" measuredH="100" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::Arrow" x="1208" y="271" w="73" h="15" measuredW="150" measuredH="100" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%202</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Arrow" x="1385" y="235" w="73" h="15" measuredW="150" measuredH="100" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%203</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Arrow" x="1145" y="420" w="73" h="15" measuredW="150" measuredH="100" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%204</text>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Arrow" x="1278" y="284" w="20" h="46" measuredW="150" measuredH="100" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%20C1</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Arrow" x="1356" y="286" w="20" h="46" measuredW="150" measuredH="100" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%20C2</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::Arrow" x="1444" y="288" w="20" h="46" measuredW="150" measuredH="100" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%20C3</text>
+      </controlProperties>
+    </control>
+    <control controlID="45" controlTypeID="com.balsamiq.mockups::Arrow" x="1222" y="464" w="20" h="46" measuredW="150" measuredH="100" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%20C4</text>
+      </controlProperties>
+    </control>
+    <control controlID="46" controlTypeID="com.balsamiq.mockups::Arrow" x="1350" y="464" w="20" h="46" measuredW="150" measuredH="100" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%20C5</text>
+      </controlProperties>
+    </control>
+    <control controlID="47" controlTypeID="com.balsamiq.mockups::Arrow" x="1444" y="464" w="20" h="46" measuredW="150" measuredH="100" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.5</backgroundAlpha>
+        <curvature>1</curvature>
+        <direction>top</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>true</rightArrow>
+        <stroke>solid</stroke>
+        <text>Filter%20C6</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

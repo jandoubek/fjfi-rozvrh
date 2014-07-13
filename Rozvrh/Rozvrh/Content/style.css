@@ -172,9 +172,6 @@ div#LogInContainer fieldset, div#FormContainer fieldset {margin: 1%; width: 28%;
 
 div#FormContainer input#XMLTimetableFilePathField,  input#LinkToInfoField,  input#PrefixPoolLinkField, input#SufixPoolLinkField, input#WelcomeMessage {width:98%;}
 
-/*div#FormContainer input {margin: 0% 0% 3% 0%;}*/
-.import-error { text-align:center; height:20px; width:50%;  margin: 0 auto; position: absolute; top: 5px; left: 0; bottom: 0; right: 0; z-index: 999; }
-
-.timetable-tooltip-styling { position: absolute; font-size: 12px; padding: 5px; }
+div#FormContainer input {margin: 0% 0% 3% 0%;}
 
 div#FormContainer #WelcomeMessage {width: 100%; min-height: 7em; height: 100%;}

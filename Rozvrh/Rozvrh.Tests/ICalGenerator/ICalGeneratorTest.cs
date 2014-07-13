@@ -15,8 +15,10 @@ namespace Rozvrh.Tests
         public void TestGenerate()
         {
 
-            ExportLecture a = new ExportLecture("PredmetA", DayOfWeek.Monday, new DateTime(1, 1, 1, 7, 30, 0), new TimeSpan(2, 0, 0), "OsobaA", "MistnostA", "#99999", true);
-            ExportLecture b = new ExportLecture("PredmetB", DayOfWeek.Tuesday, new DateTime(1, 1, 1, 17, 0, 0), new TimeSpan(1, 0, 0), "OsobaB", "MistnostB", "#99999", true);
+            ExportLecture a = new ExportLecture("PredmetA", DayOfWeek.Monday, new DateTime(1, 1, 1, 7, 30, 0), new TimeSpan(2, 0, 0),
+                "OsobaA", "MistnostA", "#99999", true);
+            ExportLecture b = new ExportLecture("PredmetB", DayOfWeek.Tuesday, new DateTime(1, 1, 1, 17, 0, 0), new TimeSpan(1, 0, 0),
+                "OsobaB", "MistnostB", "#99999", true);
 
             var hodiny = new List<ExportLecture>();
             hodiny.Add(a);
@@ -66,6 +68,7 @@ namespace Rozvrh.Tests
             DateTime semesterEnd = new DateTime();
             ICalGenerator gen = new ICalGenerator();
             string actualOutput = gen.generateICal(hodiny, semesterStart, semesterEnd);
+
             string goodOutput = @"BEGIN:VCALENDAR" + System.Environment.NewLine +
                                 "VERSION:2.0" + System.Environment.NewLine +
                                 "PRODID:-//hacksw/handcal//NONSGML v1.0//EN" + System.Environment.NewLine +

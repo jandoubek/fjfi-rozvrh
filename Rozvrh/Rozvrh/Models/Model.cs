@@ -200,7 +200,6 @@ namespace Rozvrh.Models
                                                List<string> classroomIds,   List<string> dayIds,             List<string> timeIds)
         {
             log.Debug("Method entry.");
-
             var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
 
             //by groups, specializations, degreeYears

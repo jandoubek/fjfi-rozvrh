@@ -68,8 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
     <None Include="App_Browsers\qt.browser" />
     <None Include="packages.config" />
   </ItemGroup>

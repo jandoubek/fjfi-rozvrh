@@ -32,7 +32,7 @@
                 // see the uitheme demo for more details on how to change the class names
             uitheme : 'jui'
         }
-        });
+    });
 
         $('#table-wrapper').perfectScrollbar({
             suppressScrollX: true,
@@ -95,19 +95,19 @@
         <thead>
             <tr>
                 <th>Vybrat</th>
-                <th>Předmět</th>
-                <th>Katedra</th>
-                <th>Vyučující</th>
-                <th>Den</th>
-                <th>Čas</th>
-                <th>Délka (hod)</th>
-                <th>Místnost</th>
-                <th>Pravidelně</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model.FiltredTimetableFields != null)
-            {
+            <th>Předmět</th>
+            <th>Katedra</th>
+            <th>Vyučující</th>
+            <th>Den</th>
+            <th>Čas</th>
+            <th>Délka (hod)</th>
+            <th>Místnost</th>
+            <th>Pravidelně</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.FiltredTimetableFields != null)
+        {
                 
                 foreach (var item in Model.FiltredTimetableFields)
                 {

@@ -43,9 +43,6 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\log4net.dll</HintPath>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -252,11 +249,6 @@
     <Content Include="Editable\Chris_Botti.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Images\ing2jch1.png" />
-    <Content Include="References\log4net.dll" />
-    <Content Include="Scripts\dateValidation.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="NuGet.exe" />
     <Content Include="Rotativa\libeay32.dll" />
     <Content Include="Rotativa\libgcc_s_dw2-1.dll" />
