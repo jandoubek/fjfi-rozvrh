@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <IConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <LinkToInfo>http://www.km.fjfi.cvut.cz/rozvrh/info.pdf</LinkToInfo>
-  <Created>2014-02-11T00:00:00</Created>
-  <WelcomeMessage>Vítej v aplikaci MůjRozvrh FJFI! Začni vpravo v sekci Výběr.
-Tutorialy ještě nejsou nahrané.</WelcomeMessage>
-  <SemesterStart>2014-02-17T00:00:00</SemesterStart>
-  <SemesterEnd>2014-05-16T00:00:00</SemesterEnd>
-  <XMLTimeTablePath>~/Editable/Chris_Botti.xml</XMLTimeTablePath>
-  <PrefixPoolLink>http://geraldine.fjfi.cvut.cz/WORK/Anketa/LS2013/67_pub/courses/</PrefixPoolLink>
+  <Created>2014-09-18T00:00:00</Created>
+  <WelcomeMessage>Vítej v aplikaci MůjRozvrh FJFI! Začni vpravo v sekci Výběr.</WelcomeMessage>
+  <SemesterStart>2014-09-22T00:00:00</SemesterStart>
+  <SemesterEnd>2014-12-19T00:00:00</SemesterEnd>
+  <XMLTimeTablePath>http://www.krbalek.cz/TimeTable/TTB_output.xml</XMLTimeTablePath>
+  <PrefixPoolLink>http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2013/67_pub/courses/</PrefixPoolLink>
   <SufixPoolLink />
   <ErrorMessage />
 </IConfig>

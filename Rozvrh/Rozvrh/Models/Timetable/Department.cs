@@ -40,7 +40,7 @@ namespace Rozvrh.Models.Timetable
                     return "3433892";
                 case "KJR":
                     return "15586304";
-                case "KSE":
+                case "KSI":
                     return "12680465";
                 default:
                     return "11184810";

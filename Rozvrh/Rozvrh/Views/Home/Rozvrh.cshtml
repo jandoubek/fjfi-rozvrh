@@ -263,7 +263,8 @@
             foreach (var day in Model.Days)
             {
                 int dayHeight = 50;
-                var dayGroups = HomeController.getGroups(Model.CustomTimetableFields.Where(m => m.day == day.name).ToList());
+                var lecturesInDay = Model.CustomTimetableFields.Where(m => m.day == day.name).ToList();
+                var dayGroups = HomeController.getGroups(lecturesInDay);
 
             <div id="@day.id" class="horizontal">@day.name
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Globalization;
 
 namespace Rozvrh.Controllers
 {
@@ -176,7 +177,9 @@ namespace Rozvrh.Controllers
         /// <returns></returns>
         private static TimeSpan getDuration(TimetableField field)
         {
-            Double time_duration = Double.Parse(field.duration);
+            string input = field.duration;
+            Double time_duration = 2;
+            Double.TryParse(input, NumberStyles.Number, CultureInfo.GetCultureInfo("cs-CZ"), out time_duration);
             int hours = (int) time_duration;
             int minutes = (int) (time_duration-hours)*60;
             return new TimeSpan(hours, minutes, 0);
