@@ -19,17 +19,18 @@ Ostré nasazení na mujrozvrh.fjfi.cvut.cz
 
 ## Návrhy na upgrade 
 * fulltextové vyhledávání hodin
+* export do JPG
+* mobilní verze webu
+* uživatelské účty s přihlašováním přes KOS pro persistenci dat
+* dostupnost databází i pro minulé semestry, možnost si je vybrat
+* tooltip pro položky seznamu ve filtru
+
+## Chyby
 * zlepšit/upravit/zdokonalit (pro širší rozsah rozlišení) layout
 * aby se po výběru položky v seznamu, neroloval seznam (ve filtrech) nahoru
 * v dialogovém okně úpravy se v seznamech nezobrazuje aktuální položka
-* tooltip pro položky seznamu ve filtru
-* zjistit proč se aplikace restartuje vždy po cca 30 hodinách
-* export do JPG
-* mobilní verze webu
-* uživatelské účty s přihlašováním přes KOS pro data persistence
-* dodělat tutorialy!
+* chybí tutorialy
 * dohlédnout na kvalitu dat - háčky, čárky, barvy, jména předmětů
-* dostupnost databází i pro minulé semestry, možnost si je vybrat
 
 ## Team
 * David Blatský - zadání, aplikační logika, datový model, detaily GUI, odpovědný za chod
@@ -38,5 +39,5 @@ Ostré nasazení na mujrozvrh.fjfi.cvut.cz
 * Tomáš Smola - testování, vývoj GUI
 * Richard Salač - propojení modulů v controlleru, komunikace se správcem serveru
 
-* Milan Krbálek - uživatel aplikace, vkládá nový databázový soubor
+* Milan Krbálek - uživatel-správce aplikace, vkládá nový databázový soubor
 * Jan Doubek - přednášejí předmětu PVS, při němž byl projek úspěšně rozběhnut
