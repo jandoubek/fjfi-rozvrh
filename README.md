@@ -18,7 +18,6 @@ Ostré nasazení na mujrozvrh.fjfi.cvut.cz
 * možnost uložit si vytvořený rozvrh pro další použití
 
 ## Návrhy na upgrade 
-* fulltextové vyhledávání hodin
 * export do JPG
 * mobilní verze webu
 * uživatelské účty s přihlašováním přes KOS pro persistenci dat
