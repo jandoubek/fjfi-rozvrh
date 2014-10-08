@@ -125,7 +125,7 @@ namespace Rozvrh.Controllers
 
         public PartialViewResult FilterAll(List<string> degreeYears, List<string> specializations, List<string> groups,
             List<string> departments, List<string> lecturers, List<string> buildings,
-            List<string> classrooms, List<string> days, List<string> times)
+            List<string> classrooms, List<string> days, List<string> times, string searchedString)
         {
             removeEmptyElement(degreeYears);
             removeEmptyElement(specializations);
@@ -138,9 +138,9 @@ namespace Rozvrh.Controllers
             removeEmptyElement(times);
 
             if (degreeYears.Any() || specializations.Any() || groups.Any() || departments.Any() ||
-                lecturers.Any() || buildings.Any() || classrooms.Any() || days.Any() || times.Any())
+                lecturers.Any() || buildings.Any() || classrooms.Any() || days.Any() || times.Any() || searchedString.Length > 0)
 
-                M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times);
+                M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times, searchedString);
 
             System.Web.HttpContext.Current.Session["FiltredTimetableFields"] = M.FiltredTimetableFields;
 

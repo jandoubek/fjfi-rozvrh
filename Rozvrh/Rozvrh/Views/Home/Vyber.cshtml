@@ -8,7 +8,8 @@
             degreeYears: $('#SelectedDegreeYears').val(), specializations: $('#SelectedSpecializations').val(),
             groups: $('#SelectedGroups').val(), departments: $('#SelectedDepartments').val(),
             lecturers: $('#SelectedLecturers').val(), buildings: $('#SelectedBuildings').val(),
-            classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val()
+            classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val(),
+            searchedString: $('#SearchedString').val()
         }, function (data) {
             $('#List').html(data);
         });
@@ -24,6 +25,7 @@
         $("select option").removeAttr("selected");
         $('select').selectBox('refresh');
         $('#zamereni select, #kruh select, #vyucujici select, #mistnost select').selectBox('options', []);
+        $('#SearchedString').val('');
         filterAll();
     }
 
@@ -52,6 +54,8 @@
 
         $(".box").mouseenter(function () { $(".resetOne", this).show(); })
                  .mouseleave(function () { $(".resetOne", this).hide(); });
+        $("div#vyhledavani").mouseenter(function () { $(".resetOne", this).show(); })
+                         .mouseleave(function () { $(".resetOne", this).hide(); });
     });
 
     function BindSpinner() {
@@ -71,6 +75,11 @@
         $(res).prop("selected", false);
         $(res).removeAttr("selected");
         $('select').selectBox('refresh');
+        filterAll();
+    }
+
+    function resetFilter() {
+        $('#SearchedString').val('');
         filterAll();
     }
 
@@ -157,8 +166,16 @@ new { id = "filterForm" }
         <div class="box">
             <button class="resetOne" onclick="resetOne('zacatek');">Reset</button>
             @Html.LabelFor(m => m.SelectedTimes, "Začátek")
-            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "6", onchange = "onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "6", onchange = "onListBoxChange(this);"})
         </div>
     </div>
+    
+    
+    <div id="vyhledavani" class="ui-state-default">
+        <span id="searchIcon" class="ui-icon ui-icon-search"></span>
+        <button class="resetOne" onclick="resetFilter();">Reset</button>
+        @Html.TextBoxFor(m => m.SearchedString, new {onchange = "onListBoxChange(this);", placeholder = "Vyhledat předmět" })
+    </div>
+    
     <button id="clearAll" onclick="resetAll()">Reset vše</button>
 }

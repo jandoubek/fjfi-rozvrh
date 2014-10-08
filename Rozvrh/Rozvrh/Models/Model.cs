@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using Rozvrh.Models.Timetable;
 
 namespace Rozvrh.Models
@@ -197,7 +199,7 @@ namespace Rozvrh.Models
         /// <param name="timeIds">Ids of the given times.</param>
         public void FilterTimetableFieldsByAll(List<string> degreeYearIds,  List<string> specializationIds,  List<string> groupIds,
                                                List<string> departmentIds,  List<string> lecturerIds,        List<string> buildingIds,
-                                               List<string> classroomIds,   List<string> dayIds,             List<string> timeIds)
+                                               List<string> classroomIds,   List<string> dayIds,             List<string> timeIds,      string searchedString)
         {
             log.Debug("Method entry.");
             var lessonsFromAllFilters = new List<IEnumerable<Lesson>>();
@@ -230,6 +232,8 @@ namespace Rozvrh.Models
             //by times
             filterLessonsByTimes(timeIds, lessonsFromAllFilters);
 
+            //by search string
+            filterLessonsBySearchString(searchedString, lessonsFromAllFilters);
             
             var resultLessons = intersect(lessonsFromAllFilters);
 
@@ -433,13 +437,75 @@ namespace Rozvrh.Models
         }
 
         /// <summary>
+        /// Method filtering lessons by given lectures.
+        /// </summary>
+        /// <param name="lectureIds">Ids of the given lectures.</param>
+        /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
+        private void filterLessonsByLectures(List<string> lectureIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
+        {
+            log.Debug("Method entry.");
+            if (anyId(lectureIds))
+            {
+                var lessonsFilteredByLecture =
+                     from l in xmlTimetable.m_lessons
+                     where lectureIds.Contains(l.lectureId)
+                     select l;
+                lessonsFromAllFilters.Add(lessonsFilteredByLecture);
+            }
+            log.Debug("Method exit.");
+        }
+
+        /// <summary>
+        /// Method filtering lessons by given courses.
+        /// </summary>
+        /// <param name="courseIds">Ids of the given courses.</param>
+        /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
+        private void filterLessonsByCourses(List<string> courseIds, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
+        {
+            log.Debug("Method entry.");
+            if (anyId(courseIds))
+            {
+                var lectureIdsFilteredByCourses =
+                    from lecture in xmlTimetable.m_lectures
+                    where courseIds.Contains(lecture.courseId)
+                    select lecture.id;
+
+                filterLessonsByLectures(lectureIdsFilteredByCourses.ToList(), lessonsFromAllFilters);
+            }
+            log.Debug("Method exit.");
+        }
+
+        /// <summary>
+        /// Method filtering lessons by given search string representing acronym or name of a course.
+        /// </summary>
+        /// <param name="searchString">Search string representing acronym or name of a course.</param>
+        /// <param name="lessonsFromAllFilters">Collection where add partial filter result.</param>
+        private void filterLessonsBySearchString(string searchString, ICollection<IEnumerable<Lesson>> lessonsFromAllFilters)
+        {
+            log.Debug("Method entry.");
+            if (searchString.Length > 0)
+            {
+                var courseIdsFilteredBySearchString =
+                    from c in xmlTimetable.m_courses
+                    where RemoveDiacriticsAndLower(c.acronym).Contains(RemoveDiacriticsAndLower(searchString)) || RemoveDiacriticsAndLower(c.name).Contains(RemoveDiacriticsAndLower(searchString))
+                    select c.id;
+
+                filterLessonsByCourses(courseIdsFilteredBySearchString.ToList(), lessonsFromAllFilters);
+            }
+            log.Debug("Method exit.");
+        }
+
+        /// <summary>
         /// Makes set intersection of the given lists of lessons.
         /// </summary>
         /// <param name="lessonsFromAllFilters">"Lists of lessons in one list."</param>
         /// <returns>List of common lessons.</returns>
         private static IEnumerable<Lesson> intersect(IEnumerable<IEnumerable<Lesson>> lessonsFromAllFilters)
         {
-            return lessonsFromAllFilters.Aggregate((previousList, nextList) => previousList.Intersect(nextList).ToList());
+            if (lessonsFromAllFilters.Any())
+                return lessonsFromAllFilters.Aggregate((previousList, nextList) => previousList.Intersect(nextList).ToList());
+            else
+                return new List<Lesson>();
         }
 
         /// <summary>
@@ -452,6 +518,25 @@ namespace Rozvrh.Models
             if (ids != null && ids.Count > 0)
                 return true;
             return false;
+        }
+
+        private static string RemoveDiacriticsAndLower(String s)
+        {
+            // oddělení znaků od modifikátorů (háčků, čárek, atd.)
+            s = s.Normalize(System.Text.NormalizationForm.FormD);
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                // do řetězce přidá všechny znaky kromě modifikátorů
+                if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(s[i]) != System.Globalization.UnicodeCategory.NonSpacingMark)
+                {
+                    sb.Append(s[i]);
+                }
+            }
+
+            // vrátí řetězec bez diakritiky
+            return sb.ToString().ToLower();
         }
 
         public List<Department> Departments { get; private set; }
@@ -467,6 +552,7 @@ namespace Rozvrh.Models
         /// List of TimetableFields fitred using settings in filtrs on Vyber.cshtml
         /// </summary>
         public List<TimetableField> FiltredTimetableFields { get; private set; }
+
         /// <summary>
         /// List of TimetableFields selected by user to be part of his personal timetable
         /// </summary>
@@ -481,6 +567,7 @@ namespace Rozvrh.Models
         public List<int> SelectedClassrooms { get; set; }
         public List<int> SelectedDays { get; set; }
         public List<int> SelectedTimes { get; set; }
+        public string SearchedString { get; set; }
         
         /// <summary>
         /// Used for holding the xml import message.
