@@ -26,7 +26,6 @@ Ostré nasazení na mujrozvrh.fjfi.cvut.cz
 
 ## Chyby
 * zlepšit/upravit/zdokonalit (pro širší rozsah rozlišení) layout
-* aby se po výběru položky v seznamu, neroloval seznam (ve filtrech) nahoru
 * v dialogovém okně úpravy se v seznamech nezobrazuje aktuální položka
 * chybí tutorialy
 * dohlédnout na kvalitu dat - háčky, čárky, barvy, jména předmětů
