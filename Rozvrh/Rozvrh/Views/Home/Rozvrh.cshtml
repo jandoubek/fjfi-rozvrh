@@ -155,10 +155,10 @@
                 $("#lecture").val(result.lecture_acr);
                 $("#dialog-form #lecturer").val(result.lecturer);
                 $("#dialog-form #room").val(result.classroom);
-                $("#dialog-form #department").val(result.department_acr);
+                $("select#department").next("a.selectBox").children("span.selectBox-label").text(result.department_acr);
                 $("#dialog-form #hours").val(result.time_hours);
                 $("#dialog-form #minutes").val(result.time_minutes);
-                $("#dialog-form #day").val(result.day);
+                $("select#day").next("a.selectBox").children("span.selectBox-label").text(result.day);
                 $("#dialog-form #duration").val(result.duration);
                 $("#dialog-form #period").prop("checked", result.period == "Ano" ? true : false);
                 $("#dialog-form").data("uid", uid).dialog("open");

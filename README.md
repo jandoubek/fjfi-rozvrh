@@ -2,6 +2,7 @@
 
 ## Řešení:
 Ostré nasazení na mujrozvrh.fjfi.cvut.cz
+testovací provoz na mujrozvrhfjfi.aspone.cz
 
 ## Zadání:
 * web aplikace sloužící studentům a učitelům pro nalezení, úpravu a export vlastního rozvrhu
@@ -26,7 +27,6 @@ Ostré nasazení na mujrozvrh.fjfi.cvut.cz
 
 ## Chyby
 * zlepšit/upravit/zdokonalit (pro širší rozsah rozlišení) layout
-* v dialogovém okně úpravy se v seznamech nezobrazuje aktuální položka
 * chybí tutorialy
 * dohlédnout na kvalitu dat - háčky, čárky, barvy, jména předmětů
 
