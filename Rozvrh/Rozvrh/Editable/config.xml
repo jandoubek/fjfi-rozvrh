@@ -2,7 +2,7 @@
 <IConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <LinkToInfo>http://www.km.fjfi.cvut.cz/rozvrh/info.pdf</LinkToInfo>
   <Created>2014-09-18T00:00:00</Created>
-  <WelcomeMessage>Vítej v aplikaci MůjRozvrh FJFI! Začni vpravo v sekci Výběr.</WelcomeMessage>
+  <WelcomeMessage>Vítej v aplikaci MůjRozvrh FJFI! Začni vpravo v sekci Výběr. Testovací provoz.</WelcomeMessage>
   <SemesterStart>2014-09-22T00:00:00</SemesterStart>
   <SemesterEnd>2014-12-19T00:00:00</SemesterEnd>
   <XMLTimeTablePath>http://www.krbalek.cz/TimeTable/TTB_output.xml</XMLTimeTablePath>

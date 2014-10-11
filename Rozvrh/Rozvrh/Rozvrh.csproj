@@ -247,7 +247,9 @@
     <Content Include="Content\themes\base\theme.default.css" />
     <Content Include="Editable\Aktualni_databaze.xml" />
     <Content Include="Editable\Chris_Botti.xml" />
-    <Content Include="Editable\config.xml" />
+    <None Include="Editable\config.xml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="NuGet.exe" />

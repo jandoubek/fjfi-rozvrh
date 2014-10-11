@@ -34,13 +34,37 @@
         $('#SelectedGroups').val([]);
     }
     
+    function scrollToSelected() {
+        var scrollboxes = ["zamereni", "vyucujici", "mistnost", "zacatek"];
+        for (j = 0; j < scrollboxes.length; j++) {
+            var cur_box = scrollboxes[j];
+            var i = 0;
+            $("#" + cur_box + " ul").find('li').each(function () {
+                i++;
+                if ($(this).attr('class') == 'selectBox-selected') {
+                    //alert(i);
+                    var height = $(this).height();
+                    //alert(height);
+                    $("#" + cur_box + " .selectBox-inline").scrollTop((i - 3) * height);
+                    $("#" + cur_box + " .selectBox-inline").perfectScrollbar('update');
+                    return false;
+                }
+            });
+        }
+        
+    }
+
     $(document).ready(function () {
         BindSpinner();
+
+        
 
         $('select').selectBox();
         $(".selectBox-inline").perfectScrollbar({
             suppressScrollX: true
         });
+
+        scrollToSelected();
 
         $("button#clearAll").button({
             icons: { primary: "ui-icon-close" },
