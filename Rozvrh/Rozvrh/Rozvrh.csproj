@@ -142,6 +142,7 @@
     <Compile Include="Exporters\Generators\ICalGenerator.cs" />
     <Compile Include="Exporters\Generators\SvgGenerator.cs" />
     <Compile Include="Exporters\ImportExport.cs" />
+    <Compile Include="Models\OneXMLTimetable.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\FakeTimetableField.cs" />
     <Compile Include="Models\IConfig.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Models\Timetable\Lecturer.cs" />
     <Compile Include="Models\Timetable\Time.cs" />
     <Compile Include="Models\Timetable\Specialization.cs" />
+    <Compile Include="Models\Timetable\TimetableInfo.cs" />
     <Compile Include="Models\XMLTimetable.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exporters\Common\ExportLecture.cs" />
@@ -172,9 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fjfiLogo.gif" />
-    <Content Include="Content\loading.gif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\loading.gif" />
     <Content Include="Content\asc.gif" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\jquery.selectBox-arrow.gif" />
@@ -245,11 +245,18 @@
     <Content Include="Content\desc.gif" />
     <Content Include="Content\themes\base\perfect-scrollbar.css" />
     <Content Include="Content\themes\base\theme.default.css" />
-    <Content Include="Editable\Aktualni_databaze.xml" />
-    <Content Include="Editable\Chris_Botti.xml" />
-    <None Include="Editable\config.xml">
+    <Content Include="Editable\14-15-zimni.xml" />
+    <Content Include="Editable\Archive\13-14-zimni.xml" />
+    <Content Include="Editable\Archive\13-14-letni.xml" />
+    <Content Include="Editable\14-15-zimni-info.xml" />
+    <Content Include="Editable\Archive\13-14-letni-info.xml" />
+    <Content Include="Editable\config.xml">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
+    <Content Include="Editable\welcomeMessage.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Editable\Archive\13-14-zimni-info.xml" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="NuGet.exe" />
@@ -266,6 +273,7 @@
     <None Include="Properties\PublishProfiles\aspone.pubxml" />
     <None Include="Properties\PublishProfiles\schedule.fjfi.cvut.cz.pubxml" />
     <None Include="Properties\PublishProfiles\smarterasp.pubxml" />
+    <None Include="Properties\PublishProfiles\ToFolder.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.0.3-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />

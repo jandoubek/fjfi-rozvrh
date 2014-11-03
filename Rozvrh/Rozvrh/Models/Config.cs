@@ -35,7 +35,7 @@ namespace Rozvrh.Models
             log.Debug("Method entry.");
             if (!LoadFromFile())
             {
-                SetDefault();
+                Init();
                 log.Info("Default hard-coded configuration loaded.");
                 //POPUP
             }
@@ -49,16 +49,11 @@ namespace Rozvrh.Models
         public IConfig GetIConfig()
         {
             log.Debug("Method entry.");
+
             IConfig ic = new IConfig();
-            ic.LinkToAdditionalInformation = LinkToAdditionalInformation;
-            ic.SemesterStart = SemesterStart;
-            ic.SemesterEnd = SemesterEnd;
-            ic.Created = Created;
-            ic.WelcomeMessage = WelcomeMessage;
-            ic.SufixPoolLink = SufixPoolLink;
-            ic.PrefixPoolLink = PrefixPoolLink;
-            ic.XMLTimetableFilePath = XMLTimetableFilePath;
-            ic.ErrorMessage = ErrorMessage;
+            ic.MostRecentTimetableXMLFilePath = MostRecentTimetableXMLFilePath;
+            ic.WelcomeMessageFilePath = WelcomeMessageFilePath;
+            ic.ArchivePath = ArchivePath;
             log.Debug("Method exit.");
 
             return ic;
@@ -72,14 +67,9 @@ namespace Rozvrh.Models
         {
             log.Debug("Method entry.");
             
-            LinkToAdditionalInformation = src.LinkToAdditionalInformation;
-            SemesterStart = src.SemesterStart;
-            SemesterEnd = src.SemesterEnd;
-            Created = src.Created;
-            WelcomeMessage = src.WelcomeMessage;
-            SufixPoolLink = src.SufixPoolLink;
-            PrefixPoolLink = src.PrefixPoolLink;
-            XMLTimetableFilePath = src.XMLTimetableFilePath;
+            MostRecentTimetableXMLFilePath = src.MostRecentTimetableXMLFilePath;
+            WelcomeMessageFilePath = src.WelcomeMessageFilePath;
+            ArchivePath = src.ArchivePath;
             
             log.Debug("Method exit.");
         }
@@ -87,27 +77,16 @@ namespace Rozvrh.Models
         /// <summary>
         /// Set the properties values.
         /// </summary>
-        /// <param name="XMLTimetableFilePath">Path to the data file.</param>
-        /// <param name="SemesterStart">Starting date of the study period.</param>
-        /// <param name="SemesterEnd">Ending date of the study period.</param>
-        /// <param name="Created">The date when the timetable data generated.</param>
-        /// <param name="LinkToInfo">Link to the additional info in timetable footer.</param>
-        /// <param name="WelcomeMessage">Message to be shown on the empty filtering result list.</param>
-        /// <param name="PrefixPoolLink">Prefix of the link to the course popularity pool.</param>
-        /// <param name="SufixPoolLink">Sufix of the link to the course popularity link.
-        public void Set(string XMLTimetableFilePath, DateTime SemesterStart, DateTime SemesterEnd,
-                        DateTime Created, string LinkToInfo, string WelcomeMessage, string PrefixPoolLink, string SufixPoolLink)
+        /// <param name="MostRecentTimetableXMLFilePath">File path to the most recent XML with timetables.</param>
+        /// <param name="ArchivePath">Path to the folder with timetable files (.xml and .info)</param>
+        /// <param name="WelcomeMessageFilePath">Message to be shown on the empty filtering result list.</param>
+        public void Set(string mMostRecentTimetableXMLFilePath, string mArchivePath, string mWelcomeMessage)
         {
             log.Debug("Method entry.");
             
-            this.XMLTimetableFilePath = XMLTimetableFilePath;
-            this.SemesterStart = SemesterStart;
-            this.SemesterEnd = SemesterEnd;
-            this.Created = Created;
-            this.WelcomeMessage = WelcomeMessage;
-            this.LinkToAdditionalInformation = LinkToInfo;
-            this.PrefixPoolLink = PrefixPoolLink;
-            this.SufixPoolLink = SufixPoolLink;
+            MostRecentTimetableXMLFilePath = mMostRecentTimetableXMLFilePath;
+            WelcomeMessageFilePath = mWelcomeMessage;
+            ArchivePath = mArchivePath;
 
             log.Debug("Method exit.");
         }
@@ -115,18 +94,13 @@ namespace Rozvrh.Models
         /// <summary>
         /// Sets config to some values when the config file inaccessible.
         /// </summary>
-        public void SetDefault()
+        public void Init()
         {
             log.Debug("Method entry.");
 
-            XMLTimetableFilePath = "~/Editable/Aktualni_databaze.xml";
-            SemesterStart = new DateTime(2013, 9, 23);
-            SemesterEnd = new DateTime(2014, 2, 14);
-            Created = new DateTime(2013,11,13);
-            LinkToAdditionalInformation = "http://www.km.fjfi.cvut.cz/rozvrh/info.pdf";
-            WelcomeMessage = "Vítej v aplikaci MůjRozvrh FIFJ! Začni v sekci filtrování vpravo.";
-            PrefixPoolLink = "http://geraldine.fjfi.cvut.cz/WORK/Anketa/ZS2012/67_pub/courses/";
-            SufixPoolLink = "/index.html";
+            MostRecentTimetableXMLFilePath = "~/Editable/13-14-zimni.xml";
+            WelcomeMessageFilePath = "Vítej v aplikaci MůjRozvrh FIFJ! Začni v sekci filtrování vpravo.";
+            ArchivePath = "~/Editable/Archive/";
 
             log.Debug("Method exit.");
         }

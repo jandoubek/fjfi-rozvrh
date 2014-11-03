@@ -15,32 +15,32 @@ namespace Rozvrh.Models.Timetable
             this.code = code;
             this.name = name;
             this.acronym = acronym;
-            this.color = tempColorRepair(acronym);
+            this.color = tempColorRepair();
         }
 
-        private string tempColorRepair(string acronym)
+        private string tempColorRepair()
         {
-            switch(acronym)
+            switch(code)
             {
-                case "KM":
+                case "01":
                     return "7590422";
-                case "KF":
+                case "02":
                     return "16153724";
-                case "KJ":
+                case "04":
                     return "11184810";
-                case "KIPL":
+                case "11":
                     return "13369344";
-                case "KFE":
+                case "12":
                     return "16087296";
-                case "KMAT":
+                case "14":
                     return "52411";
-                case "KJCH":
+                case "15":
                     return "7688315";
-                case "KDAIZ":
+                case "16":
                     return "3433892";
-                case "KJR":
+                case "17":
                     return "15586304";
-                case "KSI":
+                case "18":
                     return "12680465";
                 default:
                     return "11184810";

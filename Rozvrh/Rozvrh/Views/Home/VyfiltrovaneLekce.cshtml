@@ -44,16 +44,6 @@
             text: false
         });
 
-        $("button#AddAll").button({
-            icons: { primary: "ui-icon-plus" },
-            text: true
-        });
-
-        $("button#RemoveAll").button({
-            icons: { primary: "ui-icon-trash" },
-            text: true
-        });
-
         $(".courseAcronym").tooltip({ show: null, hide: null, position: { my: "left+10", at: "right top" } });
         $("td").tooltip({ show: null, hide: null, position: { my: "bottom", at: "top" } });
     });
@@ -66,30 +56,8 @@
         });
     }
 
-    function addAll() {
-        var allVals = [];
-        $('#Tabulka input:checkbox').each(function () {
-            allVals.push($(this).val());
-        });
-        $.post('@Url.Action("AddAll", "Home")', { uids: allVals }, function (data) {
-            $('#Timetable').html(data);
-        });
-    }
-
-    function removeAll() {
-        $.post('@Url.Action("RemoveAll", "Home")', { uids: null }, function (data) {
-            $('#Timetable').html(data);
-        });
-    }
-
 </script>
 
-
-<div id="AddButtons">
-    <button id="AddAll" onclick="addAll();">Přidat vše</button>
-    <button id="RemoveAll" onclick="removeAll();">Odstranit vše</button>
-</div>
-<div class="clear"></div>
 <div id="table-wrapper">
     <table id="Tabulka" class="tablesorter">
         <thead>

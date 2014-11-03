@@ -8,8 +8,8 @@ testovací provoz na mujrozvrhfjfi.aspone.cz
 * web aplikace sloužící studentům a učitelům pro nalezení, úpravu a export vlastního rozvrhu
 * zdrojem dat XML soubory z programu TimeTableBuilder od Milana Krbálka
 * zobrazení rozvrhu v zažitém designu
-* nebude klást vysoké nároky na správu (nepřidělá nikomu práci, pouze naopak)
-* poběží na školním serveru (.NET4/IIS Web Server)
+* nebude klást vysoké nároky na správu (nepřidělá nikomu práci, jedině naopak)
+* musí běžet na školním serveru (.NET4/IIS Web Server)
 
 ## Funkcionality
 * filtrování podle všech myslitelných vlastností
@@ -17,13 +17,12 @@ testovací provoz na mujrozvrhfjfi.aspone.cz
 * ruční úprava zobrazených hodin (změna času, předmětu, jména učitele, ...)
 * export do mnoha formátů: iCal, PDF, JPG, SVG
 * možnost uložit si vytvořený rozvrh pro další použití
+* zpřístupněny i rozvrhy z minulých semestrů
 
 ## Návrhy na upgrade 
 * export do JPG
 * mobilní verze webu
 * uživatelské účty s přihlašováním přes KOS pro persistenci dat
-* dostupnost databází i pro minulé semestry, možnost si je vybrat
-* tooltip pro položky seznamu ve filtru
 
 ## Chyby
 * zlepšit/upravit/zdokonalit (pro širší rozsah rozlišení) layout

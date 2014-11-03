@@ -14,59 +14,22 @@ namespace Rozvrh.Models
     [Serializable]
     public class IConfig
     {
-        /// <summary> 
-        /// Hyperlink to webpage with additional information about timetable
-        /// </summary>
-        /// <remarks>Used in SVG export.</remarks>
-        [XmlElement("LinkToInfo")]
-        public string LinkToAdditionalInformation { get; set; }
-
-        /// <summary> 
-        /// Date the timetable was created
-        /// </summary>
-        /// <remarks>Used in SVG export.</remarks>
-        [XmlElement("Created")]
-        public DateTime Created { get; set; }
-
         /// <summary>
-        ///  Message to be shown on the empty filtering result list.
+        ///  Path to the file with message to be shown on the empty filtering result list.
         /// </summary>
-        [XmlElement("WelcomeMessage")]
-        public string WelcomeMessage { get; set; }
+        [XmlElement("WelcomeMessageFilePath")]
+        public string WelcomeMessageFilePath { get; set; }
 
         /// <summary> 
-        /// When does the semester starts.
+        /// File path to the most recent XML with timetables. 
         /// </summary>
-        [XmlElement("SemesterStart")]
-        public DateTime SemesterStart { get; set; }
+        [XmlElement("MostRecentTimetableXMLFilePath")]
+        public String MostRecentTimetableXMLFilePath { get; set; }
 
         /// <summary> 
-        /// When does the semester start.
+        /// Path to the folder with timetable files (.xml and .info) 
         /// </summary>
-        [XmlElement("SemesterEnd")]
-        public DateTime SemesterEnd { get; set; }
-
-        /// <summary> 
-        /// File path to XML with timetables. 
-        /// </summary>
-        [XmlElement("XMLTimeTablePath")]
-        public String XMLTimetableFilePath { get; set; }
-
-        /// <summary> 
-        /// Prefix of the link to course popularity pool.
-        /// </summary>
-        [XmlElement("PrefixPoolLink")]
-        public string PrefixPoolLink { get; set; }
-
-        /// <summary> 
-        /// Sufix of the link to course popularity pool.
-        /// </summary>
-        [XmlElement("SufixPoolLink")]
-        public string SufixPoolLink { get; set; }
-
-        /// <summary>
-        /// For handling error message from Controller to View
-        /// </summary>
-        public string ErrorMessage { get; set; }
+        [XmlElement("ArchivePath")]
+        public String ArchivePath { get; set; }
     }
 }

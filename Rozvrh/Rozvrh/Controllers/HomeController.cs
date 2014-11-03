@@ -33,9 +33,9 @@ namespace Rozvrh.Controllers
 
         public ActionResult ExportToSVG()
         {
-            //FIX ME (VASEK): Misto retezce rozvrh prijde z UI od uzivatele nadpis rozvrhu. 
             ImportExport instance = new ImportExport();
-            return instance.DownloadAsSVG(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created, Config.Instance.LinkToAdditionalInformation);
+            return instance.DownloadAsSVG(M.CustomTimetableFields, M.SelectedTimetable.m_timetableInfo.TimetableLabel, M.SelectedTimetable.m_timetableInfo.Created,
+                M.SelectedTimetable.m_timetableInfo.LinkToAdditionalInformation);
         }
 
         public ActionResult ViewRozvrh()
@@ -47,16 +47,16 @@ namespace Rozvrh.Controllers
         {
             ImportExport instance = new ImportExport();
 
-            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
-                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "png");
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, M.SelectedTimetable.m_timetableInfo.TimetableLabel, M.SelectedTimetable.m_timetableInfo.Created,
+                M.SelectedTimetable.m_timetableInfo.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "png");
         }
 
         public ActionResult ExportToJPG()
         {
             ImportExport instance = new ImportExport();
 
-            return instance.DownloadAsBITMAP(M.CustomTimetableFields, "Rozvrh", Config.Instance.Created,
-                Config.Instance.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "jpg");
+            return instance.DownloadAsBITMAP(M.CustomTimetableFields, M.SelectedTimetable.m_timetableInfo.TimetableLabel, M.SelectedTimetable.m_timetableInfo.Created,
+                M.SelectedTimetable.m_timetableInfo.LinkToAdditionalInformation, Server.MapPath("~/App_Data/"), "jpg");
         }
 
         public ActionResult ExportToPDF()
@@ -77,7 +77,7 @@ namespace Rozvrh.Controllers
         public ActionResult ExportToICal()
         {
             ImportExport instance = new ImportExport();
-            return instance.DownloadAsICAL(M.CustomTimetableFields, Config.Instance.SemesterStart, Config.Instance.SemesterEnd);
+            return instance.DownloadAsICAL(M.CustomTimetableFields, M.SelectedTimetable.m_timetableInfo.SemesterStart, M.SelectedTimetable.m_timetableInfo.SemesterEnd);
         }
 
         public ActionResult ExportToXML()
@@ -99,7 +99,7 @@ namespace Rozvrh.Controllers
             }
             catch (InvalidDataException ex)
             {
-                M.ImportErrorMessage = ex.Message;
+                ViewBag.ImportErrorMessage = ex.Message;
             }
 
             return View("Index", M);
@@ -108,6 +108,9 @@ namespace Rozvrh.Controllers
 
         public PartialViewResult Filter(Model returnedModel)
         {
+            if(returnedModel.SelectedTimetableId != M.SelectedTimetable.m_timetableInfo.Id)
+                M = new Model(XMLTimetable.getTimetableOfId(returnedModel.SelectedTimetableId));
+
             if (returnedModel.SelectedDegreeYears.Any())
                 M.FilterSpecializationsByDegreeYears(returnedModel.SelectedDegreeYears.ConvertAll(d => d.ToString()));
 
@@ -125,7 +128,7 @@ namespace Rozvrh.Controllers
 
         public PartialViewResult FilterAll(List<string> degreeYears, List<string> specializations, List<string> groups,
             List<string> departments, List<string> lecturers, List<string> buildings,
-            List<string> classrooms, List<string> days, List<string> times, string searchedString)
+            List<string> classrooms, List<string> days, List<string> times, string searchedString, string timetableId)
         {
             removeEmptyElement(degreeYears);
             removeEmptyElement(specializations);
@@ -137,10 +140,15 @@ namespace Rozvrh.Controllers
             removeEmptyElement(days);
             removeEmptyElement(times);
 
+            if (timetableId != M.SelectedTimetable.m_timetableInfo.Id)
+                M = new Model(XMLTimetable.getTimetableOfId(timetableId));
+            
             if (degreeYears.Any() || specializations.Any() || groups.Any() || departments.Any() ||
                 lecturers.Any() || buildings.Any() || classrooms.Any() || days.Any() || times.Any() || searchedString.Length > 0)
-
+            {
+                
                 M.FilterTimetableFieldsByAll(degreeYears, specializations, groups, departments, lecturers, buildings, classrooms, days, times, searchedString);
+            }
 
             System.Web.HttpContext.Current.Session["FiltredTimetableFields"] = M.FiltredTimetableFields;
 
@@ -284,8 +292,6 @@ namespace Rozvrh.Controllers
         {
             System.Web.HttpContext.Current.Session["CustomTimetableFields"] = M.CustomTimetableFields;
         }
-
-
 
         public static List<List<TimetableField>> getGroups(List<TimetableField> fields)
         {            

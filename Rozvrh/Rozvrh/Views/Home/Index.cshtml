@@ -3,25 +3,9 @@
     ViewBag.Title = "";
 }
 
-@section right{
-    <div id="tabs">
-        <ul>
-            <li><a href="#tabs-1">Výběr</a></li>
-            <li><a href="#tabs-2">Export</a></li>
-            <li><a href="#tabs-3">Import</a></li>
-            <li id="AboutTab"><a href="#tabs-4">O Aplikaci</a></li>
-            <li id="TutorialTab"><a href="#tabs-5">Tutorial</a></li>
-        </ul>
-        <div id="tabs-1">@{Html.RenderPartial("Vyber");}</div>
-        <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
-        <div id="tabs-3">@{Html.RenderPartial("Import");}</div>
-        <div id="tabs-5">@{Html.RenderPartial("Tutorial");}</div>
-        <div id="tabs-4">@{Html.RenderPartial("About");}</div>
-    </div>
-}
-
 @section scripts{
     <script>
+
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -38,7 +22,7 @@
 
         $(document).ready(function () {
             var errorFlag = false;
-            var errorMessage = '@Model.ImportErrorMessage';
+            var errorMessage = '@ViewBag.ImportErrorMessage';
             if (errorMessage.length > 0) {
                 errorFlag = true;
             }
@@ -53,20 +37,45 @@
                 }
             });
         });
-
     </script>
 }
+
+@section right{
+    <section id="rightSection">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">Výběr</a></li>
+                <li><a href="#tabs-2">Export</a></li>
+                <li><a href="#tabs-3">Import</a></li>
+                <li id="AboutTab"><a href="#tabs-4">O Aplikaci</a></li>
+                <li id="TutorialTab"><a href="#tabs-5">Tutorial</a></li>
+            </ul>
+            <div id="tabs-1">@{Html.RenderPartial("Vyber", Model);}</div>
+            <div id="tabs-2">@{Html.RenderPartial("Export");}</div>
+            <div id="tabs-3">@{Html.RenderPartial("Import");}</div>
+            <div id="tabs-5">@{Html.RenderPartial("Tutorial");}</div>
+            <div id="tabs-4">@{Html.RenderPartial("About");}</div>
+        </div>
+    </section>
+}
+
+@section left{
+    <section id="leftSection">
+        <div id="Timetable">@{Html.RenderPartial("Rozvrh");}</div>
+    </section>
+}
+
+@section bottom{
+    <section id="bottomSection">
+        <div id="List">
+           <div id="welcomeMessage">@Html.Raw(HttpUtility.HtmlDecode(Model.WelcomeMessage))</div>
+            <img id="fjfiLogo" align="middle"/>
+            @*<iframe id="videoFrame" src="//www.youtube.com/embed/bqCZx-U13qg" frameborder="0" allowfullscreen></iframe>*@
+            @{Html.RenderPartial("VyfiltrovaneLekce", Model);}
+        </div>
+    </section>
+}
+
 <div id="dialog-importError" title="Chyba importu!">
-    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Vyskytla se chyba: @Model.ImportErrorMessage</p>
+    <p><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Vyskytla se chyba: @ViewBag.ImportErrorMessage</p>
 </div>
-
-<div id="Timetable">@Html.Partial("Rozvrh")</div>
-<div id="List">
-    <div id="welcomeMessage">@Model.WelcomeMessage</div>
-    <img id="fjfiLogo" />
-    <div id="lastUpdate">Poslední aktualizace databáze: @Model.CreatedDate</div>
-    <iframe id="videoFrame" src="//www.youtube.com/embed/bqCZx-U13qg" frameborder="0" allowfullscreen></iframe>
-    @Html.Partial("VyfiltrovaneLekce")
-</div>
-<br />
-

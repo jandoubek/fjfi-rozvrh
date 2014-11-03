@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Security.Cryptography;
 using System.Text;
-using System.Xml.Serialization;
-using System.IO;
 using Rozvrh.Models;
 
 namespace Rozvrh.Controllers
@@ -68,39 +64,26 @@ namespace Rozvrh.Controllers
         /// Method processing input from the configuration fields of the Config view.
         /// </summary>
         /// <param name="submitButton">Which type of action should be done.</param>
-        /// <param name="XMLTimetableFilePathField">Path to the data file.</param>
-        /// <param name="SemesterStartField">Starting date of the study period.</param>
-        /// <param name="SemesterEndField">Ending date of the study period.</param>
-        /// <param name="CreatedField">The date when the timetable data generated.</param>
-        /// <param name="LinkToInfoField">Link to the additional info in timetable footer.</param>
-        /// <param name="WelcomeMessage">Message to be shown on the empty filtering result list.</param>
-        /// <param name="PrefixPoolLinkField">Prefix of the link to the course popularity pool.</param>
-        /// <param name="SufixPoolLinkField">Sufix of the link to the course popularity link.
+        /// <param name="MostRecentTimetableXMLFilePath">File path to the most recent XML with timetables.</param>
+        /// <param name="ArchivePath">Path to the folder with timetable files (.xml and .info)</param>
+        /// <param name="WelcomeMessageFilePath">Path to the file with message to be shown on the empty filtering result list.</param>
         /// <returns>Partial view of the actualized Config.</returns>
         [HttpPost]
-        public PartialViewResult ConfigButtonAction(string submitButton, string XMLTimetableFilePathField, DateTime SemesterStartField, DateTime SemesterEndField, 
-                                                    DateTime CreatedField, string LinkToInfoField, string WelcomeMessage, string PrefixPoolLinkField, string SufixPoolLinkField)
+        public PartialViewResult ConfigButtonAction(string submitButton, string MostRecentTimetableXMLFilePath, string ArchivePath, string WelcomeMessageFilePath)
         {
             log.Debug("Method entry.");
-            m_config.ErrorMessage = "";
+            ViewBag.ErrorMessage = "";
             switch (submitButton)
             {
-                case "Reload":
-                    m_config.Set(XMLTimetableFilePathField, SemesterStartField, SemesterEndField, CreatedField, LinkToInfoField, WelcomeMessage, PrefixPoolLinkField, SufixPoolLinkField);
-                    if (!m_config.SaveToFile())
-                        m_config.ErrorMessage = "Nepovedlo se uložit nastavení do souboru, více v logovacím souboru./n";
-                    ModelState.Clear();
-                    if (!XMLTimetable.Instance.Refresh(m_config.XMLTimetableFilePath))
-                        m_config.ErrorMessage += "Nepovedlo se načíst nebo naparsovat soubor. Více informací v log souboru./n";
-                    log.Debug("Reload button clicked.");
-                    return PartialView("Config", m_config.GetIConfig());
 
-                case "Uložit":
-                    m_config.Set(XMLTimetableFilePathField, SemesterStartField, SemesterEndField, CreatedField, LinkToInfoField, WelcomeMessage, PrefixPoolLinkField, SufixPoolLinkField);
+                case "Uložit a Restartovat":
+                    m_config.Set(MostRecentTimetableXMLFilePath, ArchivePath, WelcomeMessageFilePath);
                     if (!m_config.SaveToFile())
-                        m_config.ErrorMessage = "Nepovedlo se uložit nastavení do souboru, více v logovacím souboru.";
+                        ViewBag.ErrorMessage = "Nepovedlo se uložit nastavení do souboru, více v logovacím souboru./n";
                     ModelState.Clear();
-                    log.Debug("Uložit button clicked.");
+                    if (!XMLTimetable.Instance.LoadDatabase())
+                        ViewBag.ErrorMessage += "Nepovedlo se načíst nebo naparsovat soubor. Více informací v log souboru./n";
+                    log.Debug("Save and Reload button clicked.");
                     return PartialView("Config", m_config.GetIConfig());
 
                 case "Zrušit":
@@ -130,8 +113,6 @@ namespace Rozvrh.Controllers
             sha1PasswordBytes = sha1.ComputeHash(Encoding.ASCII.GetBytes(Convert.ToBase64String(sha1PasswordBytes)));
 
             byte[] blatsky =    Convert.FromBase64String("E3oVOby8gYF+HUdfP3JV5tK+3a4=");
-            byte[] honzik =     Convert.FromBase64String("4zJDk3AHl5HuiaKAdeH3bcweE1Y=");
-            byte[] stika =      Convert.FromBase64String("VenMx97CkpVO0NmJb+cywDpEZ18=");
             byte[] krbalek =    Convert.FromBase64String("ULhngopNWAsQhSq4cWuMj+yC3YY=");
 
             if (sha1PasswordBytes.SequenceEqual(krbalek))
@@ -142,16 +123,6 @@ namespace Rozvrh.Controllers
             if (sha1PasswordBytes.SequenceEqual(blatsky))
             {
                 log.Info("Blatský successfully loged on.");
-                return true;
-            }
-            if (sha1PasswordBytes.SequenceEqual(honzik))
-            {
-                log.Info("Honzík successfully loged on.");
-                return true;
-            }
-            if (sha1PasswordBytes.SequenceEqual(stika))
-            {
-                log.Info("Štika successfully loged on.");
                 return true;
             }
 

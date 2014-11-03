@@ -9,7 +9,7 @@
             groups: $('#SelectedGroups').val(), departments: $('#SelectedDepartments').val(),
             lecturers: $('#SelectedLecturers').val(), buildings: $('#SelectedBuildings').val(),
             classrooms: $('#SelectedClassrooms').val(), days: $('#SelectedDays').val(), times: $('#SelectedTimes').val(),
-            searchedString: $('#SearchedString').val()
+            searchedString: $('#SearchedString').val(), timetableId: $('#SelectedTimetableId').val()
         }, function (data) {
             $('#List').html(data);
         });
@@ -21,10 +21,10 @@
     }
 
     function resetAll() {
-        $("select option").prop("selected", false);
-        $("select option").removeAttr("selected");
-        $('select').selectBox('refresh');
-        $('#zamereni select, #kruh select, #vyucujici select, #mistnost select').selectBox('options', []);
+        $(".boxContainer select option").prop("selected", false);
+        $(".boxContainer select option").removeAttr("selected");
+        $('.boxContainer select').selectBox('refresh');
+        $('#obor select, #kruh select, #vyucujici select, #mistnost select').selectBox('options', []);
         $('#SearchedString').val('');
         filterAll();
     }
@@ -35,38 +35,56 @@
     }
     
     function scrollToSelected() {
-        var scrollboxes = ["zamereni", "vyucujici", "mistnost", "zacatek"];
+        var scrollboxes = ["obor", "vyucujici", "mistnost", "zacatek"];
         for (j = 0; j < scrollboxes.length; j++) {
             var cur_box = scrollboxes[j];
             var i = 0;
             $("#" + cur_box + " ul").find('li').each(function () {
                 i++;
                 if ($(this).attr('class') == 'selectBox-selected') {
-                    //alert(i);
                     var height = $(this).height();
-                    //alert(height);
                     $("#" + cur_box + " .selectBox-inline").scrollTop((i - 3) * height);
                     $("#" + cur_box + " .selectBox-inline").perfectScrollbar('update');
                     return false;
                 }
             });
         }
-        
+    }
+
+    function addTitlesToOptionsOfSpecialization() {
+        var optionVal = new Array();
+        $('div#obor select:nth-of-type(2) option').each(function () {
+            optionVal.push($(this).text());
+        });
+
+        if ((optionVal.length > 0))
+        {
+            var i = 0;
+            $('div#obor a.selectBox ul.selectBox-options li').each(function () {
+                $(this).children('a').attr('title', optionVal[i]);
+                i++;
+            });
+        }
     }
 
     $(document).ready(function () {
         BindSpinner();
 
-        
+        $('#TimetableArchiveList select').selectBox();
 
-        $('select').selectBox();
+        $(".box").each(function (i) {
+            $('select:first', this).selectBox();
+        });
+
+        addTitlesToOptionsOfSpecialization();
+
         $(".selectBox-inline").perfectScrollbar({
             suppressScrollX: true
         });
 
         scrollToSelected();
 
-        $("button#clearAll").button({
+        $("button#ClearAll").button({
             icons: { primary: "ui-icon-close" },
             text: true
         });
@@ -76,10 +94,41 @@
             text: false
         });
 
+        $("button#AddAll").button({
+            icons: { primary: "ui-icon-plus" },
+            text: true
+        });
+
+        $("button#RemoveAll").button({
+            icons: { primary: "ui-icon-trash" },
+            text: true
+        });
+
+        $("#TimetableArchiveList").hover(function () {
+            $('#TimetableArchiveList .selectBox-dropdown').addClass('ui-state-hover');
+        },
+            function() {
+                $('#TimetableArchiveList .selectBox-dropdown').removeClass('ui-state-hover');
+            });
+
+        $("div#vyhledavani").hover(function () {
+            //$('div#vyhledavani').addClass('ui-state-hover');
+            $(".resetOne", this).show();
+        },
+        function () {
+            //$('div#vyhledavani').removeClass('ui-state-hover');
+            $(".resetOne", this).hide();
+        });
+
+        $("div#vyhledavani").tooltip();
+        $("div#TimetableArchiveList a.selectBox").attr("title", "Můžeš vybrat rozvrh z minulých let. V závorce je datum aktualizace databáze.");
+        $("div#TimetableArchiveList a.selectBox").tooltip({ position: { my: "right", at: "left" } });
+        $("ClearAll").tooltip();
+        $("AddAll").tooltip();
+        $("RemoveAll").tooltip();
+
         $(".box").mouseenter(function () { $(".resetOne", this).show(); })
                  .mouseleave(function () { $(".resetOne", this).hide(); });
-        $("div#vyhledavani").mouseenter(function () { $(".resetOne", this).show(); })
-                         .mouseleave(function () { $(".resetOne", this).hide(); });
     });
 
     function BindSpinner() {
@@ -93,7 +142,7 @@
     };
 
     function resetOne(boxId) {
-        if (boxId == "rocnik" || boxId == "zamereni")
+        if (boxId == "rocnik" || boxId == "obor")
             unselectSpecializationsGroups();
         var res = "#".concat(boxId, " select option");
         $(res).prop("selected", false);
@@ -107,31 +156,58 @@
         filterAll();
     }
 
+    function addAll() {
+        var allVals = [];
+        $('#Tabulka input:checkbox').each(function () {
+            allVals.push($(this).val());
+        });
+        $.post('@Url.Action("AddAll", "Home")', { uids: allVals }, function (data) {
+            $('#Timetable').html(data);
+        });
+    }
+
+    function removeAll() {
+        $.post('@Url.Action("RemoveAll", "Home")', { uids: null }, function (data) {
+            $('#Timetable').html(data);
+        });
+    }
+
 </script>
 
 @using (Ajax.BeginForm("Filter", "Home", new AjaxOptions
 {
     HttpMethod = "Post",
     UpdateTargetId = "tabs-1",
-    InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
-    
+    InsertionMode = InsertionMode.Replace
 },
-new { id = "filterForm" }
-))
+            new { id = "filterForm" }))
 {
 
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
+    <div id="upperLine">
+        <div id="TimetableArchiveList" title="Můžeš vybrat i rozvrh z minulých let.">
+            @Html.DropDownListFor(model => model.SelectedTimetableId, new SelectList(Model.TimetablesInfoList, "Id", "CompoundLabel", Model.SelectedTimetableId), new { onchange = "resetAll(); onListBoxChange(this);", @class = "ui-state-default" })
+        </div>
+    
+        <div id="vyhledavani" class="ui-state-default" title="Vyhledávání dle názvu předmětu funguje, pouze pokud je vyplněn v databázi. Po vyplnění klikni mimo pole nebo stiskni TAB.">
+                <span id="searchIcon" class="ui-icon ui-icon-search"></span>
+                <button class="resetOne" onclick="resetFilter();">Reset</button>
+                @Html.TextBoxFor(m => m.SearchedString, new { onchange = "onListBoxChange(this);", placeholder = "Vyhledat předmět dle kódu nebo názvu" })
+        </div>
+    </div>
+    
     <div class="boxContainer" id="prvni">
         <div class="box" id="rocnik">
             <button class="resetOne" onclick="resetOne('rocnik');">Reset</button>
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
-            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]);onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]); onListBoxChange(this);" })
         </div>
-        <div class="box" id="zamereni">
-            <button class="resetOne" onclick="resetOne('zamereni');">Reset</button>
-            @Html.LabelFor(m => m.SelectedSpecializations, "Zaměření")
-            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "9", onchange = "$('#SelectedGroups').val([]);onListBoxChange(this);" })
+        <div class="box" id="obor">
+            <button class="resetOne" onclick="resetOne('obor');">Reset</button>
+            @Html.LabelFor(m => m.SelectedSpecializations, "Obor")
+            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "9", onchange = "$('#SelectedGroups').val([]); onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "name"), new { style= "position: absolute; display: none;" })
         </div>
         <div class="box" id="kruh">
             <button class="resetOne" onclick="resetOne('kruh');">Reset</button>
@@ -139,21 +215,22 @@ new { id = "filterForm" }
             @Html.ListBoxFor(m => m.SelectedGroups, new MultiSelectList(Model.Groups, "id", "groupNo"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
-
+    
     <div class="boxContainer" id="druhy">
         <div class="box" id="katedra">
             <button class="resetOne" onclick="resetOne('katedra');">Reset</button>
             @Html.LabelFor(m => m.SelectedDepartments, "Katedra")
             @{
-                List<object> tempDeparts = new List<object>();
-                foreach(var dep in Model.Departments) 
-                {
-                    tempDeparts.Add( new {
-                        id = dep.id,
-                        acronym = (Convert.ToInt32(dep.code) >= 0 ? dep.code + "\u2005" : "\u2005") + dep.acronym
-                    } 
-                    );
-                }
+    List<object> tempDeparts = new List<object>();
+    foreach (var dep in Model.Departments)
+    {
+        tempDeparts.Add(new
+        {
+            id = dep.id,
+            acronym = (Convert.ToInt32(dep.code) >= 0 ? dep.code + "\u2005" : "\u2005") + dep.acronym
+        }
+        );
+    }
             }
 
             @Html.ListBoxFor(m => m.SelectedDepartments, new MultiSelectList(tempDeparts, "id", "acronym"), new { size = "9", onchange = "$('#SelectedLecturers').val([]);onListBoxChange(this);" })
@@ -164,7 +241,7 @@ new { id = "filterForm" }
             @Html.ListBoxFor(m => m.SelectedLecturers, new MultiSelectList(Model.Lecturers, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
-
+    
     <div class="boxContainer" id="treti">
         <div class="box" id="budova">
             <button class="resetOne" onclick="resetOne('budova');">Reset</button>
@@ -177,7 +254,7 @@ new { id = "filterForm" }
             @Html.ListBoxFor(m => m.SelectedClassrooms, new MultiSelectList(Model.Classrooms, "id", "name"), new { size = "9", onchange = "onListBoxChange(this);" })
         </div>
     </div>
-
+   
     <div class="boxContainer" id="den">
         <div class="box">
             <button class="resetOne" onclick="resetOne('den');">Reset</button>
@@ -193,13 +270,10 @@ new { id = "filterForm" }
             @Html.ListBoxFor(m => m.SelectedTimes, new MultiSelectList(Model.Times, "id", "acronym"), new { size = "6", onchange = "onListBoxChange(this);"})
         </div>
     </div>
-    
-    
-    <div id="vyhledavani" class="ui-state-default">
-        <span id="searchIcon" class="ui-icon ui-icon-search"></span>
-        <button class="resetOne" onclick="resetFilter();">Reset</button>
-        @Html.TextBoxFor(m => m.SearchedString, new {onchange = "onListBoxChange(this);", placeholder = "Vyhledat předmět" })
+  
+    <div id="FilterButtons">
+        <button id="ClearAll" onclick="resetAll()" title="Resetuje všechny filtry kromě zvoleného semestru">Reset vše</button>
+        <button id="AddAll" onclick="addAll();" title="Přidá všechny hodiny ze seznamu do rozvrhu">Přidat vše</button>
+        <button id="RemoveAll" onclick="removeAll();" title="Odstraní všechny hodiny z rozvrhu">Odstranit vše</button>
     </div>
-    
-    <button id="clearAll" onclick="resetAll()">Reset vše</button>
 }

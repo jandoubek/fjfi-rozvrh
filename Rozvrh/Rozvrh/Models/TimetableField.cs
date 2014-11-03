@@ -118,7 +118,7 @@ namespace Rozvrh.Models
         /// <param name="t">Time class input.</param>
         /// <param name="b">Building class input.</param>
         /// <param name="cr">Classroom class input.</param>
-        public TimetableField(Department dep, Course c, Lecture lec, Lecturer ler, Day d, Time t, Building b, Classroom cr)
+        public TimetableField(Department dep, Course c, Lecture lec, Lecturer ler, Day d, Time t, Building b, Classroom cr, TimetableInfo ti)
         {
             department = dep.name;
             department_acr = dep.acronym;
@@ -132,8 +132,9 @@ namespace Rozvrh.Models
             else
                 period = "Ne";
             duration = lec.duration;   //will be replaced to the config setting
-            Config config = Config.Instance;
-            course_href = config.PrefixPoolLink + dep.code + c.acronym.Replace(@"/", "") + config.SufixPoolLink;
+            string prefix = ti.PrefixPoolLink;
+            string sufix = ti.SufixPoolLink;
+            course_href = prefix + dep.code + c.acronym.Replace(@"/", "") + sufix;
             tag = lec.tag; 
             practice = lec.practice;
             lecturer = ler.name;
