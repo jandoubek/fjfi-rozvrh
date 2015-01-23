@@ -31,5 +31,11 @@ namespace Rozvrh.Models
         /// </summary>
         [XmlElement("ArchivePath")]
         public String ArchivePath { get; set; }
+
+        /// <summary>
+        /// Welcome message to be shown at startup page.
+        /// </summary>
+        [XmlIgnore]
+        public String WelcomeMessage { get; set; }
     }
 }

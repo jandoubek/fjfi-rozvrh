@@ -47,7 +47,7 @@ namespace Rozvrh.Models
         {
             log.Debug("Method entry.");
 
-            WelcomeMessage = LoadWelcomeMessangeFromFile(Config.Instance.WelcomeMessageFilePath);
+            WelcomeMessage = Config.Instance.WelcomeMessage;
 
             Specializations = new List<Specialization>();
             Groups = new List<Group>();
@@ -155,32 +155,6 @@ namespace Rozvrh.Models
             
         }
 
-        private string LoadWelcomeMessangeFromFile(string welcomeMessageFilePath)
-        {
-            log.Debug("Method entry.");
-            string result = "";
-            try
-            {
-                log.Debug("Trying to load config from file: '" + welcomeMessageFilePath + "'");
-
-                TextReader reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(welcomeMessageFilePath));
-                if (reader == null)
-                {
-                    log.Error("Unable to load config file (wrong filepath).");
-                }
-                result = reader.ReadToEnd();
-                reader.Close();
-                log.Info("Welcome message successfully loaded from file: '" + welcomeMessageFilePath + "'");
-                log.Debug("Method exit.");
-                return result;
-            }
-            catch
-            {
-                log.Debug("Welcome message does not loaded from file: '" + welcomeMessageFilePath + "'");
-                log.Debug("Method exit");
-                return result;
-            }
-        }
 
 
         public List<Department> Departments { get; private set; }

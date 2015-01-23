@@ -32,8 +32,9 @@ namespace Rozvrh.Models
 		/// </summary>
         private Config()
 		{
+            log.Info("----------------------Application is starting ---------------------");
             log.Debug("Method entry.");
-            if (!LoadFromFile())
+            if (!LoadConfigFromFile())
             {
                 Init();
                 log.Info("Default hard-coded configuration loaded.");
@@ -149,32 +150,50 @@ namespace Rozvrh.Models
         /// </summary>
         /// <returns></returns>
         /// <returns>Bool result.</returns>
-        public bool LoadFromFile()
+        public bool LoadConfigFromFile()
         {
             log.Debug("Method entry.");
             try
             {
-                log.Debug("Trying to load config from file: '" + configFilePath+"'");
-                XmlSerializer serializer = new XmlSerializer(typeof(IConfig));
-                TextReader reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(configFilePath));
+                string fileContent = Utils.Files.LoadFileContentFromPath(configFilePath);
+                TextReader reader = new StringReader(fileContent);
                 if (reader == null)
-                {
                     log.Error("Unable to load config file (wrong filepath).");
-                }
+
+                XmlSerializer serializer = new XmlSerializer(typeof(IConfig));
                 IConfig readConfig = (IConfig)serializer.Deserialize(reader);
                 reader.Close();
 
                 Set(readConfig);
                 log.Info("Configuration successfully loaded from file: '" + configFilePath + "'");
-                log.Debug("Method exit.");
+                this.WelcomeMessage = LoadWelcomeMessageFromFile(this.WelcomeMessageFilePath);
                 return true;
             }
             catch
             {
-                log.Info("Configuration does not loaded from file: '" + configFilePath + "'");
-                log.Debug("Method exit");
+                log.Error("Configuration not loaded from file: '" + configFilePath + "'");
                 return false;
             }
+            finally
+            {
+                log.Debug("Method exit");
+            }
+        }
+
+        private static string LoadWelcomeMessageFromFile(string welcomeMessageFilePath)
+        {
+            log.Debug("Method entry.");
+            string wm = Utils.Files.LoadFileContentFromPath(welcomeMessageFilePath);
+            if (string.IsNullOrEmpty(wm))
+            {
+                log.Error("Unable to load a welcome message from " + welcomeMessageFilePath);
+            }
+            else
+            {
+                log.Info("Welcome message successfully loaded from: " + welcomeMessageFilePath);
+            }
+            log.Debug("Method exit");
+            return wm;
         }
 	}
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Rozvrh.Models.Timetable;
 using System.Xml.Linq;
+using System.IO;
 
 namespace Rozvrh.Models
 {
@@ -112,7 +113,7 @@ namespace Rozvrh.Models
             m_groupLessonBinder = new List<GroupLessonBinder>();
             m_timetableInfo = new TimetableInfo();
 
-            if (!this.LoadFile(xmlPath))
+            if (!this.LoadOneXMLTimetableFromFile(xmlPath))
             {
                 log.Debug("Method exit.");
                 return false;
@@ -130,35 +131,33 @@ namespace Rozvrh.Models
         /// Method which open and parse the xml file.
         /// </summary>
         /// <returns>Bool result.</returns>
-        private bool LoadFile(string xmlPath)
+        private bool LoadOneXMLTimetableFromFile(string xmlPath)
         {
             log.Debug("Method entry.");
-            try
+            string oxmltt = Utils.Files.LoadFileContentFromPath(xmlPath);
+            if (string.IsNullOrEmpty(oxmltt))
             {
-                log.Debug("Trying to load XML database file: '" + xmlPath + "'.");
-
-                string pathString;
-                //if the path starts with ~ - use local server loading
-                if (String.CompareOrdinal("~", 0, xmlPath, 0, 1) == 0)
-                {
-                    log.Info("Loading XML file from a server map path: '" + xmlPath + "'.");
-                    pathString = System.Web.HttpContext.Current.Server.MapPath(xmlPath);
-                }
-                else
-                {
-                    log.Info("Loading XML file from an absolute path (like http): '" + xmlPath + "'.");
-                    pathString = xmlPath;
-                }
-                m_xelDefinitions = XElement.Load(pathString);
-                log.Debug("XML loaded.");
-                log.Debug("Method exit.");
-                return true;
-            }
-            catch
-            {
-                log.Error("Unable to load and parse the XML data file: '" + xmlPath + "'.");
-                log.Debug("Method exit.");
+                log.Error("Unable to load a XML timetable from " + xmlPath);
                 return false;
+            }
+            else
+            {
+                log.Debug("The XML timetable successfully loaded from: " + xmlPath);
+                try
+                {
+                    m_xelDefinitions = XElement.Load(new StringReader(oxmltt));
+                    log.Info("The XML timetable successfully loaded from: " + xmlPath);
+                    return true;
+                }
+                catch
+                {
+                    log.Error("Unable to parse the XML data file: '" + xmlPath + "'.");
+                    return false;
+                }
+                finally
+                {
+                    log.Debug("Method exit");
+                }
             }
         }
 

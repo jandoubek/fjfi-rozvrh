@@ -86,7 +86,7 @@ namespace Rozvrh.Models.Timetable
 
         public TimetableInfo(string xmlTimetableFilePath, string id)
         {
-            TimetableInfo ti = LoadFromFile(xmlTimetableFilePath);
+            TimetableInfo ti = LoadTimetableInfoFromFile(xmlTimetableFilePath);
             SetValues(ti);
             Id = id;
             TimetableXMLFilePath = xmlTimetableFilePath;
@@ -108,44 +108,35 @@ namespace Rozvrh.Models.Timetable
             LinkToAdditionalInformation = ti.LinkToAdditionalInformation;
         }
 
-        private static TimetableInfo LoadFromFile(string timetableFilePath)
+        private static TimetableInfo LoadTimetableInfoFromFile(string timetableFilePath)
         {
             log.Debug("Method entry.");
             string infoFilePath =  Path.GetDirectoryName(timetableFilePath) + @"\" + Path.GetFileNameWithoutExtension(timetableFilePath) + "-info.xml";
+
             try
             {
-                log.Debug("Trying to load timetable info from file: '" + infoFilePath + "'");
-                XmlSerializer serializer = new XmlSerializer(typeof(TimetableInfo));
-
-                if (String.CompareOrdinal("~", 0, infoFilePath, 0, 1) == 0)
-                {
-                    log.Info("Loading XML file from a server map path: '" + infoFilePath + "'.");
-                    infoFilePath = System.Web.HttpContext.Current.Server.MapPath(infoFilePath);
-                }
-                else
-                {
-                    log.Info("Loading XML file from an absolute path (like http): '" + infoFilePath + "'.");
-                }
-                
-                TextReader reader = new StreamReader(infoFilePath);
+                string fileContent = Utils.Files.LoadFileContentFromPath(infoFilePath);
+                TextReader reader = new StringReader(fileContent);
                 if (reader == null)
-                {
                     log.Error("Unable to load timetable info file (wrong filepath).");
-                }
+
+                XmlSerializer serializer = new XmlSerializer(typeof(TimetableInfo));
                 TimetableInfo loadedTimetableInfo = (TimetableInfo)serializer.Deserialize(reader);
                 reader.Close();
 
-
-                log.Debug("Timetable info successfully loaded from file: '" + infoFilePath + "'");
-                log.Debug("Method exit.");
+                log.Info("Timetable info loaded from file: '" + infoFilePath + "'");
                 return loadedTimetableInfo;
             }
             catch (Exception e)
             {
-                log.Error("Configuration does not loaded from file: '" + infoFilePath + "'. Exception: " + e.Message );
-                log.Debug("Method exit");
+                log.Error("Timetable info not loaded from file: '" + infoFilePath + "'. Exception: " + e.Message );
                 return null;
             }
+            finally
+            {
+                log.Debug("Method exit");
+            }
+            
         }
     }
 }
