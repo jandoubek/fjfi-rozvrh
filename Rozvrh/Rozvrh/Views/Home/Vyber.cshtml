@@ -191,7 +191,7 @@
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
     <div id="upperLine">
-        <div id="TimetableArchiveList" title="Můžeš vybrat i rozvrh z minulých let.">
+        <div id="TimetableArchiveList" title="Ročník - semestr (datum generování rozvrhu)">
             @Html.DropDownListFor(model => model.SelectedTimetableId, new SelectList(Model.TimetablesInfoList, "Id", "CompoundLabel", Model.SelectedTimetableId), new { onchange = "resetAll(); onListBoxChange(this);", @class = "ui-state-default" })
         </div>
     

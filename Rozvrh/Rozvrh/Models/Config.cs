@@ -52,7 +52,6 @@ namespace Rozvrh.Models
             log.Debug("Method entry.");
 
             IConfig ic = new IConfig();
-            ic.MostRecentTimetableXMLFilePath = MostRecentTimetableXMLFilePath;
             ic.WelcomeMessageFilePath = WelcomeMessageFilePath;
             ic.ArchivePath = ArchivePath;
             log.Debug("Method exit.");
@@ -68,7 +67,6 @@ namespace Rozvrh.Models
         {
             log.Debug("Method entry.");
             
-            MostRecentTimetableXMLFilePath = src.MostRecentTimetableXMLFilePath;
             WelcomeMessageFilePath = src.WelcomeMessageFilePath;
             ArchivePath = src.ArchivePath;
             
@@ -78,14 +76,12 @@ namespace Rozvrh.Models
         /// <summary>
         /// Set the properties values.
         /// </summary>
-        /// <param name="MostRecentTimetableXMLFilePath">File path to the most recent XML with timetables.</param>
         /// <param name="ArchivePath">Path to the folder with timetable files (.xml and .info)</param>
         /// <param name="WelcomeMessageFilePath">Message to be shown on the empty filtering result list.</param>
-        public void Set(string mMostRecentTimetableXMLFilePath, string mArchivePath, string mWelcomeMessage)
+        public void Set(string mArchivePath, string mWelcomeMessage)
         {
             log.Debug("Method entry.");
             
-            MostRecentTimetableXMLFilePath = mMostRecentTimetableXMLFilePath;
             WelcomeMessageFilePath = mWelcomeMessage;
             ArchivePath = mArchivePath;
 
@@ -99,7 +95,6 @@ namespace Rozvrh.Models
         {
             log.Debug("Method entry.");
 
-            MostRecentTimetableXMLFilePath = "~/Editable/13-14-zimni.xml";
             WelcomeMessageFilePath = "Vítej v aplikaci MůjRozvrh FIFJ! Začni v sekci filtrování vpravo.";
             ArchivePath = "~/Editable/Archive/";
 

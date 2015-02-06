@@ -89,6 +89,26 @@ namespace Rozvrh.Models
         /// </summary>
         public List<GroupLessonBinder> m_groupLessonBinder { get; set; }
 
+        public void Copy(OneXMLTimetable src)
+        {
+            m_buildings = src.m_buildings;
+            m_classrooms = src.m_classrooms;
+            m_courses = src.m_courses;
+            m_days = src.m_days;
+            m_degreeyears = src.m_degreeyears;
+            m_departments = src.m_departments;
+            m_groupLessonBinder = src.m_groupLessonBinder;
+            m_groups = src.m_groups;
+            m_lecturers = src.m_lecturers;
+            m_lectures = src.m_lectures;
+            m_lessons = src.m_lessons;
+            m_specializations = src.m_specializations;
+            m_times = src.m_times;
+            m_timetableInfo = src.m_timetableInfo;
+            m_xelDefinitions = src.m_xelDefinitions;   
+        }
+        
+
         /// <summary>
         /// Reloads xml file, parses and initializes properties which holds base data of the application. This method should be used for refreshing the model after updating thxml with timetable.
         /// </summary>

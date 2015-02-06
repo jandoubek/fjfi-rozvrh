@@ -21,12 +21,6 @@ namespace Rozvrh.Models
         public string WelcomeMessageFilePath { get; set; }
 
         /// <summary> 
-        /// File path to the most recent XML with timetables. 
-        /// </summary>
-        [XmlElement("MostRecentTimetableXMLFilePath")]
-        public String MostRecentTimetableXMLFilePath { get; set; }
-
-        /// <summary> 
         /// Path to the folder with timetable files (.xml and .info) 
         /// </summary>
         [XmlElement("ArchivePath")]

@@ -40,13 +40,6 @@ namespace Rozvrh.Models
 
             TimetableArchive = new List<OneXMLTimetable>();
 
-            //load most recent timetable
-            if (this.Load(Config.Instance.MostRecentTimetableXMLFilePath))
-            {
-                m_timetableInfo = new TimetableInfo(Config.Instance.MostRecentTimetableXMLFilePath, "0");
-                TimetableArchive.Add(this);
-                result = true;
-            }
             //load archive timetables
 
             List<string> paths = xmlFilePaths();
@@ -63,6 +56,11 @@ namespace Rozvrh.Models
                     }
                 }
             }
+
+            //get most recent timetable accordint to creation date
+            OneXMLTimetable mostRecent = TimetableArchive.OrderByDescending(t => t.m_timetableInfo.SemesterStart).OrderByDescending(t => t.m_timetableInfo.Created).First();
+            this.Copy(mostRecent);
+
             return result;
         }
 

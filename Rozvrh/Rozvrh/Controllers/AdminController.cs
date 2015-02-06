@@ -64,12 +64,11 @@ namespace Rozvrh.Controllers
         /// Method processing input from the configuration fields of the Config view.
         /// </summary>
         /// <param name="submitButton">Which type of action should be done.</param>
-        /// <param name="MostRecentTimetableXMLFilePath">File path to the most recent XML with timetables.</param>
         /// <param name="ArchivePath">Path to the folder with timetable files (.xml and .info)</param>
         /// <param name="WelcomeMessageFilePath">Path to the file with message to be shown on the empty filtering result list.</param>
         /// <returns>Partial view of the actualized Config.</returns>
         [HttpPost]
-        public PartialViewResult ConfigButtonAction(string submitButton, string MostRecentTimetableXMLFilePath, string ArchivePath, string WelcomeMessageFilePath)
+        public PartialViewResult ConfigButtonAction(string submitButton, string ArchivePath, string WelcomeMessageFilePath)
         {
             log.Debug("Method entry.");
             ViewBag.ErrorMessage = "";
@@ -77,7 +76,7 @@ namespace Rozvrh.Controllers
             {
 
                 case "Uložit a Restartovat":
-                    m_config.Set(MostRecentTimetableXMLFilePath, ArchivePath, WelcomeMessageFilePath);
+                    m_config.Set(ArchivePath, WelcomeMessageFilePath);
                     if (!m_config.SaveToFile())
                         ViewBag.ErrorMessage = "Nepovedlo se uložit nastavení do souboru, více v logovacím souboru./n";
                     ModelState.Clear();

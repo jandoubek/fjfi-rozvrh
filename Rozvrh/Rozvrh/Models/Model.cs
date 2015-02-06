@@ -199,7 +199,7 @@ namespace Rozvrh.Models
         {
             get
             {
-                return XMLTimetable.TimetableArchive.Select(t => t.m_timetableInfo).OrderByDescending(t=>t.Created).ToList();
+                return XMLTimetable.TimetableArchive.Select(t => t.m_timetableInfo).OrderByDescending(t => t.SemesterStart).OrderByDescending(t=>t.Created).ToList();
             }
         }
 
