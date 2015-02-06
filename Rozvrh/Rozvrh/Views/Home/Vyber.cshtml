@@ -94,6 +94,11 @@
             text: false
         });
 
+        $("button#searchButton").button({
+            icons: { primary: "ui-icon-search" },
+            text: false
+        });
+
         $("button#AddAll").button({
             icons: { primary: "ui-icon-plus" },
             text: true
@@ -190,8 +195,8 @@
             @Html.DropDownListFor(model => model.SelectedTimetableId, new SelectList(Model.TimetablesInfoList, "Id", "CompoundLabel", Model.SelectedTimetableId), new { onchange = "resetAll(); onListBoxChange(this);", @class = "ui-state-default" })
         </div>
     
-        <div id="vyhledavani" class="ui-state-default" title="Vyhledávání dle názvu předmětu funguje, pouze pokud je vyplněn v databázi. Po vyplnění klikni mimo pole nebo stiskni TAB.">
-                <span id="searchIcon" class="ui-icon ui-icon-search"></span>
+        <div id="vyhledavani" class="ui-state-default" title="Vyhledávání dle názvu předmětu funguje, pouze pokud je vyplněn v databázi.">
+                <button id="searchButton"></button>
                 <button class="resetOne" onclick="resetFilter();">Reset</button>
                 @Html.TextBoxFor(m => m.SearchedString, new { onchange = "onListBoxChange(this);", placeholder = "Vyhledat předmět dle kódu nebo názvu" })
         </div>
