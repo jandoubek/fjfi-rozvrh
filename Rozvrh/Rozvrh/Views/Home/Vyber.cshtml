@@ -126,7 +126,7 @@
         });
 
         $("div#vyhledavani").tooltip();
-        $("div#TimetableArchiveList a.selectBox").attr("title", "Můžeš vybrat rozvrh z minulých let. V závorce je datum aktualizace databáze.");
+        $("div#TimetableArchiveList a.selectBox").attr("title", "Ročník - semestr (datum generování rozvrhu).");
         $("div#TimetableArchiveList a.selectBox").tooltip({ position: { my: "right", at: "left" } });
         $("ClearAll").tooltip();
         $("AddAll").tooltip();
@@ -149,7 +149,7 @@
     function resetOne(boxId) {
         if (boxId == "rocnik" || boxId == "obor")
             unselectSpecializationsGroups();
-        var res = "#".concat(boxId, " select option");
+        var res = "#".concat(boxId, " select option");        
         $(res).prop("selected", false);
         $(res).removeAttr("selected");
         $('select').selectBox('refresh');
@@ -191,7 +191,7 @@
     <div id="Loading"><span /><img src="@Url.Content("~/Content/loading.gif")" alt="Waiting for response." /></div>
 
     <div id="upperLine">
-        <div id="TimetableArchiveList" title="Ročník - semestr (datum generování rozvrhu)">
+        <div id="TimetableArchiveList">
             @Html.DropDownListFor(model => model.SelectedTimetableId, new SelectList(Model.TimetablesInfoList, "Id", "CompoundLabel", Model.SelectedTimetableId), new { onchange = "resetAll(); onListBoxChange(this);", @class = "ui-state-default" })
         </div>
     
@@ -206,13 +206,13 @@
         <div class="box" id="rocnik">
             <button class="resetOne" onclick="resetOne('rocnik');">Reset</button>
             @Html.LabelFor(m => m.SelectedDegreeYears, "Ročník")
-            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "$('#SelectedSpecializations').val([]);$('#SelectedGroups').val([]); onListBoxChange(this);" })
+            @Html.ListBoxFor(m => m.SelectedDegreeYears, new MultiSelectList(Model.DegreeYears, "id", "acronym"), new { size = "9", onchange = "unselectSpecializationsGroups(); onListBoxChange(this);" })
         </div>
         <div class="box" id="obor">
             <button class="resetOne" onclick="resetOne('obor');">Reset</button>
             @Html.LabelFor(m => m.SelectedSpecializations, "Obor")
             @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "acronym"), new { size = "9", onchange = "$('#SelectedGroups').val([]); onListBoxChange(this);" })
-            @Html.ListBoxFor(m => m.SelectedSpecializations, new MultiSelectList(Model.Specializations, "id", "name"), new { style= "position: absolute; display: none;" })
+            @Html.ListBox("skryty", new MultiSelectList(Model.Specializations, "id", "name"), new { style= "position: absolute; display: none;" })
         </div>
         <div class="box" id="kruh">
             <button class="resetOne" onclick="resetOne('kruh');">Reset</button>

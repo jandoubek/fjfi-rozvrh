@@ -249,8 +249,11 @@
     <Content Include="Editable\Archive\13-14-zimni.xml" />
     <Content Include="Editable\Archive\13-14-letni.xml" />
     <Content Include="Editable\Archive\13-14-letni-info.xml" />
+    <Content Include="Editable\Archive\14-15-letni-info.xml" />
+    <Content Include="Editable\Archive\14-15-letni.xml" />
     <Content Include="Editable\Archive\14-15-zimni-info.xml" />
     <Content Include="Editable\Archive\14-15-zimni.xml" />
+    <Content Include="Editable\Archive\index.txt" />
     <Content Include="Editable\config.xml">
       <SubType>Designer</SubType>
     </Content>

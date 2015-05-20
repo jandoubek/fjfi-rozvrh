@@ -28,22 +28,26 @@ namespace Rozvrh.Utils
                 {
                     log.Debug("Loading XML file from the server map path: '" + filepath + "'.");
                     filepath = System.Web.HttpContext.Current.Server.MapPath(filepath);
+                    TextReader reader = new StreamReader(filepath);
+                    if (reader == null)
+                    {
+                        log.Error("Unable to load a content of the file (wrong filepath).");
+                    }
+                    result = reader.ReadToEnd();
+                    reader.Close();
+                    log.Debug("Content successfully loaded from the file: '" + filepath + "'");
+                    log.Debug("Method exit.");
+                    return result;
                 }
                 else
                 {
                     log.Debug("Loading XML file from the absolute path (like http): '" + filepath + "'.");
+                    System.Net.WebClient wclient = new System.Net.WebClient();
+                    wclient.Encoding = System.Text.Encoding.UTF8;
+                    return wclient.DownloadString(filepath);
                 }
 
-                TextReader reader = new StreamReader(filepath);
-                if (reader == null)
-                {
-                    log.Error("Unable to load a content of the file (wrong filepath).");
-                }
-                result = reader.ReadToEnd();
-                reader.Close();
-                log.Debug("Content successfully loaded from the file: '" + filepath + "'");
-                log.Debug("Method exit.");
-                return result;
+                
             }
             catch
             {

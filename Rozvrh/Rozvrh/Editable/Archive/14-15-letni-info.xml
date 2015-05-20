@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TimetableInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LinkToInfo>http://www.km.fjfi.cvut.cz/rozvrh/info.pdf</LinkToInfo>
+  <Created>2015-02-07T12:00:00</Created>
+  <SemesterStart>2015-02-16T00:00:00</SemesterStart>
+  <SemesterEnd>2015-05-15T00:00:00</SemesterEnd>
+  <TimetableLabel>2014/2015 - letní semestr</TimetableLabel>
+  <PrefixPoolLink>http://geraldine.fjfi.cvut.cz/WORK/Anketa/LS2014/67_pub/courses/</PrefixPoolLink>
+  <SufixPoolLink />
+</TimetableInfo>

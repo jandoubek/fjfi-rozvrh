@@ -111,7 +111,7 @@ namespace Rozvrh.Models.Timetable
         private static TimetableInfo LoadTimetableInfoFromFile(string timetableFilePath)
         {
             log.Debug("Method entry.");
-            string infoFilePath =  Path.GetDirectoryName(timetableFilePath) + @"\" + Path.GetFileNameWithoutExtension(timetableFilePath) + "-info.xml";
+            string infoFilePath = timetableFilePath.Insert(timetableFilePath.Length-4, "-info");             
 
             try
             {

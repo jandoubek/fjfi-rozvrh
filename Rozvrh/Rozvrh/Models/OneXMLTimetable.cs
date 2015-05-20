@@ -89,6 +89,10 @@ namespace Rozvrh.Models
         /// </summary>
         public List<GroupLessonBinder> m_groupLessonBinder { get; set; }
 
+        /// <summary>
+        /// Copy properties (data) from one instance to this.
+        /// </summary>
+        /// <param name="src">Source instance.</param>
         public void Copy(OneXMLTimetable src)
         {
             m_buildings = src.m_buildings;
@@ -108,7 +112,6 @@ namespace Rozvrh.Models
             m_xelDefinitions = src.m_xelDefinitions;   
         }
         
-
         /// <summary>
         /// Reloads xml file, parses and initializes properties which holds base data of the application. This method should be used for refreshing the model after updating thxml with timetable.
         /// </summary>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Rozvrh.Models.Timetable;
+using Rozvrh.Utils;
 using System.Xml.Linq;
 using System.IO;
 
@@ -77,9 +78,13 @@ namespace Rozvrh.Models
             List<string> files = new List<string>();
             try
             {
-                log.Debug("Trying to load XML database files from directory " + directoryPath);
-                string serverDirectoryPath = System.Web.HttpContext.Current.Server.MapPath(directoryPath);
-                files = Directory.GetFiles(serverDirectoryPath, "*.xml").ToList();
+                log.Debug("Trying to load index file with list of XMLs from directory " + directoryPath);
+                string indexFileContent = Files.LoadFileContentFromPath(directoryPath + "/index.txt");
+                files = indexFileContent.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).ToList();
+                for(int i = 0; i < files.Count; i++)
+                {
+                    files[i] = directoryPath + "/" + files[i];
+                }
                 return files;
             }
             catch
