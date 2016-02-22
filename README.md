@@ -28,6 +28,7 @@ testovací provoz na mujrozvrhfjfi.aspone.cz
 * v dialogu úprava hodiny jsou špatné defaultní hodnoty v dropdown menu
 * nefunguje export po reloadu stránky (hodiny jsou pouze v session)
 * po změně databáze není možné importovat xml založené na předchozí databázi
+* chyba při importu xml, kde je hodina bez color
 * zlepšit/upravit/zdokonalit (pro širší rozsah rozlišení) layout
 * chybí tutorialy
 * dohlédnout na kvalitu dat - háčky, čárky, barvy, jména předmětů
